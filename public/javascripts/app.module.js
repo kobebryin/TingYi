@@ -1,0 +1,1 @@
+angular.module('TinYi', ['ui.router']);

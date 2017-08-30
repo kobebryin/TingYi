@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="TinYi">
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" src="libraries/angular/angular.min.js"></script>
+    <script type="text/javascript" src="libraries/angular/angular-ui-router.min.js"></script>
+
+    <script type="text/javascript" src="javascripts/app.module.js"></script>
+    <script type="text/javascript" src="javascripts/app.config.js"></script>
+    <script type="text/javascript" src="javascripts/app.run.js"></script>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <a href="/test">Welcome to <%= title %></p>
+    <div ui-view></div>
   </body>
 </html>
