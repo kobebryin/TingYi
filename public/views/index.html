@@ -1,3 +1,11 @@
 <div class="layout">
-    Hello World
+    <a href="#/page2">Hello World</a>
+    <p>{{content}}</p>
+    <input type="text" value="" ng-model="alertText" />
+    <input type="button" value="Click me !" ng-click="showSomething()" />
+    <input type="button" value="Click me again !" ng-click="showAlert()" />
+
+    <div ng-repeat="result in resultList">
+        {{result.ID}}, {{result.RID}}
+    </div>
 </div>
