@@ -6,7 +6,15 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+//var users = require('./routes/users');
+/** -----  database MySql api routes  -----*/
+var bbsapi = require('./routes/bbsApi');
+var dishapi = require('./routes/dishApi');
+var dishlistapi = require('./routes/dishlistApi');
+var fieldvalueapi = require('./routes/fieldvalueApi');
+var mealapi = require('./routes/mealApi');
+var memberapi = require('./routes/memberApi');
+var routeapi = require('./routes/routeApi');
 
 var app = express();
 
@@ -23,7 +31,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+/** -----  database MySql api routes  -----*/
+app.use('/bbs', bbsapi);
+app.use('/dish', dishapi);
+app.use('/dishlist', dishlistapi);
+app.use('/fieldvalue',fieldvalueapi);
+app.use('/meal',mealapi);
+app.use('/member', memberapi);
+app.use('/route', routeapi);
+//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
