@@ -6,7 +6,7 @@ angular.module('TinYi').controller('IndexController', function ($rootScope, $sco
         BbsService.getBBS(function(data){
             console.log(data);
             $scope.resultList = data;
-        })
+        });
     };
 
     $scope.showAlert = function(){
