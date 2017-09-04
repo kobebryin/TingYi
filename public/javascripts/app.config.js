@@ -15,6 +15,19 @@ angular.module('TinYi').config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "views/page2.html"/*,
       controller: "IndexController"*/
     })
+    //月子餐明細查詢
+    .state('monthlyMealDetails', {
+      url: "/monthlyMealDetails",
+      templateUrl: "views/monthlyMealDetails.html",
+      controller: "monthlyMealDetailsController"
+    })
+    //調理餐明細查詢
+    .state('conditionMealDetails', {
+      url: "/conditionMealDetails",
+      templateUrl: "views/conditionMealDetails.html",
+      controller: "conditionMealDetailsController"
+    })
+    //會員資料
     .state('memberData', {
       url: "/memberData",
       templateUrl: "views/memberData.html",

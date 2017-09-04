@@ -1,0 +1,62 @@
+<div title="選擇查詢條件" data-options="region:'north',collapsible:false" style="height:350px;">
+    <form id="form_Meal_Search" class="easyui-form" method="post">
+        <input id="id_input_Meal_MealType" name="input_MealType" type="hidden" value="2">
+        <table width="900" border="0" cellspacing="0" cellpadding="0">
+            <tr valign="top">
+                <td>
+                    <table width="300" border="0" cellspacing="0" cellpadding="5">
+                        <tr>
+                            <td width="75" align="right">日期</td>
+                            <td width="205"><input id="datepicker" readonly='true' class="easyui-datebox" type="text" name="input_Date" style="width:205px; height:28px;"
+                                    data-options="formatter:date1formatter,parser:date1parser,required:true"></td>
+                        </tr>
+                        <tr>
+                            <td align="right">餐點</td>
+                            <td id="id_td_Meal_Type" width="205"><input id="id_input_Meal_Type_0" type="radio" name="input_Type" value="A" checked="checked">                                早
+                                <input id="id_input_Meal_Type_1" type="radio" name="input_Type" value="B"> 午
+                                <input id="id_input_Meal_Type_2" type="radio" name="input_Type" value="C"> 晚
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">禁忌</td>
+                            <td><input id="id_input_Meal_Meal06" name="input_Meal06" class="easyui-combotree" type="text" style="width:205px;height:28px;"
+                                    data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Member_Attrib05',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px'"
+                                    multiple></td>
+                        </tr>
+                        <tr>
+                            <td align="right">加減</td>
+                            <td><input id="id_input_Meal_Meal07" name="input_Meal07" class="easyui-combobox" type="text" style="width:205px;height:28px;"
+                                    data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal07_2',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
+                                    multiple></td>
+                        </tr>
+                        <tr>
+                            <td align="right">湯換飲品</td>
+                            <td><input id="id_input_Meal_Meal08" name="input_Meal08" class="easyui-combobox" type="text" style="width:205px;height:28px;"
+                                    data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal08_2',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
+                                    multiple></td>
+                        </tr>
+                    </table>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" value="查詢"></input>
+					<input type="button" value="清空"></input>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td height="10"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div data-options="region:'center'" style="padding:10px 0px 0px 10px;height:146px;">
+	<textarea id="txt_Request_Search" readonly style="width:1256px;border-style:none; border-width:0px;height:121px;font-size:18px;"></textarea>
+</div>
