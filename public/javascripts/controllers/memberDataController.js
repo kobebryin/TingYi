@@ -7,7 +7,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         mip2: null, 
         user: null, 
         password: null,
-        type: null,
+        type: null,   //＝會員類型 3: 營養顧問 5:客戶 （1、2、4待解）
         upid: null, 
         meal1sicktype: null, 
         meal1a: null,
@@ -103,10 +103,21 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     });
 
     $scope.postMEMBER = function(){
+        //預產期年月日合併
+        $scope.member.attrib04 = $scope.attrib04_0_TMP + "<br>" + $scope.attrib04_1_TMP + "<br>" + $scope.attrib04_2_TMP;
+        //生日年月日合併
+        $scope.member.attrib03 = $scope.attrib03_0_TMP + "<br>" + $scope.attrib03_1_TMP + "<br>" + $scope.attrib03_2_TMP;
+        //生產日期年月日合併
+        $scope.member.attrib02 = $scope.attrib02_0_TMP + "<br>" + $scope.attrib02_1_TMP + "<br>" + $scope.attrib02_2_TMP;
+        //供餐開始日期年月日合併
+        $scope.member.attrib16 = $scope.attrib16_0_TMP + "<br>" + $scope.attrib16_1_TMP + "<br>" + $scope.attrib16_2_TMP;
+        //供餐結束日期年月日合併
+        $scope.member.attrib17 = $scope.attrib17_0_TMP + "<br>" + $scope.attrib17_1_TMP + "<br>" + $scope.attrib17_2_TMP;
+        
+        console.log($scope.member);
+
         MemberService.postMEMBER($scope.member, function(data){
             console.log(data);
         });
     };
-
-
 });
