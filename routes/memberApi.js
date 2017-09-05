@@ -21,9 +21,9 @@ connection.connect(function (err) {
 
 // --------  get Data from MySQL's table member ----------------------- 
 router.get('/', function (req, res, next) {
-    connection.query('SELECT * FROM member WHERE ID="11889";', function (error, results, fields) {
+    connection.query('SELECT * FROM member;', function (error, results, fields) {
         if (error) throw error;
-        console.log('The solution is: ', results);
+        //console.log('The solution is: ', results);
         res.json(results);
     });
 });

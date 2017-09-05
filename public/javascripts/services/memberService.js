@@ -12,4 +12,12 @@ angular.module('TinYi').service('MemberService', function ($rootScope, $http) {
             callback(data);
         });
     }
+
+    //營養顧問dropdown list名單抓取
+    this.getSalesList = function (callback) {
+        $http.get($rootScope.apiUrl + 'saleslist').success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
 })

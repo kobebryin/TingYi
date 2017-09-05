@@ -10,19 +10,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>ZA00102</td>
-                <td>創意筆捲行李牌-藍色</td>
-                <td>旅行小物</td>
-                <td>blue</td>
-                <td class="center">280</td>
-            </tr>
-            <tr>
-                <td>ZA00103</td>
-                <td>創意筆捲行李牌-黃色</td>
-                <td>旅行小物</td>
-                <td class="center">yellow</td>
-                <td class="center">280</td>
+            <tr ng-repeat="members in getMember">
+                <td>{{members.ID}}</td>
+                <td>{{members.Attrib01}}</td>
+                <td>{{members.User}}</td>
+                <td>{{members.Attrib13}}</td>
+                <td class="center">{{typeMapping[members.Type]}}</td>
             </tr>
         </tbody>
     </table>
@@ -119,13 +112,13 @@
                                     <div style="padding-left:25px;">會員類型</div>
                                 </td>
                                 <td>
-                                    <select name="id_input_Member_Info_Type">
-                                                <option value="客戶">客戶</option>
-                                                <option value="醫院">醫院</option>
-                                                <option value="營養顧問">營養顧問</option>
-                                                <option value="寫單人員">寫單人員</option>
-                                                <option value="管理人員">管理人員</option>
-                                                <option value="最高權限管理人員">最高權限管理人員</option>    
+                                    <select name="id_input_Member_Info_Type" ng-model="member.type">
+                                                <option value=5>客戶</option>
+                                                <option value=4>醫院</option>
+                                                <option value=3>營養顧問</option>
+                                                <option value=2>寫單人員</option>
+                                                <option value=1>管理人員</option>
+                                                <option value=0>最高權限管理人員</option>    
                                     </select>
                                 </td>
                             </tr>
@@ -189,8 +182,11 @@
                                 <td>
                                     <div style="padding-left:25px;">營養顧問</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_UpID" name="UpID" value="11761" class="easyui-combobox" type="text"
-                                        style="width:523px; height:28px;" data-options="required:true,url:'/info/member/saleslist.jsp',method:'get',valueField:'id',textField:'text',panelHeight:'auto',editable:false"></td>
+                                <td>
+                                    <select name="UpID" ng-model="member.upid">
+                                        <option ng-repeat="sales in saleslist" value="{{sales.ID}}">{{sales.Attrib01}}</option>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <td>

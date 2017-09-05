@@ -15,6 +15,8 @@ var fieldvalueapi = require('./routes/fieldvalueApi');
 var mealapi = require('./routes/mealApi');
 var memberapi = require('./routes/memberApi');
 var routeapi = require('./routes/routeApi');
+var saleslistapi = require('./routes/saleslistApi');
+
 
 var app = express();
 
@@ -39,6 +41,7 @@ app.use('/fieldvalue',fieldvalueapi);
 app.use('/meal',mealapi);
 app.use('/member', memberapi);
 app.use('/route', routeapi);
+app.use('/saleslist', saleslistapi);
 //app.use('/users', users);
 
 // catch 404 and forward to error handler
