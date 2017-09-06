@@ -101,23 +101,29 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         // console.log(data);
 
         setTimeout(function () {
-            $('#example').dataTable({
-                "order": [[0, "desc"]],
-                "fnRowCallback":
-                function (nRow, aData, iDisplayIndex) {
-                    nRow.className = nRow.className + aData[4]; return nRow;
-                },
-                "aoData": [
-                    null,
-                    null,
-                    { "bVisible": false, "bSearchable": false },
-                    { "sClass": "center" },
-                    { "sClass": "center" }
-                ]
-            });
-            // Hide it after 0.1 seconds
-            $.LoadingOverlay("hide");
-        }, 200);
+            $(document).ready(function () {
+                var table = $('#example').DataTable({
+                    "order": [[0, "desc"]],
+                    "fnRowCallback":
+                    function (nRow, aData, iDisplayIndex) {
+                        nRow.className = nRow.className + aData[4]; return nRow;
+                    },
+                    "aoData": [
+                        null,
+                        null,
+                        { "bVisible": false, "bSearchable": false },
+                        { "sClass": "center" },
+                        { "sClass": "center" }
+                    ]
+                });
+                $('#example tbody').on('click', 'tr', function () {
+                    var data = table.row(this).data();
+                    alert('You clicked on ' + data[0] + '\'s row');
+                });
+                // Hide it after 0.1 seconds
+                $.LoadingOverlay("hide");
+            }, 200);
+        });
     });
 
     // $(document).ready(function () {
