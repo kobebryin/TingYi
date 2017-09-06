@@ -116,10 +116,8 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                 ]
             });
             // Hide it after 0.1 seconds
-            setTimeout(function(){
-                $.LoadingOverlay("hide");
-            }, 100);
-        }, 0);
+            $.LoadingOverlay("hide");
+        }, 200);
     });
 
     // $(document).ready(function () {
