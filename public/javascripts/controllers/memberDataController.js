@@ -1,6 +1,7 @@
 angular.module('TinYi').controller('memberDataController', function ($rootScope, $scope, MemberService) {
     $scope.typeMapping = ['最高權限管理人員', '管理人員', '寫單人員', '營養顧問', '醫院', '客戶'];
     $scope.member = {
+        id: null,
         rid: null,
         mid: null,
         mip: null,
@@ -99,11 +100,13 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     MemberService.getMEMBER(function (data) {
         $scope.getMember = data;
         // console.log(data);
-
+        
+        //先讓資料用timeout讀入datatables，再call其他
         setTimeout(function () {
+            //呼叫datatables
             $(document).ready(function () {
                 var table = $('#example').DataTable({
-                    "order": [[0, "desc"]],
+                    "order": [[0, "desc"]],         //用ＩＤ當排序，遞減
                     "fnRowCallback":
                     function (nRow, aData, iDisplayIndex) {
                         nRow.className = nRow.className + aData[4]; return nRow;
@@ -116,9 +119,35 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                         { "sClass": "center" }
                     ]
                 });
+                
+                //row點擊事件，get遭點擊的會員資料，並顯示到表格上
                 $('#example tbody').on('click', 'tr', function () {
                     var data = table.row(this).data();
-                    alert('You clicked on ' + data[0] + '\'s row');
+                    var id = data[0];
+
+                    MemberService.getOneMEMBER(id, function(data){
+                        //console.log(data);
+                        $scope.member.attrib09 = data[0].Attrib09;
+                        $scope.member.attrib01 = data[0].Attrib01;
+                        $scope.member.attrib05 = data[0].Attrib05;
+                        $scope.member.attrib19 = data[0].Attrib19;
+                        $scope.member.attrib20 = data[0].Attrib20;
+                        $scope.member.attrib21 = data[0].Attrib21;
+                        $scope.member.attrib08 = data[0].Attrib08;
+                        $scope.member.user = data[0].User;
+                        $scope.member.attrib10 = data[0].Attrib10;
+                        $scope.member.attrib11 = data[0].Attrib11;
+                        $scope.member.attrib25 = data[0].Attrib25;
+                        $scope.member.attrib12 = data[0].Attrib12;
+                        $scope.member.attrib13 = data[0].Attrib13;
+                        $scope.member.attrib14 = data[0].Attrib14;
+                        $scope.member.attrib15 = data[0].Attrib15;
+                        $scope.member.id = data[0].ID;
+
+                        console.log($scope.member);
+                    });
+
+                    //alert('You clicked on ' + data[0] + '\'s row');
                 });
                 // Hide it after 0.1 seconds
                 $.LoadingOverlay("hide");
