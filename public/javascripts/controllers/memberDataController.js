@@ -1,5 +1,63 @@
 angular.module('TinYi').controller('memberDataController', function ($rootScope, $scope, MemberService) {
-    $scope.typeMapping = ['最高權限管理人員', '管理人員', '寫單人員', '營養顧問', '醫院', '客戶'];
+    //會員類型分類
+    $scope.typeMapping = [
+        {value: 0, name: '最高權限管理人員'}, 
+        {value: 1, name: '管理人員'}, 
+        {value: 2, name: '寫單人員'}, 
+        {value: 3, name: '營養顧問'}, 
+        {value: 4, name: '醫院'}, 
+        {value: 5, name: '客戶'}];
+
+    //月份分類
+    $scope.months = [
+        {value: '1', name: '1'}, 
+        {value: '2', name: '2'}, 
+        {value: '3', name: '3'}, 
+        {value: '4', name: '4'}, 
+        {value: '5', name: '5'},
+        {value: '6', name: '6'}, 
+        {value: '7', name: '7'}, 
+        {value: '8', name: '8'}, 
+        {value: '9', name: '9'}, 
+        {value: '10', name: '10'}, 
+        {value: '11', name: '11'}, 
+        {value: '12', name: '12'}];
+
+    //日期分類
+    $scope.days = [
+        {value: '1', name: '1'}, 
+        {value: '2', name: '2'}, 
+        {value: '3', name: '3'}, 
+        {value: '4', name: '4'}, 
+        {value: '5', name: '5'},
+        {value: '6', name: '6'}, 
+        {value: '7', name: '7'}, 
+        {value: '8', name: '8'}, 
+        {value: '9', name: '9'}, 
+        {value: '10', name: '10'}, 
+        {value: '11', name: '11'},  
+        {value: '12', name: '12'}, 
+        {value: '13', name: '13'}, 
+        {value: '14', name: '14'}, 
+        {value: '15', name: '15'},
+        {value: '16', name: '16'}, 
+        {value: '17', name: '17'}, 
+        {value: '18', name: '18'}, 
+        {value: '19', name: '19'}, 
+        {value: '20', name: '20'}, 
+        {value: '21', name: '21'},  
+        {value: '22', name: '22'}, 
+        {value: '23', name: '23'}, 
+        {value: '24', name: '24'}, 
+        {value: '25', name: '25'},
+        {value: '26', name: '26'}, 
+        {value: '27', name: '27'}, 
+        {value: '28', name: '28'}, 
+        {value: '29', name: '29'}, 
+        {value: '30', name: '30'}, 
+        {value: '31', name: '31'}];
+
+    //member table資料表欄位
     $scope.member = {
         id: null,
         rid: null,
@@ -143,8 +201,25 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                         $scope.member.attrib14 = data[0].Attrib14;
                         $scope.member.attrib15 = data[0].Attrib15;
                         $scope.member.id = data[0].ID;
+                        $scope.member.type = data[0].Type;
+                        console.log(data[0].Attrib04);
+                        
+                        //資料庫沒正規劃，所以要判端預產期是否為null，是的話不做事把變數歸零，不是的話傳上去表單顯示
+                        if(data[0].Attrib04){
+                            $scope.attrib04_0_TMP = data[0].Attrib04.split("<br>")[0];
+                            $scope.attrib04_1_TMP = data[0].Attrib04.split("<br>")[1];
+                            $scope.attrib04_2_TMP = data[0].Attrib04.split("<br>")[2];
+                            // console.log(data[0].Attrib04.split("<br>")[1])
+                        }else{
+                            $scope.attrib04_0_TMP = '';
+                            $scope.attrib04_1_TMP = '';
+                            $scope.attrib04_2_TMP = '';
+                        }
+                        
+                        //營養顧問
+                        $scope.member.upid = data[0].UpID;
 
-                        console.log($scope.member);
+                        // console.log($scope.member);
                     });
 
                     //alert('You clicked on ' + data[0] + '\'s row');
@@ -154,23 +229,6 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
             }, 200);
         });
     });
-
-    // $(document).ready(function () {
-    //     $('#example').dataTable({
-    //         "fnRowCallback":
-    //         function (nRow, aData, iDisplayIndex) {
-    //             nRow.className = nRow.className + aData[4]; return nRow;
-    //         },
-    //         "aoData": [
-    //             null,
-    //             null,
-    //             { "bVisible": false, "bSearchable": false },
-    //             { "sClass": "center" },
-    //             { "sClass": "center" }
-    //         ]
-    //     });
-    // });
-
 
     //新增資料上ＭySQL
     $scope.postMEMBER = function () {

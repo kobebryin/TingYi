@@ -15,7 +15,7 @@
                 <td>{{members.Attrib01}}</td>
                 <td>{{members.User}}</td>
                 <td>{{members.Attrib13}}</td>
-                <td class="center">{{typeMapping[members.Type]}}</td>
+                <td class="center">{{typeMapping[members.Type].name}}</td>
             </tr>
         </tbody>
     </table>
@@ -57,9 +57,10 @@
                                 </td>
                                 <td>民國
                                     <input id="id_input_Member_Info_Attrib04_0_TMP" name="Attrib04_0_TMP" class="easyui-textbox" type="text" style="width:74px; height:28px;"
-                                        data-options="required1:true" SetTWTime ng-model="attrib04_0_TMP">                                    年
-                                    <select name="id_input_Member_Info_Attrib04_1_TMP" ng-model="attrib04_1_TMP">
-                                                <option value="01">1</option>
+                                        data-options="required1:true" SetTWTime ng-model="attrib04_0_TMP">年
+                                    <select name="id_input_Member_Info_Attrib04_1_TMP" ng-model="attrib04_1_TMP" ng-options="month.value as month.name for month in months">
+                                        <option value="">--請選擇--</option>        
+                                        <!-- <option value="01">1</option>
                                                 <option value="02">2</option>
                                                 <option value="03">3</option>
                                                 <option value="04">4</option>
@@ -70,10 +71,11 @@
                                                 <option value="09">9</option>
                                                 <option value="10">10</option>
                                                 <option value="11">11</option>
-                                                <option value="12">12</option>
+                                                <option value="12">12</option> -->
                                     </select>月
-                                    <select name="id_input_Member_Info_Attrib04_2_TMP" ng-model="attrib04_2_TMP">
-                                            <option value="1">1</option>
+                                    <select name="id_input_Member_Info_Attrib04_2_TMP" ng-model="attrib04_2_TMP" ng-options="day.value as day.name for day in days">
+                                        <option value="">--請選擇--</option>      
+                                        <!-- <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                             <option value="4">4</option>
@@ -103,7 +105,7 @@
                                             <option value="28">28</option>
                                             <option value="29">29</option>
                                             <option value="30">30</option>
-                                            <option value="31">31</option>
+                                            <option value="31">31</option> -->
                                     </select> 日
                                 </td>
                             </tr>
@@ -112,14 +114,16 @@
                                     <div style="padding-left:25px;">會員類型</div>
                                 </td>
                                 <td>
-                                    <select name="id_input_Member_Info_Type" ng-model="member.type">
-                                                <option value=5>客戶</option>
+                                    <select name="id_input_Member_Info_Type" ng-model="member.type" ng-options="type.value as type.name for type in typeMapping">
+                                        <option value="">--請選擇--</option>        
+                                        <!-- <option value=5>客戶</option>
                                                 <option value=4>醫院</option>
                                                 <option value=3>營養顧問</option>
                                                 <option value=2>寫單人員</option>
                                                 <option value=1>管理人員</option>
-                                                <option value=0>最高權限管理人員</option>    
+                                                <option value=0>最高權限管理人員</option>     -->
                                     </select>
+                                    <!-- {{member.type}} -->
                                 </td>
                             </tr>
                             <tr>
@@ -183,9 +187,10 @@
                                     <div style="padding-left:25px;">營養顧問</div>
                                 </td>
                                 <td>
-                                    <select name="UpID" ng-model="member.upid">
-                                        <option ng-repeat="sales in saleslist" value="{{sales.ID}}">{{sales.Attrib01}}</option>
-                                    </select>
+                                    <select name="UpID" ng-model="member.upid" ng-options="sale.ID as sale.Attrib01 for sale in saleslist">
+                                        <option value="">--請選擇--</option>  
+                                        <!-- <option ng-repeat="sales in saleslist" value="{{sales.ID}}">{{sales.Attrib01}}</option> -->
+                                    </select>{{member.upid}}
                                 </td>
                             </tr>
                             <tr>
