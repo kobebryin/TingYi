@@ -22,7 +22,7 @@
 </div>
 
 <div class="function_btn">
-    <input type="button" value="新增"></input>
+    <input type="button" value="新增" ng-ckick="createNewMEMBER()"></input>
     <input type="button" value="修改"></input>
     <input type="button" value="刪除"></input>
     <input type="button" value="保存" ng-click="postMEMBER()"></input>
@@ -133,8 +133,9 @@
                                 <td>民國
                                     <input id="id_input_Member_Info_Attrib03_0_TMP" name="Attrib03_0_TMP" class="easyui-textbox" type="text" style="width:74px; height:28px;"
                                         data-options="required1:true" SetTWTime ng-model="attrib03_0_TMP">                                    年
-                                    <select name="id_input_Member_Info_Attrib03_1_TMP" ng-model="attrib03_1_TMP">
-                                            <option value="1">1</option>
+                                    <select name="id_input_Member_Info_Attrib03_1_TMP" ng-model="attrib03_1_TMP" ng-options="month.value as month.name for month in months">
+                                        <option value="">--請選擇--</option>
+                                            <!-- <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                             <option value="4">4</option>
@@ -145,10 +146,11 @@
                                             <option value="9">9</option>
                                             <option value="10">10</option>
                                             <option value="11">11</option>
-                                            <option value="12">12</option>
-                                </select>月
-                                    <select name="id_input_Member_Info_Attrib03_2_TMP" ng-model="attrib03_2_TMP">
-                                        <option value="1">1</option>
+                                            <option value="12">12</option> -->
+                                    </select>月
+                                    <select name="id_input_Member_Info_Attrib03_2_TMP" ng-model="attrib03_2_TMP" ng-options="day.value as day.name for day in days">
+                                        <option value="">--請選擇--</option>      
+                                        <!-- <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                         <option value="4">4</option>
@@ -178,7 +180,7 @@
                                         <option value="28">28</option>
                                         <option value="29">29</option>
                                         <option value="30">30</option>
-                                        <option value="31">31</option>
+                                        <option value="31">31</option> -->
                                 </select> 日
                                 </td>
                             </tr>
@@ -190,7 +192,7 @@
                                     <select name="UpID" ng-model="member.upid" ng-options="sale.ID as sale.Attrib01 for sale in saleslist">
                                         <option value="">--請選擇--</option>  
                                         <!-- <option ng-repeat="sales in saleslist" value="{{sales.ID}}">{{sales.Attrib01}}</option> -->
-                                    </select>{{member.upid}}
+                                    </select><!--{{member.upid}}-->
                                 </td>
                             </tr>
                             <tr>
@@ -202,62 +204,17 @@
                                         <tr>
                                             <td width="443">民國
                                                 <input id="id_input_Member_Info_Attrib02_0_TMP" name="Attrib02_0_TMP" class="easyui-textbox" type="text" style="width:74px; height:28px;"
-                                                    data-options="required1:true" SetTWTime ng-model="attrib02_0_TMP">                                                年
-                                                <select name="id_input_Member_Info_Attrib02_1_TMP" ng-model="attrib02_1_TMP">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
+                                                    data-options="required1:true" SetTWTime ng-model="attrib02_0_TMP">年
+                                                <select name="id_input_Member_Info_Attrib02_1_TMP" ng-model="attrib02_1_TMP" ng-options="month.value as month.name for month in months">
+                                                    <option value="">--請選擇--</option>
                                                 </select>月
-                                                <select name="id_input_Member_Info_Attrib02_2_TMP" ng-model="attrib02_2_TMP"> 
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                        <option value="10">10</option>
-                                                        <option value="11">11</option>
-                                                        <option value="12">12</option>
-                                                        <option value="13">13</option>
-                                                        <option value="14">14</option>
-                                                        <option value="15">15</option>
-                                                        <option value="16">16</option>
-                                                        <option value="17">17</option>
-                                                        <option value="18">18</option>
-                                                        <option value="19">19</option>
-                                                        <option value="20">20</option>
-                                                        <option value="21">21</option>
-                                                        <option value="22">22</option>
-                                                        <option value="23">23</option>
-                                                        <option value="24">24</option>
-                                                        <option value="25">25</option>
-                                                        <option value="26">26</option>
-                                                        <option value="27">27</option>
-                                                        <option value="28">28</option>
-                                                        <option value="29">29</option>
-                                                        <option value="30">30</option>
-                                                        <option value="31">31</option>
+                                                <select name="id_input_Member_Info_Attrib02_2_TMP" ng-model="attrib02_2_TMP" ng-options="day.value as day.name for day in days">
+                                                    <option value="">--請選擇--</option>      
                                                 </select> 日
                                             </td>
                                             <td width="80" align="right">
-                                                <select name="id_input_Member_Info_Attrib22" ng-model="member.attrib22">
-                                                            <option value=" ">  </option>
-                                                            <option value="自然">自然</option>
-                                                            <option value="剖腹">剖腹</option>
-                                                            <option value="小產">小產</option>
-                                                            <option value="術後">術後</option>
+                                                <select name="id_input_Member_Info_Attrib22" ng-model="member.attrib22" ng-options="born.value as born.name for born in bornType">
+                                                    <option value="">--請選擇--</option>  
                                                 </select>
                                             </td>
                                         </tr>
@@ -274,60 +231,16 @@
                                             <td width="443">民國
                                                 <input id="id_input_Member_Info_Attrib16_0_TMP" name="Attrib16_0_TMP" class="easyui-textbox" type="text" style="width:74px; height:28px;"
                                                     data-options="required1:true" SetTWTime ng-model="attrib16_0_TMP">年
-                                                <select name="id_input_Member_Info_Attrib16_1_TMP" ng-model="attrib16_1_TMP">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
+                                                <select name="id_input_Member_Info_Attrib16_1_TMP" ng-model="attrib16_1_TMP" ng-options="month.value as month.name for month in months">
+                                                    <option value="">--請選擇--</option>
                                                 </select>月
-                                                <select name="id_input_Member_Info_Attrib16_2_TMP" ng-model="attrib16_2_TMP">
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                        <option value="10">10</option>
-                                                        <option value="11">11</option>
-                                                        <option value="12">12</option>
-                                                        <option value="13">13</option>
-                                                        <option value="14">14</option>
-                                                        <option value="15">15</option>
-                                                        <option value="16">16</option>
-                                                        <option value="17">17</option>
-                                                        <option value="18">18</option>
-                                                        <option value="19">19</option>
-                                                        <option value="20">20</option>
-                                                        <option value="21">21</option>
-                                                        <option value="22">22</option>
-                                                        <option value="23">23</option>
-                                                        <option value="24">24</option>
-                                                        <option value="25">25</option>
-                                                        <option value="26">26</option>
-                                                        <option value="27">27</option>
-                                                        <option value="28">28</option>
-                                                        <option value="29">29</option>
-                                                        <option value="30">30</option>
-                                                        <option value="31">31</option>
+                                                <select name="id_input_Member_Info_Attrib16_2_TMP" ng-model="attrib16_2_TMP" ng-options="day.value as day.name for day in days">
+                                                    <option value="">--請選擇--</option>      
                                                 </select> 日
                                             </td>
                                             <td width="80" align="right">
-                                                <select name="id_input_Member_Info_Attrib23" ng-model="member.attrib23">
-                                                            <option value=" ">  </option>
-                                                            <option value="早">早</option>
-                                                            <option value="午">午</option>
-                                                            <option value="晚">晚</option>
+                                                <select name="id_input_Member_Info_Attrib23" ng-model="member.attrib23" ng-options="mealtime.value as mealtime.name for mealtime in mealTimeType">
+                                                    <option value="">--請選擇--</option>      
                                                 </select>
                                             </td>
                                         </tr>
@@ -344,60 +257,16 @@
                                             <td width="443">民國
                                                 <input id="id_input_Member_Info_Attrib17_0_TMP" name="Attrib17_0_TMP" class="easyui-textbox" type="text" style="width:74px; height:28px;"
                                                     data-options="required1:true" SetTWTime ng-model="attrib17_0_TMP">年
-                                                <select name="id_input_Member_Info_Attrib17_1_TMP" ng-model="attrib17_1_TMP">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
+                                                <select name="id_input_Member_Info_Attrib17_1_TMP" ng-model="attrib17_1_TMP" ng-options="month.value as month.name for month in months">
+                                                    <option value="">--請選擇--</option>
                                                 </select>月
-                                                <select name="id_input_Member_Info_Attrib17_2_TMP" ng-model="attrib17_2_TMP">
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                        <option value="10">10</option>
-                                                        <option value="11">11</option>
-                                                        <option value="12">12</option>
-                                                        <option value="13">13</option>
-                                                        <option value="14">14</option>
-                                                        <option value="15">15</option>
-                                                        <option value="16">16</option>
-                                                        <option value="17">17</option>
-                                                        <option value="18">18</option>
-                                                        <option value="19">19</option>
-                                                        <option value="20">20</option>
-                                                        <option value="21">21</option>
-                                                        <option value="22">22</option>
-                                                        <option value="23">23</option>
-                                                        <option value="24">24</option>
-                                                        <option value="25">25</option>
-                                                        <option value="26">26</option>
-                                                        <option value="27">27</option>
-                                                        <option value="28">28</option>
-                                                        <option value="29">29</option>
-                                                        <option value="30">30</option>
-                                                        <option value="31">31</option>
+                                                <select name="id_input_Member_Info_Attrib17_2_TMP" ng-model="attrib17_2_TMP" ng-options="day.value as day.name for day in days">
+                                                    <option value="">--請選擇--</option>      
                                                 </select> 日
                                             </td>
                                             <td width="80" align="right">
-                                                <select name="id_input_Member_Info_Attrib24" ng-model="member.attrib24">
-                                                            <option value=" ">  </option>
-                                                            <option value="早">早</option>
-                                                            <option value="午">午</option>
-                                                            <option value="晚">晚</option>
+                                                <select name="id_input_Member_Info_Attrib24" ng-model="member.attrib24" ng-options="mealtime.value as mealtime.name for mealtime in mealTimeType">
+                                                    <option value="">--請選擇--</option>      
                                                 </select>
                                             </td>
                                         </tr>
