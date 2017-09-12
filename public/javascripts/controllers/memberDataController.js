@@ -1,4 +1,6 @@
 angular.module('TinYi').controller('memberDataController', function ($rootScope, $scope, MemberService) {
+    $scope.readonly = false;    //欄位唯獨狀態變數
+
     //會員類型分類
     $scope.typeMapping = [
         { value: 0, name: '最高權限管理人員' },
@@ -202,6 +204,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     $(this).addClass('selected');
                     //}
 
+                    $scope.readonly = true;     //將欄位都變唯獨
 
                     //存取抓出選取會員資料的變數
                     var data = table.row(this).data();
@@ -296,11 +299,6 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         });
     });
 
-    //要新增會員資料清空物件
-    $scope.createNewMEMBER = function(){
-        
-    };
-
     //新增資料上ＭySQL
     $scope.postMEMBER = function () {
         //預產期年月日合併
@@ -319,5 +317,33 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         MemberService.postMEMBER($scope.member, function (data) {
             console.log(data);
         });
+    };
+
+    //新增清空欄位
+    $scope.createNewMEMBER = function () {
+        //將欄位唯獨關閉
+        $scope.readonly = false;
+
+        //用迴圈將所有值設為null
+        for(var p in $scope.member){
+            if($scope.member.hasOwnProperty(p)){
+                $scope.member[p] = null;
+            }
+        }
+        $scope.attrib04_0_TMP = null;
+        $scope.attrib04_1_TMP = null;
+        $scope.attrib04_2_TMP = null;
+        $scope.attrib03_0_TMP = null;
+        $scope.attrib03_1_TMP = null;
+        $scope.attrib03_2_TMP = null;
+        $scope.attrib02_0_TMP = null;
+        $scope.attrib02_1_TMP = null;
+        $scope.attrib02_2_TMP = null;
+        $scope.attrib16_0_TMP = null;
+        $scope.attrib16_1_TMP = null;
+        $scope.attrib16_2_TMP = null;
+        $scope.attrib17_0_TMP = null;
+        $scope.attrib17_1_TMP = null;
+        $scope.attrib17_2_TMP = null;
     };
 });
