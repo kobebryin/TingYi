@@ -1,27 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
-
-/** -------------------------connect MySQL-----------------------START----- */
-var connection = mysql.createConnection({
-    host: 'tingyinas.myqnapcloud.com',
-    user: 'kobebryin',
-    password: 'ilove5205><',
-    database: 'TingYi'
-});
-
-connection.connect(function (err) {
-    if (err) {
-        console.error('error connecting: ' + err.stack);
-        return;
-    }
-    console.log('connected as id ' + connection.threadId);
-});
-/** -------------------------connect MySQL-----------------------END------ */
 
 // --------  get Data from MySQL's table dishlist ----------------------- 
 router.get('/', function (req, res, next) {
-    connection.query('SELECT * FROM dishlist;', function (error, results, fields) {
+    req.dbConnection.query('SELECT * FROM dishlist;', function (error, results, fields) {
         if (error) throw error;
         console.log('The solution is: ', results);
         res.json(results);
@@ -30,7 +12,7 @@ router.get('/', function (req, res, next) {
 
 // --------  insert Data from MySQL's table dishlist ----------------------- 
 router.post('/', function (req, res, next) {
-    connection.query("INSERT INTO dishlist (RID, MID, MIP, MID2, MIP2, AID, SID, Date, MealType, Type, DishName, Amount, Flag, CreateTime, RecordTime, ShowTime) VALUES ("
+    req.dbConnection.query("INSERT INTO dishlist (RID, MID, MIP, MID2, MIP2, AID, SID, Date, MealType, Type, DishName, Amount, Flag, CreateTime, RecordTime, ShowTime) VALUES ("
         + "'" + req.body.rid + "', "
         + "'" + req.body.mid + "', "
         + "'" + req.body.mip + "', "
@@ -55,7 +37,7 @@ router.post('/', function (req, res, next) {
 
 // --------  update Data from MySQL's table dishlist ----------------------- 
 router.put('/', function (req, res, next) {
-    connection.query('UPDATE dishlist SET '
+    req.dbConnection.query('UPDATE dishlist SET '
         + "RID=" + "'" + req.body.rid + "', "
         + 'MID=' + "'" + req.body.mid + "', "
         + 'MIP=' + "'" + req.body.mip + "', "
@@ -82,7 +64,7 @@ router.put('/', function (req, res, next) {
 
 // --------  delete Data from MySQL's table dishlist ----------------------- 
 router.delete('/', function (req, res, next) {
-    connection.query('DELETE FROM dishlist WHERE ID=' + "'" + req.body.id + "';", function (error, results, fields) {
+    req.dbConnection.query('DELETE FROM dishlist WHERE ID=' + "'" + req.body.id + "';", function (error, results, fields) {
         if (error) throw error;
         console.log('The solution is: ', results);
         res.json(results);

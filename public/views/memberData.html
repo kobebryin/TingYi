@@ -41,14 +41,14 @@
                                 <td width="115">
                                     <div style="padding-left:25px;">房號</div>
                                 </td>
-                                <td width="523"><input id="id_input_Member_Info_Attrib09" ng-disabled="readonly" name="Attrib09" type="text"
+                                <td width="523"><input id="id_input_Member_Info_Attrib09" ng-readonly="readonly" name="Attrib09" type="text"
                                         style="width:523px; height:28px;" data-options="required1:true" ng-model="member.attrib09"></td>
                             </tr>
                             <tr>
                                 <td>
                                     <div style="padding-left:25px;">姓名</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib01" ng-disabled="readonly" name="Attrib01" class="easyui-textbox"
+                                <td><input id="id_input_Member_Info_Attrib01" ng-readonly="readonly" name="Attrib01" class="easyui-textbox"
                                         type="text" style="width:523px; height:28px;" data-options="required:true" ng-model="member.attrib01"></td>
                             </tr>
                             <tr>
@@ -56,7 +56,7 @@
                                     <div style="padding-left:25px;">預產期</div>
                                 </td>
                                 <td>民國
-                                    <input id="id_input_Member_Info_Attrib04_0_TMP" ng-disabled="readonly" name="Attrib04_0_TMP" class="easyui-textbox" type="text"
+                                    <input id="id_input_Member_Info_Attrib04_0_TMP" ng-readonly="readonly" name="Attrib04_0_TMP" class="easyui-textbox" type="text"
                                         style="width:74px; height:28px;" data-options="required1:true" SetTWTime ng-model="attrib04_0_TMP">年
                                     <select name="id_input_Member_Info_Attrib04_1_TMP" ng-disabled="readonly" ng-model="attrib04_1_TMP" ng-options="month.value as month.name for month in months">
                                         <option value="">--請選擇--</option>        
@@ -131,7 +131,7 @@
                                     <div style="padding-left:25px;">生日</div>
                                 </td>
                                 <td>民國
-                                    <input id="id_input_Member_Info_Attrib03_0_TMP" ng-disabled="readonly" name="Attrib03_0_TMP" class="easyui-textbox" type="text"
+                                    <input id="id_input_Member_Info_Attrib03_0_TMP" ng-readonly="readonly" name="Attrib03_0_TMP" class="easyui-textbox" type="text"
                                         style="width:74px; height:28px;" data-options="required1:true" SetTWTime ng-model="attrib03_0_TMP">                                    年
                                     <select name="id_input_Member_Info_Attrib03_1_TMP" ng-disabled="readonly" ng-model="attrib03_1_TMP" ng-options="month.value as month.name for month in months">
                                         <option value="">--請選擇--</option>
@@ -204,7 +204,7 @@
                                     <table width="523" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td width="443">民國
-                                                <input id="id_input_Member_Info_Attrib02_0_TMP" ng-disabled="readonly" name="Attrib02_0_TMP" class="easyui-textbox" type="text"
+                                                <input id="id_input_Member_Info_Attrib02_0_TMP" ng-readonly="readonly" name="Attrib02_0_TMP" class="easyui-textbox" type="text"
                                                     style="width:74px; height:28px;" data-options="required1:true" SetTWTime
                                                     ng-model="attrib02_0_TMP">年
                                                 <select name="id_input_Member_Info_Attrib02_1_TMP" ng-disabled="readonly" ng-model="attrib02_1_TMP" ng-options="month.value as month.name for month in months">
@@ -231,7 +231,7 @@
                                     <table width="523" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td width="443">民國
-                                                <input id="id_input_Member_Info_Attrib16_0_TMP" ng-disabled="readonly" name="Attrib16_0_TMP" class="easyui-textbox" type="text"
+                                                <input id="id_input_Member_Info_Attrib16_0_TMP" ng-readonly="readonly" name="Attrib16_0_TMP" class="easyui-textbox" type="text"
                                                     style="width:74px; height:28px;" data-options="required1:true" SetTWTime
                                                     ng-model="attrib16_0_TMP">年
                                                 <select name="id_input_Member_Info_Attrib16_1_TMP" ng-disabled="readonly" ng-model="attrib16_1_TMP" ng-options="month.value as month.name for month in months">
@@ -258,7 +258,7 @@
                                     <table width="523" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td width="443">民國
-                                                <input id="id_input_Member_Info_Attrib17_0_TMP" ng-disabled="readonly" name="Attrib17_0_TMP" class="easyui-textbox" type="text"
+                                                <input id="id_input_Member_Info_Attrib17_0_TMP" ng-readonly="readonly" name="Attrib17_0_TMP" class="easyui-textbox" type="text"
                                                     style="width:74px; height:28px;" data-options="required1:true" SetTWTime
                                                     ng-model="attrib17_0_TMP">年
                                                 <select name="id_input_Member_Info_Attrib17_1_TMP" ng-disabled="readonly" ng-model="attrib17_1_TMP" ng-options="month.value as month.name for month in months">
@@ -282,7 +282,7 @@
                                     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Member_Attrib05" fieldtype="tree"
                                         onClick="fieldedit($(this));">禁忌 &nbsp; &nbsp;</a>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib05" ng-disabled="readonly" name="Attrib05" class="easyui-combotree"
+                                <td><input id="id_input_Member_Info_Attrib05" ng-readonly="readonly" name="Attrib05" class="easyui-combotree"
                                         type="text" style="width:523px; height:28px;" ng-model="member.attrib05" data-options="required1:true,url:'/info/fieldvalue/list.jsp?TableAttrib=Member_Attrib05',method:'get',cascadeCheck:''"
                                         multiple></td>
                             </tr>
@@ -290,39 +290,39 @@
                                 <td>
                                     <div style="padding-left:25px;">餐點修改</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib06" ng-disabled="readonly" name="Attrib06" type="hidden">
-                                    <input id="id_input_Member_Info_Attrib06_0_TMP" ng-disabled="readonly" name="Attrib06_0_TMP" type="hidden">
-                                    <input id="id_input_Member_Info_Attrib06_1_TMP" ng-disabled="readonly" name="Attrib06_1_TMP" class="easyui-textbox" type="text"
+                                <td><input id="id_input_Member_Info_Attrib06" ng-readonly="readonly" name="Attrib06" type="hidden">
+                                    <input id="id_input_Member_Info_Attrib06_0_TMP" ng-readonly="readonly" name="Attrib06_0_TMP" type="hidden">
+                                    <input id="id_input_Member_Info_Attrib06_1_TMP" ng-readonly="readonly" name="Attrib06_1_TMP" class="easyui-textbox" type="text"
                                         style="width:523px; height:28px;" AddContent></td>
                             </tr>
                             <tr>
                                 <td>
                                     <div style="padding-left:25px;">特殊情況</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib07" ng-disabled="readonly" name="Attrib07" type="hidden">
-                                    <input id="id_input_Member_Info_Attrib07_0_TMP" ng-disabled="readonly" name="Attrib07_0_TMP" type="hidden">
-                                    <input id="id_input_Member_Info_Attrib07_1_TMP" ng-disabled="readonly" name="Attrib07_1_TMP" class="easyui-textbox" type="text"
+                                <td><input id="id_input_Member_Info_Attrib07" ng-readonly="readonly" name="Attrib07" type="hidden">
+                                    <input id="id_input_Member_Info_Attrib07_0_TMP" ng-readonly="readonly" name="Attrib07_0_TMP" type="hidden">
+                                    <input id="id_input_Member_Info_Attrib07_1_TMP" ng-readonly="readonly" name="Attrib07_1_TMP" class="easyui-textbox" type="text"
                                         style="width:523px; height:28px;" AddContent></td>
                             </tr>
                             <tr>
                                 <td>
                                     <div style="padding-left:25px;">訂購總額</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib19" ng-disabled="readonly" name="Attrib19" class="easyui-textbox"
+                                <td><input id="id_input_Member_Info_Attrib19" ng-readonly="readonly" name="Attrib19" class="easyui-textbox"
                                         type="text" style="width:523px; height:28px;" data-options="required1:true" ng-model="member.attrib19"></td>
                             </tr>
                             <tr>
                                 <td>
                                     <div style="padding-left:25px;">已付訂金</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib20" ng-disabled="readonly" name="Attrib20" class="easyui-textbox"
+                                <td><input id="id_input_Member_Info_Attrib20" ng-readonly="readonly" name="Attrib20" class="easyui-textbox"
                                         type="text" style="width:523px; height:28px;" data-options="required1:true" ng-model="member.attrib20"></td>
                             </tr>
                             <tr>
                                 <td>
                                     <div style="padding-left:25px;">剩餘尾款</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib21" ng-disabled="readonly" name="Attrib21" class="easyui-textbox"
+                                <td><input id="id_input_Member_Info_Attrib21" ng-readonly="readonly" name="Attrib21" class="easyui-textbox"
                                         type="text" style="width:523px; height:28px;" data-options="required1:true" ng-model="member.attrib21"></td>
                             </tr>
                             <tr>
@@ -330,7 +330,7 @@
                                     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Member_Attrib08" fieldtype="tree"
                                         onClick="fieldedit($(this));">贈品 &nbsp; &nbsp;</a>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib08" ng-disabled="readonly" name="Attrib08" class="easyui-combotree"
+                                <td><input id="id_input_Member_Info_Attrib08" ng-readonly="readonly" name="Attrib08" class="easyui-combotree"
                                         type="text" style="width:523px; height:28px;" ng-model="member.attrib08" data-options="required1:true,url:'/info/fieldvalue/list.jsp?TableAttrib=Member_Attrib08',method:'get',cascadeCheck:''"
                                         multiple></td>
                             </tr>
@@ -350,7 +350,7 @@
                                 <td>
                                     <div style="padding-left:25px;">手機</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_User" ng-disabled="readonly" name="User" class="easyui-textbox"
+                                <td><input id="id_input_Member_Info_User" ng-readonly="readonly" name="User" class="easyui-textbox"
                                         type="text" style="width:523px; height:28px;" data-options="required:true" ng-model="member.user"
                                         ng-change="member.password=member.user"></td>
                             </tr>
@@ -358,35 +358,35 @@
                                 <td>
                                     <div style="padding-left:25px;">住家電話</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib10" ng-disabled="readonly" name="Attrib10" class="easyui-textbox"
+                                <td><input id="id_input_Member_Info_Attrib10" ng-readonly="readonly" name="Attrib10" class="easyui-textbox"
                                         type="text" style="width:523px; height:28px;" ng-model="member.attrib10" data-options="required1:true"></td>
                             </tr>
                             <tr>
                                 <td>
                                     <div style="padding-left:25px;">公司電話</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib11" ng-disabled="readonly" name="Attrib11" class="easyui-textbox"
+                                <td><input id="id_input_Member_Info_Attrib11" ng-readonly="readonly" name="Attrib11" class="easyui-textbox"
                                         type="text" style="width:523px; height:28px;" ng-model="member.attrib11" data-options="required1:true"></td>
                             </tr>
                             <tr>
                                 <td>
                                     <div style="padding-left:25px;">聯絡人電話</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib25" ng-disabled="readonly" name="Attrib25" class="easyui-textbox"
+                                <td><input id="id_input_Member_Info_Attrib25" ng-readonly="readonly" name="Attrib25" class="easyui-textbox"
                                         type="text" style="width:523px; height:28px;" ng-model="member.attrib25"></td>
                             </tr>
                             <tr>
                                 <td>
                                     <div style="padding-left:25px;">Line ID</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib12" ng-disabled="readonly" name="Attrib12" class="easyui-textbox"
+                                <td><input id="id_input_Member_Info_Attrib12" ng-readonly="readonly" name="Attrib12" class="easyui-textbox"
                                         type="text" style="width:523px; height:28px;" data-options="required1:true" ng-model="member.attrib12"></td>
                             </tr>
                             <tr>
                                 <td>
                                     <div style="padding-left:25px;">住家地址</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib13" ng-disabled="readonly" name="Attrib13" class="easyui-textbox"
+                                <td><input id="id_input_Member_Info_Attrib13" ng-readonly="readonly" name="Attrib13" class="easyui-textbox"
                                         type="text" style="width:523px; height:28px;" data-options="required1:true" ng-model="member.attrib13"></td>
                             </tr>
                             <tr>
@@ -395,7 +395,7 @@
                                         onClick="fieldedit($(this));">午餐地址</a>
 
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib14" ng-disabled="readonly" name="Attrib14" class="easyui-combobox"
+                                <td><input id="id_input_Member_Info_Attrib14" ng-readonly="readonly" name="Attrib14" class="easyui-combobox"
                                         type="text" style="width:523px; height:28px;" data-options="required1:true,url:'/info/fieldvalue/list.jsp?TableAttrib=Member_Attrib14',method:'get',valueField:'id',textField:'text',cascadeCheck:''"
                                         ng-model="member.attrib14"></td>
                             </tr>
@@ -404,7 +404,7 @@
                                     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Member_Attrib14" fieldtype="radio"
                                         onClick="fieldedit($(this));">晚餐地址</a>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib15" ng-disabled="readonly" name="Attrib15" class="easyui-combobox"
+                                <td><input id="id_input_Member_Info_Attrib15" ng-readonly="readonly" name="Attrib15" class="easyui-combobox"
                                         type="text" style="width:523px; height:28px;" data-options="required1:true,url:'/info/fieldvalue/list.jsp?TableAttrib=Member_Attrib14',method:'get',valueField:'id',textField:'text',cascadeCheck:''"
                                         ng-model="member.attrib15"></td>
                             </tr>

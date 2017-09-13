@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mysql = require('mysql');
 
 var index = require('./routes/index');
 //var users = require('./routes/users');
@@ -18,8 +19,6 @@ var routeapi = require('./routes/routeApi');
 var saleslistapi = require('./routes/saleslistApi');
 var memberoneapi = require('./routes/memberOneApi');
 
-
-
 var app = express();
 
 // view engine setup
@@ -33,6 +32,29 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+/** -------------------------connect MySQL-----------------------START----- */
+var connection = mysql.createConnection({
+    host: 'tingyinas.myqnapcloud.com',
+    user: 'kobebryin',
+    password: 'ilove5205><',
+    database: 'TingYi'
+});
+
+connection.connect(function (err) {
+    if (err) {
+        console.error('error connecting: ' + err.stack);
+        return;
+    }
+    console.log('connected as id ' + connection.threadId);
+});
+/** -------------------------connect MySQL-----------------------END------ */
+
+/* Add MySQL connection into req.dbConnection Object */
+app.use(function(req, res, next) {
+    req.dbConnection = connection;
+    next();
+});
 
 app.use('/', index);
 /** -----  database MySql api routes  -----*/

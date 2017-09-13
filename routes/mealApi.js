@@ -1,27 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
-
-/** -------------------------connect MySQL-----------------------START----- */
-var connection = mysql.createConnection({
-    host: 'tingyinas.myqnapcloud.com',
-    user: 'kobebryin',
-    password: 'ilove5205><',
-    database: 'TingYi'
-});
-
-connection.connect(function (err) {
-    if (err) {
-        console.error('error connecting: ' + err.stack);
-        return;
-    }
-    console.log('connected as id ' + connection.threadId);
-});
-/** -------------------------connect MySQL-----------------------END------ */
 
 // --------  get Data from MySQL's table meal ----------------------- 
 router.get('/', function (req, res, next) {
-    connection.query('SELECT * FROM meal;', function (error, results, fields) {
+    req.dbConnection.query('SELECT * FROM meal;', function (error, results, fields) {
         if (error) throw error;
         console.log('The solution is: ', results);
         res.json(results);
@@ -30,7 +12,7 @@ router.get('/', function (req, res, next) {
 
 // --------  insert Data from MySQL's table meal ----------------------- 
 router.post('/', function (req, res, next) {
-    connection.query("INSERT INTO meal (RID, MID, MIP, MID2, MIP2, MemberID, Date, MealType, Type, Meal01, Meal02, Meal03, Meal04, Meal05, Meal06, Meal07, Meal08, Meal09, Meal10, Meal11, Meal12, Meal13, Meal14, Meal15, Meal16, Meal17, Meal18, Meal19, Meal20, Meal21, Meal22, Meal23, Meal24, Meal25, Meal26, Meal27, Meal28, Meal29, Meal30, Meal31, Meal32, Meal33, Meal34, Meal35, Meal36, Meal37, Meal38, Meal39, Meal40, Flag, CreateTime, RecordTime, ShowTime) VALUES ("
+    req.dbConnection.query("INSERT INTO meal (RID, MID, MIP, MID2, MIP2, MemberID, Date, MealType, Type, Meal01, Meal02, Meal03, Meal04, Meal05, Meal06, Meal07, Meal08, Meal09, Meal10, Meal11, Meal12, Meal13, Meal14, Meal15, Meal16, Meal17, Meal18, Meal19, Meal20, Meal21, Meal22, Meal23, Meal24, Meal25, Meal26, Meal27, Meal28, Meal29, Meal30, Meal31, Meal32, Meal33, Meal34, Meal35, Meal36, Meal37, Meal38, Meal39, Meal40, Flag, CreateTime, RecordTime, ShowTime) VALUES ("
         + "'" + req.body.rid + "', "
         + "'" + req.body.mid + "', "
         + "'" + req.body.mip + "', "
@@ -92,7 +74,7 @@ router.post('/', function (req, res, next) {
 
 // --------  update Data from MySQL's table meal ----------------------- 
 router.put('/', function (req, res, next) {
-    connection.query('UPDATE meal SET '
+    req.dbConnection.query('UPDATE meal SET '
         + "RID=" + "'" + req.body.rid + "', "
         + 'MID=' + "'" + req.body.mid + "', "
         + 'MIP=' + "'" + req.body.mip + "', "
@@ -156,7 +138,7 @@ router.put('/', function (req, res, next) {
 
 // --------  delete Data from MySQL's table meal ----------------------- 
 router.delete('/', function (req, res, next) {
-    connection.query('DELETE FROM meal WHERE ID=' + "'" + req.body.id + "';", function (error, results, fields) {
+    req.dbConnection.query('DELETE FROM meal WHERE ID=' + "'" + req.body.id + "';", function (error, results, fields) {
         if (error) throw error;
         console.log('The solution is: ', results);
         res.json(results);

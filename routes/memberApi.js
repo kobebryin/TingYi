@@ -1,27 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
-
-/** -------------------------connect MySQL-----------------------START----- */
-var connection = mysql.createConnection({
-    host: 'tingyinas.myqnapcloud.com',
-    user: 'kobebryin',
-    password: 'ilove5205><',
-    database: 'TingYi'
-});
-
-connection.connect(function (err) {
-    if (err) {
-        console.error('error connecting: ' + err.stack);
-        return;
-    }
-    console.log('connected as id ' + connection.threadId);
-});
-/** -------------------------connect MySQL-----------------------END------ */
 
 // --------  get Data from MySQL's table member ----------------------- 
 router.get('/', function (req, res, next) {
-    connection.query('SELECT * FROM member;', function (error, results, fields) {
+    req.dbConnection.query('SELECT * FROM member;', function (error, results, fields) {
         if (error) throw error;
         //console.log('The solution is: ', results);
         res.json(results);
@@ -30,7 +12,7 @@ router.get('/', function (req, res, next) {
 
 // --------  insert Data from MySQL's table member ----------------------- 
 router.post('/', function (req, res, next) {
-    connection.query("INSERT INTO member (RID, MID, MIP, MID2, MIP2, User, Password, Type, UpID, Meal1SickType, Meal1A, Meal1AC, Meal1B, Meal1BC, Meal1C, Meal1CC, Meal2SickType, Meal2A, Meal2AC, Meal2B, Meal2BC, Meal2C, Meal2CC, Meal3SickType, Meal3A, Meal3AC, Meal3B, Meal3BC, Meal3C, Meal3CC, SAttrib01, SAttrib02, SAttrib03, SAttrib04, SAttrib05, SAttrib06, SAttrib07, SAttrib08, SAttrib09, SAttrib10, SAttrib11, SAttrib12, SAttrib13, SAttrib14, SAttrib15, SAttrib16, SAttrib17, SAttrib18, SAttrib19, SAttrib20, Attrib01, Attrib02, Attrib03, Attrib04, Attrib05, Attrib06, Attrib07, Attrib08, Attrib09, Attrib10, Attrib11, Attrib12, Attrib13, Attrib14, Attrib15, Attrib16, Attrib17, Attrib18, Attrib19, Attrib20, Attrib21, Attrib22, Attrib23, Attrib24, Attrib25, Attrib26, Attrib27, Attrib28, Attrib29, Attrib30, Flag, CreateTime, RecordTime, ShowTime) VALUES ("
+    req.dbConnection.query("INSERT INTO member (RID, MID, MIP, MID2, MIP2, User, Password, Type, UpID, Meal1SickType, Meal1A, Meal1AC, Meal1B, Meal1BC, Meal1C, Meal1CC, Meal2SickType, Meal2A, Meal2AC, Meal2B, Meal2BC, Meal2C, Meal2CC, Meal3SickType, Meal3A, Meal3AC, Meal3B, Meal3BC, Meal3C, Meal3CC, SAttrib01, SAttrib02, SAttrib03, SAttrib04, SAttrib05, SAttrib06, SAttrib07, SAttrib08, SAttrib09, SAttrib10, SAttrib11, SAttrib12, SAttrib13, SAttrib14, SAttrib15, SAttrib16, SAttrib17, SAttrib18, SAttrib19, SAttrib20, Attrib01, Attrib02, Attrib03, Attrib04, Attrib05, Attrib06, Attrib07, Attrib08, Attrib09, Attrib10, Attrib11, Attrib12, Attrib13, Attrib14, Attrib15, Attrib16, Attrib17, Attrib18, Attrib19, Attrib20, Attrib21, Attrib22, Attrib23, Attrib24, Attrib25, Attrib26, Attrib27, Attrib28, Attrib29, Attrib30, Flag, CreateTime, RecordTime, ShowTime) VALUES ("
         + "'" + req.body.rid + "', "
         + "'" + req.body.mid + "', "
         + "'" + req.body.mip + "', "
@@ -123,7 +105,7 @@ router.post('/', function (req, res, next) {
 
 // --------  update Data from MySQL's table member ----------------------- 
 router.put('/', function (req, res, next) {
-    connection.query('UPDATE member SET '
+    req.dbConnection.query('UPDATE member SET '
         + "RID=" + "'" + req.body.rid + "', "
         + 'MID=' + "'" + req.body.mid + "', "
         + 'MIP=' + "'" + req.body.mip + "', "
@@ -218,7 +200,7 @@ router.put('/', function (req, res, next) {
 
 // --------  delete Data from MySQL's table member ----------------------- 
 router.delete('/', function (req, res, next) {
-    connection.query('DELETE FROM member WHERE ID=' +  req.query.ID + ';', function (error, results, fields) {
+    req.dbConnection.query('DELETE FROM member WHERE ID=' +  req.query.ID + ';', function (error, results, fields) {
         if (error) throw error;
         console.log('The solution is: ', results);
         res.json(results);
