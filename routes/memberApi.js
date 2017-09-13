@@ -218,7 +218,7 @@ router.put('/', function (req, res, next) {
 
 // --------  delete Data from MySQL's table member ----------------------- 
 router.delete('/', function (req, res, next) {
-    connection.query('DELETE FROM member WHERE ID=' + "'" + req.body.id + "';", function (error, results, fields) {
+    connection.query('DELETE FROM member WHERE ID=' +  req.query.ID + ';', function (error, results, fields) {
         if (error) throw error;
         console.log('The solution is: ', results);
         res.json(results);

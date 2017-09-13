@@ -321,6 +321,10 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
     //新增清空欄位
     $scope.createNewMEMBER = function () {
+        //datatables假如有欄位被選擇反白，將反白取消。
+        var table = $('#example').DataTable();
+        table.$('tr.selected').removeClass('selected');
+
         //將欄位唯獨關閉
         $scope.readonly = false;
 
@@ -345,5 +349,16 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         $scope.attrib17_0_TMP = null;
         $scope.attrib17_1_TMP = null;
         $scope.attrib17_2_TMP = null;
+    };
+
+    //刪除資料庫內選取會員的欄位
+    $scope.deleteMEMBER = function () {
+        // console.log($scope.member.id);
+        // 抓取ＩＤ
+        var id = $scope.member.id;
+        //呼叫刪除function
+        MemberService.deleteMEMBER(id, function (data) {
+
+        });
     };
 });

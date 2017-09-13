@@ -30,4 +30,12 @@ angular.module('TinYi').service('MemberService', function ($rootScope, $http) {
             callback(data);
         });
     }
+
+    //刪除會員資料
+    this.deleteMEMBER = function (id, callback) {
+        $http.delete($rootScope.apiUrl + 'member?ID=' + id).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
 })
