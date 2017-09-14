@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <script type="text/javascript" src="../libraries/jquery/jquery.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2><%= title %></h2>
+        <div class="form-group">
+            <label for="email">帳號:</label>
+            <input type="text" class="form-control" id="username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="pwd">密碼:</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <button type="submit" class="btn btn-default" onclick="login()">登入</button>
+    </div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+    function login() {
+        $.ajax({
+            url: "/users/login",
+            data: { username: $('#username').val(), password: $('#password').val() },
+            type: 'POST'
+        }).done(function (result) {
+            if(result.status === 'success'){
+                location.href = '/#/memberData';
+            }else if(result.status === 'incorrect password'){
+                alert(result.status);
+            }else if(result.status === 'incorrect username'){
+                alert(result.status);
+            }else{
+                alert('帳號密碼錯誤');
+            }
+        });
+    }
+</script>

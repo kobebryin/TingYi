@@ -164,6 +164,79 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
     initial();  //  此頁開始時先呼叫initial()
 
+    
+    /**-----------------------------------------click event zone start----------------------------------------- */
+    //新增資料上ＭySQL
+    $scope.postMEMBER = function () {
+
+        if ($scope.member.attrib01 == null) {   //判斷使用者必輸項有無輸入，如果沒輸入跳出提醒
+            clearScopeMemberObj(); //清空$scope.member 物件
+            alert("欄位 [姓名] 為必輸項!");
+        } else if ($scope.member.user == null) {
+            clearScopeMemberObj(); //清空$scope.member 物件
+            alert("欄位 [手機] 為必輸項!");
+        } else {
+            //預產期年月日合併
+            $scope.member.attrib04 = $scope.attrib04_0_TMP + "<br>" + $scope.attrib04_1_TMP + "<br>" + $scope.attrib04_2_TMP;
+            //生日年月日合併
+            $scope.member.attrib03 = $scope.attrib03_0_TMP + "<br>" + $scope.attrib03_1_TMP + "<br>" + $scope.attrib03_2_TMP;
+            //生產日期年月日合併
+            $scope.member.attrib02 = $scope.attrib02_0_TMP + "<br>" + $scope.attrib02_1_TMP + "<br>" + $scope.attrib02_2_TMP;
+            //供餐開始日期年月日合併
+            $scope.member.attrib16 = $scope.attrib16_0_TMP + "<br>" + $scope.attrib16_1_TMP + "<br>" + $scope.attrib16_2_TMP;
+            //供餐結束日期年月日合併
+            $scope.member.attrib17 = $scope.attrib17_0_TMP + "<br>" + $scope.attrib17_1_TMP + "<br>" + $scope.attrib17_2_TMP;
+
+            console.log($scope.member);
+
+            MemberService.postMEMBER($scope.member, function (data) {
+                table.destroy();    //摧毀dataTables
+                initial();          //reload dataTables
+
+                clearScopeMemberObj(); //清空$scope.member 物件
+                console.log(data);
+            });
+        }
+    };
+
+    //新增清空欄位
+    $scope.createNewMEMBER = function () {
+        //datatables假如有欄位被選擇反白，將反白取消。
+        table.$('tr.selected').removeClass('selected');
+
+        //將欄位唯獨關閉
+        $scope.readonly = false;
+
+        clearScopeMemberObj(); //清空$scope.member 物件
+    };
+
+    //刪除資料庫內選取會員的欄位
+    $scope.deleteMEMBER = function () {
+        // console.log($scope.member.id);
+
+        if ($scope.member.id == null) {     //判斷有無選取會員，如無選取會員則跳出提示請使用者選取會員後再做刪除
+            alert("請選取要刪除的會員");
+        } else {
+            var confirmDelete = confirm("確定要刪除這筆會員資料？　＊注意!　此動作無法復原！！");　//跳除confirm視窗詢是否刪除
+            if (confirmDelete == true) {
+                // 抓取ＩＤ
+                var id = $scope.member.id;
+                //假設按下確定，呼叫刪除function
+                MemberService.deleteMEMBER(id, function (data) {
+                    table.destroy();    //摧毀dataTables
+                    initial();          //reload dataTables
+
+                    clearScopeMemberObj(); //清空$scope.member 物件
+                });
+            } else {
+                //按下取消不做任何事情
+            }
+        }
+    };
+    /**-----------------------------------------click event zone end-------------------------------------------- */
+
+
+    /**-----------------------------------------function zone start---------------------------------------------- */
     //initial() 開始時會做的事: 1.顯示LoadingOverlay 2.營養顧問dropdown list名單抓取 3.會員資料初始取得存入datatables
     function initial() {
         // Show full page LoadingOverlay
@@ -305,58 +378,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         });
     }
 
-    //新增資料上ＭySQL
-    $scope.postMEMBER = function () {
-        //預產期年月日合併
-        $scope.member.attrib04 = $scope.attrib04_0_TMP + "<br>" + $scope.attrib04_1_TMP + "<br>" + $scope.attrib04_2_TMP;
-        //生日年月日合併
-        $scope.member.attrib03 = $scope.attrib03_0_TMP + "<br>" + $scope.attrib03_1_TMP + "<br>" + $scope.attrib03_2_TMP;
-        //生產日期年月日合併
-        $scope.member.attrib02 = $scope.attrib02_0_TMP + "<br>" + $scope.attrib02_1_TMP + "<br>" + $scope.attrib02_2_TMP;
-        //供餐開始日期年月日合併
-        $scope.member.attrib16 = $scope.attrib16_0_TMP + "<br>" + $scope.attrib16_1_TMP + "<br>" + $scope.attrib16_2_TMP;
-        //供餐結束日期年月日合併
-        $scope.member.attrib17 = $scope.attrib17_0_TMP + "<br>" + $scope.attrib17_1_TMP + "<br>" + $scope.attrib17_2_TMP;
-
-        console.log($scope.member);
-
-        MemberService.postMEMBER($scope.member, function (data) {
-            table.destroy();    //摧毀dataTables
-            initial();          //reload dataTables
-
-            //用迴圈將所有值設為null
-            for (var p in $scope.member) {
-                if ($scope.member.hasOwnProperty(p)) {
-                    $scope.member[p] = null;
-                }
-            }
-            $scope.attrib04_0_TMP = null;
-            $scope.attrib04_1_TMP = null;
-            $scope.attrib04_2_TMP = null;
-            $scope.attrib03_0_TMP = null;
-            $scope.attrib03_1_TMP = null;
-            $scope.attrib03_2_TMP = null;
-            $scope.attrib02_0_TMP = null;
-            $scope.attrib02_1_TMP = null;
-            $scope.attrib02_2_TMP = null;
-            $scope.attrib16_0_TMP = null;
-            $scope.attrib16_1_TMP = null;
-            $scope.attrib16_2_TMP = null;
-            $scope.attrib17_0_TMP = null;
-            $scope.attrib17_1_TMP = null;
-            $scope.attrib17_2_TMP = null;
-            console.log(data);
-        });
-    };
-
-    //新增清空欄位
-    $scope.createNewMEMBER = function () {
-        //datatables假如有欄位被選擇反白，將反白取消。
-        table.$('tr.selected').removeClass('selected');
-
-        //將欄位唯獨關閉
-        $scope.readonly = false;
-
+    function clearScopeMemberObj() {
         //用迴圈將所有值設為null
         for (var p in $scope.member) {
             if ($scope.member.hasOwnProperty(p)) {
@@ -378,47 +400,6 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         $scope.attrib17_0_TMP = null;
         $scope.attrib17_1_TMP = null;
         $scope.attrib17_2_TMP = null;
-    };
-
-    //刪除資料庫內選取會員的欄位
-    $scope.deleteMEMBER = function () {
-        // console.log($scope.member.id);
-
-        var confirmDelete = confirm("確定要刪除這筆會員資料？　＊注意!　此動作無法復原！！");　//跳除confirm視窗詢是否刪除
-        if (confirmDelete == true) {
-            // 抓取ＩＤ
-            var id = $scope.member.id;
-            //假設按下確定，呼叫刪除function
-            MemberService.deleteMEMBER(id, function (data) {
-                table.destroy();    //摧毀dataTables
-                initial();          //reload dataTables
-
-                //用迴圈將所有值設為null
-                for (var p in $scope.member) {
-                    if ($scope.member.hasOwnProperty(p)) {
-                        $scope.member[p] = null;
-                    }
-                }
-                $scope.attrib04_0_TMP = null;
-                $scope.attrib04_1_TMP = null;
-                $scope.attrib04_2_TMP = null;
-                $scope.attrib03_0_TMP = null;
-                $scope.attrib03_1_TMP = null;
-                $scope.attrib03_2_TMP = null;
-                $scope.attrib02_0_TMP = null;
-                $scope.attrib02_1_TMP = null;
-                $scope.attrib02_2_TMP = null;
-                $scope.attrib16_0_TMP = null;
-                $scope.attrib16_1_TMP = null;
-                $scope.attrib16_2_TMP = null;
-                $scope.attrib17_0_TMP = null;
-                $scope.attrib17_1_TMP = null;
-                $scope.attrib17_2_TMP = null;
-            });
-        } else {
-            //按下取消不做任何事情
-        }
-
-
-    };
+    }
+    /**-------------------------------------------function zone end---------------------------------------------- */
 });
