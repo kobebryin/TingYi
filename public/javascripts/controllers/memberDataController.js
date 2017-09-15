@@ -1,6 +1,8 @@
 angular.module('TinYi').controller('memberDataController', function ($rootScope, $scope, MemberService) {
     $scope.readonly = false;    //欄位唯獨狀態變數
     var table;                  //將JQUERY dataTables 設為全域變數
+    var save_falg = false;      //判斷是否可以按下保存的flag
+    var saveORupdate_falr = true;   //判斷使用者是選擇新增或是修改，true回新增、false為修改
 
     //會員類型分類
     $scope.typeMapping = [
@@ -164,38 +166,91 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
     initial();  //  此頁開始時先呼叫initial()
 
-    
+
     /**-----------------------------------------click event zone start----------------------------------------- */
     //新增資料上ＭySQL
     $scope.postMEMBER = function () {
 
-        if ($scope.member.attrib01 == null) {   //判斷使用者必輸項有無輸入，如果沒輸入跳出提醒
-            clearScopeMemberObj(); //清空$scope.member 物件
-            alert("欄位 [姓名] 為必輸項!");
-        } else if ($scope.member.user == null) {
-            clearScopeMemberObj(); //清空$scope.member 物件
-            alert("欄位 [手機] 為必輸項!");
+        if (!save_falg) {
+            alert("請點選[新增]或者[修改]");
         } else {
-            //預產期年月日合併
-            $scope.member.attrib04 = $scope.attrib04_0_TMP + "<br>" + $scope.attrib04_1_TMP + "<br>" + $scope.attrib04_2_TMP;
-            //生日年月日合併
-            $scope.member.attrib03 = $scope.attrib03_0_TMP + "<br>" + $scope.attrib03_1_TMP + "<br>" + $scope.attrib03_2_TMP;
-            //生產日期年月日合併
-            $scope.member.attrib02 = $scope.attrib02_0_TMP + "<br>" + $scope.attrib02_1_TMP + "<br>" + $scope.attrib02_2_TMP;
-            //供餐開始日期年月日合併
-            $scope.member.attrib16 = $scope.attrib16_0_TMP + "<br>" + $scope.attrib16_1_TMP + "<br>" + $scope.attrib16_2_TMP;
-            //供餐結束日期年月日合併
-            $scope.member.attrib17 = $scope.attrib17_0_TMP + "<br>" + $scope.attrib17_1_TMP + "<br>" + $scope.attrib17_2_TMP;
 
-            console.log($scope.member);
+            if (saveORupdate_falr) {    //做新增會員的部分
+                if ($scope.member.attrib01 == null) {   //判斷使用者必輸項有無輸入，如果沒輸入跳出提醒
+                    clearScopeMemberObj(); //清空$scope.member 物件
+                    alert("欄位 [姓名] 為必輸項!");
+                } else if ($scope.member.user == null) {
+                    clearScopeMemberObj(); //清空$scope.member 物件
+                    alert("欄位 [手機] 為必輸項!");
+                } else {
+                    //預產期年月日合併
+                    $scope.member.attrib04 = $scope.attrib04_0_TMP + "<br>" + $scope.attrib04_1_TMP + "<br>" + $scope.attrib04_2_TMP;
+                    //生日年月日合併
+                    $scope.member.attrib03 = $scope.attrib03_0_TMP + "<br>" + $scope.attrib03_1_TMP + "<br>" + $scope.attrib03_2_TMP;
+                    //生產日期年月日合併
+                    $scope.member.attrib02 = $scope.attrib02_0_TMP + "<br>" + $scope.attrib02_1_TMP + "<br>" + $scope.attrib02_2_TMP;
+                    //供餐開始日期年月日合併
+                    $scope.member.attrib16 = $scope.attrib16_0_TMP + "<br>" + $scope.attrib16_1_TMP + "<br>" + $scope.attrib16_2_TMP;
+                    //供餐結束日期年月日合併
+                    $scope.member.attrib17 = $scope.attrib17_0_TMP + "<br>" + $scope.attrib17_1_TMP + "<br>" + $scope.attrib17_2_TMP;
 
-            MemberService.postMEMBER($scope.member, function (data) {
-                table.destroy();    //摧毀dataTables
-                initial();          //reload dataTables
+                    console.log($scope.member);
 
-                clearScopeMemberObj(); //清空$scope.member 物件
-                console.log(data);
-            });
+                    MemberService.postMEMBER($scope.member, function (data) {
+                        table.destroy();    //摧毀dataTables
+                        initial();          //reload dataTables
+
+                        clearScopeMemberObj(); //清空$scope.member 物件
+                        console.log(data);
+                    });
+                }
+            } else {    //做修改會員的部分
+
+                if ($scope.member.attrib01 == null) {   //判斷使用者必輸項有無輸入，如果沒輸入跳出提醒
+                    clearScopeMemberObj(); //清空$scope.member 物件
+                    alert("欄位 [姓名] 為必輸項!");
+                } else if ($scope.member.user == null) {
+                    clearScopeMemberObj(); //清空$scope.member 物件
+                    alert("欄位 [手機] 為必輸項!");
+                } else {
+                    //預產期年月日合併
+                    $scope.member.attrib04 = $scope.attrib04_0_TMP + "<br>" + $scope.attrib04_1_TMP + "<br>" + $scope.attrib04_2_TMP;
+                    //生日年月日合併
+                    $scope.member.attrib03 = $scope.attrib03_0_TMP + "<br>" + $scope.attrib03_1_TMP + "<br>" + $scope.attrib03_2_TMP;
+                    //生產日期年月日合併
+                    $scope.member.attrib02 = $scope.attrib02_0_TMP + "<br>" + $scope.attrib02_1_TMP + "<br>" + $scope.attrib02_2_TMP;
+                    //供餐開始日期年月日合併
+                    $scope.member.attrib16 = $scope.attrib16_0_TMP + "<br>" + $scope.attrib16_1_TMP + "<br>" + $scope.attrib16_2_TMP;
+                    //供餐結束日期年月日合併
+                    $scope.member.attrib17 = $scope.attrib17_0_TMP + "<br>" + $scope.attrib17_1_TMP + "<br>" + $scope.attrib17_2_TMP;
+
+                    console.log($scope.member);
+
+                    MemberService.putMEMBER($scope.member, function (data) {
+                        table.destroy();    //摧毀dataTables
+                        initial();          //reload dataTables
+
+                        clearScopeMemberObj(); //清空$scope.member 物件
+                    });
+                }
+            }
+        }
+    };
+
+    //修改按鈕
+    $scope.updateMEMBER = function () {
+        if ($scope.member.id == null) {     //判斷有無選取會員，如無選取會員則跳出提示請使用者選取會員後再做修改
+            alert("請選取要修改的會員");
+        } else {
+            //將欄位唯獨關閉
+            $scope.readonly = false;
+
+            //改成修改模式
+            saveORupdate_falr = false;
+
+            //可以按下保存
+            save_falg = true;
+
         }
     };
 
@@ -206,6 +261,12 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
         //將欄位唯獨關閉
         $scope.readonly = false;
+
+        //改成修改模式
+        saveORupdate_falr = true;
+
+        //可以按下保存
+        save_falg = true;
 
         clearScopeMemberObj(); //清空$scope.member 物件
     };
@@ -273,6 +334,9 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
                     //row點擊事件，get遭點擊的會員資料，並顯示到表格上
                     $('#example tbody').on('click', 'tr', function () {
+                        //有點選會員時不行按下保存
+                        save_falg = false;
+
                         //點選row會有顏色改變，注解掉的部分是因為不希望重複點集會取消顏色
                         /*if ( $(this).hasClass('selected') ) {
                             $(this).removeClass('selected');
