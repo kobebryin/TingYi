@@ -165,7 +165,11 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     };
 
     initial();  //  此頁開始時先呼叫initial()
-
+    $('#dinner_addr').combobox({
+        url:'http://127.0.0.1:8080/fieldvalue',
+        valueField:'id',
+        textField:'text'
+    });
 
     /**-----------------------------------------click event zone start----------------------------------------- */
     //新增資料上ＭySQL

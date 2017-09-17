@@ -2,16 +2,16 @@ var express = require('express');
 var router = express.Router();
 
 // --------  get Data from MySQL's table fieldvalue ----------------------- 
-router.get('/', function (req, res, next) {
-    req.dbConnection.query('SELECT * FROM fieldvalue;', function (error, results, fields) {
+router.post('/', function (req, res, next) {
+    req.dbConnection.query("SELECT Content FROM fieldvalue WHERE TableAttrib ='Member_Attrib14';", function (error, results, fields) {
         if (error) throw error;
-        console.log('The solution is: ', results);
-        res.json(results);
+        console.log('The solution is: ', JSON.parse(results[0].Content));
+        res.json(JSON.parse(results[0].Content));
     });
 });
 
 // --------  insert Data from MySQL's table fieldvalue ----------------------- 
-router.post('/', function (req, res, next) {
+router.get('/', function (req, res, next) {
     req.dbConnection.query("INSERT INTO fieldvalue (RID, MID, MIP, MID2, MIP2, TableAttrib, Content, Flag, CreateTime, RecordTime, ShowTime) VALUES ("
         + "'" + req.body.rid + "', "
         + "'" + req.body.mid + "', "
