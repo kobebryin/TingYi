@@ -165,10 +165,11 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     };
 
     initial();  //  此頁開始時先呼叫initial()
-    $('#dinner_addr').combobox({
-        url:'http://127.0.0.1:8080/fieldvalue',
-        valueField:'id',
-        textField:'text'
+    
+    $('#id_input_Member_Info_Attrib05').combotree({
+        url: 'http://127.0.0.1:8080/fieldvalueAttrib05',
+        editable: true,
+        multiple: true
     });
 
     /**-----------------------------------------click event zone start----------------------------------------- */
@@ -197,6 +198,10 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     $scope.member.attrib16 = $scope.attrib16_0_TMP + "<br>" + $scope.attrib16_1_TMP + "<br>" + $scope.attrib16_2_TMP;
                     //供餐結束日期年月日合併
                     $scope.member.attrib17 = $scope.attrib17_0_TMP + "<br>" + $scope.attrib17_1_TMP + "<br>" + $scope.attrib17_2_TMP;
+
+                    //午,晚餐easy-ui conboxbox值設定
+                    $scope.member.attrib14 = $('#lunch_addr').val();
+                    $scope.member.attrib15 = $('#dinner_addr').val();
 
                     console.log($scope.member);
 
@@ -228,6 +233,10 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     //供餐結束日期年月日合併
                     $scope.member.attrib17 = $scope.attrib17_0_TMP + "<br>" + $scope.attrib17_1_TMP + "<br>" + $scope.attrib17_2_TMP;
 
+                    //午,晚餐easy-ui conboxbox值設定
+                    $scope.member.attrib14 = $('#lunch_addr').val();
+                    $scope.member.attrib15 = $('#dinner_addr').val();                   
+
                     console.log($scope.member);
 
                     MemberService.putMEMBER($scope.member, function (data) {
@@ -248,7 +257,9 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         } else {
             //將欄位唯獨關閉
             $scope.readonly = false;
-
+            $('#dinner_addr').combobox('readonly',false);
+            $('#lunch_addr').combobox('readonly',false);
+            
             //改成修改模式
             saveORupdate_falr = false;
 
@@ -265,6 +276,8 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
         //將欄位唯獨關閉
         $scope.readonly = false;
+        $('#dinner_addr').combobox('readonly',false);
+        $('#lunch_addr').combobox('readonly',false);
 
         //改成修改模式
         saveORupdate_falr = true;
@@ -312,6 +325,18 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
             $scope.saleslist = data;
         });
 
+        //午,晚餐地址combobox設定
+        $('#dinner_addr').combobox({
+            url:'http://127.0.0.1:8080/fieldvalue',
+            valueField:'id',
+            textField:'text'
+        });
+        $('#lunch_addr').combobox({
+            url:'http://127.0.0.1:8080/fieldvalue',
+            valueField:'id',
+            textField:'text'
+        });
+
         //會員資料初始取得存入datatables
         MemberService.getMEMBER(function (data) {
             $scope.getMember = data;
@@ -351,6 +376,9 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                         //}
 
                         $scope.readonly = true;     //將欄位都變唯獨
+                        $('#dinner_addr').combobox('readonly',true);
+                        $('#lunch_addr').combobox('readonly',true);
+
 
                         //存取抓出選取會員資料的變數
                         var data = table.row(this).data();
@@ -375,6 +403,8 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                             $scope.member.attrib15 = data[0].Attrib15;
                             $scope.member.id = data[0].ID;
                             $scope.member.type = data[0].Type;
+                            $('#dinner_addr').combobox('setValue', $scope.member.attrib15);
+                            $('#lunch_addr').combobox('setValue', $scope.member.attrib14);
                             //console.log(data[0].Attrib04);
 
                             //資料庫沒正規劃，所以要判端預產期是否為null，是的話不做事把變數歸零，不是的話傳上去表單顯示
@@ -468,6 +498,8 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         $scope.attrib17_0_TMP = null;
         $scope.attrib17_1_TMP = null;
         $scope.attrib17_2_TMP = null;
+        $('#dinner_addr').combobox('setValue', '');
+        $('#lunch_addr').combobox('setValue', '');
     }
     /**-------------------------------------------function zone end---------------------------------------------- */
 });

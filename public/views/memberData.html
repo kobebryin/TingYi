@@ -29,7 +29,7 @@
 </div>
 
 <div class="content">
-    <div id="div_info_edit"  class="easyui-panel">
+    <div id="div_info_edit" class="easyui-panel">
         <form id="form_Member_Info" class="easyui-form" method="post">
             <input type="hidden" name="TableName_TMP" value="Member">
             <table width="1331" border="0" cellspacing="0" cellpadding="0">
@@ -279,12 +279,16 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Member_Attrib05" fieldtype="tree"
-                                        onClick="fieldedit($(this));">禁忌 &nbsp; &nbsp;</a>
+                                    <div style="padding-left:25px;">禁忌</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib05" ng-readonly="readonly" name="Attrib05" class="easyui-combotree"
+                                <td>
+                                    <!-- <input id="id_input_Member_Info_Attrib05" ng-readonly="readonly" name="Attrib05" class="easyui-combotree"
                                         type="text" style="width:523px; height:28px;" ng-model="member.attrib05" data-options="required1:true,url:'/info/fieldvalue/list.jsp?TableAttrib=Member_Attrib05',method:'get',cascadeCheck:''"
-                                        multiple></td>
+                                        multiple>
+                                     -->
+                                    <input id="id_input_Member_Info_Attrib05" name="Attrib05" type="text" style="width:523px; height:28px;" ng-model="member.attrib05"
+                                        class="easyui-combotree" value="">
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -391,35 +395,26 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Member_Attrib14" fieldtype="radio"
-                                        onClick="fieldedit($(this));">午餐地址</a>
+                                    <div style="padding-left:25px;">午餐地址</div>
 
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib14" ng-readonly="readonly" name="Attrib14" class="easyui-combobox"
-                                        type="text" style="width:523px; height:28px;" data-options="required1:true,url:'/info/fieldvalue/list.jsp?TableAttrib=Member_Attrib14',method:'get',valueField:'id',textField:'text',cascadeCheck:''"
-                                        ng-model="member.attrib14"></td>
+                                <td>
+                                    <!-- <input id="id_input_Member_Info_Attrib14" ng-readonly="readonly" name="Attrib14" class="easyui-combobox" type="text" style="width:523px; height:28px;"
+                                        data-options="required1:true,url:'/info/fieldvalue/list.jsp?TableAttrib=Member_Attrib14',method:'get',valueField:'id',textField:'text',cascadeCheck:''"
+                                        ng-model="member.attrib14"> -->
+                                    <input id="lunch_addr" style="width:523px; height:28px;" name="Attrib14" ng-model="member.attrib14" value="">
+                                </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Member_Attrib14" fieldtype="radio"
-                                        onClick="fieldedit($(this));">晚餐地址</a>
+                                    <div style="padding-left:25px;">晚餐地址</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib15" ng-readonly="readonly" name="Attrib15" class="easyui-combobox"
+                                <td>
+                                    <!-- <input id="id_input_Member_Info_Attrib15" ng-readonly="readonly" name="Attrib15" class="easyui-combobox"
                                         type="text" style="width:523px; height:28px;" data-options="required1:true,url:'/info/fieldvalue/list.jsp?TableAttrib=Member_Attrib14',method:'get',valueField:'id',textField:'text',cascadeCheck:''"
-                                        ng-model="member.attrib15">
+                                        ng-model="member.attrib15"> -->
 
-                                        <input id="dinner_addr" style="width:523px; height:28px;" ng-readonly="readonly" name="Attrib15" ng-model="member.attrib15" value="">
-
-                                    <!-- <select class="easyui-combobox" name="state" label="State:" labelPosition="top" style="width:100%;">
-                                            <option value="AL">嘉基住院</option>
-                                            <option value="AK">長庚住院</option>
-                                            <option value="AZ">聖馬住院</option>
-                                            <option value="AR">禾宜住院</option>
-                                            <option value="CA">信合美住院</option>
-                                            <option value="CO">康寶</option>
-                                            <option value="CT">佑生</option>
-                                    </select> -->
-
+                                    <input id="dinner_addr" style="width:523px; height:28px;" name="Attrib15" ng-model="member.attrib15" value="">
                                 </td>
                             </tr>
                             <tr valign="top">
