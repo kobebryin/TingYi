@@ -165,12 +165,6 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     };
 
     initial();  //  此頁開始時先呼叫initial()
-    
-    $('#id_input_Member_Info_Attrib05').combotree({
-        url: 'http://127.0.0.1:8080/fieldvalueAttrib05',
-        editable: true,
-        multiple: true
-    });
 
     /**-----------------------------------------click event zone start----------------------------------------- */
     //新增資料上ＭySQL
@@ -200,8 +194,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     $scope.member.attrib17 = $scope.attrib17_0_TMP + "<br>" + $scope.attrib17_1_TMP + "<br>" + $scope.attrib17_2_TMP;
 
                     //午,晚餐easy-ui conboxbox值設定
-                    $scope.member.attrib14 = $('#lunch_addr').val();
-                    $scope.member.attrib15 = $('#dinner_addr').val();
+                    easy_ui_setting();
 
                     console.log($scope.member);
 
@@ -234,8 +227,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     $scope.member.attrib17 = $scope.attrib17_0_TMP + "<br>" + $scope.attrib17_1_TMP + "<br>" + $scope.attrib17_2_TMP;
 
                     //午,晚餐easy-ui conboxbox值設定
-                    $scope.member.attrib14 = $('#lunch_addr').val();
-                    $scope.member.attrib15 = $('#dinner_addr').val();                   
+                    easy_ui_setting();
 
                     console.log($scope.member);
 
@@ -256,10 +248,8 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
             alert("請選取要修改的會員");
         } else {
             //將欄位唯獨關閉
-            $scope.readonly = false;
-            $('#dinner_addr').combobox('readonly',false);
-            $('#lunch_addr').combobox('readonly',false);
-            
+            close_readonly();
+
             //改成修改模式
             saveORupdate_falr = false;
 
@@ -275,9 +265,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         table.$('tr.selected').removeClass('selected');
 
         //將欄位唯獨關閉
-        $scope.readonly = false;
-        $('#dinner_addr').combobox('readonly',false);
-        $('#lunch_addr').combobox('readonly',false);
+        close_readonly();
 
         //改成修改模式
         saveORupdate_falr = true;
@@ -327,15 +315,28 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
         //午,晚餐地址combobox設定
         $('#dinner_addr').combobox({
-            url:'http://127.0.0.1:8080/fieldvalue',
-            valueField:'id',
-            textField:'text'
+            url: 'http://127.0.0.1:8080/fieldvalue',
+            valueField: 'id',
+            textField: 'text'
         });
         $('#lunch_addr').combobox({
-            url:'http://127.0.0.1:8080/fieldvalue',
-            valueField:'id',
-            textField:'text'
+            url: 'http://127.0.0.1:8080/fieldvalue',
+            valueField: 'id',
+            textField: 'text'
         });
+        $('#id_input_Member_Info_Attrib05').combotree({
+            url: 'http://127.0.0.1:8080/fieldvalueAttrib05',
+            multiple: true,
+            valueField: 'id',
+            textField: 'text'
+        });
+        $('#id_input_Member_Info_Attrib08').combotree({
+            url: 'http://127.0.0.1:8080/fieldvalueAttrib08',
+            multiple: true,
+            valueField: 'id',
+            textField: 'text'
+        });
+        
 
         //會員資料初始取得存入datatables
         MemberService.getMEMBER(function (data) {
@@ -375,9 +376,8 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                         $(this).addClass('selected');
                         //}
 
-                        $scope.readonly = true;     //將欄位都變唯獨
-                        $('#dinner_addr').combobox('readonly',true);
-                        $('#lunch_addr').combobox('readonly',true);
+                        //將欄位都變唯獨
+                        open_readonly();
 
 
                         //存取抓出選取會員資料的變數
@@ -405,6 +405,22 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                             $scope.member.type = data[0].Type;
                             $('#dinner_addr').combobox('setValue', $scope.member.attrib15);
                             $('#lunch_addr').combobox('setValue', $scope.member.attrib14);
+                            
+                            //(禁忌)easy-ui combotree 要能夠讓值放入並且顯示勾選，要塞入物件
+                            var attrib05setArray = [];
+                            var attrib05Array = $scope.member.attrib05.split(",");
+                            for (key in attrib05Array) {
+                                attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
+                            }
+                            $('#id_input_Member_Info_Attrib05').combotree('setValue', attrib05setArray);
+                            //(贈品)easy-ui combotree 要能夠讓值放入並且顯示勾選，要塞入物件
+                            var attrib08setArray = [];
+                            var attrib08Array = $scope.member.attrib08.split(",");
+                            for (key in attrib08Array) {
+                                attrib08setArray.push({ id: attrib08Array[key], text: attrib08Array[key] });
+                            }
+                            $('#id_input_Member_Info_Attrib08').combotree('setValue', attrib08setArray);
+
                             //console.log(data[0].Attrib04);
 
                             //資料庫沒正規劃，所以要判端預產期是否為null，是的話不做事把變數歸零，不是的話傳上去表單顯示
@@ -500,6 +516,34 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         $scope.attrib17_2_TMP = null;
         $('#dinner_addr').combobox('setValue', '');
         $('#lunch_addr').combobox('setValue', '');
+        $('#id_input_Member_Info_Attrib05').combotree('setValue', '');
+        $('#id_input_Member_Info_Attrib08').combotree('setValue', '');
+    }
+
+    function easy_ui_setting() {
+        //午,晚餐easy-ui conboxbox值設定
+        $scope.member.attrib14 = $('#lunch_addr').val();
+        $scope.member.attrib15 = $('#dinner_addr').val();
+        $scope.member.attrib05 = $('#id_input_Member_Info_Attrib05').val();
+        $scope.member.attrib08 = $('#id_input_Member_Info_Attrib08').val();
+    }
+
+    function close_readonly() {
+        //將欄位唯獨關閉
+        $scope.readonly = false;
+        $('#dinner_addr').combobox('readonly', false);
+        $('#lunch_addr').combobox('readonly', false);
+        $('#id_input_Member_Info_Attrib05').combotree('readonly', false);
+        $('#id_input_Member_Info_Attrib08').combotree('readonly', false);
+    }
+
+    function open_readonly() {
+        //將欄位都變唯獨
+        $scope.readonly = true;
+        $('#dinner_addr').combobox('readonly', true);
+        $('#lunch_addr').combobox('readonly', true);
+        $('#id_input_Member_Info_Attrib05').combotree('readonly', true);
+        $('#id_input_Member_Info_Attrib08').combotree('readonly', true);
     }
     /**-------------------------------------------function zone end---------------------------------------------- */
 });

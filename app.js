@@ -14,6 +14,7 @@ var dishapi = require('./routes/dishApi');
 var dishlistapi = require('./routes/dishlistApi');
 var fieldvalueapi = require('./routes/fieldvalueApi');
 var fieldvalueAttrib05api = require('./routes/fieldvalueAttrib05');
+var fieldvalueAttrib08api = require('./routes/fieldvalueAttrib08');
 var mealapi = require('./routes/mealApi');
 var memberapi = require('./routes/memberApi');
 var routeapi = require('./routes/routeApi');
@@ -62,8 +63,9 @@ app.use('/', index);
 app.use('/bbs', bbsapi);
 app.use('/dish', dishapi);
 app.use('/dishlist', dishlistapi);
-app.use('/fieldvalue',fieldvalueapi);fieldvalueAttrib05api
+app.use('/fieldvalue',fieldvalueapi);
 app.use('/fieldvalueAttrib05',fieldvalueAttrib05api);
+app.use('/fieldvalueAttrib08',fieldvalueAttrib08api);
 app.use('/meal',mealapi);
 app.use('/member', memberapi);
 app.use('/route', routeapi);

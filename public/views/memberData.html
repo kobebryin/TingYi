@@ -331,12 +331,16 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Member_Attrib08" fieldtype="tree"
-                                        onClick="fieldedit($(this));">贈品 &nbsp; &nbsp;</a>
+                                    <div style="padding-left:25px;">贈品</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib08" ng-readonly="readonly" name="Attrib08" class="easyui-combotree"
+                                <td>
+                                    <!-- <input id="id_input_Member_Info_Attrib08" ng-readonly="readonly" name="Attrib08" class="easyui-combotree"
                                         type="text" style="width:523px; height:28px;" ng-model="member.attrib08" data-options="required1:true,url:'/info/fieldvalue/list.jsp?TableAttrib=Member_Attrib08',method:'get',cascadeCheck:''"
-                                        multiple></td>
+                                        multiple> -->
+
+                                    <input id="id_input_Member_Info_Attrib08" name="Attrib08" type="text" style="width:523px; height:28px;" ng-model="member.attrib08"
+                                        class="easyui-combotree" value="">
+                                </td>
                             </tr>
                         </table>
                     </td>
