@@ -3,7 +3,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     var table;                  //將JQUERY dataTables 設為全域變數
     var save_falg = false;      //判斷是否可以按下保存的flag
     var saveORupdate_falr = true;   //判斷使用者是選擇新增或是修改，true回新增、false為修改
-    var Today=new Date();           //日期
+    var Today = new Date();           //日期
 
     //會員類型分類
     $scope.typeMapping = [
@@ -197,7 +197,13 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     //午,晚餐easy-ui conboxbox值設定
                     easy_ui_setting();
 
-                    $scope.member.attrib06 = Today.getFullYear() + '-' + (Today.getMonth()+1) + '-' + Today.getDate() + ':' + $scope.attrib06_TMP;
+                    //先判斷有無輸入資料、有的話:餐點修改、特殊情況新增(加入年-月-日 : content)
+                    if ($scope.attrib06_TMP != null) {
+                        $scope.member.attrib06 = Today.getFullYear() + '-' + (Today.getMonth() + 1) + '-' + Today.getDate() + ':' + $scope.attrib06_TMP;
+                    } else { }
+                    if ($scope.attrib07_TMP != null) {
+                        $scope.member.attrib07 = Today.getFullYear() + '-' + (Today.getMonth() + 1) + '-' + Today.getDate() + ':' + $scope.attrib07_TMP;
+                    } else { }
 
                     //console.log($scope.member);
 
@@ -232,7 +238,21 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     //午,晚餐easy-ui conboxbox值設定
                     easy_ui_setting();
 
-                    $scope.member.attrib06 += '<br>' + Today.getFullYear() + '-' + (Today.getMonth()+1) + '-' + Today.getDate() + ':' + $scope.attrib06_TMP;                    
+                    //先判斷有無輸入資料、有的話:餐點修改、特殊情況新增(加入<br>年-月-日 : content)
+                    if ($scope.attrib06_TMP != null) {
+                        if ($scope.member.attrib06 != null) {
+                            $scope.member.attrib06 += '<br>' + Today.getFullYear() + '-' + (Today.getMonth() + 1) + '-' + Today.getDate() + ':' + $scope.attrib06_TMP;
+                        } else {
+                            $scope.member.attrib06 = Today.getFullYear() + '-' + (Today.getMonth() + 1) + '-' + Today.getDate() + ':' + $scope.attrib06_TMP;
+                        }
+                    } else { }
+                    if ($scope.attrib07_TMP != null) {
+                        if ($scope.member.attrib07 != null) {
+                            $scope.member.attrib07 += '<br>' + Today.getFullYear() + '-' + (Today.getMonth() + 1) + '-' + Today.getDate() + ':' + $scope.attrib07_TMP;
+                        } else {
+                            $scope.member.attrib07 = Today.getFullYear() + '-' + (Today.getMonth() + 1) + '-' + Today.getDate() + ':' + $scope.attrib07_TMP;
+                        }
+                    } else { }
 
                     console.log($scope.member);
 
@@ -257,6 +277,10 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
             //改成修改模式
             saveORupdate_falr = false;
+
+            //餐點修改、特殊情況欄位清空
+            $scope.attrib06_TMP = null;
+            $scope.attrib07_TMP = null;
 
             //可以按下保存
             save_falg = true;
@@ -341,7 +365,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
             valueField: 'id',
             textField: 'text'
         });
-        
+
 
         //會員資料初始取得存入datatables
         MemberService.getMEMBER(function (data) {
@@ -410,7 +434,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                             $scope.member.type = data[0].Type;
                             $('#dinner_addr').combobox('setValue', $scope.member.attrib15);
                             $('#lunch_addr').combobox('setValue', $scope.member.attrib14);
-                            
+
                             //(禁忌)easy-ui combotree 要能夠讓值放入並且顯示勾選，要塞入物件
                             var attrib05setArray = [];
                             var attrib05Array = $scope.member.attrib05.split(",");
@@ -485,9 +509,16 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                             $scope.member.attrib24 = data[0].Attrib24;
                             $scope.member.upid = data[0].UpID;  //營養顧問
                             $scope.member.attrib06 = data[0].Attrib06;
-                            $scope.attrib06_TMP = $scope.member.attrib06;
+                            $scope.member.attrib07 = data[0].Attrib07;
 
-                            // console.log($scope.member);
+                            //餐點修改、特殊情況要判斷使否有值，有的話再切
+                            if ($scope.member.attrib06 != null) {
+                                $scope.attrib06_TMP = $scope.member.attrib06.split('<br>'); //餐點修改
+                            } else { }
+                            if ($scope.member.attrib07 != null) {
+                                $scope.attrib07_TMP = $scope.member.attrib07.split('<br>'); //特殊情況
+                            } else { }
+                            // console.log( $scope.member.attrib07.split('<br>'));
                         });
 
                         //alert('You clicked on ' + data[0] + '\'s row');
@@ -506,6 +537,11 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                 $scope.member[p] = null;
             }
         }
+
+        //
+        $scope.member.type = 5;
+        $scope.member.upid = 11761;
+
         $scope.attrib04_0_TMP = null;
         $scope.attrib04_1_TMP = null;
         $scope.attrib04_2_TMP = null;
@@ -522,6 +558,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         $scope.attrib17_1_TMP = null;
         $scope.attrib17_2_TMP = null;
         $scope.attrib06_TMP = null;
+        $scope.attrib07_TMP = null;
         $('#dinner_addr').combobox('setValue', '');
         $('#lunch_addr').combobox('setValue', '');
         $('#id_input_Member_Info_Attrib05').combotree('setValue', '');

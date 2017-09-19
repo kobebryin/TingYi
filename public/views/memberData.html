@@ -114,7 +114,7 @@
                                     <div style="padding-left:25px;">會員類型</div>
                                 </td>
                                 <td>
-                                    <select name="id_input_Member_Info_Type" ng-disabled="readonly" ng-model="member.type" ng-options="type.value as type.name for type in typeMapping">
+                                    <select name="id_input_Member_Info_Type" ng-disabled="readonly" ng-model="member.type" ng-init=" member.type = typeMapping[5].value"   ng-options="type.value as type.name for type in typeMapping">
                                         <option value="">--請選擇--</option>        
                                         <!-- <option value=5>客戶</option>
                                                 <option value=4>醫院</option>
@@ -303,10 +303,13 @@
                                 <td>
                                     <div style="padding-left:25px;">特殊情況</div>
                                 </td>
-                                <td><input id="id_input_Member_Info_Attrib07" ng-readonly="readonly" name="Attrib07" type="hidden">
-                                    <input id="id_input_Member_Info_Attrib07_0_TMP" ng-readonly="readonly" name="Attrib07_0_TMP" type="hidden">
-                                    <input id="id_input_Member_Info_Attrib07_1_TMP" ng-readonly="readonly" name="Attrib07_1_TMP" class="easyui-textbox" type="text"
-                                        style="width:523px; height:28px;" AddContent></td>
+                                <td>
+                                    <input id="id_input_Member_Info_Attrib07" ng-model="attrib07_TMP" ng-readonly="readonly" name="Attrib07_1_TMP" class="easyui-textbox"
+                                        type="text" style="width:523px; height:28px;">
+
+                                </td>
+
+
                             </tr>
                             <tr>
                                 <td>
