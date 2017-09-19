@@ -3,6 +3,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     var table;                  //將JQUERY dataTables 設為全域變數
     var save_falg = false;      //判斷是否可以按下保存的flag
     var saveORupdate_falr = true;   //判斷使用者是選擇新增或是修改，true回新增、false為修改
+    var Today=new Date();           //日期
 
     //會員類型分類
     $scope.typeMapping = [
@@ -196,7 +197,9 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     //午,晚餐easy-ui conboxbox值設定
                     easy_ui_setting();
 
-                    console.log($scope.member);
+                    $scope.member.attrib06 = Today.getFullYear() + '-' + (Today.getMonth()+1) + '-' + Today.getDate() + ':' + $scope.attrib06_TMP;
+
+                    //console.log($scope.member);
 
                     MemberService.postMEMBER($scope.member, function (data) {
                         table.destroy();    //摧毀dataTables
@@ -228,6 +231,8 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
                     //午,晚餐easy-ui conboxbox值設定
                     easy_ui_setting();
+
+                    $scope.member.attrib06 += '<br>' + Today.getFullYear() + '-' + (Today.getMonth()+1) + '-' + Today.getDate() + ':' + $scope.attrib06_TMP;                    
 
                     console.log($scope.member);
 
@@ -479,6 +484,8 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                             $scope.member.attrib23 = data[0].Attrib23;
                             $scope.member.attrib24 = data[0].Attrib24;
                             $scope.member.upid = data[0].UpID;  //營養顧問
+                            $scope.member.attrib06 = data[0].Attrib06;
+                            $scope.attrib06_TMP = $scope.member.attrib06;
 
                             // console.log($scope.member);
                         });
@@ -514,6 +521,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         $scope.attrib17_0_TMP = null;
         $scope.attrib17_1_TMP = null;
         $scope.attrib17_2_TMP = null;
+        $scope.attrib06_TMP = null;
         $('#dinner_addr').combobox('setValue', '');
         $('#lunch_addr').combobox('setValue', '');
         $('#id_input_Member_Info_Attrib05').combotree('setValue', '');
