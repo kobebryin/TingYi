@@ -8,7 +8,7 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel='stylesheet' href='/stylesheets/jquery.dataTables.min.css' />
   <link rel='stylesheet' href='/stylesheets/datepicker.css' />
-  
+
   <script type="text/javascript" src="libraries/angular/angular.min.js"></script>
   <script type="text/javascript" src="libraries/angular/angular-ui-router.min.js"></script>
   <script type="text/javascript" src="libraries/jquery/jquery.js"></script>
@@ -25,7 +25,7 @@
   <script type="text/javascript" src="javascripts/controllers/memberDataController.js"></script>
   <script type="text/javascript" src="javascripts/controllers/conditionMealDetailsController.js"></script>
   <script type="text/javascript" src="javascripts/controllers/monthlyMealDetailsController.js"></script>
-  
+
   <script type="text/javascript" src="javascripts/services/bbsService.js"></script>
   <script type="text/javascript" src="javascripts/services/memberService.js"></script>
 
@@ -46,7 +46,17 @@
 </head>
 
 <body>
-  <div ui-view></div>
+
+  <ul id="navigatBar">
+    <li id="li_navigatBar"><a id="a_navigatBar" href="#/memberData">會員資料</a></li>
+    <li id="li_navigatBar"><a id="a_navigatBar" href="#/monthlyMealDetails">月子餐明細查詢</a></li>
+    <li id="li_navigatBar"><a id="a_navigatBar" href="#/conditionMealDetails">調理餐明細查詢</a></li>
+    <li id="li_navigatBar"><a id="a_navigatBar" href="#contact">報表</a></li>
+    <li id="li_navigatBar" style="float:right"><a id="a_navigatBar" class="active" href="#about">Log Out</a></li>
+  </ul>
+
+  <div class="main" ui-view></div>
+
 </body>
 
 </html>

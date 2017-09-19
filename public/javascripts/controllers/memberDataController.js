@@ -4,6 +4,21 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     var save_falg = false;      //判斷是否可以按下保存的flag
     var saveORupdate_falr = true;   //判斷使用者是選擇新增或是修改，true回新增、false為修改
     var Today = new Date();           //日期
+    var client_ip;              //客戶端IP位置
+
+    //購買餐類checkbox物件
+    $scope.checkboxModel = {
+        value1: false,
+        value2: false,
+        value3: false,
+        value4: false,
+        value5: false,
+        value6: false,
+        value7: false,
+        value8: false,
+        value9: false,
+        value10: false
+    };
 
     //會員類型分類
     $scope.typeMapping = [
@@ -167,6 +182,12 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
     initial();  //  此頁開始時先呼叫initial()
 
+    //取得客戶單IP位址
+    $.getJSON('//freegeoip.net/json/?callback=?', function (data) {
+        client_ip = data.ip;
+        console.log(data.ip);
+    });;
+
     /**-----------------------------------------click event zone start----------------------------------------- */
     //新增資料上ＭySQL
     $scope.postMEMBER = function () {
@@ -183,6 +204,10 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     clearScopeMemberObj(); //清空$scope.member 物件
                     alert("欄位 [手機] 為必輸項!");
                 } else {
+                    //存入客戶端IP
+                    $scope.member.mip = client_ip;
+                    $scope.member.mip2 = client_ip;
+
                     //預產期年月日合併
                     $scope.member.attrib04 = $scope.attrib04_0_TMP + "<br>" + $scope.attrib04_1_TMP + "<br>" + $scope.attrib04_2_TMP;
                     //生日年月日合併
@@ -197,6 +222,9 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     //午,晚餐easy-ui conboxbox值設定
                     easy_ui_setting();
 
+                    //購買餐類的塞值
+                    checkboxModel();
+
                     //先判斷有無輸入資料、有的話:餐點修改、特殊情況新增(加入年-月-日 : content)
                     if ($scope.attrib06_TMP != null) {
                         $scope.member.attrib06 = Today.getFullYear() + '-' + (Today.getMonth() + 1) + '-' + Today.getDate() + ':' + $scope.attrib06_TMP;
@@ -204,6 +232,11 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     if ($scope.attrib07_TMP != null) {
                         $scope.member.attrib07 = Today.getFullYear() + '-' + (Today.getMonth() + 1) + '-' + Today.getDate() + ':' + $scope.attrib07_TMP;
                     } else { }
+
+                    //CreateTime、RecordTime、ShowTime initialize
+                    $scope.member.createtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+                    $scope.member.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+                    $scope.member.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
 
                     //console.log($scope.member);
 
@@ -224,6 +257,13 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     clearScopeMemberObj(); //清空$scope.member 物件
                     alert("欄位 [手機] 為必輸項!");
                 } else {
+                    //存入客戶端IP
+                    $scope.member.mip = client_ip;
+                    $scope.member.mip2 = client_ip;
+
+                    //修改手機會造成密碼消失所以加入以下:
+                    $scope.member.password = $scope.member.user;
+
                     //預產期年月日合併
                     $scope.member.attrib04 = $scope.attrib04_0_TMP + "<br>" + $scope.attrib04_1_TMP + "<br>" + $scope.attrib04_2_TMP;
                     //生日年月日合併
@@ -237,6 +277,8 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
                     //午,晚餐easy-ui conboxbox值設定
                     easy_ui_setting();
+                    //購買餐類的塞值
+                    checkboxModel();
 
                     //先判斷有無輸入資料、有的話:餐點修改、特殊情況新增(加入<br>年-月-日 : content)
                     if ($scope.attrib06_TMP != null) {
@@ -253,6 +295,10 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                             $scope.member.attrib07 = Today.getFullYear() + '-' + (Today.getMonth() + 1) + '-' + Today.getDate() + ':' + $scope.attrib07_TMP;
                         }
                     } else { }
+
+                    //CreateTime、RecordTime、ShowTime initialize
+                    $scope.member.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+                    $scope.member.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
 
                     console.log($scope.member);
 
@@ -408,7 +454,6 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                         //將欄位都變唯獨
                         open_readonly();
 
-
                         //存取抓出選取會員資料的變數
                         var data = table.row(this).data();
                         var id = data[0];
@@ -510,6 +555,11 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                             $scope.member.upid = data[0].UpID;  //營養顧問
                             $scope.member.attrib06 = data[0].Attrib06;
                             $scope.member.attrib07 = data[0].Attrib07;
+                            $scope.member.attrib18 = data[0].Attrib18;  //購買餐類
+                            //CreateTime、RecordTime、ShowTime initialize
+                            $scope.member.createtime = data[0].CreateTime;
+                            $scope.member.recordtime = data[0].RecordTime;
+                            $scope.member.showtime = data[0].ShowTime;
 
                             //餐點修改、特殊情況要判斷使否有值，有的話再切
                             if ($scope.member.attrib06 != null) {
@@ -518,6 +568,57 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                             if ($scope.member.attrib07 != null) {
                                 $scope.attrib07_TMP = $scope.member.attrib07.split('<br>'); //特殊情況
                             } else { }
+
+                            //清空checkboxModel
+                            clearScopeCheckModelObj();
+                            //購買餐類checkbox要判斷使否有值，有的話再切
+                            if ($scope.member.attrib18 != null) {
+                                var attrib18 = [];
+                                attrib18 = $scope.member.attrib18.split("<br><br>itoscarbr");
+                                for (key in attrib18) {
+                                    if (attrib18[key].split("<br>")[0] === "經典住院餐") {
+                                        $scope.checkboxModel.value1 = true;
+                                        $scope.Attrib18_TMP_1 = attrib18[key].split("<br>")[1];
+                                    }
+                                    if (attrib18[key].split("<br>")[0] === "經典月子餐") {
+                                        $scope.checkboxModel.value2 = true;
+                                        $scope.Attrib18_TMP_2 = attrib18[key].split("<br>")[1];
+                                    }
+                                    if (attrib18[key].split("<br>")[0] === "溫馨住院餐") {
+                                        $scope.checkboxModel.value3 = true;
+                                        $scope.Attrib18_TMP_3 = attrib18[key].split("<br>")[1];
+                                    }
+                                    if (attrib18[key].split("<br>")[0] === "溫馨月子餐") {
+                                        $scope.checkboxModel.value4 = true;
+                                        $scope.Attrib18_TMP_4 = attrib18[key].split("<br>")[1];
+                                    }
+                                    if (attrib18[key].split("<br>")[0] === "經典小產餐") {
+                                        $scope.checkboxModel.value5 = true;
+                                        $scope.Attrib18_TMP_5 = attrib18[key].split("<br>")[1];
+                                    }
+                                    if (attrib18[key].split("<br>")[0] === "經典孕哺餐") {
+                                        $scope.checkboxModel.value6 = true;
+                                        $scope.Attrib18_TMP_6 = attrib18[key].split("<br>")[1];
+                                    }
+                                    if (attrib18[key].split("<br>")[0] === "經典孕期餐") {
+                                        $scope.checkboxModel.value7 = true;
+                                        $scope.Attrib18_TMP_7 = attrib18[key].split("<br>")[1];
+                                    }
+                                    if (attrib18[key].split("<br>")[0] === "術後調理餐") {
+                                        $scope.checkboxModel.value8 = true;
+                                        $scope.Attrib18_TMP_8 = attrib18[key].split("<br>")[1];
+                                    }
+                                    if (attrib18[key].split("<br>")[0] === "調理餐") {
+                                        $scope.checkboxModel.value9 = true;
+                                        $scope.Attrib18_TMP_9 = attrib18[key].split("<br>")[1];
+                                    }
+                                    if (attrib18[key].split("<br>")[0] === "一般餐") {
+                                        $scope.checkboxModel.value10 = true;
+                                        $scope.Attrib18_TMP_10 = attrib18[key].split("<br>")[1];
+                                    }
+                                }
+                            } else { }
+
                             // console.log( $scope.member.attrib07.split('<br>'));
                         });
 
@@ -538,7 +639,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
             }
         }
 
-        //
+        //將會員類型預設客戶(5)營養顧問預設張書齊(11761)
         $scope.member.type = 5;
         $scope.member.upid = 11761;
 
@@ -559,10 +660,33 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         $scope.attrib17_2_TMP = null;
         $scope.attrib06_TMP = null;
         $scope.attrib07_TMP = null;
+
+        //清空checkboxModel
+        clearScopeCheckModelObj();
+
         $('#dinner_addr').combobox('setValue', '');
         $('#lunch_addr').combobox('setValue', '');
         $('#id_input_Member_Info_Attrib05').combotree('setValue', '');
         $('#id_input_Member_Info_Attrib08').combotree('setValue', '');
+    }
+
+    function clearScopeCheckModelObj() {
+        //用迴圈將所有checkboxModel設為false
+        for (var p in $scope.checkboxModel) {
+            if ($scope.checkboxModel.hasOwnProperty(p)) {
+                $scope.checkboxModel[p] = false;
+            }
+        }
+        $scope.Attrib18_TMP_1 = null;
+        $scope.Attrib18_TMP_2 = null;
+        $scope.Attrib18_TMP_3 = null;
+        $scope.Attrib18_TMP_4 = null;
+        $scope.Attrib18_TMP_5 = null;
+        $scope.Attrib18_TMP_6 = null;
+        $scope.Attrib18_TMP_7 = null;
+        $scope.Attrib18_TMP_8 = null;
+        $scope.Attrib18_TMP_9 = null;
+        $scope.Attrib18_TMP_10 = null;
     }
 
     function easy_ui_setting() {
@@ -589,6 +713,57 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         $('#lunch_addr').combobox('readonly', true);
         $('#id_input_Member_Info_Attrib05').combotree('readonly', true);
         $('#id_input_Member_Info_Attrib08').combotree('readonly', true);
+    }
+
+    //購買餐類的塞值
+    function checkboxModel() {
+        if (!$scope.checkboxModel.value1 &&
+            !$scope.checkboxModel.value2 &&
+            !$scope.checkboxModel.value3 &&
+            !$scope.checkboxModel.value4 &&
+            !$scope.checkboxModel.value5 &&
+            !$scope.checkboxModel.value6 &&
+            !$scope.checkboxModel.value7 &&
+            !$scope.checkboxModel.value8 &&
+            !$scope.checkboxModel.value9 &&
+            !$scope.checkboxModel.value10) {
+
+            $scope.member.attrib18 = null;
+
+        } else {
+
+            $scope.member.attrib18 = "<br><br>itoscarbr";
+            if ($scope.checkboxModel.value1) {
+                $scope.member.attrib18 += "經典住院餐<br>" + $scope.Attrib18_TMP_1 + "<br><br>itoscarbr";
+            }
+            if ($scope.checkboxModel.value2) {
+                $scope.member.attrib18 += "經典月子餐<br>" + $scope.Attrib18_TMP_2 + "<br><br>itoscarbr";
+            }
+            if ($scope.checkboxModel.value3) {
+                $scope.member.attrib18 += "溫馨住院餐<br>" + $scope.Attrib18_TMP_3 + "<br><br>itoscarbr";
+            }
+            if ($scope.checkboxModel.value4) {
+                $scope.member.attrib18 += "溫馨月子餐<br>" + $scope.Attrib18_TMP_4 + "<br><br>itoscarbr";
+            }
+            if ($scope.checkboxModel.value5) {
+                $scope.member.attrib18 += "經典小產餐<br>" + $scope.Attrib18_TMP_5 + "<br><br>itoscarbr";
+            }
+            if ($scope.checkboxModel.value6) {
+                $scope.member.attrib18 += "經典孕哺餐<br>" + $scope.Attrib18_TMP_6 + "<br><br>itoscarbr";
+            }
+            if ($scope.checkboxModel.value7) {
+                $scope.member.attrib18 += "經典孕期餐<br>" + $scope.Attrib18_TMP_7 + "<br><br>itoscarbr";
+            }
+            if ($scope.checkboxModel.value8) {
+                $scope.member.attrib18 += "術後調理餐<br>" + $scope.Attrib18_TMP_8 + "<br><br>itoscarbr";
+            }
+            if ($scope.checkboxModel.value9) {
+                $scope.member.attrib18 += "調理餐<br>" + $scope.Attrib18_TMP_9 + "<br><br>itoscarbr";
+            }
+            if ($scope.checkboxModel.value10) {
+                $scope.member.attrib18 += "一般餐<br>" + $scope.Attrib18_TMP_10 + "<br><br>itoscarbr";
+            }
+        }
     }
     /**-------------------------------------------function zone end---------------------------------------------- */
 });

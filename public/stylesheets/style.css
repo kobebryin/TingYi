@@ -1,8 +1,42 @@
 body {
-  padding: 50px;
+  width: 100%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
 }
+
+.main {
+  padding: 20px;
+}
+
+/*** Active/Current Navigation Link */
+#navigatBar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#li_navigatBar {
+    float: left;
+}
+
+#a_navigatBar {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#a_navigatBar:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
