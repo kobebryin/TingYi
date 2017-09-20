@@ -1,4 +1,9 @@
 <div class="layout">
+
+    <button class="button" ng-disabled="tabFlag" ng-click="goToMonthMeal()">月子餐 </button>
+    <button class="button button2" ng-disabled="tabFlag">調理餐</button>
+    <button class="button button3" ng-disabled="tabFlag">一般餐</button>
+
     <table id="example" class="display" border="0" cellspacing="0" cellpadding="0">
         <thead>
             <tr>
@@ -430,35 +435,45 @@
                                     <div style="padding-left:25px;">購買餐類</div>
                                 </td>
                                 <td id="td_Member_Info_Attrib18">
-                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value1" /> 經典住院餐
-                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_1" name="Attrib18_TMP_1" type="text" style="width:523px; height:28px;" />
+                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value1" />                                    經典住院餐
+                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_1" name="Attrib18_TMP_1" type="text"
+                                        style="width:523px; height:28px;" />
 
-                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value2" /> 經典月子餐
-                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_2" name="Attrib18_TMP_2" type="text" style="width:523px; height:28px;" />
+                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value2" />                                    經典月子餐
+                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_2" name="Attrib18_TMP_2" type="text"
+                                        style="width:523px; height:28px;" />
 
-                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value3" /> 溫馨住院餐
-                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_3" name="Attrib18_TMP_3" type="text" style="width:523px; height:28px;" />
+                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value3" />                                    溫馨住院餐
+                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_3" name="Attrib18_TMP_3" type="text"
+                                        style="width:523px; height:28px;" />
 
-                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value4" /> 溫馨月子餐
-                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_4" name="Attrib18_TMP_4" type="text" style="width:523px; height:28px;" />
+                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value4" />                                    溫馨月子餐
+                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_4" name="Attrib18_TMP_4" type="text"
+                                        style="width:523px; height:28px;" />
 
-                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value5" /> 經典小產餐
-                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_5" name="Attrib18_TMP_5" type="text" style="width:523px; height:28px;" />
+                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value5" />                                    經典小產餐
+                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_5" name="Attrib18_TMP_5" type="text"
+                                        style="width:523px; height:28px;" />
 
-                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value6" /> 經典孕哺餐
-                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_6" name="Attrib18_TMP_6" type="text" style="width:523px; height:28px;" />
+                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value6" />                                    經典孕哺餐
+                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_6" name="Attrib18_TMP_6" type="text"
+                                        style="width:523px; height:28px;" />
 
-                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value7" /> 經典孕期餐
-                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_7" name="Attrib18_TMP_7" type="text" style="width:523px; height:28px;" />
+                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value7" />                                    經典孕期餐
+                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_7" name="Attrib18_TMP_7" type="text"
+                                        style="width:523px; height:28px;" />
 
-                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value8" /> 術後調理餐
-                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_8" name="Attrib18_TMP_8" type="text" style="width:523px; height:28px;" />
+                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value8" />                                    術後調理餐
+                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_8" name="Attrib18_TMP_8" type="text"
+                                        style="width:523px; height:28px;" />
 
-                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value9" /> 調理餐
-                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_9" name="Attrib18_TMP_9" type="text" style="width:523px; height:28px;" />
+                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value9" />                                    調理餐
+                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_9" name="Attrib18_TMP_9" type="text"
+                                        style="width:523px; height:28px;" />
 
-                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value10" /> 一般餐
-                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_10" name="Attrib18_TMP_10" type="text" style="width:523px; height:28px;" />
+                                    <input type="checkbox" name="vehicle" ng-disabled="readonly" ng-model="checkboxModel.value10" />                                    一般餐
+                                    <input id="id_input_Member_Info_Attrib18" ng-readonly="readonly" ng-model="Attrib18_TMP_10" name="Attrib18_TMP_10" type="text"
+                                        style="width:523px; height:28px;" />
                                 </td>
                             </tr>
                         </table>

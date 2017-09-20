@@ -130,12 +130,12 @@
                                         </tr>
                                         <tr>
                                             <td align="right" style="font-size:12px;">手機</td>
-                                            <td><input id="id_input_Meal_Info_Meal_A_Meal02" name="Meal_A_Meal02" class="easyui-textbox"
+                                            <td><input id="id_input_Meal_Info_Meal_A_Meal02" ng-model="Meal_A_Meal02" name="Meal_A_Meal02" class="easyui-textbox"
                                                     type="text" style="width:171px;" data-options="fontsize:'12px'"></td>
                                         </tr>
                                         <tr>
                                             <td align="right" style="font-size:12px;">地址</td>
-                                            <td><input id="id_input_Meal_Info_Meal_A_Meal03" name="Meal_A_Meal03" class="easyui-textbox"
+                                            <td><input id="id_input_Meal_Info_Meal_A_Meal03" ng-model="Meal_A_Meal03" name="Meal_A_Meal03" class="easyui-textbox"
                                                     type="text" style="width:171px;" data-options="fontsize:'12px',chkfieldid:'id_input_Meal_Info_Meal_A_Meal04',onChange:ChkAddress_onChange,url:'/info/normaldb/selecttable.jsp?fieldname=ID,RouteNumber,Address&tablename=Route&where=Flag=9&orderby=RouteNumber'"></td>
                                         </tr>
                                         <tr>
@@ -192,9 +192,8 @@
                                         <tr>
                                             <td height="23" align="right" style="font-size:12px;">餐具
                                             </td>
-                                            <td width="171"><input id="id_input_Meal_Info_Meal_A_Meal09" name="Meal_A_Meal09" class="easyui-combobox"
-                                                    type="text" style="width:171px;" data-options="url:'/info/dish/list.jsp',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
-                                                    multiple></td>
+                                            <td width="171"><input id="Meal_A_Meal09" name="Meal_A_Meal09" class="easyui-combobox" type="text"
+                                                    style="width:171px;"></td>
                                         </tr>
                                         <tr>
                                             <td align="right" style="font-size:12px;">加湯罐</td>
@@ -208,9 +207,8 @@
                                         </tr>
                                         <tr>
                                             <td align="right" style="font-size:12px;">禁忌</td>
-                                            <td><input id="id_input_Meal_Info_Meal_A_Meal12" name="Meal_A_Meal12" class="easyui-combotree"
-                                                    type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Member_Attrib05',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px'"
-                                                    multiple></td>
+                                            <td><input id="Meal_A_Meal12" name="Meal_A_Meal12" class="easyui-combotree" type="text"
+                                                    style="width:171px;"></td>
                                         </tr>
                                         <tr>
                                             <td align="right" style="font-size:12px;">特殊禁忌</td>
@@ -218,21 +216,18 @@
                                                     type="text" style="width:171px;" data-options="fontsize:'12px'"></td>
                                         </tr>
                                         <tr>
-                                            
-                                                    <td align="right" style="font-size:12px;">加減
-                                                </td>
-                                                <td><input id="id_input_Meal_Info_Meal_A_Meal14" name="Meal_A_Meal14" class="easyui-combobox"
-                                                        type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal14_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
-                                                        multiple></td>
+
+                                            <td align="right" style="font-size:12px;">加減
+                                            </td>
+                                            <td><input id="Meal_A_Meal14" name="Meal_A_Meal14" class="easyui-combobox" type="text"
+                                                    style="width:171px;"></td>
                                         </tr>
                                         <tr>
-                                            <td align="right">
-                                                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Meal_Meal15_1" fieldtype="radio"
-                                                    onClick="fieldedit($(this));"><span style="font-size:12px;">其它</span></a>
+
+                                            <td align="right" style="font-size:12px;">其它
                                             </td>
-                                            <td><input id="id_input_Meal_Info_Meal_A_Meal15" name="Meal_A_Meal15" class="easyui-combobox"
-                                                    type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal15_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
-                                                    multiple></td>
+                                            <td><input id="Meal_A_Meal15" name="Meal_A_Meal15" class="easyui-combobox" type="text"
+                                                    style="width:171px;"></td>
                                         </tr>
                                         <tr>
                                             <td></td>
@@ -245,59 +240,53 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    </td>
-                                    <td>
-                                        <table width="246" border="0" cellspacing="0" cellpadding="5">
-                                            <tr>
-                                                <td width="55"></td>
-                                                <td width="171" style="font-size:12px;"><input id="id_input_Meal_Info_Meal_A_Meal18" name="Meal_A_Meal18" type="checkbox"
-                                                        value="西式早餐"> 西式早餐
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td align="right" style="font-size:12px;">收款</td>
-                                                <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_A_Meal19" name="Meal_A_Meal19" type="checkbox"
-                                                        value="收款"> 現金
-                                                    <input id="id_input_Meal_Info_Meal_A_Meal20" name="Meal_A_Meal20" class="easyui-textbox" type="text" style="width:86px;"
-                                                        data-options="fontsize:'12px'">                                                    元
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td align="right">
-                                                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Meal_Meal21_1" fieldtype="radio"
-                                                        onClick="fieldedit($(this));"><span style="font-size:12px;">加飲</span></a>
-                                                </td>
-                                                <td><input id="id_input_Meal_Info_Meal_A_Meal21" name="Meal_A_Meal21" class="easyui-combobox"
-                                                        type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal21_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"></td>
-                                            </tr>
-                                            <tr>
-                                                <td align="right">
-                                                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Meal_Meal22_1" fieldtype="radio"
-                                                        onClick="fieldedit($(this));"><span style="font-size:12px;">換飲</span></a>
-                                                </td>
-                                                <td><input id="id_input_Meal_Info_Meal_A_Meal22" name="Meal_A_Meal22" class="easyui-combobox"
-                                                        type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal22_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"></td>
-                                            </tr>
-                                            <tr>
-                                                <td align="right">
-                                                    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Meal_Meal23_1" fieldtype="radio"
-                                                        onClick="fieldedit($(this));"><span style="font-size:12px;">領飲</span></a>
-                                                </td>
-                                                <td><input id="id_input_Meal_Info_Meal_A_Meal23" name="Meal_A_Meal23" class="easyui-combobox"
-                                                        type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal23_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"></td>
-                                            </tr>
-                                            <tr>
-                                                <td align="right" valign="top">
-                                                    <div style="padding-top:3px;font-size:12px;">備註</div>
-                                                </td>
-                                                <td><input id="id_input_Meal_Info_Meal_A_Meal24" name="Meal_A_Meal24" class="easyui-textbox"
-                                                        type="text" style="width:171px; height:76px;" data-options="multiline:true,fontsize:'12px'"></td>
-                                            </tr>
-                                        </table>
-                                    </td>
+                                </td>
+                                <td>
+                                    <table width="246" border="0" cellspacing="0" cellpadding="5">
+                                        <tr>
+                                            <td width="55"></td>
+                                            <td width="171" style="font-size:12px;"><input id="id_input_Meal_Info_Meal_A_Meal18" name="Meal_A_Meal18" type="checkbox"
+                                                    value="西式早餐"> 西式早餐
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">收款</td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_A_Meal19" name="Meal_A_Meal19" type="checkbox"
+                                                    value="收款"> 現金
+                                                <input id="id_input_Meal_Info_Meal_A_Meal20" name="Meal_A_Meal20" class="easyui-textbox" type="text" style="width:86px;"
+                                                    data-options="fontsize:'12px'">                                                元
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">加飲
+                                            </td>
+                                            <td><input id="Meal_A_Meal21" name="Meal_A_Meal21" class="easyui-combobox" type="text"
+                                                    style="width:171px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">換飲
+                                            </td>
+                                            <td><input id="Meal_A_Meal22" name="Meal_A_Meal22" class="easyui-combobox" type="text"
+                                                    style="width:171px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">領飲
+                                            </td>
+                                            <td><input id="Meal_A_Meal23" name="Meal_A_Meal23" class="easyui-combobox" type="text"
+                                                    style="width:171px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" valign="top">
+                                                <div style="padding-top:3px;font-size:12px;">備註</div>
+                                            </td>
+                                            <td><input id="id_input_Meal_Info_Meal_A_Meal24" name="Meal_A_Meal24" class="easyui-textbox"
+                                                    type="text" style="width:171px; height:76px;" data-options="multiline:true,fontsize:'12px'"></td>
+                                        </tr>
+                                    </table>
+                                </td>
                             </tr>
                         </table>
-                        </td>
+                    </td>
                 </tr>
                 <tr>
                     <td id="td_B" bgcolor="#FEC1C0">
@@ -317,12 +306,12 @@
                                         </tr>
                                         <tr>
                                             <td align="right" style="font-size:12px;">手機</td>
-                                            <td><input id="id_input_Meal_Info_Meal_B_Meal02" name="Meal_B_Meal02" class="easyui-textbox"
+                                            <td><input id="id_input_Meal_Info_Meal_B_Meal02" ng-model="Meal_B_Meal02" name="Meal_B_Meal02" class="easyui-textbox"
                                                     type="text" style="width:171px;" data-options="fontsize:'12px'"></td>
                                         </tr>
                                         <tr>
                                             <td align="right" style="font-size:12px;">地址</td>
-                                            <td><input id="id_input_Meal_Info_Meal_B_Meal03" name="Meal_B_Meal03" class="easyui-textbox"
+                                            <td><input id="id_input_Meal_Info_Meal_B_Meal03" ng-model="Meal_B_Meal03" name="Meal_B_Meal03" class="easyui-textbox"
                                                     type="text" style="width:171px;" data-options="fontsize:'12px',chkfieldid:'id_input_Meal_Info_Meal_B_Meal04',onChange:ChkAddress_onChange,url:'/info/normaldb/selecttable.jsp?fieldname=ID,RouteNumber,Address&tablename=Route&where=Flag=9&orderby=RouteNumber'"></td>
                                         </tr>
                                         <tr>
@@ -376,60 +365,55 @@
                                 <td>
                                     <table width="246" border="0" cellspacing="0" cellpadding="5">
                                         <tr>
-                                            <<td height="23" align="right" style="font-size:12px;">餐具
-                                </td>
-                                <td width="171"><input id="id_input_Meal_Info_Meal_B_Meal09" name="Meal_B_Meal09" class="easyui-combobox"
-                                        type="text" style="width:171px;" data-options="url:'/info/dish/list.jsp',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
-                                        multiple></td>
-                                </tr>
-                                <tr>
-                                    <td align="right" style="font-size:12px;">加湯罐</td>
-                                    <td><input id="id_input_Meal_Info_Meal_B_Meal10" name="Meal_B_Meal10" class="easyui-textbox"
-                                            type="text" style="width:171px;" data-options="fontsize:'12px'"></td>
-                                </tr>
-                                <tr>
-                                    <td align="right" style="font-size:12px;">加飲品</td>
-                                    <td><input id="id_input_Meal_Info_Meal_B_Meal11" name="Meal_B_Meal11" class="easyui-textbox"
-                                            type="text" style="width:171px;" data-options="fontsize:'12px'"></td>
-                                </tr>
-                                <tr>
-                                    <td align="right" style="font-size:12px;">禁忌</td>
-                                    <td><input id="id_input_Meal_Info_Meal_B_Meal12" name="Meal_B_Meal12" class="easyui-combotree"
-                                            type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Member_Attrib05',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px'"
-                                            multiple></td>
-                                </tr>
-                                <tr>
-                                    <td align="right" style="font-size:12px;">特殊禁忌</td>
-                                    <td><input id="id_input_Meal_Info_Meal_B_Meal13" name="Meal_B_Meal13" class="easyui-textbox"
-                                            type="text" style="width:171px;" data-options="fontsize:'12px'"></td>
-                                </tr>
-                                <tr>
-                                   
+                                            <td height="23" align="right" style="font-size:12px;">餐具
+                                            </td>
+                                            <td width="171"><input id="Meal_B_Meal09" name="Meal_B_Meal09" class="easyui-combobox" type="text"
+                                                    style="width:171px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">加湯罐</td>
+                                            <td><input id="id_input_Meal_Info_Meal_B_Meal10" name="Meal_B_Meal10" class="easyui-textbox"
+                                                    type="text" style="width:171px;" data-options="fontsize:'12px'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">加飲品</td>
+                                            <td><input id="id_input_Meal_Info_Meal_B_Meal11" name="Meal_B_Meal11" class="easyui-textbox"
+                                                    type="text" style="width:171px;" data-options="fontsize:'12px'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">禁忌</td>
+                                            <td><input id="Meal_B_Meal12" name="Meal_B_Meal12" class="easyui-combotree" type="text"
+                                                    style="width:171px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">特殊禁忌</td>
+                                            <td><input id="id_input_Meal_Info_Meal_B_Meal13" name="Meal_B_Meal13" class="easyui-textbox"
+                                                    type="text" style="width:171px;" data-options="fontsize:'12px'"></td>
+                                        </tr>
+                                        <tr>
+
                                             <td align="right" style="font-size:12px;">加減
-                                        </td>
-                                        <td><input id="id_input_Meal_Info_Meal_B_Meal14" name="Meal_B_Meal14" class="easyui-combobox"
-                                                type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal14_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
-                                                multiple></td>
-                                </tr>
-                                <tr>
-                                    <td align="right">
-                                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Meal_Meal15_1" fieldtype="radio"
-                                            onClick="fieldedit($(this));"><span style="font-size:12px;">其它</span></a>
-                                    </td>
-                                    <td><input id="id_input_Meal_Info_Meal_B_Meal15" name="Meal_B_Meal15" class="easyui-combobox"
-                                            type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal15_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
-                                            multiple></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_B_Meal25" name="Meal_B_Meal25" type="checkbox" value="試吃">                                        試吃
-                                        <input id="id_input_Meal_Info_Meal_B_Meal16" name="Meal_B_Meal16" class="easyui-textbox" type="text" style="width:35px;"
-                                            data-options="fontsize:'12px'"> :
-                                        <input id="id_input_Meal_Info_Meal_B_Meal17" name="Meal_B_Meal17" class="easyui-textbox" type="text" style="width:35px;"
-                                            data-options="fontsize:'12px'">
-                                    </td>
-                                </tr>
-                                </table>
+                                            </td>
+                                            <td><input id="Meal_B_Meal14" name="Meal_B_Meal14" class="easyui-combobox" type="text"
+                                                    style="width:171px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">其它
+                                            </td>
+                                            <td><input id="Meal_B_Meal15" name="Meal_B_Meal15" class="easyui-combobox" type="text"
+                                                    style="width:171px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_B_Meal25" name="Meal_B_Meal25" type="checkbox"
+                                                    value="試吃"> 試吃
+                                                <input id="id_input_Meal_Info_Meal_B_Meal16" name="Meal_B_Meal16" class="easyui-textbox" type="text" style="width:35px;"
+                                                    data-options="fontsize:'12px'">                                                :
+                                                <input id="id_input_Meal_Info_Meal_B_Meal17" name="Meal_B_Meal17" class="easyui-textbox" type="text" style="width:35px;"
+                                                    data-options="fontsize:'12px'">
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                                 <td>
                                     <table width="246" border="0" cellspacing="0" cellpadding="5">
@@ -442,28 +426,22 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td align="right">
-                                                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Meal_Meal21_1" fieldtype="radio"
-                                                    onClick="fieldedit($(this));"><span style="font-size:12px;">加飲</span></a>
+                                            <td width="55" align="right" style="font-size:12px;">加飲
                                             </td>
-                                            <td><input id="id_input_Meal_Info_Meal_B_Meal21" name="Meal_B_Meal21" class="easyui-combobox"
-                                                    type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal21_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"></td>
+                                            <td><input id="Meal_B_Meal21" name="Meal_B_Meal21" class="easyui-combobox" type="text"
+                                                    style="width:171px;"></td>
                                         </tr>
                                         <tr>
-                                            <td align="right">
-                                                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Meal_Meal22_1" fieldtype="radio"
-                                                    onClick="fieldedit($(this));"><span style="font-size:12px;">換飲</span></a>
+                                            <td width="55" align="right" style="font-size:12px;">換飲
                                             </td>
-                                            <td><input id="id_input_Meal_Info_Meal_B_Meal22" name="Meal_B_Meal22" class="easyui-combobox"
-                                                    type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal22_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"></td>
+                                            <td><input id="Meal_B_Meal22" name="Meal_B_Meal22" class="easyui-combobox" type="text"
+                                                    style="width:171px;"></td>
                                         </tr>
                                         <tr>
-                                            <td align="right">
-                                                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Meal_Meal23_1" fieldtype="radio"
-                                                    onClick="fieldedit($(this));"><span style="font-size:12px;">領飲</span></a>
+                                            <td width="55" align="right" style="font-size:12px;">領飲
                                             </td>
-                                            <td><input id="id_input_Meal_Info_Meal_B_Meal23" name="Meal_B_Meal23" class="easyui-combobox"
-                                                    type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal23_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"></td>
+                                            <td><input id="Meal_B_Meal23" name="Meal_B_Meal23" class="easyui-combobox" type="text"
+                                                    style="width:171px;"></td>
                                         </tr>
                                         <tr>
                                             <td align="right" valign="top">
@@ -496,12 +474,12 @@
                                         </tr>
                                         <tr>
                                             <td align="right" style="font-size:12px;">手機</td>
-                                            <td><input id="id_input_Meal_Info_Meal_C_Meal02" name="Meal_C_Meal02" class="easyui-textbox"
+                                            <td><input id="id_input_Meal_Info_Meal_C_Meal02" ng-model="Meal_C_Meal02" name="Meal_C_Meal02" class="easyui-textbox"
                                                     type="text" style="width:171px;" data-options="fontsize:'12px'"></td>
                                         </tr>
                                         <tr>
                                             <td align="right" style="font-size:12px;">地址</td>
-                                            <td><input id="id_input_Meal_Info_Meal_C_Meal03" name="Meal_C_Meal03" class="easyui-textbox"
+                                            <td><input id="id_input_Meal_Info_Meal_C_Meal03" ng-model="Meal_C_Meal03" name="Meal_C_Meal03" class="easyui-textbox"
                                                     type="text" style="width:171px;" data-options="fontsize:'12px',chkfieldid:'id_input_Meal_Info_Meal_C_Meal04',onChange:ChkAddress_onChange,url:'/info/normaldb/selecttable.jsp?fieldname=ID,RouteNumber,Address&tablename=Route&where=Flag=9&orderby=RouteNumber'"></td>
                                         </tr>
                                         <tr>
@@ -557,9 +535,8 @@
                                         <tr>
                                             <td height="23" align="right" style="font-size:12px;">餐具
                                             </td>
-                                            <td width="171"><input id="id_input_Meal_Info_Meal_C_Meal09" name="Meal_C_Meal09" class="easyui-combobox"
-                                                    type="text" style="width:171px;" data-options="url:'/info/dish/list.jsp',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
-                                                    multiple></td>
+                                            <td width="171"><input id="Meal_C_Meal09" name="Meal_C_Meal09" class="easyui-combobox"
+                                                    type="text" style="width:171px;"></td>
                                         </tr>
                                         <tr>
                                             <td align="right" style="font-size:12px;">加湯罐</td>
@@ -573,9 +550,8 @@
                                         </tr>
                                         <tr>
                                             <td align="right" style="font-size:12px;">禁忌</td>
-                                            <td><input id="id_input_Meal_Info_Meal_C_Meal12" name="Meal_C_Meal12" class="easyui-combotree"
-                                                    type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Member_Attrib05',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px'"
-                                                    multiple></td>
+                                            <td><input id="Meal_C_Meal12" name="Meal_C_Meal12" class="easyui-combotree"
+                                                    type="text" style="width:171px;"></td>
                                         </tr>
                                         <tr>
                                             <td align="right" style="font-size:12px;">特殊禁忌</td>
@@ -583,20 +559,16 @@
                                                     type="text" style="width:171px;" data-options="fontsize:'12px'"></td>
                                         </tr>
                                         <tr>
-                                                <td align="right" style="font-size:12px;">加減
+                                            <td align="right" style="font-size:12px;">加減
                                             </td>
-                                            <td><input id="id_input_Meal_Info_Meal_C_Meal14" name="Meal_C_Meal14" class="easyui-combobox"
-                                                    type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal14_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
-                                                    multiple></td>
+                                            <td><input id="Meal_C_Meal14" name="Meal_C_Meal14" class="easyui-combobox"
+                                                    type="text" style="width:171px;"></td>
                                         </tr>
                                         <tr>
-                                            <td align="right">
-                                                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Meal_Meal15_1" fieldtype="radio"
-                                                    onClick="fieldedit($(this));"><span style="font-size:12px;">其它</span></a>
+                                                <td align="right" style="font-size:12px;">其它
                                             </td>
-                                            <td><input id="id_input_Meal_Info_Meal_C_Meal15" name="Meal_C_Meal15" class="easyui-combobox"
-                                                    type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal15_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
-                                                    multiple></td>
+                                            <td><input id="Meal_C_Meal15" name="Meal_C_Meal15" class="easyui-combobox"
+                                                    type="text" style="width:171px;"></td>
                                         </tr>
                                         <tr>
                                             <td></td>
@@ -621,28 +593,22 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td align="right">
-                                                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Meal_Meal21_1" fieldtype="radio"
-                                                    onClick="fieldedit($(this));"><span style="font-size:12px;">加飲</span></a>
+                                                <td align="right" style="font-size:12px;">加飲
                                             </td>
-                                            <td><input id="id_input_Meal_Info_Meal_C_Meal21" name="Meal_C_Meal21" class="easyui-combobox"
-                                                    type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal21_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"></td>
+                                            <td><input id="Meal_C_Meal21" name="Meal_C_Meal21" class="easyui-combobox"
+                                                    type="text" style="width:171px;"></td>
                                         </tr>
                                         <tr>
-                                            <td align="right">
-                                                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Meal_Meal22_1" fieldtype="radio"
-                                                    onClick="fieldedit($(this));"><span style="font-size:12px;">換飲</span></a>
+                                                <td align="right" style="font-size:12px;">換飲
                                             </td>
-                                            <td><input id="id_input_Meal_Info_Meal_C_Meal22" name="Meal_C_Meal22" class="easyui-combobox"
-                                                    type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal22_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"></td>
+                                            <td><input id="Meal_C_Meal22" name="Meal_C_Meal22" class="easyui-combobox"
+                                                    type="text" style="width:171px;"></td>
                                         </tr>
                                         <tr>
-                                            <td align="right">
-                                                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" fieldname="Meal_Meal23_1" fieldtype="radio"
-                                                    onClick="fieldedit($(this));"><span style="font-size:12px;">領飲</span></a>
+                                            <td align="right" style="font-size:12px;">領飲
                                             </td>
-                                            <td><input id="id_input_Meal_Info_Meal_C_Meal23" name="Meal_C_Meal23" class="easyui-combobox"
-                                                    type="text" style="width:171px;" data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal23_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"></td>
+                                            <td><input id="Meal_C_Meal23" name="Meal_C_Meal23" class="easyui-combobox"
+                                                    type="text" style="width:171px;"></td>
                                         </tr>
                                         <tr>
                                             <td align="right" valign="top">
@@ -659,7 +625,7 @@
                 </tr>
             </table>
 
-            </td>
+        </td>
 
     </tr>
 </table>

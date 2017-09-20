@@ -5,6 +5,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     var saveORupdate_falr = true;   //判斷使用者是選擇新增或是修改，true回新增、false為修改
     var Today = new Date();           //日期
     var client_ip;              //客戶端IP位置
+    $scope.tabFlag = true;
 
     //購買餐類checkbox物件
     $scope.checkboxModel = {
@@ -180,7 +181,8 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         showtime: null
     };
 
-    initial();  //  此頁開始時先呼叫initial()
+    //  此頁開始時先呼叫initial()
+    initial();
 
     //取得客戶單IP位址
     $.getJSON('//freegeoip.net/json/?callback=?', function (data) {
@@ -189,6 +191,12 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     });;
 
     /**-----------------------------------------click event zone start----------------------------------------- */
+    //進入月子餐頁面
+    $scope.goToMonthMeal = function () {
+        location.href = '/#/monthMeal';
+        $rootScope.id = $scope.member.id;
+    };
+    
     //新增資料上ＭySQL
     $scope.postMEMBER = function () {
 
@@ -339,6 +347,9 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         //datatables假如有欄位被選擇反白，將反白取消。
         table.$('tr.selected').removeClass('selected');
 
+        //TAB按鈕不能按因為沒點選客戶
+        $scope.tabFlag = true;
+
         //將欄位唯獨關閉
         close_readonly();
 
@@ -380,6 +391,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     /**-----------------------------------------function zone start---------------------------------------------- */
     //initial() 開始時會做的事: 1.顯示LoadingOverlay 2.營養顧問dropdown list名單抓取 3.會員資料初始取得存入datatables
     function initial() {
+
         // Show full page LoadingOverlay
         $.LoadingOverlay("show");
 
@@ -441,6 +453,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     $('#example tbody').on('click', 'tr', function () {
                         //有點選會員時不行按下保存
                         save_falg = false;
+                        $scope.tabFlag = false;
 
                         //點選row會有顏色改變，注解掉的部分是因為不希望重複點集會取消顏色
                         /*if ( $(this).hasClass('selected') ) {
