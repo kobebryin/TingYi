@@ -32,5 +32,11 @@ angular.module('TinYi').config(function($stateProvider, $urlRouterProvider) {
       url: "/memberData",
       templateUrl: "views/memberData.html",
       controller: "memberDataController"
+    })
+    //月子餐
+    .state('monthMeal', {
+      url: "/monthMeal",
+      templateUrl: "views/monthMeal.html",
+      controller: "monthMealController"
     });
 });
