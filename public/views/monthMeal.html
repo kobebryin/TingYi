@@ -10,7 +10,7 @@
                     <td width="100"><input type="radio" id="id_input_Edit_Type_4" name="Edit_Type" value="5"></td>
                 </tr>
                 <tr align="left">
-                    <td><input type="button" id="a_Link_Save_1" value="新增" class="easyui-linkbutton" /></td>
+                    <td><input type="button" id="a_Link_Save_1" ng-click="new()" value="新增" class="easyui-linkbutton" /></td>
                     <td><input type="button" id="a_Link_Save_2" value="刪除" class="easyui-linkbutton" disabled></td>
                     <td><input type="button" id="a_Link_Save_3" value="修改(加入)" class="easyui-linkbutton" disabled></td>
                     <td><input type="button" id="a_Link_Save_4" value="修改(取消)" class="easyui-linkbutton" disabled></td>
@@ -37,7 +37,7 @@
                 </tr>
                 <tr align="right">
                     <td align="left">病理種類：</td>
-                    <td colspan="6" align="right"><input id="id_input_Meal_Info_Member_MealXSickType" name="Member_MealXSickType" class="easyui-textbox"
+                    <td colspan="6" align="right"><input id="id_input_Meal_Info_Member_MealXSickType" name="Member_MealXSickType" ng-model="mealForMember.meal1sicktype" class="easyui-textbox"
                             type="text" style="width:330px; height:28px;" value=""></td>
                 </tr>
                 <tr>
@@ -53,17 +53,17 @@
                     <td align="left">總餐數：</td>
                     <td>早</td>
                     <td><input id="id_input_Meal_Info_Member_MealXA" name="Member_MealXA" class="easyui-textbox" type="text"
-                            style="width:85px; height:28px;" data-options="onChange:UpdateMealNum" value="">
+                            style="width:85px; height:28px;" ng-model="mealForMember.meal1a" value="">
                         <input id="id_input_Meal_Info_Member_MealXACOK" name="Member_MealXACOK" type="hidden" value="">
-                        <input id="id_input_Meal_Info_Member_MealXASelect" name="Member_MealXASelect" type="hidden"></td>
+                        <input id="id_input_Meal_Info_Member_MealXASelect" ng-model="mealForMember.meal1a" name="Member_MealXASelect" type="hidden"></td>
                     <td>午</td>
                     <td><input id="id_input_Meal_Info_Member_MealXB" name="Member_MealXB" class="easyui-textbox" type="text"
-                            style="width:85px; height:28px;" data-options="onChange:UpdateMealNum" value="">
+                            style="width:85px; height:28px;" ng-model="mealForMember.meal1b" value="">
                         <input id="id_input_Meal_Info_Member_MealXBCOK" name="Member_MealXBCOK" type="hidden" value="">
                         <input id="id_input_Meal_Info_Member_MealXBSelect" name="Member_MealXBSelect" type="hidden"></td>
                     <td>晚</td>
                     <td><input id="id_input_Meal_Info_Member_MealXC" name="Member_MealXC" class="easyui-textbox" type="text"
-                            style="width:85px; height:28px;" data-options="onChange:UpdateMealNum" value="">
+                            style="width:85px; height:28px;" ng-model="mealForMember.meal1c" value="">
                         <input id="id_input_Meal_Info_Member_MealXCCOK" name="Member_MealXCCOK" type="hidden" value="">
                         <input id="id_input_Meal_Info_Member_MealXCSelect" name="Member_MealXCSelect" type="hidden"></td>
                 </tr>
@@ -125,8 +125,8 @@
                                     <table width="246" border="0" cellspacing="0" cellpadding="5">
                                         <tr>
                                             <td width="55" align="right" style="font-size:12px;">床號</td>
-                                            <td width="171"><input id="id_input_Meal_Info_Meal_A_Meal01" name="Meal_A_Meal01" class="easyui-textbox"
-                                                    type="text" style="width:171px;" data-options="fontsize:'12px'"></td>
+                                            <td width="171"><input id="Meal_A_Meal01" name="Meal_A_Meal01" class="easyui-textbox" ng-model=""
+                                                    type="text" style="width:171px;" ></td>
                                         </tr>
                                         <tr>
                                             <td align="right" style="font-size:12px;">手機</td>

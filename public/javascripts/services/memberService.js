@@ -46,4 +46,13 @@ angular.module('TinYi').service('MemberService', function ($rootScope, $http) {
             callback(data);
         });
     }
+
+    //月子餐頁面日期早午晚存檔
+    this.putMEMBERforMonthMeal = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + 'memberForMeal', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
 })
