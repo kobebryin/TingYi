@@ -13,59 +13,111 @@ router.get('/', function (req, res, next) {
 // --------  insert Data from MySQL's table meal ----------------------- 
 router.post('/', function (req, res, next) {
     req.dbConnection.query("INSERT INTO meal (RID, MID, MIP, MID2, MIP2, MemberID, Date, MealType, Type, Meal01, Meal02, Meal03, Meal04, Meal05, Meal06, Meal07, Meal08, Meal09, Meal10, Meal11, Meal12, Meal13, Meal14, Meal15, Meal16, Meal17, Meal18, Meal19, Meal20, Meal21, Meal22, Meal23, Meal24, Meal25, Meal26, Meal27, Meal28, Meal29, Meal30, Meal31, Meal32, Meal33, Meal34, Meal35, Meal36, Meal37, Meal38, Meal39, Meal40, Flag, CreateTime, RecordTime, ShowTime) VALUES ("
-        + "'" + req.body.rid + "', "
-        + "'" + req.body.mid + "', "
-        + "'" + req.body.mip + "', "
-        + "'" + req.body.mid2 + "', "
-        + "'" + req.body.mip2 + "', "
-        + "'" + req.body.memberid + "', "
-        + "'" + req.body.date + "', "
-        + "'" + req.body.mealtype + "', "
-        + "'" + req.body.type + "', "
-        + "'" + req.body.meal01 + "', "
-        + "'" + req.body.meal02 + "', "
-        + "'" + req.body.meal03 + "', "
-        + "'" + req.body.meal04 + "', "
-        + "'" + req.body.meal05 + "', "
-        + "'" + req.body.meal06 + "', "
-        + "'" + req.body.meal07 + "', "
-        + "'" + req.body.meal08 + "', "
-        + "'" + req.body.meal09 + "', "
-        + "'" + req.body.meal10 + "', "
-        + "'" + req.body.meal11 + "', "
-        + "'" + req.body.meal12 + "', "
-        + "'" + req.body.meal13 + "', "
-        + "'" + req.body.meal14 + "', "
-        + "'" + req.body.meal15 + "', "
-        + "'" + req.body.meal16 + "', "
-        + "'" + req.body.meal17 + "', "
-        + "'" + req.body.meal18 + "', "
-        + "'" + req.body.meal19 + "', "
-        + "'" + req.body.meal20 + "', "
-        + "'" + req.body.meal21 + "', "
-        + "'" + req.body.meal22 + "', "
-        + "'" + req.body.meal23 + "', "
-        + "'" + req.body.meal24 + "', "
-        + "'" + req.body.meal25 + "', "
-        + "'" + req.body.meal26 + "', "
-        + "'" + req.body.meal27 + "', "
-        + "'" + req.body.meal28 + "', "
-        + "'" + req.body.meal29 + "', "
-        + "'" + req.body.meal30 + "', "
-        + "'" + req.body.meal31 + "', "
-        + "'" + req.body.meal32 + "', "
-        + "'" + req.body.meal33 + "', "
-        + "'" + req.body.meal34 + "', "
-        + "'" + req.body.meal35 + "', "
-        + "'" + req.body.meal36 + "', "
-        + "'" + req.body.meal37 + "', "
-        + "'" + req.body.meal38 + "', "
-        + "'" + req.body.meal39 + "', "
-        + "'" + req.body.meal40 + "', "
-        + "'" + req.body.flag + "', "
-        + "'" + req.body.createtime + "', "
-        + "'" + req.body.recordtime + "', "
-        + "'" + req.body.showtime + "');", function (error, results, fields) {
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ", "
+        + '?' + ");", [req.body.rid,
+        req.body.mid,
+        req.body.mip,
+        req.body.mid2,
+        req.body.mip2,
+        req.body.memberid,
+        req.body.date,
+        req.body.mealtype,
+        req.body.type,
+        req.body.meal01,
+        req.body.meal02,
+        req.body.meal03,
+        req.body.meal04,
+        req.body.meal05,
+        req.body.meal06,
+        req.body.meal07,
+        req.body.meal08,
+        req.body.meal09,
+        req.body.meal10,
+        req.body.meal11,
+        req.body.meal12,
+        req.body.meal13,
+        req.body.meal14,
+        req.body.meal15,
+        req.body.meal16,
+        req.body.meal17,
+        req.body.meal18,
+        req.body.meal19,
+        req.body.meal20,
+        req.body.meal21,
+        req.body.meal22,
+        req.body.meal23,
+        req.body.meal24,
+        req.body.meal25,
+        req.body.meal26,
+        req.body.meal27,
+        req.body.meal28,
+        req.body.meal29,
+        req.body.meal30,
+        req.body.meal31,
+        req.body.meal32,
+        req.body.meal33,
+        req.body.meal34,
+        req.body.meal35,
+        req.body.meal36,
+        req.body.meal37,
+        req.body.meal38,
+        req.body.meal39,
+        req.body.meal40,
+        req.body.flag,
+        req.body.createtime,
+        req.body.recordtime,
+        req.body.showtime], function (error, results, fields) {
             if (error) throw error;
             console.log('The solution is: ', results);
             res.json(results);
