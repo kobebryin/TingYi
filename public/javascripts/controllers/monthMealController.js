@@ -209,6 +209,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
 
     //新增按鈕觸發事件
     $scope.new = function () {
+
         if (!$scope.cb_morningFalg && !$scope.cb_noonFalg && !$scope.cb_nightFalg) {
             alert('請至少勾選一個時段才可新增!');
         } else {
@@ -258,15 +259,16 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             //判斷勾選的時段(早午晚)
             if ($scope.cb_morningFalg) {
                 var dates_A = month_calendar_morning.multiDatesPicker('getDates');
-                for (key in dates_A) {
-                    $scope.meallistA.date = dates_A[key];
-                         
-                    monthMealService.postMeal($scope.meallistA, function (data) {
-                        console.log('222');
-                        clearScopeMemberObj();
-                        initial();
-                    });    
-                }
+
+                // for (key in dates_A) {
+                //     $scope.meallistA.date = dates_A[key];
+
+                //     monthMealService.postMeal($scope.meallistA, function (data) {
+                //         console.log('222');
+                //         clearScopeMemberObj();
+                //         initial();
+                //     });
+                // }
             }
 
             if ($scope.cb_noonFalg) {
@@ -491,11 +493,11 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
 
             $scope.mealForMember.meal1sicktype = data[0].Meal1SickType;
             $scope.mealForMember.meal1a = data[0].Meal1A;
-            $scope.mealForMember.meal1ac = data[0].Meal1AC;
+            $scope.mealForMember.meal1ac = data[0].Meal1AC;     //早日期
             $scope.mealForMember.meal1b = data[0].Meal1B;
-            $scope.mealForMember.meal1bc = data[0].Meal1BC;
+            $scope.mealForMember.meal1bc = data[0].Meal1BC;     //午日期
             $scope.mealForMember.meal1c = data[0].Meal1C;
-            $scope.mealForMember.meal1cc = data[0].Meal1CC;
+            $scope.mealForMember.meal1cc = data[0].Meal1CC;     //晚日期
 
             //塞值到前端
             $scope.meallistA.meal02 = $scope.meal.user;    //手機
@@ -602,6 +604,27 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
         $scope.meallistC.flag = 9;
         $scope.meallistC.type = 'C';
         $scope.meallistC.mealtype = 1;
+    }
+
+    //抓日期差集
+    function A_B () {
+        var meal1ac_initial = $scope.mealForMember.meal1ac.substring(1, $scope.mealForMember.meal1ac.length - 1);   //先去頭去尾';'
+        var meal1ac_initial_array = meal1ac_initial.split(";");     //依照;來切
+        console.log(meal1ac_initial_array);
+
+        var dates = month_calendar_morning.multiDatesPicker('getDates');
+        console.log(dates);
+        var set1 = new Set(dates);
+        var set2 = new Set(meal1ac_initial_array);
+    
+        var subset = [];
+    
+        for (let item of set1) {
+            if (!set2.has(item)) {
+                subset.push(item);
+            }
+        }
+        console.log(subset);
     }
     /**---------------------------------------function zone end--------------------------------------------*/
 });
