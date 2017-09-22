@@ -260,15 +260,69 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             if ($scope.cb_morningFalg) {
                 var dates_A = month_calendar_morning.multiDatesPicker('getDates');
 
-                // for (key in dates_A) {
-                //     $scope.meallistA.date = dates_A[key];
+                for (let key in dates_A) {
+                    //$scope.meallistA.date = dates_A[key];
+                    let input = {
+                        rid: $scope.meallistA.rid,
+                        mid: $scope.meallistA.mid,
+                        mip: $scope.meallistA.mip,
+                        mid2: $scope.meallistA.mid2,
+                        mip2: $scope.meallistA.mip2,
+                        memberid: $scope.meallistA.memberid,
+                        date: dates_A[key],
+                        mealtype: 1,
+                        type: 'A',
+                        meal01: $scope.meallistA.meal01,
+                        meal02: $scope.meallistA.meal02,
+                        meal03: $scope.meallistA.meal03,
+                        meal04: $scope.meallistA.meal04,
+                        meal05: $scope.meallistA.meal05,
+                        meal06: $scope.meallistA.meal06,
+                        meal07: $scope.meallistA.meal07,
+                        meal08: $scope.meallistA.meal08,
+                        meal09: $scope.meallistA.meal09,
+                        meal10: $scope.meallistA.meal10,
+                        meal11: $scope.meallistA.meal11,
+                        meal12: $scope.meallistA.meal12,
+                        meal13: $scope.meallistA.meal13,
+                        meal14: $scope.meallistA.meal14,
+                        meal15: $scope.meallistA.meal15,
+                        meal16: $scope.meallistA.meal16,
+                        meal17: $scope.meallistA.meal17,
+                        meal18: $scope.meallistA.meal18,
+                        meal19: $scope.meallistA.meal19,
+                        meal20: $scope.meallistA.meal20,
+                        meal21: $scope.meallistA.meal21,
+                        meal22: $scope.meallistA.meal22,
+                        meal23: $scope.meallistA.meal23,
+                        meal24: $scope.meallistA.meal24,
+                        meal25: $scope.meallistA.meal25,
+                        meal26: $scope.meallistA.meal26,
+                        meal27: $scope.meallistA.meal27,
+                        meal28: $scope.meallistA.meal28,
+                        meal29: $scope.meallistA.meal29,
+                        meal30: $scope.meallistA.meal30,
+                        meal31: $scope.meallistA.meal31,
+                        meal32: $scope.meallistA.meal32,
+                        meal33: $scope.meallistA.meal33,
+                        meal34: $scope.meallistA.meal34,
+                        meal35: $scope.meallistA.meal35,
+                        meal36: $scope.meallistA.meal36,
+                        meal37: $scope.meallistA.meal37,
+                        meal38: $scope.meallistA.meal38,
+                        meal39: $scope.meallistA.meal39,
+                        meal40: $scope.meallistA.meal40,
+                        flag: 9,
+                        createtime: $scope.meallistA.createtime,
+                        recordtime: $scope.meallistA.recordtime,
+                        showtime: $scope.meallistA.showtime
+                    };
 
-                //     monthMealService.postMeal($scope.meallistA, function (data) {
-                //         console.log('222');
-                //         clearScopeMemberObj();
-                //         initial();
-                //     });
-                // }
+                    monthMealService.postMeal(input, function (data) {
+                        clearScopeMemberObj();
+                        initial();
+                    });
+                }
             }
 
             if ($scope.cb_noonFalg) {
