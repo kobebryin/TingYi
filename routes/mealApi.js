@@ -190,7 +190,7 @@ router.put('/', function (req, res, next) {
 
 // --------  delete Data from MySQL's table meal ----------------------- 
 router.delete('/', function (req, res, next) {
-    req.dbConnection.query('DELETE FROM meal WHERE MemberID=' + req.query.MemberID + ';', function (error, results, fields) {
+    req.dbConnection.query('DELETE FROM meal WHERE MemberID=' + req.query.MemberID + ' AND MealType=1;', function (error, results, fields) {
         if (error) throw error;
         console.log('The solution is: ', results);
         res.json(results);

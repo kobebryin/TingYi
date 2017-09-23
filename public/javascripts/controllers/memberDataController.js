@@ -196,6 +196,11 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         location.href = '/#/monthMeal';
         $rootScope.id = $scope.member.id;
     };
+
+    $rootScope.goToConditionMeal = function () {
+        location.href = '/#/conditionMeal';
+        $rootScope.id = $scope.member.id;
+    };
     
     //新增資料上ＭySQL
     $scope.postMEMBER = function () {
@@ -391,6 +396,8 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     /**-----------------------------------------function zone start---------------------------------------------- */
     //initial() 開始時會做的事: 1.顯示LoadingOverlay 2.營養顧問dropdown list名單抓取 3.會員資料初始取得存入datatables
     function initial() {
+
+        $rootScope.id = null;
 
         // Show full page LoadingOverlay
         $.LoadingOverlay("show");

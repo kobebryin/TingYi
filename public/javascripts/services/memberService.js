@@ -55,4 +55,14 @@ angular.module('TinYi').service('MemberService', function ($rootScope, $http) {
         });
     }
 
+    //調理餐頁面日期午存檔
+    this.putMEMBERforConditionMeal = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + 'memberForConditionMeal', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
+
+
 })

@@ -7,9 +7,17 @@ angular.module('TinYi').service('monthMealService', function ($rootScope, $http)
         });
     }
 
-    //刪除餐點資料
-    this.deleteMeal = function (id, callback) {
+    //月子餐刪除餐點資料
+    this.deleteMeal_A = function (id, callback) {
         $http.delete($rootScope.apiUrl + 'meal?MemberID=' + id).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
+    //月子餐刪除餐點資料
+    this.deleteMeal_B = function (id, callback) {
+        $http.delete($rootScope.apiUrl + 'memberForConditionMeal?MemberID=' + id).success(function (data) {
             // you can do some processing here
             callback(data);
         });
