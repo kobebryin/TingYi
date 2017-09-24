@@ -63,6 +63,14 @@ angular.module('TinYi').service('MemberService', function ($rootScope, $http) {
         });
     }
 
+    //一般餐頁面日期午存檔
+    this.putMEMBERforNormalMeal = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + 'memberForNormalMeal', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
 
 
 })

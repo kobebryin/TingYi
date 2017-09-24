@@ -201,6 +201,11 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         location.href = '/#/conditionMeal';
         $rootScope.id = $scope.member.id;
     };
+
+    $rootScope.goToNormalMeal = function () {
+        location.href = '/#/normalMeal';
+        $rootScope.id = $scope.member.id;
+    };
     
     //新增資料上ＭySQL
     $scope.postMEMBER = function () {

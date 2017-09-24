@@ -39,10 +39,16 @@ angular.module('TinYi').config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "views/monthMeal.html",
       controller: "monthMealController"
     })
-    //月子餐
+    //調理餐
     .state('conditionMeal', {
       url: "/conditionMeal",
       templateUrl: "views/conditionMeal.html",
       controller: "conditionMealController"
+    })
+    //一般餐
+    .state('normalMeal', {
+      url: "/normalMeal",
+      templateUrl: "views/normalMeal.html",
+     controller: "normalMealController"
     });
 });

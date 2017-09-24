@@ -209,35 +209,52 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
     $.getJSON('//freegeoip.net/json/?callback=?', function (data) {
         client_ip = data.ip;
         console.log(data.ip);
-    });;
+    });
+
+    //進入月子餐頁面
+    $scope.goToMonthMeal = function () {
+        location.href = '/#/monthMeal';
+    };
+
+    $rootScope.goToConditionMeal = function () {
+        location.href = '/#/conditionMeal';
+    };
+
+    $rootScope.goToNormalMeal = function () {
+        location.href = '/#/normalMeal';
+    };
 
     //清空重填按鈕
     $scope.clearAll = function () {
+        var confirmDelete = confirm("確認刪除之前的舊訂餐嗎？    ＊假如確認，將無法恢復！");　//跳除confirm視窗詢是否刪除
+        if (confirmDelete == true) {
+            //左邊框架的變數
+            let mealForMember = {
+                meal2sicktype: null,
+                meal2a: null,
+                meal2ac: null,
+                meal2b: null,
+                meal2bc: null,
+                meal2c: null,
+                meal2cc: null,
+                recordtime: null,
+                showtime: null,
+                id: id
+            }
 
-        //左邊框架的變數
-        let mealForMember = {
-            meal2sicktype: null,
-            meal2a: null,
-            meal2ac: null,
-            meal2b: null,
-            meal2bc: null,
-            meal2c: null,
-            meal2cc: null,
-            recordtime: null,
-            showtime: null,
-            id: id
+            mealForMember.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+            mealForMember.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+
+            MemberService.putMEMBERforConditionMeal(mealForMember, function (data) {
+                initial();
+            });
+
+            monthMealService.deleteMeal_B(id, function (data) {
+                initial();
+            });
+        } else {
+            //按下取消不做任何事情 
         }
-
-        mealForMember.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-        mealForMember.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-
-        MemberService.putMEMBERforConditionMeal(mealForMember, function (data) {
-            initial();
-        });
-
-        monthMealService.deleteMeal_B(id, function (data) {
-            initial();
-        });
     };
 
     //新增按鈕觸發事件

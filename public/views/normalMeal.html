@@ -1,0 +1,502 @@
+<button class="button" ng-disabled="tabFlag" ng-click="goToMonthMeal()">月子餐 </button>
+<button class="button button2" ng-disabled="tabFlag" ng-click="goToConditionMeal()">調理餐</button>
+<button class="button button3" ng-disabled="tabFlag" ng-click="goToNormalMeal()">一般餐</button>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5">
+    <tr>
+        <td>
+            <!-- <table width="428" border="0" cellspacing="0" cellpadding="0">
+                <tr align="center">
+                    <td width="55"><input type="radio" id="id_input_Edit_Type_0" name="Edit_Type" value="1" checked="checked"></td>
+                    <td width="55"><input type="radio" id="id_input_Edit_Type_1" name="Edit_Type" value="2"></td>
+                    <td width="109"><input type="radio" id="id_input_Edit_Type_2" name="Edit_Type" value="3"></td>
+                    <td width="109"><input type="radio" id="id_input_Edit_Type_3" name="Edit_Type" value="4"></td>
+                    <td width="100"><input type="radio" id="id_input_Edit_Type_4" name="Edit_Type" value="5"></td>
+                </tr>
+                <tr align="left">
+                    <td><input type="button" id="a_Link_Save_1" ng-click="new()" value="新增" class="easyui-linkbutton" /></td>
+                    <td><input type="button" id="a_Link_Save_2" value="刪除" class="easyui-linkbutton" disabled></td>
+                    <td><input type="button" id="a_Link_Save_3" value="修改(加入)" class="easyui-linkbutton" disabled></td>
+                    <td><input type="button" id="a_Link_Save_4" value="修改(取消)" class="easyui-linkbutton" disabled></td>
+                    <td align="right"><input type="button" id="a_Link_Save_5" value="修改(覆蓋)" class="easyui-linkbutton" disabled></td>
+                </tr>
+            </table> -->
+
+            <input type="checkbox" name="month_calendar_morning" ng-model="cb_morningFalg" />早
+            <div id="month_calendar_morning"></div>
+            <input type="checkbox" name="month_calendar_noon" ng-model="cb_noonFalg" />午
+            <div id="month_calendar_noon"></div>
+            <input type="checkbox" name="month_calendar_night" ng-model="cb_nightFalg" />晚
+            <div id="month_calendar_night"></div>
+
+            <table width="428" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="91" height="10"></td>
+                    <td width="21"></td>
+                    <td width="90"></td>
+                    <td width="23"></td>
+                    <td width="90"></td>
+                    <td width="23"></td>
+                    <td width="90"></td>
+                </tr>
+                <tr>
+                    <td height="10"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr align="right">
+                    <td align="left">總餐數：</td>
+                    <td>早</td>
+                    <td><input id="id_input_Meal_Info_Member_MealXA" name="Member_MealXA" class="easyui-textbox" type="text"
+                            style="width:85px; height:28px;" ng-model="mealForMember.meal3a" value="">
+                        <input id="id_input_Meal_Info_Member_MealXACOK" name="Member_MealXACOK" type="hidden" value="">
+                        <input id="id_input_Meal_Info_Member_MealXASelect" ng-model="mealForMember.meal1a" name="Member_MealXASelect" type="hidden"></td>
+                    <td>午</td>
+                    <td><input id="id_input_Meal_Info_Member_MealXB" name="Member_MealXB" class="easyui-textbox" type="text"
+                            style="width:85px; height:28px;" ng-model="mealForMember.meal3b" value="">
+                        <input id="id_input_Meal_Info_Member_MealXBCOK" name="Member_MealXBCOK" type="hidden" value="">
+                        <input id="id_input_Meal_Info_Member_MealXBSelect" name="Member_MealXBSelect" type="hidden"></td>
+                    <td>晚</td>
+                    <td><input id="id_input_Meal_Info_Member_MealXC" name="Member_MealXC" class="easyui-textbox" type="text"
+                            style="width:85px; height:28px;" ng-model="mealForMember.meal3c" value="">
+                        <input id="id_input_Meal_Info_Member_MealXCCOK" name="Member_MealXCCOK" type="hidden" value="">
+                        <input id="id_input_Meal_Info_Member_MealXCSelect" name="Member_MealXCSelect" type="hidden"></td>
+                </tr>
+                <tr>
+                    <td height="10"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr align="right">
+                    <td align="left">剩餘餐數：</td>
+                    <td>早</td>
+                    <td><input id="id_input_Meal_Info_Member_MealXARemain" name="Member_MealXRemain" class="easyui-textbox" type="text"
+                            style="width:85px; height:28px;" readonly></td>
+                    <td>午</td>
+                    <td><input id="id_input_Meal_Info_Member_MealXBRemain" name="Member_MealXRemain" class="easyui-textbox" type="text"
+                            style="width:85px; height:28px;" readonly></td>
+                    <td>晚</td>
+                    <td><input id="id_input_Meal_Info_Member_MealXCRemain" name="Member_MealXRemain" class="easyui-textbox" type="text"
+                            style="width:85px; height:28px;" readonly></td>
+                </tr>
+                <tr>
+                    <td height="10"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <input type="button" id="a_Link_Save_1" ng-click="new()" value="新增" class="easyui-linkbutton" />
+                    </td>
+                    <td align="right">
+                        <input type="button" value="清空重填" ng-click="clearAll()" class="easyui-linkbutton" style="width:85px;">
+                    </td>
+                </tr>
+            </table>
+        </td>
+
+        <td>
+            <table width="875" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td bgcolor="#FFEE99">
+                        <table width="875" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="191" height="20"></td>
+                                <td width="191" height="20"></td>
+                                <td width="191" height="20"></td>
+                            </tr>
+                            <tr valign="top">
+                                <td>
+                                    <table width="191" border="0" cellspacing="0" cellpadding="5">
+                                        <tr>
+                                            <td width="55" align="right" style="font-size:12px;">數量</td>
+                                            <td width="171"><input id="id_input_Meal_Info_Meal_A_Meal01" name="Meal_A_Meal01" class="easyui-textbox"
+                                                    ng-model="meallistA.meal01" type="text" style="width:130px;" data-options="fontsize:'12px'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">手機</td>
+                                            <td><input id="id_input_Meal_Info_Meal_A_Meal02" name="Meal_A_Meal02" class="easyui-textbox"
+                                                    ng-model="meallistA.meal02" type="text" style="width:130px;" data-options="fontsize:'12px'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">地址</td>
+                                            <td><input id="id_input_Meal_Info_Meal_A_Meal03" name="Meal_A_Meal03" class="easyui-textbox"
+                                                    ng-model="meallistA.meal03" type="text" style="width:130px;" data-options="fontsize:'12px',chkfieldid:'id_input_Meal_Info_Meal_A_Meal04',onChange:ChkAddress_onChange,url:'/info/normaldb/selecttable.jsp?fieldname=ID,RouteNumber,Address&tablename=Route&where=Flag=9&orderby=RouteNumber'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">
+                                                <span style="font-size:12px;">路線</span>
+                                            </td>
+                                            <td><input id="id_input_Meal_Info_Meal_A_Meal04" name="Meal_A_Meal04" class="easyui-textbox"
+                                                    ng-model="meallistA.meal04" type="text" style="width:130px;" data-options="fontsize:'12px',chkfieldid:'id_input_Meal_Info_Meal_A_Meal03',onChange:ChkRoute_onChange,url:'/info/normaldb/selecttable.jsp?fieldname=ID,RouteNumber,Address&tablename=Route&where=Flag=9&orderby=RouteNumber'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_A_Meal05" name="Meal_A_Meal05" type="checkbox"
+                                                    ng-model="meallistA.meal05" ng-true-value="'提早到'" ng-false-value="''" value="提早到">                                                提早到
+                                                <input id="id_input_Meal_Info_Meal_A_Meal06" ng-model="meallistA.meal06" name="Meal_A_Meal06" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                :
+                                                <input id="id_input_Meal_Info_Meal_A_Meal07" ng-model="meallistA.meal07" name="Meal_A_Meal07" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_A_Meal08" name="Meal_A_Meal08" type="checkbox"
+                                                    ng-model="meallistA.meal08" ng-true-value="'餐票'" ng-false-value="''" value="餐票">                                                餐票
+                                                <input id="id_input_Meal_Info_Meal_A_Meal09" ng-model="meallistA.meal09" name="Meal_A_Meal09" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                本
+                                                <input id="id_input_Meal_Info_Meal_A_Meal10" ng-model="meallistA.meal10" name="Meal_A_Meal10" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                元
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div id="div_A" style="position:relative;font-weight:bold;left:35px;top:-202px;width:30px;">早<br><a id="div_DelA" href="javascript:void(0)" class="easyui-linkbutton" style="display:none"
+                                            onClick="SaveMealForm('A');">刪<br>除</a></div>
+                                </td>
+                                <td>
+                                    <table width="191" border="0" cellspacing="0" cellpadding="5">
+                                        <tr>
+                                            <td width="55" align="right" style="font-size:12px;">收費方式</td>
+                                            <td width="171" style="font-size:12px;"><input id="id_input_Meal_Info_Meal_A_Meal11" name="Meal_A_Meal11" type="checkbox"
+                                                    ng-model="meallistA.meal11" ng-true-value="'餐票'" ng-false-value="''" value="餐票">                                                餐票
+                                                <input id="id_input_Meal_Info_Meal_A_Meal12" name="Meal_A_Meal12" ng-model="meallistA.meal12" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                張
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_A_Meal13" name="Meal_A_Meal13" type="checkbox"
+                                                    ng-model="meallistA.meal13" ng-true-value="'已付清'" ng-false-value="''" value="已付清">                                                已付清 </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_A_Meal14" name="Meal_A_Meal14" type="checkbox"
+                                                    ng-model="meallistA.meal14" ng-true-value="'現金'" ng-false-value="''" value="現金">                                                現金
+                                                <input id="id_input_Meal_Info_Meal_A_Meal15" name="Meal_A_Meal15" ng-model="meallistA.meal15" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                個
+                                                <input id="id_input_Meal_Info_Meal_A_Meal16" name="Meal_A_Meal16" ng-model="meallistA.meal16" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                元 </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_A_Meal17" name="Meal_A_Meal17" type="checkbox"
+                                                    ng-model="meallistA.meal17" ng-true-value="'匯款'" ng-false-value="''" value="匯款">                                                匯款
+                                                <input id="id_input_Meal_Info_Meal_A_Meal18" name="Meal_A_Meal18" ng-model="meallistA.meal18" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                元 </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_A_Meal19" name="Meal_A_Meal19" type="checkbox"
+                                                    ng-model="meallistA.meal19" ng-true-value="'匯款'" ng-false-value="''" value="匯款">                                                月結
+                                                <input id="id_input_Meal_Info_Meal_A_Meal20" name="Meal_A_Meal20" ng-model="meallistA.meal20" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                個
+                                                <input id="id_input_Meal_Info_Meal_A_Meal21" name="Meal_A_Meal21" ng-model="meallistA.meal21" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                元 </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table width="191" border="0" cellspacing="0" cellpadding="5">
+                                        <tr>
+                                            <td width="55" align="right" valign="top">
+                                                <div style="padding-top:3px;font-size:12px;">備註</div>
+                                            </td>
+                                            <td width="171" style="font-size:12px;"><input id="id_input_Meal_Info_Meal_A_Meal22" name="Meal_A_Meal22" type="checkbox"
+                                                    ng-model="meallistA.meal22" ng-true-value="'匯款'" ng-false-value="''" value="匯款">                                                放警衛室
+                                                <input id="id_input_Meal_Info_Meal_A_Meal23" name="Meal_A_Meal23" ng-model="meallistA.meal23" ng-true-value="'匯款'" ng-false-value="''"
+                                                    type="checkbox" value="匯款">                                                打電話
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><input id="id_input_Meal_Info_Meal_A_Meal24" name="Meal_A_Meal24" class="easyui-textbox"
+                                                    ng-model="meallistA.meal24" type="text" style="width:130px; height:100px;"
+                                                    data-options="multiline:true"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="td_B" bgcolor="#F0BBFF">
+                        <table width="875" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="191" height="20"></td>
+                                <td width="191" height="20"></td>
+                                <td width="191" height="20"></td>
+                            </tr>
+                            <tr valign="top">
+                                <td>
+                                    <table width="191" border="0" cellspacing="0" cellpadding="5">
+                                        <tr>
+                                            <td width="55" align="right" style="font-size:12px;">數量</td>
+                                            <td width="171"><input id="id_input_Meal_Info_Meal_B_Meal01" name="Meal_B_Meal01" class="easyui-textbox"
+                                                    ng-model="meallistB.meal01" type="text" style="width:130px;" data-options="fontsize:'12px'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">手機</td>
+                                            <td><input id="id_input_Meal_Info_Meal_B_Meal02" name="Meal_B_Meal02" class="easyui-textbox"
+                                                    ng-model="meallistB.meal02" type="text" style="width:130px;" data-options="fontsize:'12px'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">地址</td>
+                                            <td><input id="id_input_Meal_Info_Meal_B_Meal03" name="Meal_B_Meal03" class="easyui-textbox"
+                                                    ng-model="meallistB.meal03" type="text" style="width:130px;" data-options="fontsize:'12px',chkfieldid:'id_input_Meal_Info_Meal_B_Meal04',onChange:ChkAddress_onChange,url:'/info/normaldb/selecttable.jsp?fieldname=ID,RouteNumber,Address&tablename=Route&where=Flag=9&orderby=RouteNumber'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">
+                                                <span style="font-size:12px;">路線</span>
+                                            </td>
+                                            <td><input id="id_input_Meal_Info_Meal_B_Meal04" name="Meal_B_Meal04" class="easyui-textbox"
+                                                    ng-model="meallistB.meal04" type="text" style="width:130px;" data-options="fontsize:'12px',chkfieldid:'id_input_Meal_Info_Meal_B_Meal03',onChange:ChkRoute_onChange,url:'/info/normaldb/selecttable.jsp?fieldname=ID,RouteNumber,Address&tablename=Route&where=Flag=9&orderby=RouteNumber'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_B_Meal05" name="Meal_B_Meal05" type="checkbox"
+                                                    ng-model="meallistB.meal05" ng-true-value="'提早到'" ng-false-value="''" value="提早到">                                                提早到
+                                                <input id="id_input_Meal_Info_Meal_B_Meal06" ng-model="meallistB.meal06" name="Meal_B_Meal06" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                :
+                                                <input id="id_input_Meal_Info_Meal_B_Meal07" ng-model="meallistB.meal07" name="Meal_B_Meal07" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_B_Meal08" name="Meal_B_Meal08" type="checkbox"
+                                                    ng-model="meallistB.meal08" ng-true-value="'餐票'" ng-false-value="''" value="餐票">                                                餐票
+                                                <input id="id_input_Meal_Info_Meal_B_Meal09" ng-model="meallistB.meal09" name="Meal_B_Meal09" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                本
+                                                <input id="id_input_Meal_Info_Meal_B_Meal10" ng-model="meallistB.meal10" name="Meal_B_Meal10" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                元
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div style="position:relative;font-weight:bold;left:35px;top:-202px;width:30px;">午<br><a id="div_DelB" href="javascript:void(0)" class="easyui-linkbutton" style="display:none"
+                                            onClick="SaveMealForm('B');">刪<br>除</a></div>
+                                </td>
+                                <td>
+                                    <table width="191" border="0" cellspacing="0" cellpadding="5">
+                                        <tr>
+                                            <td width="55" align="right" style="font-size:12px;">收費方式</td>
+                                            <td width="171" style="font-size:12px;"><input id="id_input_Meal_Info_Meal_B_Meal11" name="Meal_B_Meal11" type="checkbox"
+                                                    ng-model="meallistB.meal11" ng-true-value="'餐票'" ng-false-value="''" value="餐票">                                                餐票
+                                                <input id="id_input_Meal_Info_Meal_B_Meal12" name="Meal_B_Meal12" ng-model="meallistB.meal12" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                張
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_B_Meal13" name="Meal_B_Meal13" type="checkbox"
+                                                    ng-model="meallistB.meal13" ng-true-value="'餐票'" ng-false-value="''" value="餐票">                                                已付清 </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_B_Meal14" name="Meal_B_Meal14" type="checkbox"
+                                                    ng-model="meallistB.meal14" ng-true-value="'現金'" ng-false-value="''" value="現金">                                                現金
+                                                <input id="id_input_Meal_Info_Meal_B_Meal15" ng-model="meallistB.meal15" name="Meal_B_Meal15" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                個
+                                                <input id="id_input_Meal_Info_Meal_B_Meal16" ng-model="meallistB.meal16" name="Meal_B_Meal16" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                元 </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_B_Meal17" name="Meal_B_Meal17" type="checkbox"
+                                                    ng-model="meallistB.meal17" ng-true-value="'匯款'" ng-false-value="''" value="匯款">                                                匯款
+                                                <input id="id_input_Meal_Info_Meal_B_Meal18" name="Meal_B_Meal18" ng-model="meallistB.meal18" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                元 </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_B_Meal19" name="Meal_B_Meal19" type="checkbox"
+                                                    ng-model="meallistB.meal19" ng-true-value="'匯款'" ng-false-value="''" value="匯款">                                                月結
+                                                <input id="id_input_Meal_Info_Meal_B_Meal20" name="Meal_B_Meal20" ng-model="meallistB.meal20" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                個
+                                                <input id="id_input_Meal_Info_Meal_B_Meal21" name="Meal_B_Meal21" ng-model="meallistB.meal21" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                元 </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table width="191" border="0" cellspacing="0" cellpadding="5">
+                                        <tr>
+                                            <td width="55" align="right" valign="top">
+                                                <div style="padding-top:3px;font-size:12px;">備註</div>
+                                            </td>
+                                            <td width="171" style="font-size:12px;"><input id="id_input_Meal_Info_Meal_B_Meal22" name="Meal_B_Meal22" type="checkbox"
+                                                    ng-model="meallistB.meal22" ng-true-value="'匯款'" ng-false-value="''" value="匯款">                                                放警衛室
+                                                <input id="id_input_Meal_Info_Meal_B_Meal23" name="Meal_B_Meal23" ng-model="meallistB.meal23" ng-true-value="'匯款'" ng-false-value="''"
+                                                    type="checkbox" value="匯款">                                                打電話
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><input id="id_input_Meal_Info_Meal_B_Meal24" name="Meal_B_Meal24" class="easyui-textbox"
+                                                    ng-model="meallistB.meal24" type="text" style="width:130px; height:100px;"
+                                                    data-options="multiline:true"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="td_C" bgcolor="#99FFFF">
+                        <table width="875" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="191" height="20"></td>
+                                <td width="191" height="20"></td>
+                                <td width="191" height="20"></td>
+                            </tr>
+                            <tr valign="top">
+                                <td>
+                                    <table width="191" border="0" cellspacing="0" cellpadding="5">
+                                        <tr>
+                                            <td width="55" align="right" style="font-size:12px;">數量</td>
+                                            <td width="171"><input id="id_input_Meal_Info_Meal_C_Meal01" name="Meal_C_Meal01" class="easyui-textbox"
+                                                    ng-model="meallistC.meal01" type="text" style="width:130px;" data-options="fontsize:'12px'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">手機</td>
+                                            <td><input id="id_input_Meal_Info_Meal_C_Meal02" name="Meal_C_Meal02" class="easyui-textbox"
+                                                    ng-model="meallistC.meal02" type="text" style="width:130px;" data-options="fontsize:'12px'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right" style="font-size:12px;">地址</td>
+                                            <td><input id="id_input_Meal_Info_Meal_C_Meal03" name="Meal_C_Meal03" class="easyui-textbox"
+                                                    ng-model="meallistC.meal03" type="text" style="width:130px;" data-options="fontsize:'12px',chkfieldid:'id_input_Meal_Info_Meal_C_Meal04',onChange:ChkAddress_onChange,url:'/info/normaldb/selecttable.jsp?fieldname=ID,RouteNumber,Address&tablename=Route&where=Flag=9&orderby=RouteNumber'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">
+                                                <span style="font-size:12px;">路線</span>
+                                            </td>
+                                            <td><input id="id_input_Meal_Info_Meal_C_Meal04" name="Meal_C_Meal04" class="easyui-textbox"
+                                                    ng-model="meallistC.meal04" type="text" style="width:130px;" data-options="fontsize:'12px',chkfieldid:'id_input_Meal_Info_Meal_C_Meal03',onChange:ChkRoute_onChange,url:'/info/normaldb/selecttable.jsp?fieldname=ID,RouteNumber,Address&tablename=Route&where=Flag=9&orderby=RouteNumber'"></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_C_Meal05" name="Meal_C_Meal05" type="checkbox"
+                                                    ng-model="meallistC.meal05" ng-true-value="'提早到'" ng-false-value="''" value="提早到">                                                提早到
+                                                <input id="id_input_Meal_Info_Meal_C_Meal06" name="Meal_C_Meal06" ng-model="meallistC.meal06" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                :
+                                                <input id="id_input_Meal_Info_Meal_C_Meal07" name="Meal_C_Meal07" ng-model="meallistC.meal07" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_C_Meal08" name="Meal_C_Meal08" type="checkbox"
+                                                    ng-model="meallistC.meal08" ng-true-value="'餐票'" ng-false-value="''" value="餐票">                                                餐票
+                                                <input id="id_input_Meal_Info_Meal_C_Meal09" name="Meal_C_Meal09" ng-model="meallistC.meal09" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                本
+                                                <input id="id_input_Meal_Info_Meal_C_Meal10" name="Meal_C_Meal10" ng-model="meallistC.meal10" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                元
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div style="position:relative;font-weight:bold;left:35px;top:-202px;width:30px;">晚<br><a id="div_DelC" href="javascript:void(0)" class="easyui-linkbutton" style="display:none"
+                                            onClick="SaveMealForm('C');">刪<br>除</a></div>
+                                </td>
+                                <td>
+                                    <table width="191" border="0" cellspacing="0" cellpadding="5">
+                                        <tr>
+                                            <td width="55" align="right" style="font-size:12px;">收費方式</td>
+                                            <td width="171" style="font-size:12px;"><input id="id_input_Meal_Info_Meal_C_Meal11" name="Meal_C_Meal11" type="checkbox"
+                                                    ng-model="meallistC.meal11" ng-true-value="'餐票'" ng-false-value="''" value="餐票">                                                餐票
+                                                <input id="id_input_Meal_Info_Meal_C_Meal12" name="Meal_C_Meal12" class="easyui-textbox" ng-model="meallistC.meal12" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                張
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_C_Meal13" name="Meal_C_Meal13" type="checkbox"
+                                                    ng-model="meallistC.meal13" ng-true-value="'餐票'" ng-false-value="''" value="餐票">                                                已付清 </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_C_Meal14" name="Meal_C_Meal14" type="checkbox"
+                                                    ng-model="meallistC.meal14" ng-true-value="'現金'" ng-false-value="''" value="現金">                                                現金
+                                                <input id="id_input_Meal_Info_Meal_C_Meal15" name="Meal_C_Meal15" ng-model="meallistC.meal15" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                個
+                                                <input id="id_input_Meal_Info_Meal_C_Meal16" name="Meal_C_Meal16" ng-model="meallistC.meal16" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                元 </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_C_Meal17" name="Meal_C_Meal17" type="checkbox"
+                                                    ng-model="meallistC.meal17" ng-true-value="'匯款'" ng-false-value="''" value="匯款">                                                匯款
+                                                <input id="id_input_Meal_Info_Meal_C_Meal18" name="Meal_C_Meal18" ng-model="meallistC.meal18" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                元 </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"><input id="id_input_Meal_Info_Meal_C_Meal19" name="Meal_C_Meal19" type="checkbox"
+                                                    ng-model="meallistC.meal19" ng-true-value="'匯款'" ng-false-value="''" value="匯款">                                                月結
+                                                <input id="id_input_Meal_Info_Meal_C_Meal20" name="Meal_C_Meal20" ng-model="meallistC.meal20" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                個
+                                                <input id="id_input_Meal_Info_Meal_C_Meal21" name="Meal_C_Meal21" ng-model="meallistC.meal21" class="easyui-textbox" type="text"
+                                                    style="width:20px;" data-options="fontsize:'12px'">                                                元 </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="font-size:12px;"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table width="191" border="0" cellspacing="0" cellpadding="5">
+                                        <tr>
+                                            <td width="55" align="right" valign="top">
+                                                <div style="padding-top:3px;font-size:12px;">備註</div>
+                                            </td>
+                                            <td width="171" style="font-size:12px;"><input id="id_input_Meal_Info_Meal_C_Meal22" name="Meal_C_Meal22" type="checkbox"
+                                                    ng-model="meallistC.meal22" ng-true-value="'匯款'" ng-false-value="''" value="匯款">                                                放警衛室
+                                                <input id="id_input_Meal_Info_Meal_C_Meal23" name="Meal_C_Meal23" type="checkbox" value="匯款" ng-model="meallistC.meal23"
+                                                    ng-true-value="'匯款'" ng-false-value="''">                                                打電話
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><input id="id_input_Meal_Info_Meal_C_Meal24" name="Meal_C_Meal24" class="easyui-textbox"
+                                                    type="text" style="width:130px; height:100px;" ng-model="meallistC.meal24"
+                                                    data-options="multiline:true"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
