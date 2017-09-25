@@ -27,6 +27,7 @@ var memberForConditionMeal = require('./routes/memberForConditionMeal');
 var memberForNormalMeal = require('./routes/memberForNormalMeal');
 var routeapi = require('./routes/routeApi');
 var saleslistapi = require('./routes/saleslistApi');
+var searchMonthMealApi = require('./routes/searchMonthMealApi');
 var memberoneapi = require('./routes/memberOneApi');
 
 var app = express();
@@ -86,6 +87,7 @@ app.use('/memberForConditionMeal', memberForConditionMeal);
 app.use('/memberForNormalMeal', memberForNormalMeal);
 app.use('/route', routeapi);
 app.use('/saleslist', saleslistapi);
+app.use('/searchMonthMealApi', searchMonthMealApi);
 app.use('/memberOne', memberoneapi);
 app.use('/users', users);
 

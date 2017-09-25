@@ -12,39 +12,34 @@
 						</tr>
 						<tr>
 							<td width="55" align="right">餐點</td>
-							<td id="id_td_Meal_Type" width="255"><input id="id_input_Meal_Type_0" type="radio" name="input_Type" value="A" checked="checked"> 早
-								<input id="id_input_Meal_Type_1" type="radio" name="input_Type" value="B"> 午
-								<input id="id_input_Meal_Type_2" type="radio" name="input_Type" value="C"> 晚
+							<td id="id_td_Meal_Type" width="255">
+								<input id="id_input_Meal_Type_0" type="radio" ng-model="Meal_Type" name="input_Type" value="A" checked="true"> 早
+								<input id="id_input_Meal_Type_1" type="radio" ng-model="Meal_Type" name="input_Type" value="B"> 午
+								<input id="id_input_Meal_Type_2" type="radio" ng-model="Meal_Type" name="input_Type" value="C"> 晚
 							</td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td align="right">餐具</td>
 							<td><input id="id_input_Meal_Meal09" name="input_Meal09" class="easyui-combobox" type="text" style="width:255px;height:28px;"
 								 data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal09_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
 								 multiple></td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td align="right">禁忌</td>
-							<td><input id="id_input_Meal_Meal12" name="input_Meal12" class="easyui-combotree" type="text" style="width:255px;height:28px;"
-								 data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Member_Attrib05',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px'"
-								 multiple></td>
+							<td><input id="id_input_Meal_Meal12" name="input_Meal12" class="easyui-combotree" type="text" style="width:255px;height:28px;"></td>
 						</tr>
 						<tr>
 							<td align="right">加減</td>
-							<td><input id="id_input_Meal_Meal14" name="input_Meal14" class="easyui-combobox" type="text" style="width:255px;height:28px;"
-								 data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal14_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
-								 multiple></td>
+							<td><input id="id_input_Meal_Meal14" name="input_Meal14" class="easyui-combobox" type="text" style="width:255px;height:28px;"></td>
 						</tr>
 						<tr>
 							<td align="right">其它</td>
-							<td><input id="id_input_Meal_Meal15" name="input_Meal15" class="easyui-combobox" type="text" style="width:255px;height:28px;"
-								 data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal15_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
-								 multiple></td>
+							<td><input id="id_input_Meal_Meal15" name="input_Meal15" class="easyui-combobox" type="text" style="width:255px;height:28px;"></td>
 						</tr>
 						<tr>
 							<td></td>
-							<td><input id="id_input_Meal_Meal19" name="input_Meal19" type="checkbox" value="收款"> 收款
-								<input id="id_input_Meal_Meal25" name="input_Meal25" type="checkbox" value="試吃"> 試吃
+							<td><input id="id_input_Meal_Meal19" name="input_Meal19" ng-model="Meal19" ng-true-value="'收款'" ng-false-value="''" type="checkbox" value="收款"> 收款
+								<input id="id_input_Meal_Meal25" name="input_Meal25" ng-model="Meal25" ng-true-value="'試吃'" ng-false-value="''" type="checkbox" value="試吃"> 試吃
 							</td>
 						</tr>
 					</table>
@@ -53,35 +48,40 @@
 					<table width="330" border="0" cellspacing="0" cellpadding="5">
 						<tr valign="top">
 							<td width="55" height="23" align="right">全酒</td>
-							<td width="255"><input id="id_input_Meal_Meal05_0" name="input_Meal05" type="checkbox" value="全酒清湯"> 清湯
-								<input id="id_input_Meal_Meal05_1" name="input_Meal05" type="checkbox" value="全酒1期"> 1期
-								<input id="id_input_Meal_Meal05_2" name="input_Meal05" type="checkbox" value="全酒3期"> 3期
+							<td style="font-size:12px;">
+								<input type="radio" id="id_input_Meal_Info_Meal_C_Meal05_0" name="Meal_C_Meal05" ng-model="Meal05" value="全酒清湯">                                                清湯
+								<input type="radio" id="id_input_Meal_Info_Meal_C_Meal05_1" name="Meal_C_Meal05" ng-model="Meal05" value="全酒1期">                                                1期
+								<input type="radio" id="id_input_Meal_Info_Meal_C_Meal05_2" name="Meal_C_Meal05" ng-model="Meal05" value="全酒3期">                                                3期
 							</td>
 						</tr>
 						<tr valign="top">
 							<td height="23" align="right">半酒</td>
-							<td><input id="id_input_Meal_Meal05_3" name="input_Meal05" type="checkbox" value="半酒清湯"> 清湯
-								<input id="id_input_Meal_Meal05_4" name="input_Meal05" type="checkbox" value="半酒1期"> 1期
-								<input id="id_input_Meal_Meal05_5" name="input_Meal05" type="checkbox" value="半酒3期"> 3期
+							<td style="font-size:12px;">
+								<input type="radio" id="id_input_Meal_Info_Meal_C_Meal05_3" name="Meal_C_Meal05" ng-model="Meal05" value="半酒清湯">                                                清湯
+								<input type="radio" id="id_input_Meal_Info_Meal_C_Meal05_4" name="Meal_C_Meal05" ng-model="Meal05" value="半酒1期">                                                1期
+								<input type="radio" id="id_input_Meal_Info_Meal_C_Meal05_5" name="Meal_C_Meal05" ng-model="Meal05" value="半酒3期">                                                3期
 							</td>
 						</tr>
 						<tr valign="top">
 							<td height="23" align="right">麻油</td>
-							<td><input type="checkbox" id="id_input_Meal_Meal06_0" name="input_Meal06" value="加麻"> 加麻
-								<input type="checkbox" id="id_input_Meal_Meal06_1" name="input_Meal06" value="禁麻"> 禁麻
+							<td style="font-size:12px;">
+								<input type="radio" id="id_input_Meal_Info_Meal_C_Meal06_0" name="Meal_C_Meal06" ng-model="Meal06" value="加麻">                                                加麻
+								<input type="radio" id="id_input_Meal_Info_Meal_C_Meal06_1" name="Meal_C_Meal06" ng-model="Meal06" value="禁麻">                                                禁麻
 							</td>
 						</tr>
 						<tr valign="top">
 							<td height="23" align="right">酒</td>
-							<td><input type="checkbox" id="id_input_Meal_Meal07_0" name="input_Meal07" value="加酒"> 加酒
-								<input type="checkbox" id="id_input_Meal_Meal07_1" name="input_Meal07" value="禁酒"> 禁酒
-								<input type="checkbox" id="id_input_Meal_Meal07_2" name="input_Meal07" value="無限制"> 無限制
+							<td style="font-size:12px;">
+								<input type="radio" id="id_input_Meal_Info_Meal_C_Meal07_0" name="Meal_C_Meal07" ng-model="Meal07" value="加酒">                                                加酒
+								<input type="radio" id="id_input_Meal_Info_Meal_C_Meal07_1" name="Meal_C_Meal07" ng-model="Meal07" value="禁酒">                                                禁酒
+								<input type="radio" id="id_input_Meal_Info_Meal_C_Meal07_2" name="Meal_C_Meal07" ng-model="Meal07" value="無限制">                                                無限制
 							</td>
 						</tr>
 						<tr valign="top">
 							<td height="23" align="right">素</td>
-							<td><input type="checkbox" id="id_input_Meal_Meal08_0" name="input_Meal08" value="全素"> 全素
-								<input type="checkbox" id="id_input_Meal_Meal08_1" name="input_Meal08" value="蛋奶"> 蛋奶
+							<td style="font-size:12px;">
+								<input type="radio" id="id_input_Meal_Info_Meal_C_Meal08_0" name="Meal_C_Meal08" ng-model="Meal08" value="全素">                                                全素
+								<input type="radio" id="id_input_Meal_Info_Meal_C_Meal08_1" name="Meal_C_Meal08" ng-model="Meal08" value="蛋奶">                                                蛋奶
 							</td>
 						</tr>
 					</table>
@@ -90,29 +90,23 @@
 					<table width="330" border="0" cellspacing="0" cellpadding="5">
 						<tr>
 							<td width="55" align="right">加飲品</td>
-							<td width="255"><input id="id_input_Meal_Meal21" name="input_Meal21" class="easyui-combobox" type="text" style="width:255px;height:28px;"
-								 data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal21_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
-								 multiple></td>
+							<td width="255"><input id="id_input_Meal_Meal21" name="input_Meal21" class="easyui-combobox" type="text" style="width:255px;height:28px;"></td>
 						</tr>
 						<tr>
 							<td align="right">換飲品</td>
-							<td><input id="id_input_Meal_Meal22" name="input_Meal22" class="easyui-combobox" type="text" style="width:255px;height:28px;"
-								 data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal22_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
-								 multiple></td>
+							<td><input id="id_input_Meal_Meal22" name="input_Meal22" class="easyui-combobox" type="text" style="width:255px;height:28px;"></td>
 						</tr>
 						<tr>
 							<td align="right">領飲品</td>
-							<td><input id="id_input_Meal_Meal23" name="input_Meal23" class="easyui-combobox" type="text" style="width:255px;height:28px;"
-								 data-options="url:'/info/fieldvalue/list.jsp?TableAttrib=Meal_Meal23_1',method:'get',valueField:'id',textField:'text',cascadeCheck:'',fontsize:'12px',editable:false"
-								 multiple></td>
+							<td><input id="id_input_Meal_Meal23" name="input_Meal23" class="easyui-combobox" type="text" style="width:255px;height:28px;"></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<input type="button" value="查詢"></input>
-					<input type="button" value="清空"></input>
+					<input type="button" ng-click="search()" value="查詢"></input>
+					<input type="button" ng-click="clean()" value="清空"></input>
 				</td>
 				<td></td>
 				<td></td>
