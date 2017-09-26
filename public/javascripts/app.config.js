@@ -50,5 +50,11 @@ angular.module('TinYi').config(function($stateProvider, $urlRouterProvider) {
       url: "/normalMeal",
       templateUrl: "views/normalMeal.html",
      controller: "normalMealController"
+    })
+    //報表
+    .state('report', {
+      url: "/report",
+      templateUrl: "views/report.html",
+     controller: "reportController"
     });
 });

@@ -2,7 +2,7 @@ angular.module('TinYi').service('searchMonthMealService', function ($rootScope, 
 
     //搜尋會員資料
     this.postSearch = function (inputObj, callback) {
-        console.log(inputObj);
+        //console.log(inputObj);
 
         //post method
         $http({

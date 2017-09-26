@@ -1,0 +1,61 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="5">
+    <tr>
+        <td width="100%">
+
+            <div id="div_SubMeal_exportexcel" style="padding:5px">
+                <input type="button" value="導出Excel" ng-click="exportexcel()" class="easyui-linkbutton" style="width:85px;">
+            </div>
+            <table id="dg"></table>
+
+
+        </td>
+
+        <td>
+            <div title="選擇查詢條件" data-options="region:'east',collapsible:false" style="width:400px;padding:10px;" align="center">
+                <input type="hidden" id="mealtype" value="-1">
+                <input type="hidden" id="mealtime" value="-1">
+                <table id="table_SubMeal_Search" cellpadding="5" border="0" width="280">
+                    <tr>
+                        <td width="116">日期</td>
+                        <td width="138" align="right">
+                            <input id="datepicker" readonly='true' class="easyui-datebox" type="text" name="input_Date" style="width:138px;height:28px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>月子餐名單</td>
+                        <td align="right"><input type="radio" id="selmeal_0" name="Meal_1" ng-model="Meal_1" value="1,A">早</input>&nbsp;
+                            <input
+                                type="radio" id="selmeal_1" name="Meal_1" ng-model="Meal_1" value="1,B">午</input>&nbsp;<input type="radio" id="selmeal_2" name="Meal_1" ng-model="Meal_1" value="1,C">晚</input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>調理餐名條</td>
+                        <td align="right"><input type="radio" id="selmeal_0" name="Meal_1" ng-model="Meal_1" value="2,A">早</input>&nbsp;
+                            <input
+                                type="radio" id="selmeal_1" name="Meal_1" ng-model="Meal_1" value="2,B">午</input>&nbsp;<input type="radio" id="selmeal_2" name="Meal_1" ng-model="Meal_1" value="2,C">晚</input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>一般餐統計</td>
+                        <td align="right"><input type="radio" id="selmeal_0" name="Meal_1" ng-model="Meal_1" value="3,A">早</input>&nbsp;
+                            <input
+                                type="radio" id="selmeal_1" name="Meal_1" ng-model="Meal_1" value="3,B">午</input>&nbsp;<input type="radio" id="selmeal_2" name="Meal_1" ng-model="Meal_1" value="3,C">晚</input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>送餐報表</td>
+                        <td align="right"><input type="radio" id="selmeal_0" name="Meal_1" ng-model="Meal_1" value="4,A">早</input>&nbsp;
+                            <input
+                                type="radio" id="selmeal_1" name="Meal_1" ng-model="Meal_1" value="4,B">午</input>&nbsp;<input type="radio" id="selmeal_2" name="Meal_1" ng-model="Meal_1" value="4,C">晚</input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="70">
+                            <input type="button" value="查詢" ng-click="doSearch()" class="easyui-linkbutton" style="width:85px;">
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>

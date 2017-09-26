@@ -11,6 +11,11 @@ a {
   padding: 20px;
 }
 
+td, th {
+    display: table-cell;
+    vertical-align: top;
+}
+
 /*** Active/Current Navigation Link */
 #navigatBar {
     list-style-type: none;

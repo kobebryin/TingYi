@@ -80,7 +80,7 @@ angular.module('TinYi').controller('monthlyMealDetailsController', function ($ro
             searchMonthMealService.postSearch(SearchArray, function (data) {
                 var total = data.length;    //取得回傳資料陣列長度
                 var ContentStr = "查詢到 " + total + " 個客戶\n"; //要顯示的字串
-                
+
                 //判斷長度是否大於0，因為0等於沒資料
                 if (total != 0) {
                     ContentStr += "---------------------------------------------------------------------------------------------------------------------\n";
@@ -96,7 +96,7 @@ angular.module('TinYi').controller('monthlyMealDetailsController', function ($ro
                 }
                 $("#txt_Request_Search").val(ContentStr);
             });
-        }else{
+        } else {
             alert('日期為必輸項，請先輸入日期!');
         }
     };

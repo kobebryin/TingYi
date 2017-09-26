@@ -28,7 +28,10 @@ var memberForNormalMeal = require('./routes/memberForNormalMeal');
 var routeapi = require('./routes/routeApi');
 var saleslistapi = require('./routes/saleslistApi');
 var searchMonthMealApi = require('./routes/searchMonthMealApi');
+var searchConditionMealApi = require('./routes/searchConditionMealApi');
 var memberoneapi = require('./routes/memberOneApi');
+var reportApi = require('./routes/reportApi');
+var reportAllApi = require('./routes/reportAllApi');
 
 var app = express();
 
@@ -88,7 +91,10 @@ app.use('/memberForNormalMeal', memberForNormalMeal);
 app.use('/route', routeapi);
 app.use('/saleslist', saleslistapi);
 app.use('/searchMonthMealApi', searchMonthMealApi);
+app.use('/searchConditionMealApi', searchConditionMealApi);
 app.use('/memberOne', memberoneapi);
+app.use('/reportApi', reportApi);
+app.use('/reportAllApi', reportAllApi);
 app.use('/users', users);
 
 // catch 404 and forward to error handler

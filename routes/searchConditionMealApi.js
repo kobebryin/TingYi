@@ -44,7 +44,7 @@ router.post('/', function (req, res, next) {
     //         }
     //     }
     // }
-    //console.log(sqlquery);
+    console.log(sqlquery);
 
     req.dbConnection.query(sqlquery, function (error, results, fields) {
         if (error) throw error;
