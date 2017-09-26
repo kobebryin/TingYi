@@ -16,7 +16,7 @@ angular.module('TinYi').service('searchMonthMealService', function ($rootScope, 
             }
         })
             .success(function (response) {
-                //$scope.value = response;  
+                callback(response);
             })
             .error(function (error) {
                 alert(error);
