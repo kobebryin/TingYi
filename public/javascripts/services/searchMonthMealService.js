@@ -1,6 +1,6 @@
 angular.module('TinYi').service('searchMonthMealService', function ($rootScope, $http, $httpParamSerializer) {
 
-    //新增會員資料
+    //搜尋會員資料
     this.postSearch = function (inputObj, callback) {
         console.log(inputObj);
 
@@ -25,6 +25,14 @@ angular.module('TinYi').service('searchMonthMealService', function ($rootScope, 
             // you can do some processing here
             callback(data);
         });*/
+    }
+
+    //搜尋會員名字
+    this.getSearchID = function (id, callback) {
+        $http.get($rootScope.apiUrl + 'searchMonthMealApi?ID=' + id).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
     }
 
 })

@@ -10,74 +10,89 @@ angular.module('TinYi').controller('monthlyMealDetailsController', function ($ro
 
     $scope.search = function () {
 
-        var SearchArray = {
-            date: null,
-            mealtype: 1,
-            type: null,
-            data: []
-        }
+        if ($('#datepicker').val() != "") {
 
-        SearchArray.date = $('#datepicker').val();
-        SearchArray.type = $scope.Meal_Type;
+            var SearchArray = {
+                date: null,
+                mealtype: 1,
+                type: null,
+                data: []
+            }
 
-        if ($('#id_input_Meal_Meal12').val() != "") {
-            var obj = { Meal12: $('#id_input_Meal_Meal12').val() };
-            SearchArray.data.push(obj);
-        }
-        if ($('#id_input_Meal_Meal14').val() != "") {
-            var obj = { Meal14: $('#id_input_Meal_Meal14').val() };
-            SearchArray.data.push(obj);
-        }
-        if ($('#id_input_Meal_Meal15').val() != "") {
-            var obj = { Meal15: $('#id_input_Meal_Meal15').val() };
-            SearchArray.data.push(obj);
-        }
-        if ($scope.Meal19 != "") {
-            var obj = { Meal19: $scope.Meal19 };
-            SearchArray.data.push(obj);
-        }
-        if ($scope.Meal25 != "") {
-            var obj = { Meal25: $scope.Meal25 };
-            SearchArray.data.push(obj);
-        }
-        if ($scope.Meal05 != null) {
-            var obj = { Meal05: $scope.Meal05 };
-            SearchArray.data.push(obj);
-        }
-        if ($scope.Meal06 != null) {
-            var obj = { Meal06: $scope.Meal06 };
-            SearchArray.data.push(obj);
-        }
-        if ($scope.Meal07 != null) {
-            var obj = { Meal07: $scope.Meal07 };
-            SearchArray.data.push(obj);
-        }
-        if ($scope.Meal08 != null) {
-            var obj = { Meal08: $scope.Meal08 };
-            SearchArray.data.push(obj);
-        }
-        if ($('#id_input_Meal_Meal21').val() != "") {
-            var obj = { Meal21: $('#id_input_Meal_Meal21').val() };
-            SearchArray.data.push(obj);
-        }
-        if ($('#id_input_Meal_Meal22').val() != "") {
-            var obj = { Meal22: $('#id_input_Meal_Meal22').val() };
-            SearchArray.data.push(obj);
-        }
-        if ($('#id_input_Meal_Meal23').val() != "") {
-            var obj = { Meal23: $('#id_input_Meal_Meal23').val() };
-            SearchArray.data.push(obj);
-        }
-        console.log(SearchArray);
+            SearchArray.date = $('#datepicker').val();
+            SearchArray.type = $scope.Meal_Type;
 
-        searchMonthMealService.postSearch(SearchArray, function (data) {
-            console.log('1111');
-            console.log(data);
-            // var total=data[0].total;
-            // var ContentStr="查詢到 "+total+" 個客戶\n";
-    
-            // $("#txt_Request_Search").val(ContentStr);
-        });        
+            if ($('#id_input_Meal_Meal12').val() != "") {
+                var obj = { Meal12: $('#id_input_Meal_Meal12').val() };
+                SearchArray.data.push(obj);
+            }
+            if ($('#id_input_Meal_Meal14').val() != "") {
+                var obj = { Meal14: $('#id_input_Meal_Meal14').val() };
+                SearchArray.data.push(obj);
+            }
+            if ($('#id_input_Meal_Meal15').val() != "") {
+                var obj = { Meal15: $('#id_input_Meal_Meal15').val() };
+                SearchArray.data.push(obj);
+            }
+            if ($scope.Meal19 != "") {
+                var obj = { Meal19: $scope.Meal19 };
+                SearchArray.data.push(obj);
+            }
+            if ($scope.Meal25 != "") {
+                var obj = { Meal25: $scope.Meal25 };
+                SearchArray.data.push(obj);
+            }
+            if ($scope.Meal05 != null) {
+                var obj = { Meal05: $scope.Meal05 };
+                SearchArray.data.push(obj);
+            }
+            if ($scope.Meal06 != null) {
+                var obj = { Meal06: $scope.Meal06 };
+                SearchArray.data.push(obj);
+            }
+            if ($scope.Meal07 != null) {
+                var obj = { Meal07: $scope.Meal07 };
+                SearchArray.data.push(obj);
+            }
+            if ($scope.Meal08 != null) {
+                var obj = { Meal08: $scope.Meal08 };
+                SearchArray.data.push(obj);
+            }
+            if ($('#id_input_Meal_Meal21').val() != "") {
+                var obj = { Meal21: $('#id_input_Meal_Meal21').val() };
+                SearchArray.data.push(obj);
+            }
+            if ($('#id_input_Meal_Meal22').val() != "") {
+                var obj = { Meal22: $('#id_input_Meal_Meal22').val() };
+                SearchArray.data.push(obj);
+            }
+            if ($('#id_input_Meal_Meal23').val() != "") {
+                var obj = { Meal23: $('#id_input_Meal_Meal23').val() };
+                SearchArray.data.push(obj);
+            }
+            console.log(SearchArray);
+
+            searchMonthMealService.postSearch(SearchArray, function (data) {
+                var total = data.length;
+                var ContentStr = "查詢到 " + total + " 個客戶\n";
+
+                if (total != 0) {
+                    ContentStr += "---------------------------------------------------------------------------------------------------------------------\n";
+                    ContentStr += "日期：" + $('#datepicker').val() + " ";
+                    var Type = $scope.Meal_Type;
+                    if (Type === "A") ContentStr += "早";
+                    if (Type === "B") ContentStr += "午";
+                    if (Type === "C") ContentStr += "晚";
+                    ContentStr += "\n查詢結果如下：\n";
+                    for (var key in data) {
+                        ContentStr += "床號：" + data[key].Meal01 + "，姓名：" + data[key].Attrib01 + "\n";
+                    }
+                }
+                $("#txt_Request_Search").val(ContentStr);
+            });
+        }else{
+            alert('日期為必輸項，請先輸入日期!');
+        }
     };
     /**-----------------------------------------click event zone end-------------------------------------------- */
 

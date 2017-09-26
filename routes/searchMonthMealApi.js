@@ -1,9 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
+// --------  get Attrib01 from MySQL's table member ----------------------- 
+router.get('/', function (req, res, next) {
+    req.dbConnection.query('SELECT Attrib01 FROM member WHERE ID = ' + req.query.ID + ';', function (error, results, fields) {
+        if (error) throw error;
+        //console.log('The solution is: ', results);
+        res.json(results);
+    });
+});
+
 // -------- Search Data from MySQL's table route ----------------------- 
 router.post('/', function (req, res, next) {
-    var sqlquery = 'SELECT * FROM meal WHERE MealType=' + req.body.mealtype + ' AND Type="' + req.body.type + '" AND Date="' + req.body.date + '"';
+    var sqlquery = 'SELECT * FROM meal, member WHERE meal.MealType=' + req.body.mealtype + ' AND meal.Type="' + req.body.type + '" AND meal.Date="' + req.body.date + '"';
 
 
     for (var key in req.body.data) {
@@ -16,13 +25,16 @@ router.post('/', function (req, res, next) {
                 var string = data[key2].split(",");
                 for (var key3 in string) {
                     if (string[key3] != '') {
-                        sqlquery += ' AND ' + objKey[0] + ' LIKE "%' + string[key3] + '%"';
+                        sqlquery += ' AND meal.' + objKey[0] + ' LIKE "%' + string[key3] + '%"';
                     }
                 }
                 //console.log(data[key2])
             }
         }
     }
+
+    sqlquery += ' AND meal.MemberID = member.ID';
+
 
     // for(var key in req.body.data){
     //     var string = Object.values(req.body.data)[key].split(",");
