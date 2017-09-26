@@ -4,14 +4,17 @@ angular.module('TinYi').controller('monthlyMealDetailsController', function ($ro
     initial();
 
     /**-----------------------------------------click event zone start----------------------------------------- */
+    //清空按鈕點擊事件
     $scope.clean = function () {
-        initial();
+        initial();  //清空function
     }
 
+    //查詢按鈕點擊事件
     $scope.search = function () {
-
+        //日期必輸項，判斷有沒有輸入日期
         if ($('#datepicker').val() != "") {
 
+            //初始搜尋物件
             var SearchArray = {
                 date: null,
                 mealtype: 1,
@@ -19,6 +22,7 @@ angular.module('TinYi').controller('monthlyMealDetailsController', function ($ro
                 data: []
             }
 
+            //塞進日期與早午晚類別進物件
             SearchArray.date = $('#datepicker').val();
             SearchArray.type = $scope.Meal_Type;
 
@@ -70,12 +74,14 @@ angular.module('TinYi').controller('monthlyMealDetailsController', function ($ro
                 var obj = { Meal23: $('#id_input_Meal_Meal23').val() };
                 SearchArray.data.push(obj);
             }
-            console.log(SearchArray);
+            //console.log(SearchArray);
 
+            //查詢ＳＥＲＶＩＣＥ呼叫
             searchMonthMealService.postSearch(SearchArray, function (data) {
-                var total = data.length;
-                var ContentStr = "查詢到 " + total + " 個客戶\n";
-
+                var total = data.length;    //取得回傳資料陣列長度
+                var ContentStr = "查詢到 " + total + " 個客戶\n"; //要顯示的字串
+                
+                //判斷長度是否大於0，因為0等於沒資料
                 if (total != 0) {
                     ContentStr += "---------------------------------------------------------------------------------------------------------------------\n";
                     ContentStr += "日期：" + $('#datepicker').val() + " ";
