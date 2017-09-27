@@ -1,5 +1,6 @@
 angular.module('TinYi').controller('monthMealController', function ($rootScope, $scope, MemberService, monthMealService) {
-    var id = $rootScope.id; //11960;
+    var id = sessionStorage.memberid; //11960;
+    $scope.UserName = id;
     var month_calendar_morning;
     var month_calendar_noon;
     var month_calendar_night;
@@ -313,9 +314,9 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         //$scope.meallistA.date = dates_A[key];
                         let input = {
                             rid: $scope.meallistA.rid,
-                            mid: $scope.meallistA.mid,
+                            mid: sessionStorage.userId,
                             mip: $scope.meallistA.mip,
-                            mid2: $scope.meallistA.mid2,
+                            mid2: sessionStorage.userId,
                             mip2: $scope.meallistA.mip2,
                             memberid: $scope.meallistA.memberid,
                             date: dates_A[key],
@@ -426,9 +427,9 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         //$scope.meallistB.date = dates_B[key];
                         let input = {
                             rid: $scope.meallistB.rid,
-                            mid: $scope.meallistB.mid,
+                            mid: sessionStorage.userId,
                             mip: $scope.meallistB.mip,
-                            mid2: $scope.meallistB.mid2,
+                            mid2: sessionStorage.userId,
                             mip2: $scope.meallistB.mip2,
                             memberid: $scope.meallistB.memberid,
                             date: dates_B[key],
@@ -538,9 +539,9 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         //$scope.meallistC.date = dates_C[key];
                         let input = {
                             rid: $scope.meallistC.rid,
-                            mid: $scope.meallistC.mid,
+                            mid: sessionStorage.userId,
                             mip: $scope.meallistC.mip,
-                            mid2: $scope.meallistC.mid2,
+                            mid2: sessionStorage.userId,
                             mip2: $scope.meallistC.mip2,
                             memberid: $scope.meallistC.memberid,
                             date: dates_C[key],
@@ -608,7 +609,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
     function initial() {
 
         //判斷以防使用者用瀏覽器上下頁，沒選的話就跳回首頁
-        if ($rootScope.id === null || $rootScope.id === undefined) {
+        if (sessionStorage.memberid === null || sessionStorage.memberid === undefined) {
             alert('請點選會員才能進入此頁面!');
             location.href = '/#/memberData';
         } else {

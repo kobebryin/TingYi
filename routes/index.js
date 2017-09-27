@@ -3,7 +3,13 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'TingYi Database Server' });
+  console.log('sessionID = ' + req.session.fuck);
+  if(typeof req.session.fuck != 'undefined'){
+    res.render('index', { title: 'TingYi Database Server' });
+  }
+  else{
+    res.redirect('users/entry');
+  }
 });
 
 router.get('/test', function (req, res, next) {

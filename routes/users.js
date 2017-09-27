@@ -13,9 +13,11 @@ router.post('/login', function (req, res, next) {
     if (error) throw error;
 
     console.log('The solution is: ', results);  //log 出有沒有找到符合的Username
-    
+
     if (results.length != 0) {  //判斷有沒有找到相符的Username
       if (req.body.password == results[0].Password) { //判斷有沒有找到相符的Password
+        //session store裡沒有的，就會重新設置
+        req.session.fuck = results[0].ID;
         res.json({ status: 'success' });
       } else {
         res.json({ status: 'incorrect password' })  //密碼錯誤
@@ -25,6 +27,17 @@ router.post('/login', function (req, res, next) {
     }
     console.log(results);
   });
+});
+
+// 登出...
+router.get('/logout', function (req, res) {
+  req.session.destroy();
+  res.render('entry', { title: 'TingYi Database Server' });
+});
+
+// 取出get session ID...
+router.get('/getSessionID', function (req, res) {
+  res.json({ id: req.session.fuck });
 });
 
 module.exports = router;

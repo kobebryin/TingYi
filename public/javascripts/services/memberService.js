@@ -71,6 +71,14 @@ angular.module('TinYi').service('MemberService', function ($rootScope, $http) {
         });
     }
 
+    //get Session ID
+    this.getSessionID = function (callback) {
+        $http.get($rootScope.apiUrl + 'users/getSessionID').success(function (data) {
+            // you can do some processing here
+            callback(data.id);
+        });
+    }
+
 
 
 })

@@ -194,19 +194,19 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     //進入月子餐頁面
     $scope.goToMonthMeal = function () {
         location.href = '/#/monthMeal';
-        $rootScope.id = $scope.member.id;
+        sessionStorage.memberid = $scope.member.id;
     };
 
     $rootScope.goToConditionMeal = function () {
         location.href = '/#/conditionMeal';
-        $rootScope.id = $scope.member.id;
+        sessionStorage.memberid = $scope.member.id;
     };
 
     $rootScope.goToNormalMeal = function () {
         location.href = '/#/normalMeal';
-        $rootScope.id = $scope.member.id;
+        sessionStorage.memberid = $scope.member.id;
     };
-    
+
     //新增資料上ＭySQL
     $scope.postMEMBER = function () {
 
@@ -222,6 +222,11 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     clearScopeMemberObj(); //清空$scope.member 物件
                     alert("欄位 [手機] 為必輸項!");
                 } else {
+                    //存入登入者ID
+                    $scope.member.mid = sessionStorage.userId;
+                    $scope.member.mid2 = sessionStorage.userId;
+                    $scope.member.flag = 9;
+
                     //存入客戶端IP
                     $scope.member.mip = client_ip;
                     $scope.member.mip2 = client_ip;
@@ -275,6 +280,11 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     clearScopeMemberObj(); //清空$scope.member 物件
                     alert("欄位 [手機] 為必輸項!");
                 } else {
+                    //存入登入者ID
+                    $scope.member.mid = sessionStorage.userId;
+                    $scope.member.mid2 = sessionStorage.userId;
+                    $scope.member.flag = 9;
+
                     //存入客戶端IP
                     $scope.member.mip = client_ip;
                     $scope.member.mip2 = client_ip;
@@ -401,6 +411,10 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     /**-----------------------------------------function zone start---------------------------------------------- */
     //initial() 開始時會做的事: 1.顯示LoadingOverlay 2.營養顧問dropdown list名單抓取 3.會員資料初始取得存入datatables
     function initial() {
+
+        MemberService.getSessionID(function (id) {
+            sessionStorage.userId = id;
+        })
 
         $rootScope.id = null;
 

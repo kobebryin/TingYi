@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var json2xls = require('json2xls');
+var session = require('express-session');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -66,8 +67,17 @@ connection.connect(function (err) {
 });
 /** -------------------------connect MySQL-----------------------END------ */
 
+//設置session相關設定
+app.use(session({
+    secret: 'fuck you dont try to hack me you idiot',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 600 * 1000 } //10分鐘到期
+}));
+
+
 /* Add MySQL connection into req.dbConnection Object */
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     req.dbConnection = connection;
     next();
 });
@@ -77,15 +87,15 @@ app.use('/', index);
 app.use('/bbs', bbsapi);
 app.use('/dish', dishapi);
 app.use('/dishlist', dishlistapi);
-app.use('/fieldvalue',fieldvalueapi);
-app.use('/fieldvalueAttrib05',fieldvalueAttrib05api);
-app.use('/fieldvalueAttrib08',fieldvalueAttrib08api);
-app.use('/fieldvalueDishList',fieldvalueDishList);
-app.use('/fieldvalueMeal14',fieldvalueMeal14);
-app.use('/fieldvalueMeal15',fieldvalueMeal15);
-app.use('/fieldvalueMeal21',fieldvalueMeal21);
-app.use('/fieldvalueMeal0708',fieldvalueMeal0708);
-app.use('/meal',mealapi);
+app.use('/fieldvalue', fieldvalueapi);
+app.use('/fieldvalueAttrib05', fieldvalueAttrib05api);
+app.use('/fieldvalueAttrib08', fieldvalueAttrib08api);
+app.use('/fieldvalueDishList', fieldvalueDishList);
+app.use('/fieldvalueMeal14', fieldvalueMeal14);
+app.use('/fieldvalueMeal15', fieldvalueMeal15);
+app.use('/fieldvalueMeal21', fieldvalueMeal21);
+app.use('/fieldvalueMeal0708', fieldvalueMeal0708);
+app.use('/meal', mealapi);
 app.use('/member', memberapi);
 app.use('/memberForMeal', memberForMeal);
 app.use('/memberForConditionMeal', memberForConditionMeal);
@@ -102,21 +112,21 @@ app.use('/users', users);
 app.use(json2xls.middleware);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;
