@@ -2,9 +2,53 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
 
     $scope.Meal_1 = null;
 
-    $scope.exportexcel = function () {
- 
-    };
+
+    $scope.jsonToExport = [
+        {
+            "col1data": "1",
+            "col2data": "Fight Club",
+            "col3data": "Brad Pitt"
+        },
+        {
+            "col1data": "2",
+            "col2data": "Matrix (Series)",
+            "col3data": "Keanu Reeves"
+        },
+        {
+            "col1data": "3",
+            "col2data": "V for Vendetta",
+            "col3data": "Hugo Weaving"
+        }
+    ];
+
+    // Prepare Excel data:
+    $scope.fileName = "report";
+    $scope.exportData = [];
+    // Headers:
+    $scope.exportData.push(["#", "Movie", "Actor"]);
+    // Data:
+    angular.forEach($scope.jsonToExport, function (value, key) {
+        $scope.exportData.push([value.col1data, value.col2data, value.col3data]);
+    });
+
+    /*$scope.exportexcel = function () {
+        // var json = JSON.stringify([{
+        //     foo: '22',
+        //     qux: '33',
+        //     poo: 123,
+        //     stux: new Date()
+        // },
+        // {
+        //     foo: '11',
+        //     qux: '44',
+        //     poo: 345,
+        //     stux: new Date()
+        // }]);
+
+
+
+        // location.href = "http://127.0.0.1:8080/exportExcelApi?DATA=" + json;
+    };*/
 
     //查詢按鈕點擊事件
     $scope.doSearch = function () {
@@ -107,7 +151,7 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
         }
     };
 
-   
+
 
 
     /**---------------------------以下為起始初始化的UI----------------------------------------- */

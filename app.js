@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
+var json2xls = require('json2xls');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -32,6 +33,7 @@ var searchConditionMealApi = require('./routes/searchConditionMealApi');
 var memberoneapi = require('./routes/memberOneApi');
 var reportApi = require('./routes/reportApi');
 var reportAllApi = require('./routes/reportAllApi');
+var exportExcelApi = require('./routes/exportExcelApi');
 
 var app = express();
 
@@ -95,7 +97,9 @@ app.use('/searchConditionMealApi', searchConditionMealApi);
 app.use('/memberOne', memberoneapi);
 app.use('/reportApi', reportApi);
 app.use('/reportAllApi', reportAllApi);
+app.use('/exportExcelApi', exportExcelApi);
 app.use('/users', users);
+app.use(json2xls.middleware);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
