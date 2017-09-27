@@ -2,35 +2,9 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
 
     $scope.Meal_1 = null;
 
+    $scope.jsonToExport = null;
 
-    $scope.jsonToExport = [
-        {
-            "col1data": "1",
-            "col2data": "Fight Club",
-            "col3data": "Brad Pitt"
-        },
-        {
-            "col1data": "2",
-            "col2data": "Matrix (Series)",
-            "col3data": "Keanu Reeves"
-        },
-        {
-            "col1data": "3",
-            "col2data": "V for Vendetta",
-            "col3data": "Hugo Weaving"
-        }
-    ];
-
-    // Prepare Excel data:
-    $scope.fileName = "report";
-    $scope.exportData = [];
-    // Headers:
-    $scope.exportData.push(["#", "Movie", "Actor"]);
-    // Data:
-    angular.forEach($scope.jsonToExport, function (value, key) {
-        $scope.exportData.push([value.col1data, value.col2data, value.col3data]);
-    });
-
+    //按鈕修改暫時不用了
     /*$scope.exportexcel = function () {
         // var json = JSON.stringify([{
         //     foo: '22',
@@ -66,7 +40,29 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
             //月子餐名條
             if (SearchArray.searchType === 1) {
                 reportService.postSearch(SearchArray, function (data) {
-                    console.log(data);
+                    //console.log(data);
+
+                    //export excel zone
+                    if (SearchArray.searchTime === 'A')
+                        var excel_title = SearchArray.searchDate + '月子餐名條(早)';
+                    if (SearchArray.searchTime === 'B')
+                        var excel_title = SearchArray.searchDate + '月子餐名條(午)';
+                    if (SearchArray.searchTime === 'C')
+                        var excel_title = SearchArray.searchDate + '月子餐名條(晚)';
+
+                    $scope.jsonToExport = data;
+                    // Prepare Excel data:
+                    $scope.fileName = excel_title;
+                    $scope.exportData = [];
+                    // Headers: 
+                    $scope.exportData.push(["", excel_title, ""]);
+                    $scope.exportData.push(["編號", "床號", "姓名", "備註"]);
+                    // Data:
+                    angular.forEach($scope.jsonToExport, function (value, key) {
+                        $scope.exportData.push([value.ID, value.Meal01, value.Attrib01, value.Meal24]);
+                    });
+
+                    //ui datagrid show data
                     $('#dg').datagrid({
                         title: "月子餐名單",
                         rownumbers: true,
@@ -84,7 +80,29 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
             //調理餐名條
             if (SearchArray.searchType === 2) {
                 reportService.postSearch(SearchArray, function (data) {
-                    console.log(data);
+                    // console.log(data);
+
+                    //export excel zone
+                    if (SearchArray.searchTime === 'A')
+                        var excel_title = SearchArray.searchDate + '調理餐名條(早)';
+                    if (SearchArray.searchTime === 'B')
+                        var excel_title = SearchArray.searchDate + '調理餐名條(午)';
+                    if (SearchArray.searchTime === 'C')
+                        var excel_title = SearchArray.searchDate + '調理餐名條(晚)';
+
+                    $scope.jsonToExport = data;
+                    // Prepare Excel data:
+                    $scope.fileName = excel_title;
+                    $scope.exportData = [];
+                    // Headers: 
+                    $scope.exportData.push(["", excel_title, ""]);
+                    $scope.exportData.push(["編號", "姓名", "調理內容", "禁忌", "湯換飲品", "加減"]);
+                    // Data:
+                    angular.forEach($scope.jsonToExport, function (value, key) {
+                        $scope.exportData.push([value.ID, value.Attrib01, value.Meal05, value.Meal06, value.Meal08, value.Meal07]);
+                    });
+
+                    //ui datagrid show data
                     $('#dg').datagrid({
                         title: "調理餐名單",
                         rownumbers: true,
@@ -105,7 +123,29 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
             //一般餐名條
             if (SearchArray.searchType === 3) {
                 reportService.postSearch(SearchArray, function (data) {
-                    console.log(data);
+                    // console.log(data);
+
+                    //export excel zone
+                    if (SearchArray.searchTime === 'A')
+                        var excel_title = SearchArray.searchDate + '一般餐統計(早)';
+                    if (SearchArray.searchTime === 'B')
+                        var excel_title = SearchArray.searchDate + '一般餐統計(午)';
+                    if (SearchArray.searchTime === 'C')
+                        var excel_title = SearchArray.searchDate + '一般餐統計(晚)';
+
+                    $scope.jsonToExport = data;
+                    // Prepare Excel data:
+                    $scope.fileName = excel_title;
+                    $scope.exportData = [];
+                    // Headers: 
+                    $scope.exportData.push(["", excel_title, ""]);
+                    $scope.exportData.push(["編號", "姓名", "數量", "餐票", "月結", "現金", "備註"]);
+                    // Data:
+                    angular.forEach($scope.jsonToExport, function (value, key) {
+                        $scope.exportData.push([value.ID, value.Attrib01, value.Meal01, value.Meal12, value.Meal21, value.Meal16, value.Meal24]);
+                    });
+
+                    //ui datagrid show data
                     $('#dg').datagrid({
                         title: "一般餐統計",
                         rownumbers: true,
@@ -126,7 +166,29 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
             //送餐報表
             if (SearchArray.searchType === 4) {
                 reportService.postAllSearch(SearchArray, function (data) {
-                    console.log(data);
+                    // console.log(data);
+
+                    //export excel zone
+                    if (SearchArray.searchTime === 'A')
+                        var excel_title = SearchArray.searchDate + '送餐報表(早)';
+                    if (SearchArray.searchTime === 'B')
+                        var excel_title = SearchArray.searchDate + '送餐報表(午)';
+                    if (SearchArray.searchTime === 'C')
+                        var excel_title = SearchArray.searchDate + '送餐報表(晚)';
+
+                    $scope.jsonToExport = data;
+                    // Prepare Excel data:
+                    $scope.fileName = excel_title;
+                    $scope.exportData = [];
+                    // Headers: 
+                    $scope.exportData.push(["", excel_title, ""]);
+                    $scope.exportData.push(["編號", "姓名", "餐別", "手機", "住家電話", "地址", "現金", "路線", "備註"]);
+                    // Data:
+                    angular.forEach($scope.jsonToExport, function (value, key) {
+                        $scope.exportData.push([value.ID, value.Attrib01, value.MealType, value.User, value.Attrib10, value.Meal03, value.Meal20, value.Meal04, value.Meal24]);
+                    });
+
+                    //ui datagrid show data
                     $('#dg').datagrid({
                         title: "一般餐統計",
                         rownumbers: true,
