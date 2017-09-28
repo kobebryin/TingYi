@@ -3,10 +3,21 @@ var router = express.Router();
 
 // --------  get Data from MySQL's table member ----------------------- 
 router.get('/', function (req, res, next) {
-    req.dbConnection.query('SELECT * FROM member;', function (error, results, fields) {
-        if (error) throw error;
-        //console.log('The solution is: ', results);
-        res.json(results);
+    req.dbConnection.query('SELECT Type FROM member WHERE ID = ' + req.query.UserID + ";", function (error, results, fields) {
+        var role = results[0].Type;
+        var sql = '';
+        
+        if(role == 0)
+            sql = 'SELECT * FROM member;';
+        else
+            sql = 'SELECT * FROM member WHERE MID = ' + req.query.UserID + ";";
+        // console.log(role)
+        // console.log(sql)
+        req.dbConnection.query(sql, function (error, results, fields) {
+            if (error) throw error;
+            //console.log('The solution is: ', results);
+            res.json(results);
+        });
     });
 });
 

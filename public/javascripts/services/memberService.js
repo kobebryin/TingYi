@@ -1,7 +1,7 @@
 angular.module('TinYi').service('MemberService', function ($rootScope, $http) {
     //抓取所有會員資料
-    this.getMEMBER = function (callback) {
-        $http.get($rootScope.apiUrl + 'member').success(function (data) {
+    this.getMEMBER = function (userID , callback) {
+        $http.get($rootScope.apiUrl + 'member?UserID=' + userID).success(function (data) {
             // you can do some processing here
             callback(data);
         });
@@ -75,7 +75,7 @@ angular.module('TinYi').service('MemberService', function ($rootScope, $http) {
     this.getSessionID = function (callback) {
         $http.get($rootScope.apiUrl + 'users/getSessionID').success(function (data) {
             // you can do some processing here
-            callback(data.id);
+            callback(data);
         });
     }
 

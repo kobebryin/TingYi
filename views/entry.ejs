@@ -45,9 +45,16 @@
     }
 </script> -->
 <!DOCTYPE html>
-<html>
+<html ng-app="TinYi">
 
 <head>
+
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+    <META NAME="ROBOTS" CONTENT="NONE">
+    <META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+    <meta http-equiv="expires" content="0">
+
     <meta charset="UTF-8">
     <title>
         <%= title %>
@@ -257,3 +264,14 @@
 </body>
 
 </html>
+
+<script>
+    $().ready(function() {
+    if(document.referrer == 'http://127.0.0.1:8080/'){ 
+        history.pushState(null, null, 'login');
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, 'login');
+        });
+    }
+});
+</script>

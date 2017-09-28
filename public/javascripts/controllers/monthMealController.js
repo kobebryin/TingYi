@@ -609,7 +609,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
     function initial() {
 
         //判斷以防使用者用瀏覽器上下頁，沒選的話就跳回首頁
-        if (sessionStorage.memberid === null || sessionStorage.memberid === undefined) {
+        if (sessionStorage.memberid === 'null' || sessionStorage.memberid === undefined) {
             alert('請點選會員才能進入此頁面!');
             location.href = '/#/memberData';
         } else {

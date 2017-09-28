@@ -412,10 +412,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     //initial() 開始時會做的事: 1.顯示LoadingOverlay 2.營養顧問dropdown list名單抓取 3.會員資料初始取得存入datatables
     function initial() {
 
-        MemberService.getSessionID(function (id) {
-            sessionStorage.userId = id;
-        })
-
+        sessionStorage.memberid = null;　    //將點選會員的ID從SessionStorage中清空
         $rootScope.id = null;
 
         // Show full page LoadingOverlay
@@ -450,222 +447,227 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
             textField: 'text'
         });
 
+        //將登入者ID存進SessionStorage
+        MemberService.getSessionID(function (data) {
+            sessionStorage.userId = data.id;
+            sessionStorage.loginType = data.loginType;
 
-        //會員資料初始取得存入datatables
-        MemberService.getMEMBER(function (data) {
-            $scope.getMember = data;
-            // console.log(data);
+            //會員資料初始取得存入datatables
+            MemberService.getMEMBER( data.id, function (data) {
+                $scope.getMember = data;
+                // console.log(data);
 
-            //先讓資料用timeout讀入datatables，再call其他
-            setTimeout(function () {
-                //呼叫datatables
-                $(document).ready(function () {
-                    table = $('#example').DataTable({
-                        "order": [[0, "desc"]],         //用ＩＤ當排序，遞減
-                        "fnRowCallback":
-                        function (nRow, aData, iDisplayIndex) {
-                            nRow.className = nRow.className + aData[4]; return nRow;
-                        },
-                        "aoData": [
-                            null,
-                            null,
-                            { "bVisible": false, "bSearchable": false },
-                            { "sClass": "center" },
-                            { "sClass": "center" }
-                        ]
-                    });
-
-                    //row點擊事件，get遭點擊的會員資料，並顯示到表格上
-                    $('#example tbody').on('click', 'tr', function () {
-                        //有點選會員時不行按下保存
-                        save_falg = false;
-                        $scope.tabFlag = false;
-
-                        //點選row會有顏色改變，注解掉的部分是因為不希望重複點集會取消顏色
-                        /*if ( $(this).hasClass('selected') ) {
-                            $(this).removeClass('selected');
-                        }
-                        else {*/
-                        table.$('tr.selected').removeClass('selected');
-                        $(this).addClass('selected');
-                        //}
-
-                        //將欄位都變唯獨
-                        open_readonly();
-
-                        //存取抓出選取會員資料的變數
-                        var data = table.row(this).data();
-                        var id = data[0];
-                        //開始抓取
-                        MemberService.getOneMEMBER(id, function (data) {
-                            //console.log(data);
-                            $scope.member.attrib09 = data[0].Attrib09;
-                            $scope.member.attrib01 = data[0].Attrib01;
-                            $scope.member.attrib05 = data[0].Attrib05;
-                            $scope.member.attrib19 = data[0].Attrib19;
-                            $scope.member.attrib20 = data[0].Attrib20;
-                            $scope.member.attrib21 = data[0].Attrib21;
-                            $scope.member.attrib08 = data[0].Attrib08;
-                            $scope.member.user = data[0].User;
-                            $scope.member.attrib10 = data[0].Attrib10;
-                            $scope.member.attrib11 = data[0].Attrib11;
-                            $scope.member.attrib25 = data[0].Attrib25;
-                            $scope.member.attrib12 = data[0].Attrib12;
-                            $scope.member.attrib13 = data[0].Attrib13;
-                            $scope.member.attrib14 = data[0].Attrib14;
-                            $scope.member.attrib15 = data[0].Attrib15;
-                            $scope.member.id = data[0].ID;
-                            $scope.member.type = data[0].Type;
-                            $('#dinner_addr').combobox('setValue', $scope.member.attrib15);
-                            $('#lunch_addr').combobox('setValue', $scope.member.attrib14);
-
-                            //(禁忌)easy-ui combotree 要能夠讓值放入並且顯示勾選，要塞入物件
-                            var attrib05setArray = [];
-                            var attrib05Array = $scope.member.attrib05.split(",");
-                            for (key in attrib05Array) {
-                                attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
-                            }
-                            $('#id_input_Member_Info_Attrib05').combotree('setValue', attrib05setArray);
-                            //(贈品)easy-ui combotree 要能夠讓值放入並且顯示勾選，要塞入物件
-                            var attrib08setArray = [];
-                            var attrib08Array = $scope.member.attrib08.split(",");
-                            for (key in attrib08Array) {
-                                attrib08setArray.push({ id: attrib08Array[key], text: attrib08Array[key] });
-                            }
-                            $('#id_input_Member_Info_Attrib08').combotree('setValue', attrib08setArray);
-
-                            //console.log(data[0].Attrib04);
-
-                            //資料庫沒正規劃，所以要判端預產期是否為null，是的話不做事把變數歸零，不是的話傳上去表單顯示
-                            if (data[0].Attrib04) {
-                                $scope.attrib04_0_TMP = data[0].Attrib04.split("<br>")[0];
-                                $scope.attrib04_1_TMP = data[0].Attrib04.split("<br>")[1];
-                                $scope.attrib04_2_TMP = data[0].Attrib04.split("<br>")[2];
-                                // console.log(data[0].Attrib04.split("<br>")[1])
-                            } else {
-                                $scope.attrib04_0_TMP = '';
-                                $scope.attrib04_1_TMP = '';
-                                $scope.attrib04_2_TMP = '';
-                            }
-                            if (data[0].Attrib03) {
-                                $scope.attrib03_0_TMP = data[0].Attrib03.split("<br>")[0];
-                                $scope.attrib03_1_TMP = data[0].Attrib03.split("<br>")[1];
-                                $scope.attrib03_2_TMP = data[0].Attrib03.split("<br>")[2];
-                                // console.log(data[0].Attrib04.split("<br>")[1])
-                            } else {
-                                $scope.attrib03_0_TMP = '';
-                                $scope.attrib03_1_TMP = '';
-                                $scope.attrib03_2_TMP = '';
-                            }
-                            if (data[0].Attrib02) {
-                                $scope.attrib02_0_TMP = data[0].Attrib02.split("<br>")[0];
-                                $scope.attrib02_1_TMP = data[0].Attrib02.split("<br>")[1];
-                                $scope.attrib02_2_TMP = data[0].Attrib02.split("<br>")[2];
-                                // console.log(data[0].Attrib04.split("<br>")[1])
-                            } else {
-                                $scope.attrib02_0_TMP = '';
-                                $scope.attrib02_1_TMP = '';
-                                $scope.attrib02_2_TMP = '';
-                            }
-                            if (data[0].Attrib16) {
-                                $scope.attrib16_0_TMP = data[0].Attrib16.split("<br>")[0];
-                                $scope.attrib16_1_TMP = data[0].Attrib16.split("<br>")[1];
-                                $scope.attrib16_2_TMP = data[0].Attrib16.split("<br>")[2];
-                                // console.log(data[0].Attrib04.split("<br>")[1])
-                            } else {
-                                $scope.attrib16_0_TMP = '';
-                                $scope.attrib16_1_TMP = '';
-                                $scope.attrib16_2_TMP = '';
-                            }
-                            if (data[0].Attrib17) {
-                                $scope.attrib17_0_TMP = data[0].Attrib17.split("<br>")[0];
-                                $scope.attrib17_1_TMP = data[0].Attrib17.split("<br>")[1];
-                                $scope.attrib17_2_TMP = data[0].Attrib17.split("<br>")[2];
-                                // console.log(data[0].Attrib04.split("<br>")[1])
-                            } else {
-                                $scope.attrib17_0_TMP = '';
-                                $scope.attrib17_1_TMP = '';
-                                $scope.attrib17_2_TMP = '';
-                            }
-
-                            $scope.member.attrib22 = data[0].Attrib22;
-                            $scope.member.attrib23 = data[0].Attrib23;
-                            $scope.member.attrib24 = data[0].Attrib24;
-                            $scope.member.upid = data[0].UpID;  //營養顧問
-                            $scope.member.attrib06 = data[0].Attrib06;
-                            $scope.member.attrib07 = data[0].Attrib07;
-                            $scope.member.attrib18 = data[0].Attrib18;  //購買餐類
-                            //CreateTime、RecordTime、ShowTime initialize
-                            $scope.member.createtime = data[0].CreateTime;
-                            $scope.member.recordtime = data[0].RecordTime;
-                            $scope.member.showtime = data[0].ShowTime;
-
-                            //餐點修改、特殊情況要判斷使否有值，有的話再切
-                            if ($scope.member.attrib06 != null) {
-                                $scope.attrib06_TMP = $scope.member.attrib06.split('<br>'); //餐點修改
-                            } else { }
-                            if ($scope.member.attrib07 != null) {
-                                $scope.attrib07_TMP = $scope.member.attrib07.split('<br>'); //特殊情況
-                            } else { }
-
-                            //清空checkboxModel
-                            clearScopeCheckModelObj();
-                            //購買餐類checkbox要判斷使否有值，有的話再切
-                            if ($scope.member.attrib18 != null) {
-                                var attrib18 = [];
-                                attrib18 = $scope.member.attrib18.split("<br><br>itoscarbr");
-                                for (key in attrib18) {
-                                    if (attrib18[key].split("<br>")[0] === "經典住院餐") {
-                                        $scope.checkboxModel.value1 = true;
-                                        $scope.Attrib18_TMP_1 = attrib18[key].split("<br>")[1];
-                                    }
-                                    if (attrib18[key].split("<br>")[0] === "經典月子餐") {
-                                        $scope.checkboxModel.value2 = true;
-                                        $scope.Attrib18_TMP_2 = attrib18[key].split("<br>")[1];
-                                    }
-                                    if (attrib18[key].split("<br>")[0] === "溫馨住院餐") {
-                                        $scope.checkboxModel.value3 = true;
-                                        $scope.Attrib18_TMP_3 = attrib18[key].split("<br>")[1];
-                                    }
-                                    if (attrib18[key].split("<br>")[0] === "溫馨月子餐") {
-                                        $scope.checkboxModel.value4 = true;
-                                        $scope.Attrib18_TMP_4 = attrib18[key].split("<br>")[1];
-                                    }
-                                    if (attrib18[key].split("<br>")[0] === "經典小產餐") {
-                                        $scope.checkboxModel.value5 = true;
-                                        $scope.Attrib18_TMP_5 = attrib18[key].split("<br>")[1];
-                                    }
-                                    if (attrib18[key].split("<br>")[0] === "經典孕哺餐") {
-                                        $scope.checkboxModel.value6 = true;
-                                        $scope.Attrib18_TMP_6 = attrib18[key].split("<br>")[1];
-                                    }
-                                    if (attrib18[key].split("<br>")[0] === "經典孕期餐") {
-                                        $scope.checkboxModel.value7 = true;
-                                        $scope.Attrib18_TMP_7 = attrib18[key].split("<br>")[1];
-                                    }
-                                    if (attrib18[key].split("<br>")[0] === "術後調理餐") {
-                                        $scope.checkboxModel.value8 = true;
-                                        $scope.Attrib18_TMP_8 = attrib18[key].split("<br>")[1];
-                                    }
-                                    if (attrib18[key].split("<br>")[0] === "調理餐") {
-                                        $scope.checkboxModel.value9 = true;
-                                        $scope.Attrib18_TMP_9 = attrib18[key].split("<br>")[1];
-                                    }
-                                    if (attrib18[key].split("<br>")[0] === "一般餐") {
-                                        $scope.checkboxModel.value10 = true;
-                                        $scope.Attrib18_TMP_10 = attrib18[key].split("<br>")[1];
-                                    }
-                                }
-                            } else { }
-
-                            // console.log( $scope.member.attrib07.split('<br>'));
+                //先讓資料用timeout讀入datatables，再call其他
+                setTimeout(function () {
+                    //呼叫datatables
+                    $(document).ready(function () {
+                        table = $('#example').DataTable({
+                            "order": [[0, "desc"]],         //用ＩＤ當排序，遞減
+                            "fnRowCallback":
+                            function (nRow, aData, iDisplayIndex) {
+                                nRow.className = nRow.className + aData[4]; return nRow;
+                            },
+                            "aoData": [
+                                null,
+                                null,
+                                { "bVisible": false, "bSearchable": false },
+                                { "sClass": "center" },
+                                { "sClass": "center" }
+                            ]
                         });
 
-                        //alert('You clicked on ' + data[0] + '\'s row');
-                    });
-                    // Hide it after 0.1 seconds
-                    $.LoadingOverlay("hide");
-                }, 200);
+                        //row點擊事件，get遭點擊的會員資料，並顯示到表格上
+                        $('#example tbody').on('click', 'tr', function () {
+                            //有點選會員時不行按下保存
+                            save_falg = false;
+                            $scope.tabFlag = false;
+
+                            //點選row會有顏色改變，注解掉的部分是因為不希望重複點集會取消顏色
+                            /*if ( $(this).hasClass('selected') ) {
+                                $(this).removeClass('selected');
+                            }
+                            else {*/
+                            table.$('tr.selected').removeClass('selected');
+                            $(this).addClass('selected');
+                            //}
+
+                            //將欄位都變唯獨
+                            open_readonly();
+
+                            //存取抓出選取會員資料的變數
+                            var data = table.row(this).data();
+                            var id = data[0];
+                            //開始抓取
+                            MemberService.getOneMEMBER(id, function (data) {
+                                //console.log(data);
+                                $scope.member.attrib09 = data[0].Attrib09;
+                                $scope.member.attrib01 = data[0].Attrib01;
+                                $scope.member.attrib05 = data[0].Attrib05;
+                                $scope.member.attrib19 = data[0].Attrib19;
+                                $scope.member.attrib20 = data[0].Attrib20;
+                                $scope.member.attrib21 = data[0].Attrib21;
+                                $scope.member.attrib08 = data[0].Attrib08;
+                                $scope.member.user = data[0].User;
+                                $scope.member.attrib10 = data[0].Attrib10;
+                                $scope.member.attrib11 = data[0].Attrib11;
+                                $scope.member.attrib25 = data[0].Attrib25;
+                                $scope.member.attrib12 = data[0].Attrib12;
+                                $scope.member.attrib13 = data[0].Attrib13;
+                                $scope.member.attrib14 = data[0].Attrib14;
+                                $scope.member.attrib15 = data[0].Attrib15;
+                                $scope.member.id = data[0].ID;
+                                $scope.member.type = data[0].Type;
+                                $('#dinner_addr').combobox('setValue', $scope.member.attrib15);
+                                $('#lunch_addr').combobox('setValue', $scope.member.attrib14);
+
+                                //(禁忌)easy-ui combotree 要能夠讓值放入並且顯示勾選，要塞入物件
+                                var attrib05setArray = [];
+                                var attrib05Array = $scope.member.attrib05.split(",");
+                                for (key in attrib05Array) {
+                                    attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
+                                }
+                                $('#id_input_Member_Info_Attrib05').combotree('setValue', attrib05setArray);
+                                //(贈品)easy-ui combotree 要能夠讓值放入並且顯示勾選，要塞入物件
+                                var attrib08setArray = [];
+                                var attrib08Array = $scope.member.attrib08.split(",");
+                                for (key in attrib08Array) {
+                                    attrib08setArray.push({ id: attrib08Array[key], text: attrib08Array[key] });
+                                }
+                                $('#id_input_Member_Info_Attrib08').combotree('setValue', attrib08setArray);
+
+                                //console.log(data[0].Attrib04);
+
+                                //資料庫沒正規劃，所以要判端預產期是否為null，是的話不做事把變數歸零，不是的話傳上去表單顯示
+                                if (data[0].Attrib04) {
+                                    $scope.attrib04_0_TMP = data[0].Attrib04.split("<br>")[0];
+                                    $scope.attrib04_1_TMP = data[0].Attrib04.split("<br>")[1];
+                                    $scope.attrib04_2_TMP = data[0].Attrib04.split("<br>")[2];
+                                    // console.log(data[0].Attrib04.split("<br>")[1])
+                                } else {
+                                    $scope.attrib04_0_TMP = '';
+                                    $scope.attrib04_1_TMP = '';
+                                    $scope.attrib04_2_TMP = '';
+                                }
+                                if (data[0].Attrib03) {
+                                    $scope.attrib03_0_TMP = data[0].Attrib03.split("<br>")[0];
+                                    $scope.attrib03_1_TMP = data[0].Attrib03.split("<br>")[1];
+                                    $scope.attrib03_2_TMP = data[0].Attrib03.split("<br>")[2];
+                                    // console.log(data[0].Attrib04.split("<br>")[1])
+                                } else {
+                                    $scope.attrib03_0_TMP = '';
+                                    $scope.attrib03_1_TMP = '';
+                                    $scope.attrib03_2_TMP = '';
+                                }
+                                if (data[0].Attrib02) {
+                                    $scope.attrib02_0_TMP = data[0].Attrib02.split("<br>")[0];
+                                    $scope.attrib02_1_TMP = data[0].Attrib02.split("<br>")[1];
+                                    $scope.attrib02_2_TMP = data[0].Attrib02.split("<br>")[2];
+                                    // console.log(data[0].Attrib04.split("<br>")[1])
+                                } else {
+                                    $scope.attrib02_0_TMP = '';
+                                    $scope.attrib02_1_TMP = '';
+                                    $scope.attrib02_2_TMP = '';
+                                }
+                                if (data[0].Attrib16) {
+                                    $scope.attrib16_0_TMP = data[0].Attrib16.split("<br>")[0];
+                                    $scope.attrib16_1_TMP = data[0].Attrib16.split("<br>")[1];
+                                    $scope.attrib16_2_TMP = data[0].Attrib16.split("<br>")[2];
+                                    // console.log(data[0].Attrib04.split("<br>")[1])
+                                } else {
+                                    $scope.attrib16_0_TMP = '';
+                                    $scope.attrib16_1_TMP = '';
+                                    $scope.attrib16_2_TMP = '';
+                                }
+                                if (data[0].Attrib17) {
+                                    $scope.attrib17_0_TMP = data[0].Attrib17.split("<br>")[0];
+                                    $scope.attrib17_1_TMP = data[0].Attrib17.split("<br>")[1];
+                                    $scope.attrib17_2_TMP = data[0].Attrib17.split("<br>")[2];
+                                    // console.log(data[0].Attrib04.split("<br>")[1])
+                                } else {
+                                    $scope.attrib17_0_TMP = '';
+                                    $scope.attrib17_1_TMP = '';
+                                    $scope.attrib17_2_TMP = '';
+                                }
+
+                                $scope.member.attrib22 = data[0].Attrib22;
+                                $scope.member.attrib23 = data[0].Attrib23;
+                                $scope.member.attrib24 = data[0].Attrib24;
+                                $scope.member.upid = data[0].UpID;  //營養顧問
+                                $scope.member.attrib06 = data[0].Attrib06;
+                                $scope.member.attrib07 = data[0].Attrib07;
+                                $scope.member.attrib18 = data[0].Attrib18;  //購買餐類
+                                //CreateTime、RecordTime、ShowTime initialize
+                                $scope.member.createtime = data[0].CreateTime;
+                                $scope.member.recordtime = data[0].RecordTime;
+                                $scope.member.showtime = data[0].ShowTime;
+
+                                //餐點修改、特殊情況要判斷使否有值，有的話再切
+                                if ($scope.member.attrib06 != null) {
+                                    $scope.attrib06_TMP = $scope.member.attrib06.split('<br>'); //餐點修改
+                                } else { }
+                                if ($scope.member.attrib07 != null) {
+                                    $scope.attrib07_TMP = $scope.member.attrib07.split('<br>'); //特殊情況
+                                } else { }
+
+                                //清空checkboxModel
+                                clearScopeCheckModelObj();
+                                //購買餐類checkbox要判斷使否有值，有的話再切
+                                if ($scope.member.attrib18 != null) {
+                                    var attrib18 = [];
+                                    attrib18 = $scope.member.attrib18.split("<br><br>itoscarbr");
+                                    for (key in attrib18) {
+                                        if (attrib18[key].split("<br>")[0] === "經典住院餐") {
+                                            $scope.checkboxModel.value1 = true;
+                                            $scope.Attrib18_TMP_1 = attrib18[key].split("<br>")[1];
+                                        }
+                                        if (attrib18[key].split("<br>")[0] === "經典月子餐") {
+                                            $scope.checkboxModel.value2 = true;
+                                            $scope.Attrib18_TMP_2 = attrib18[key].split("<br>")[1];
+                                        }
+                                        if (attrib18[key].split("<br>")[0] === "溫馨住院餐") {
+                                            $scope.checkboxModel.value3 = true;
+                                            $scope.Attrib18_TMP_3 = attrib18[key].split("<br>")[1];
+                                        }
+                                        if (attrib18[key].split("<br>")[0] === "溫馨月子餐") {
+                                            $scope.checkboxModel.value4 = true;
+                                            $scope.Attrib18_TMP_4 = attrib18[key].split("<br>")[1];
+                                        }
+                                        if (attrib18[key].split("<br>")[0] === "經典小產餐") {
+                                            $scope.checkboxModel.value5 = true;
+                                            $scope.Attrib18_TMP_5 = attrib18[key].split("<br>")[1];
+                                        }
+                                        if (attrib18[key].split("<br>")[0] === "經典孕哺餐") {
+                                            $scope.checkboxModel.value6 = true;
+                                            $scope.Attrib18_TMP_6 = attrib18[key].split("<br>")[1];
+                                        }
+                                        if (attrib18[key].split("<br>")[0] === "經典孕期餐") {
+                                            $scope.checkboxModel.value7 = true;
+                                            $scope.Attrib18_TMP_7 = attrib18[key].split("<br>")[1];
+                                        }
+                                        if (attrib18[key].split("<br>")[0] === "術後調理餐") {
+                                            $scope.checkboxModel.value8 = true;
+                                            $scope.Attrib18_TMP_8 = attrib18[key].split("<br>")[1];
+                                        }
+                                        if (attrib18[key].split("<br>")[0] === "調理餐") {
+                                            $scope.checkboxModel.value9 = true;
+                                            $scope.Attrib18_TMP_9 = attrib18[key].split("<br>")[1];
+                                        }
+                                        if (attrib18[key].split("<br>")[0] === "一般餐") {
+                                            $scope.checkboxModel.value10 = true;
+                                            $scope.Attrib18_TMP_10 = attrib18[key].split("<br>")[1];
+                                        }
+                                    }
+                                } else { }
+
+                                // console.log( $scope.member.attrib07.split('<br>'));
+                            });
+
+                            //alert('You clicked on ' + data[0] + '\'s row');
+                        });
+                        // Hide it after 0.1 seconds
+                        $.LoadingOverlay("hide");
+                    }, 200);
+                });
             });
         });
     }

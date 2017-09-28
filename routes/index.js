@@ -5,9 +5,11 @@ var router = express.Router();
 router.get('/', function (req, res, next) {
   console.log('sessionID = ' + req.session.fuck);
   if(typeof req.session.fuck != 'undefined'){
+    console.log(req.session.fuck);
     res.render('index', { title: 'TingYi Database Server' });
   }
   else{
+    console.log(req.session.fuck);
     res.redirect('users/entry');
   }
 });

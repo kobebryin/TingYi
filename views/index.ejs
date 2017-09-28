@@ -5,6 +5,13 @@
   <title>
     <%= title %>
   </title>
+
+  <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+  <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+  <META NAME="ROBOTS" CONTENT="NONE">
+  <META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
+  <meta http-equiv="expires" content="0">
+
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel='stylesheet' href='/stylesheets/jquery.dataTables.min.css' />
   <link rel='stylesheet' href='/stylesheets/datepicker.css' />
@@ -32,15 +39,15 @@
   <script type="text/javascript" src="javascripts/controllers/conditionMealController.js"></script>
   <script type="text/javascript" src="javascripts/controllers/normalMealController.js"></script>
   <script type="text/javascript" src="javascripts/controllers/reportController.js"></script>
-  
+
   <script type="text/javascript" src="javascripts/directives/exportExcelDir.js"></script>
 
   <script type="text/javascript" src="javascripts/services/bbsService.js"></script>
   <script type="text/javascript" src="javascripts/services/memberService.js"></script>
   <script type="text/javascript" src="javascripts/services/monthMealService.js"></script>
   <script type="text/javascript" src="javascripts/services/searchMonthMealService.js"></script>
-  <script type="text/javascript" src="javascripts/services/searchConditionMealService.js"></script>  
-  <script type="text/javascript" src="javascripts/services/reportService.js"></script>  
+  <script type="text/javascript" src="javascripts/services/searchConditionMealService.js"></script>
+  <script type="text/javascript" src="javascripts/services/reportService.js"></script>
 
   <!-- ng-dialog -->
   <link rel="stylesheet" href="/stylesheets/ng-dialog/ngDialog.min.css">
@@ -77,3 +84,7 @@
 </body>
 
 </html>
+
+<!-- <script type="text/javascript">
+  window.history.forward(1);
+</script> -->
