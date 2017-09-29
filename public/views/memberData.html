@@ -20,17 +20,17 @@
                 <td>{{members.Attrib01}}</td>
                 <td>{{members.User}}</td>
                 <td>{{members.Attrib13}}</td>
-                <td class="center">{{typeMapping[members.Type].name}}</td>
+                <td class="center">{{typeMappingForDataTables[members.Type].name}}</td>
             </tr>
         </tbody>
     </table>
 </div>
 
 <div class="function_btn">
-    <input type="button" value="新增" ng-click="createNewMEMBER()"></input>
-    <input type="button" value="修改" ng-click="updateMEMBER()"></input>
-    <input type="button" value="刪除" ng-click="deleteMEMBER()"></input>
-    <input type="button" value="保存" ng-click="postMEMBER()"></input>
+    <input type="button" ng-disabled="c_loginTypeReadonly" value="新增" ng-click="createNewMEMBER()"></input>
+    <input type="button" ng-disabled="u_loginTypeReadonly" value="修改" ng-click="updateMEMBER()"></input>
+    <input type="button" ng-disabled="d_loginTypeReadonly" value="刪除" ng-click="deleteMEMBER()"></input>
+    <input type="button" ng-disabled="p_loginTypeReadonly" value="保存" ng-click="postMEMBER()"></input>
 </div>
 
 <div class="content">

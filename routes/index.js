@@ -6,7 +6,7 @@ router.get('/', function (req, res, next) {
   console.log('sessionID = ' + req.session.fuck);
   if(typeof req.session.fuck != 'undefined'){
     console.log(req.session.fuck);
-    res.render('index', { title: 'TingYi Database Server' });
+    res.render('index', { title: 'TingYi Database Server', UserName:  req.session.UserName});
   }
   else{
     console.log(req.session.fuck);

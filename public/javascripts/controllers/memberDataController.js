@@ -5,7 +5,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     var saveORupdate_falr = true;   //判斷使用者是選擇新增或是修改，true回新增、false為修改
     var Today = new Date();           //日期
     var client_ip;              //客戶端IP位置
-    $scope.tabFlag = true;
+    $scope.tabFlag = true;  //餐類按鈕可否點擊flag
 
     //購買餐類checkbox物件
     $scope.checkboxModel = {
@@ -20,6 +20,15 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         value9: false,
         value10: false
     };
+
+    //dataTables用的會員類型分類
+    $scope.typeMappingForDataTables = [
+        { value: 0, name: '最高權限管理人員' },
+        { value: 1, name: '管理人員' },
+        { value: 2, name: '寫單人員' },
+        { value: 3, name: '營養顧問' },
+        { value: 4, name: '醫院' },
+        { value: 5, name: '客戶' }];
 
     //會員類型分類
     $scope.typeMapping = [
@@ -452,8 +461,32 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
             sessionStorage.userId = data.id;
             sessionStorage.loginType = data.loginType;
 
+            if (data.loginType === 1 || data.loginType === 0) {     //Type = 0or 1(最高權限 或 管理人員) 可以修改刪除新增
+                $scope.c_loginTypeReadonly = false;
+                $scope.u_loginTypeReadonly = false;
+                $scope.d_loginTypeReadonly = false;
+                $scope.p_loginTypeReadonly = false;
+            } else if (data.loginType === 2) {       //Type = 2 (寫單人員)不行修改刪除但可新增
+                $scope.c_loginTypeReadonly = false;
+                $scope.u_loginTypeReadonly = true;
+                $scope.d_loginTypeReadonly = true;
+                $scope.p_loginTypeReadonly = false;
+            } else {                                           //Type = 4 (營養師)不行刪除，但可新增、修改  
+                $scope.c_loginTypeReadonly = false;
+                $scope.u_loginTypeReadonly = false;
+                $scope.d_loginTypeReadonly = true;
+                $scope.p_loginTypeReadonly = false;
+            }
+
+            if (data.loginType != 0) {  //登入會員類型不是最高權限的話，只能新增會員類型為客戶
+                //會員類型分類
+                $scope.typeMapping = [
+                    { value: 5, name: '客戶' }
+                ];
+            }
+
             //會員資料初始取得存入datatables
-            MemberService.getMEMBER( data.id, function (data) {
+            MemberService.getMEMBER(data.id, function (data) {
                 $scope.getMember = data;
                 // console.log(data);
 

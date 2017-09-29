@@ -106,10 +106,10 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <input type="button" id="a_Link_Save_1" ng-click="new()" value="新增" class="easyui-linkbutton" />
+                        <input type="button" ng-disabled="loginTypeReadonly" id="a_Link_Save_1" ng-click="new()" value="新增" class="easyui-linkbutton" />
                     </td>
                     <td align="right">
-                        <input type="button" value="清空重填" ng-click="clearAll()" class="easyui-linkbutton" style="width:85px;">
+                        <input type="button" ng-disabled="loginTypeReadonly" value="清空重填" ng-click="clearAll()" class="easyui-linkbutton" style="width:85px;">
                     </td>
                 </tr>
             </table>

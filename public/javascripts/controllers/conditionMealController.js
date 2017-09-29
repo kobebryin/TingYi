@@ -606,6 +606,12 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
     /**---------------------------------------function zone start------------------------------------------*/
     function initial() {
 
+        if(sessionStorage.loginType === '0' || sessionStorage.loginType === '1'){
+            $scope.loginTypeReadonly = false;   //最高權限或管理人員可以新增或刪除
+        }else{
+            $scope.loginTypeReadonly = true;    //寫單人員或營養師不行新增或刪除
+        }
+
         //判斷以防使用者用瀏覽器上下頁，沒選的話就跳回首頁
         if (sessionStorage.memberid === 'null' || sessionStorage.memberid === undefined) {
             alert('請點選會員才能進入此頁面!');

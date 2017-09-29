@@ -6,12 +6,6 @@
     <%= title %>
   </title>
 
-  <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-  <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
-  <META NAME="ROBOTS" CONTENT="NONE">
-  <META NAME="GOOGLEBOT" CONTENT="NOARCHIVE">
-  <meta http-equiv="expires" content="0">
-
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel='stylesheet' href='/stylesheets/jquery.dataTables.min.css' />
   <link rel='stylesheet' href='/stylesheets/datepicker.css' />
@@ -76,7 +70,7 @@
     <li id="li_navigatBar"><a id="a_navigatBar" href="#/monthlyMealDetails">月子餐明細查詢</a></li>
     <li id="li_navigatBar"><a id="a_navigatBar" href="#/conditionMealDetails">調理餐明細查詢</a></li>
     <li id="li_navigatBar"><a id="a_navigatBar" href="#/report">報表</a></li>
-    <li id="li_navigatBar" style="float:right"><a id="a_navigatBar" class="active" href="http://127.0.0.1:8080/users/logout">Log Out</a></li>
+    <li id="li_navigatBar" style="float:right"><a id="a_navigatBar" class="active" href="http://127.0.0.1:8080/users/logout">[ <%= UserName %> ] Log Out</a></li>
   </ul>
 
   <div class="main" ui-view></div>
