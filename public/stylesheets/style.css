@@ -16,6 +16,10 @@ td, th {
     vertical-align: top;
 }
 
+.main {
+    background:#FFBB77
+}
+
 /*** Active/Current Navigation Link */
 #navigatBar {
     list-style-type: none;
