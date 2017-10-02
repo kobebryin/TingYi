@@ -192,7 +192,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
     //  此頁開始時先呼叫initial()
     initial();
-
+ 
     //取得客戶單IP位址
     $.getJSON('//freegeoip.net/json/?callback=?', function (data) {
         client_ip = data.ip;

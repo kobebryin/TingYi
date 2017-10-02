@@ -73,11 +73,29 @@
     <li id="li_navigatBar" style="float:right"><a id="a_navigatBar" class="active" href="http://127.0.0.1:8080/users/logout">[ <%= UserName %> ] Log Out</a></li>
   </ul>
 
-  <div class="main" ui-view></div>
+  <div id="main_view" class="main" ui-view></div>
 
 </body>
 
 </html>
+
+
+<!-- <script>
+  $(document).ready(function () {
+    $(window).resize(function() {
+      
+      var width =  $(window).width();
+      $("#main_view").width(width);
+
+      // var txt = "";
+      // // txt += "Document width/height: " + $(document).width();
+      // // txt += "x" + $(document).height() + "\n";
+      // txt += "Window width: " + $(window).width();
+      // // txt += "x" + $(window).height();
+      // alert(txt);
+    });
+  });
+</script> -->
 
 <!-- <script type="text/javascript">
   window.history.forward(1);
