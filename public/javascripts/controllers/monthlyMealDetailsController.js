@@ -119,7 +119,7 @@ angular.module('TinYi').controller('monthlyMealDetailsController', function ($ro
         });
 
         $('#id_input_Meal_Meal12').combotree({
-            url: 'http://127.0.0.1:8080/fieldvalueAttrib05',
+            url: $rootScope.apiUrl + 'fieldvalueAttrib05',
             multiple: true,
             valueField: 'id',
             textField: 'text',
@@ -129,7 +129,7 @@ angular.module('TinYi').controller('monthlyMealDetailsController', function ($ro
         });
 
         $('#id_input_Meal_Meal14').combobox({
-            url: 'http://127.0.0.1:8080/fieldvalueMeal14',
+            url: $rootScope.apiUrl + 'fieldvalueMeal14',
             method: 'get',
             editable: false,
             multiple: true,
@@ -138,7 +138,7 @@ angular.module('TinYi').controller('monthlyMealDetailsController', function ($ro
         });
 
         $('#id_input_Meal_Meal15').combobox({
-            url: 'http://127.0.0.1:8080/fieldvalueMeal15',
+            url: $rootScope.apiUrl + 'fieldvalueMeal15',
             method: 'get',
             editable: false,
             multiple: true,
@@ -147,7 +147,7 @@ angular.module('TinYi').controller('monthlyMealDetailsController', function ($ro
         });
 
         $('#id_input_Meal_Meal21').combobox({
-            url: 'http://127.0.0.1:8080/fieldvalueMeal21',
+            url: $rootScope.apiUrl + 'fieldvalueMeal21',
             method: 'get',
             editable: false,
             valueField: 'id',
@@ -155,7 +155,7 @@ angular.module('TinYi').controller('monthlyMealDetailsController', function ($ro
         });
 
         $('#id_input_Meal_Meal22').combobox({
-            url: 'http://127.0.0.1:8080/fieldvalueMeal21',
+            url: $rootScope.apiUrl + 'fieldvalueMeal21',
             method: 'post',
             editable: false,
             valueField: 'id',
@@ -163,7 +163,7 @@ angular.module('TinYi').controller('monthlyMealDetailsController', function ($ro
         });
 
         $('#id_input_Meal_Meal23').combobox({
-            url: 'http://127.0.0.1:8080/fieldvalueMeal21',
+            url: $rootScope.apiUrl + 'fieldvalueMeal21',
             method: 'put',
             editable: false,
             valueField: 'id',

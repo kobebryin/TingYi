@@ -21,7 +21,7 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
 
 
 
-        // location.href = "http://127.0.0.1:8080/exportExcelApi?DATA=" + json;
+        // location.href = "http://192.168.1.15:8080/exportExcelApi?DATA=" + json;
     };*/
 
     //查詢按鈕點擊事件
@@ -219,7 +219,7 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
     /**---------------------------以下為起始初始化的UI----------------------------------------- */
     $('#dg').datagrid({
         title: "調理餐名單",
-        //url:'http://127.0.0.1:8080/searchConditionMealApi',
+        //url:$rootScope.apiUrl + 'searchConditionMealApi',
         rownumbers: true,
         singleSelect: true,
         columns: [[

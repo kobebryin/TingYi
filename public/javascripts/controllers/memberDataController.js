@@ -434,23 +434,23 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
         //午,晚餐地址combobox設定
         $('#dinner_addr').combobox({
-            url: 'http://127.0.0.1:8080/fieldvalue',
+            url: $rootScope.apiUrl + 'fieldvalue',
             valueField: 'id',
             textField: 'text'
         });
         $('#lunch_addr').combobox({
-            url: 'http://127.0.0.1:8080/fieldvalue',
+            url: $rootScope.apiUrl + 'fieldvalue',
             valueField: 'id',
             textField: 'text'
         });
         $('#id_input_Member_Info_Attrib05').combotree({
-            url: 'http://127.0.0.1:8080/fieldvalueAttrib05',
+            url: $rootScope.apiUrl + 'fieldvalueAttrib05',
             multiple: true,
             valueField: 'id',
             textField: 'text'
         });
         $('#id_input_Member_Info_Attrib08').combotree({
-            url: 'http://127.0.0.1:8080/fieldvalueAttrib08',
+            url: $rootScope.apiUrl + 'fieldvalueAttrib08',
             multiple: true,
             valueField: 'id',
             textField: 'text'
@@ -706,7 +706,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                 });
             }else{  //假設閒置過久沒有重新登入的話，就踢出去回到登入網址
                 alert('閒置過久，請重新登入!');
-                location.href = "http://127.0.0.1:8080/users/logout";
+                location.href = $rootScope.apiUrl + "users/logout";
             }
         });
     }

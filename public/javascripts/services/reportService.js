@@ -2,7 +2,7 @@ angular.module('TinYi').service('reportService', function ($rootScope, $http, $h
 
     //搜尋會員資料
     this.postSearch = function (inputObj, callback) {
-        console.log(inputObj);
+        // console.log(inputObj);
 
         // //post method
         // $http({
@@ -37,7 +37,7 @@ angular.module('TinYi').service('reportService', function ($rootScope, $http, $h
 
     //搜尋送餐報表資料
     this.postAllSearch = function (inputObj, callback) {
-        console.log(inputObj);
+        // console.log(inputObj);
 
         $http.post($rootScope.apiUrl + 'reportAllApi', inputObj).success(function (data) {
             // you can do some processing here

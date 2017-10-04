@@ -81,7 +81,7 @@ angular.module('TinYi').controller('conditionMealDetailsController', function ($
                 }).val();
 
                 $('#id_input_Meal_Meal06').combotree({
-                        url: 'http://127.0.0.1:8080/fieldvalueAttrib05',
+                        url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                         multiple: true,
                         valueField: 'id',
                         textField: 'text',
@@ -91,7 +91,7 @@ angular.module('TinYi').controller('conditionMealDetailsController', function ($
                 });
 
                 $('#id_input_Meal_Meal07').combobox({
-                        url: 'http://127.0.0.1:8080/fieldvalueMeal0708',
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
                         method: 'get',
                         multiple: true,
                         editable: false,
@@ -100,7 +100,7 @@ angular.module('TinYi').controller('conditionMealDetailsController', function ($
                 });
 
                 $('#id_input_Meal_Meal08').combobox({
-                        url: 'http://127.0.0.1:8080/fieldvalueMeal0708',
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
                         method: 'post',
                         editable: false,
                         multiple: true,

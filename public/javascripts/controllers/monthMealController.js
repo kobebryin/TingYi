@@ -632,7 +632,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
 
             /** Meal 早 easy UI */
             $('#Meal_A_Meal09').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueDishList',
+                url: $rootScope.apiUrl + 'fieldvalueDishList',
                 method: 'get',
                 editable: false,
                 multiple: true,
@@ -641,7 +641,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_A_Meal14').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal14',
+                url: $rootScope.apiUrl + 'fieldvalueMeal14',
                 method: 'get',
                 editable: false,
                 multiple: true,
@@ -650,7 +650,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_A_Meal15').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal15',
+                url: $rootScope.apiUrl + 'fieldvalueMeal15',
                 method: 'get',
                 editable: false,
                 multiple: true,
@@ -659,7 +659,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_A_Meal21').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal21',
+                url: $rootScope.apiUrl + 'fieldvalueMeal21',
                 method: 'get',
                 editable: false,
                 valueField: 'id',
@@ -667,7 +667,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_A_Meal22').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal21',
+                url: $rootScope.apiUrl + 'fieldvalueMeal21',
                 method: 'post',
                 editable: false,
                 valueField: 'id',
@@ -675,7 +675,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_A_Meal23').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal21',
+                url: $rootScope.apiUrl + 'fieldvalueMeal21',
                 method: 'put',
                 editable: false,
                 valueField: 'id',
@@ -683,7 +683,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_A_Meal12').combotree({
-                url: 'http://127.0.0.1:8080/fieldvalueAttrib05',
+                url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                 multiple: true,
                 valueField: 'id',
                 textField: 'text'
@@ -691,7 +691,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
 
             /** Meal 中午 easy UI */
             $('#Meal_B_Meal09').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueDishList',
+                url: $rootScope.apiUrl + 'fieldvalueDishList',
                 method: 'get',
                 editable: false,
                 multiple: true,
@@ -700,7 +700,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_B_Meal14').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal14',
+                url: $rootScope.apiUrl + 'fieldvalueMeal14',
                 method: 'get',
                 editable: false,
                 multiple: true,
@@ -709,7 +709,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_B_Meal15').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal15',
+                url: $rootScope.apiUrl + 'fieldvalueMeal15',
                 method: 'get',
                 editable: false,
                 multiple: true,
@@ -718,7 +718,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_B_Meal21').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal21',
+                url: $rootScope.apiUrl + 'fieldvalueMeal21',
                 method: 'get',
                 editable: false,
                 valueField: 'id',
@@ -726,7 +726,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_B_Meal22').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal21',
+                url: $rootScope.apiUrl + 'fieldvalueMeal21',
                 method: 'post',
                 editable: false,
                 valueField: 'id',
@@ -734,7 +734,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_B_Meal23').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal21',
+                url: $rootScope.apiUrl + 'fieldvalueMeal21',
                 method: 'put',
                 editable: false,
                 valueField: 'id',
@@ -742,7 +742,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_B_Meal12').combotree({
-                url: 'http://127.0.0.1:8080/fieldvalueAttrib05',
+                url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                 multiple: true,
                 valueField: 'id',
                 textField: 'text'
@@ -750,7 +750,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
 
             /** Meal 晚 easy UI */
             $('#Meal_C_Meal09').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueDishList',
+                url: $rootScope.apiUrl + 'fieldvalueDishList',
                 method: 'get',
                 editable: false,
                 multiple: true,
@@ -759,7 +759,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_C_Meal14').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal14',
+                url: $rootScope.apiUrl + 'fieldvalueMeal14',
                 method: 'get',
                 editable: false,
                 multiple: true,
@@ -768,7 +768,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_C_Meal15').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal15',
+                url: $rootScope.apiUrl + 'fieldvalueMeal15',
                 method: 'get',
                 editable: false,
                 multiple: true,
@@ -777,7 +777,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_C_Meal21').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal21',
+                url: $rootScope.apiUrl + 'fieldvalueMeal21',
                 method: 'get',
                 editable: false,
                 valueField: 'id',
@@ -785,7 +785,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_C_Meal22').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal21',
+                url: $rootScope.apiUrl + 'fieldvalueMeal21',
                 method: 'post',
                 editable: false,
                 valueField: 'id',
@@ -793,7 +793,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_C_Meal23').combobox({
-                url: 'http://127.0.0.1:8080/fieldvalueMeal21',
+                url: $rootScope.apiUrl + 'fieldvalueMeal21',
                 method: 'put',
                 editable: false,
                 valueField: 'id',
@@ -801,7 +801,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             });
 
             $('#Meal_C_Meal12').combotree({
-                url: 'http://127.0.0.1:8080/fieldvalueAttrib05',
+                url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                 multiple: true,
                 valueField: 'id',
                 textField: 'text'
