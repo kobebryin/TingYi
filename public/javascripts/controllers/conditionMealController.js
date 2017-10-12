@@ -7,6 +7,11 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
     var Today = new Date();           //日期
     var client_ip;              //客戶端IP位置
 
+    var Edit_Type = '1';
+    var enableDays_A = [];
+    var enableDays_B = [];
+    var enableDays_C = [];
+
     var subset_calendar_A = [];
     var subset_calendar_B = [];
     var subset_calendar_C = [];
@@ -205,6 +210,7 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
     }
 
     initial();
+    Edit_Type_check();
 
     //取得客戶單IP位址
     $.getJSON('//freegeoip.net/json/?callback=?', function (data) {
@@ -255,6 +261,193 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
             });
         } else {
             //按下取消不做任何事情 
+        }
+    };
+
+    $scope.delete = function () {
+        if (!$scope.cb_morningFalg && !$scope.cb_noonFalg && !$scope.cb_nightFalg) {
+            alert('請至少勾選一個時段才可新增!');
+        } else {
+            if ($scope.cb_morningFalg) {
+                if (month_calendar_morning.multiDatesPicker('getDates').length === 0) {
+                    alert('請至少勾選一個日期才可新增!');
+                } else {
+
+                    var dates_A = month_calendar_morning.multiDatesPicker('getDates');
+                    var meal2ac_string = ";"
+
+                    for (let key in dates_A) {
+
+                        let delete_data = {
+                            id: sessionStorage.memberid,
+                            date: dates_A[key]
+                        }
+                        monthMealService.S2_deleteMeal_A(delete_data, function (data) {
+                            initial();
+                        });
+                    }
+
+                    var meal2ac_initial = $scope.mealForMember.meal2ac.substring(1, $scope.mealForMember.meal2ac.length - 1);   //先去頭去尾';'
+                    var meal2ac_initial_array = meal2ac_initial.split(";");     //依照;來切
+                    // console.log(meal2ac_initial_array);
+
+                    var dates = month_calendar_morning.multiDatesPicker('getDates');
+                    // console.log(dates);
+                    var set1 = new Set(meal2ac_initial_array);
+                    var set2 = new Set(dates);
+
+                    var subset = [];
+
+                    for (let item of set1) {
+                        if (!set2.has(item)) {
+                            subset.push(item);
+                        }
+                    }
+                    // console.log(subset);
+
+                    if (subset.length === 0) {
+                        let inputObj = {
+                            id: sessionStorage.memberid,
+                            mea2ac: null
+                        }
+                        monthMealService.S2_putMeal_A(inputObj, function (data) {
+                            initial();
+                        });
+                    } else {
+                        for (key in subset) {
+                            meal2ac_string += subset[key] + ";";
+                        }
+
+                        let inputObj = {
+                            id: sessionStorage.memberid,
+                            mea2ac: meal2ac_string
+                        }
+                        monthMealService.S2_putMeal_A(inputObj, function (data) {
+                            initial();
+                        });
+                    }
+                }
+            }
+
+            if ($scope.cb_noonFalg) {
+                if (month_calendar_noon.multiDatesPicker('getDates').length === 0) {
+                    alert('請至少勾選一個日期才可新增!');
+                } else {
+                    var dates_B = month_calendar_noon.multiDatesPicker('getDates');
+                    var meal2bc_string = ";"
+
+                    for (let key in dates_B) {
+
+                        let delete_data = {
+                            id: sessionStorage.memberid,
+                            date: dates_B[key]
+                        }
+                        monthMealService.S2_deleteMeal_B(delete_data, function (data) {
+                            initial();
+                        });
+                    }
+
+                    var meal2bc_initial = $scope.mealForMember.meal2bc.substring(1, $scope.mealForMember.meal2bc.length - 1);   //先去頭去尾';'
+                    var meal2bc_initial_array = meal2bc_initial.split(";");     //依照;來切
+                    // console.log(meal2ac_initial_array);
+
+                    var dates = month_calendar_noon.multiDatesPicker('getDates');
+                    // console.log(dates);
+                    var set1 = new Set(meal2bc_initial_array);
+                    var set2 = new Set(dates);
+
+                    var subset = [];
+
+                    for (let item of set1) {
+                        if (!set2.has(item)) {
+                            subset.push(item);
+                        }
+                    }
+                    // console.log(subset);
+
+                    if (subset.length === 0) {
+                        let inputObj = {
+                            id: sessionStorage.memberid,
+                            mea2bc: null
+                        }
+                        monthMealService.S2_putMeal_B(inputObj, function (data) {
+                            initial();
+                        });
+                    } else {
+                        for (key in subset) {
+                            meal2bc_string += subset[key] + ";";
+                        }
+
+                        let inputObj = {
+                            id: sessionStorage.memberid,
+                            mea2bc: meal2bc_string
+                        }
+                        monthMealService.S2_putMeal_B(inputObj, function (data) {
+                            initial();
+                        });
+                    }
+                }
+            }
+
+            if ($scope.cb_nightFalg) {
+                if (month_calendar_night.multiDatesPicker('getDates').length === 0) {
+                    alert('請至少勾選一個日期才可新增!');
+                } else {
+                    var dates_C = month_calendar_night.multiDatesPicker('getDates');
+                    var meal2cc_string = ";"
+
+                    for (let key in dates_C) {
+
+                        let delete_data = {
+                            id: sessionStorage.memberid,
+                            date: dates_C[key]
+                        }
+                        monthMealService.S2_deleteMeal_C(delete_data, function (data) {
+                            initial();
+                        });
+                    }
+
+                    var meal2cc_initial = $scope.mealForMember.meal2cc.substring(1, $scope.mealForMember.meal2cc.length - 1);   //先去頭去尾';'
+                    var meal2cc_initial_array = meal2cc_initial.split(";");     //依照;來切
+                    // console.log(meal2ac_initial_array);
+
+                    var dates = month_calendar_night.multiDatesPicker('getDates');
+                    // console.log(dates);
+                    var set1 = new Set(meal2cc_initial_array);
+                    var set2 = new Set(dates);
+
+                    var subset = [];
+
+                    for (let item of set1) {
+                        if (!set2.has(item)) {
+                            subset.push(item);
+                        }
+                    }
+                    // console.log(subset);
+
+                    if (subset.length === 0) {
+                        let inputObj = {
+                            id: sessionStorage.memberid,
+                            mea2cc: null
+                        }
+                        monthMealService.S2_putMeal_C(inputObj, function (data) {
+                            initial();
+                        });
+                    } else {
+                        for (key in subset) {
+                            meal2cc_string += subset[key] + ";";
+                        }
+
+                        let inputObj = {
+                            id: sessionStorage.memberid,
+                            mea2cc: meal2cc_string
+                        }
+                        monthMealService.S2_putMeal_C(inputObj, function (data) {
+                            initial();
+                        });
+                    }
+                }
+            }
         }
     };
 
@@ -606,9 +799,9 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
     /**---------------------------------------function zone start------------------------------------------*/
     function initial() {
 
-        if(sessionStorage.loginType === '0' || sessionStorage.loginType === '1'){
+        if (sessionStorage.loginType === '0' || sessionStorage.loginType === '1') {
             $scope.loginTypeReadonly = false;   //最高權限或管理人員可以新增或刪除
-        }else{
+        } else {
             $scope.loginTypeReadonly = true;    //寫單人員或營養師不行新增或刪除
         }
 
@@ -617,172 +810,386 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
             alert('請點選會員才能進入此頁面!');
             location.href = '/#/memberData';
         } else {
-            //日歷easyui初始化
-            month_calendar_morning = $('#month_calendar_morning').multiDatesPicker({
-                dateFormat: "yy-mm-dd"
-            });
-            month_calendar_noon = $('#month_calendar_noon').multiDatesPicker({
-                dateFormat: "yy-mm-dd"
-            });
-            month_calendar_night = $('#month_calendar_night').multiDatesPicker({
-                dateFormat: "yy-mm-dd"
-            });
 
-            /** Meal 早 easy UI */
-            $('#Meal_A_Meal07').combobox({
-                url: $rootScope.apiUrl + 'fieldvalueMeal0708',
-                method: 'get',
-                multiple: true,
-                editable: false,
-                valueField: 'id',
-                textField: 'text'
-            });
+            switch (Edit_Type) {
+                case '1':
+                    //日歷easyui初始化
+                    month_calendar_morning = $('#month_calendar_morning').multiDatesPicker({
+                        dateFormat: "yy-mm-dd"
+                    });
+                    month_calendar_noon = $('#month_calendar_noon').multiDatesPicker({
+                        dateFormat: "yy-mm-dd"
+                    });
+                    month_calendar_night = $('#month_calendar_night').multiDatesPicker({
+                        dateFormat: "yy-mm-dd"
+                    });
 
-            $('#Meal_A_Meal08').combobox({
-                url: $rootScope.apiUrl + 'fieldvalueMeal0708',
-                method: 'post',
-                editable: false,
-                valueField: 'id',
-                textField: 'text'
-            });
+                    /** Meal 早 easy UI */
+                    $('#Meal_A_Meal07').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'get',
+                        multiple: true,
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
 
-            $('#Meal_A_Meal06').combotree({
-                url: $rootScope.apiUrl + 'fieldvalueAttrib05',
-                multiple: true,
-                valueField: 'id',
-                textField: 'text'
-            });
+                    $('#Meal_A_Meal08').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'post',
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
 
-            /** Meal 中午 easy UI */
-            $('#Meal_B_Meal07').combobox({
-                url: $rootScope.apiUrl + 'fieldvalueMeal0708',
-                method: 'get',
-                multiple: true,
-                editable: false,
-                valueField: 'id',
-                textField: 'text'
-            });
+                    $('#Meal_A_Meal06').combotree({
+                        url: $rootScope.apiUrl + 'fieldvalueAttrib05',
+                        multiple: true,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
 
-            $('#Meal_B_Meal08').combobox({
-                url: $rootScope.apiUrl + 'fieldvalueMeal0708',
-                method: 'post',
-                editable: false,
-                valueField: 'id',
-                textField: 'text'
-            });
+                    /** Meal 中午 easy UI */
+                    $('#Meal_B_Meal07').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'get',
+                        multiple: true,
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
 
-            $('#Meal_B_Meal06').combotree({
-                url: $rootScope.apiUrl + 'fieldvalueAttrib05',
-                multiple: true,
-                valueField: 'id',
-                textField: 'text'
-            });
+                    $('#Meal_B_Meal08').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'post',
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
 
-            /** Meal 晚 easy UI */
+                    $('#Meal_B_Meal06').combotree({
+                        url: $rootScope.apiUrl + 'fieldvalueAttrib05',
+                        multiple: true,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
 
-            $('#Meal_C_Meal07').combobox({
-                url: $rootScope.apiUrl + 'fieldvalueMeal0708',
-                method: 'get',
-                multiple: true,
-                editable: false,
-                valueField: 'id',
-                textField: 'text'
-            });
+                    /** Meal 晚 easy UI */
 
-            $('#Meal_C_Meal08').combobox({
-                url: $rootScope.apiUrl + 'fieldvalueMeal0708',
-                method: 'post',
-                editable: false,
-                valueField: 'id',
-                textField: 'text'
-            });
+                    $('#Meal_C_Meal07').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'get',
+                        multiple: true,
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
 
-            $('#Meal_C_Meal06').combotree({
-                url: $rootScope.apiUrl + 'fieldvalueAttrib05',
-                multiple: true,
-                valueField: 'id',
-                textField: 'text'
-            });
+                    $('#Meal_C_Meal08').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'post',
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
 
-            //將初始欄位值塞到前端欄位
-            MemberService.getOneMEMBER(id, function (data) {
-                $scope.meal.attrib05 = data[0].Attrib05;
-                $scope.meal.user = data[0].User;
-                $scope.meal.attrib14 = data[0].Attrib14;
-                $scope.meal.attrib15 = data[0].Attrib15;
+                    $('#Meal_C_Meal06').combotree({
+                        url: $rootScope.apiUrl + 'fieldvalueAttrib05',
+                        multiple: true,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
 
-                $scope.mealForMember.meal2sicktype = data[0].Meal2SickType;
-                $scope.mealForMember.meal2a = data[0].Meal2A;
-                $scope.mealForMember.meal2ac = data[0].Meal2AC;     //早日期
-                $scope.mealForMember.meal2b = data[0].Meal2B;
-                $scope.mealForMember.meal2bc = data[0].Meal2BC;     //午日期
-                $scope.mealForMember.meal2c = data[0].Meal2C;
-                $scope.mealForMember.meal2cc = data[0].Meal2CC;     //晚日期
+                    //將初始欄位值塞到前端欄位
+                    MemberService.getOneMEMBER(id, function (data) {
+                        $scope.meal.attrib05 = data[0].Attrib05;
+                        $scope.meal.user = data[0].User;
+                        $scope.meal.attrib14 = data[0].Attrib14;
+                        $scope.meal.attrib15 = data[0].Attrib15;
 
-                //塞值到前端
-                $scope.meallistA.meal02 = $scope.meal.user;    //手機
-                $scope.meallistB.meal02 = $scope.meal.user;    //手機  
-                $scope.meallistC.meal02 = $scope.meal.user;    //手機
-                $scope.meallistA.meal03 = $scope.meal.attrib14;    //早餐地址
-                $scope.meallistB.meal03 = $scope.meal.attrib14;    //午餐地址
-                $scope.meallistC.meal03 = $scope.meal.attrib15;    //晚餐地址
-                //(禁忌)easy-ui combotree 要能夠讓值放入並且顯示勾選，要塞入物件
-                var attrib05setArray = [];
-                var attrib05Array = $scope.meal.attrib05.split(",");
-                for (key in attrib05Array) {
-                    attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
-                }
-                $('#Meal_A_Meal06').combotree('setValue', attrib05setArray);    //早餐禁忌
-                $('#Meal_B_Meal06').combotree('setValue', attrib05setArray);    //午餐禁忌
-                $('#Meal_C_Meal06').combotree('setValue', attrib05setArray);    //晚餐禁忌
+                        $scope.mealForMember.meal2sicktype = data[0].Meal2SickType;
+                        $scope.mealForMember.meal2a = data[0].Meal2A;
+                        $scope.mealForMember.meal2ac = data[0].Meal2AC;     //早日期
+                        $scope.mealForMember.meal2b = data[0].Meal2B;
+                        $scope.mealForMember.meal2bc = data[0].Meal2BC;     //午日期
+                        $scope.mealForMember.meal2c = data[0].Meal2C;
+                        $scope.mealForMember.meal2cc = data[0].Meal2CC;     //晚日期
 
-                //日曆塞值：  第一層判斷式：判斷之前有無輸入日期，第二層判斷式：判斷長度有無至少一個日期
-                if ($scope.mealForMember.meal2ac != null) {
-                    if ($scope.mealForMember.meal2ac.length > 9) {
-                        //早餐的日曆值塞入
-                        var meal2ac_initial = $scope.mealForMember.meal2ac.substring(1, $scope.mealForMember.meal2ac.length - 1);   //先去頭去尾';'
-                        var meal2ac_initial_array = meal2ac_initial.split(";");     //依照;來切
-                        month_calendar_morning.multiDatesPicker('addDates', meal2ac_initial_array); //將選取日期值塞入
-                        month_calendar_morning = $('#month_calendar_morning').multiDatesPicker({ addDisabledDates: meal2ac_initial_array });     //選取後的日期不能使用        
-                    } else {
-                        $('#month_calendar_morning').multiDatesPicker('resetDates');
-                        $('#month_calendar_morning').multiDatesPicker('resetDates', 'disabled');
+                        //塞值到前端
+                        $scope.meallistA.meal02 = $scope.meal.user;    //手機
+                        $scope.meallistB.meal02 = $scope.meal.user;    //手機  
+                        $scope.meallistC.meal02 = $scope.meal.user;    //手機
+                        $scope.meallistA.meal03 = $scope.meal.attrib14;    //早餐地址
+                        $scope.meallistB.meal03 = $scope.meal.attrib14;    //午餐地址
+                        $scope.meallistC.meal03 = $scope.meal.attrib15;    //晚餐地址
+                        //(禁忌)easy-ui combotree 要能夠讓值放入並且顯示勾選，要塞入物件
+                        var attrib05setArray = [];
+                        var attrib05Array = $scope.meal.attrib05.split(",");
+                        for (key in attrib05Array) {
+                            attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
+                        }
+                        $('#Meal_A_Meal06').combotree('setValue', attrib05setArray);    //早餐禁忌
+                        $('#Meal_B_Meal06').combotree('setValue', attrib05setArray);    //午餐禁忌
+                        $('#Meal_C_Meal06').combotree('setValue', attrib05setArray);    //晚餐禁忌
+
+                        //日曆塞值：  第一層判斷式：判斷之前有無輸入日期，第二層判斷式：判斷長度有無至少一個日期
+                        if ($scope.mealForMember.meal2ac != null) {
+                            if ($scope.mealForMember.meal2ac.length > 9) {
+                                //早餐的日曆值塞入
+                                var meal2ac_initial = $scope.mealForMember.meal2ac.substring(1, $scope.mealForMember.meal2ac.length - 1);   //先去頭去尾';'
+                                var meal2ac_initial_array = meal2ac_initial.split(";");     //依照;來切
+                                month_calendar_morning.multiDatesPicker('addDates', meal2ac_initial_array); //將選取日期值塞入
+                                month_calendar_morning = $('#month_calendar_morning').multiDatesPicker({ addDisabledDates: meal2ac_initial_array });     //選取後的日期不能使用        
+                            } else {
+                                $('#month_calendar_morning').multiDatesPicker('resetDates');
+                                $('#month_calendar_morning').multiDatesPicker('resetDates', 'disabled');
+                            }
+                        } else {
+                            $('#month_calendar_morning').multiDatesPicker('resetDates');
+                            $('#month_calendar_morning').multiDatesPicker('resetDates', 'disabled');
+                        }
+                        if ($scope.mealForMember.meal2bc != null) {
+                            if ($scope.mealForMember.meal2bc.length > 9) {
+                                //午餐的日曆值塞入
+                                var meal2bc_initial = $scope.mealForMember.meal2bc.substring(1, $scope.mealForMember.meal2bc.length - 1);   //先去頭去尾';'
+                                var meal2bc_initial_array = meal2bc_initial.split(";");     //依照;來切
+                                month_calendar_noon.multiDatesPicker('addDates', meal2bc_initial_array);    //將選取日期值塞入
+                                month_calendar_noon = $('#month_calendar_noon').multiDatesPicker({ addDisabledDates: meal2bc_initial_array });    //選取後的日期不能使用
+                            } else {
+                                $('#month_calendar_noon').multiDatesPicker('resetDates');
+                                $('#month_calendar_noon').multiDatesPicker('resetDates', 'disabled');
+                            }
+                        } else {
+                            $('#month_calendar_noon').multiDatesPicker('resetDates');
+                            $('#month_calendar_noon').multiDatesPicker('resetDates', 'disabled');
+                        }
+                        if ($scope.mealForMember.meal2cc != null) {
+                            if ($scope.mealForMember.meal2cc.length > 9) {
+                                //晚餐的日曆值塞入
+                                var meal2cc_initial = $scope.mealForMember.meal2cc.substring(1, $scope.mealForMember.meal2cc.length - 1);   //先去頭去尾';'
+                                var meal2cc_initial_array = meal2cc_initial.split(";");     //依照;來切
+                                month_calendar_night.multiDatesPicker('addDates', meal2cc_initial_array);   //將選取日期值塞入
+                                month_calendar_night = $('#month_calendar_night').multiDatesPicker({ addDisabledDates: meal2cc_initial_array });  //選取後的日期不能使用
+                            } else {
+                                $('#month_calendar_night').multiDatesPicker('resetDates');
+                                $('#month_calendar_night').multiDatesPicker('resetDates', 'disabled');
+                            }
+                        } else {
+                            $('#month_calendar_night').multiDatesPicker('resetDates');
+                            $('#month_calendar_night').multiDatesPicker('resetDates', 'disabled');
+                        }
+                    });
+                    break;
+
+                // 刪除按鈕
+                case '2':
+                    function enableAllTheseDays_A(date) {
+                        var sdate = $.datepicker.formatDate('yy-mm-dd', date)
+                        if ($.inArray(sdate, enableDays_A) != -1) {
+                            return [true];
+                        }
+                        return [false];
                     }
-                } else {
-                    $('#month_calendar_morning').multiDatesPicker('resetDates');
-                    $('#month_calendar_morning').multiDatesPicker('resetDates', 'disabled');
-                }
-                if ($scope.mealForMember.meal2bc != null) {
-                    if ($scope.mealForMember.meal2bc.length > 9) {
-                        //午餐的日曆值塞入
-                        var meal2bc_initial = $scope.mealForMember.meal2bc.substring(1, $scope.mealForMember.meal2bc.length - 1);   //先去頭去尾';'
-                        var meal2bc_initial_array = meal2bc_initial.split(";");     //依照;來切
-                        month_calendar_noon.multiDatesPicker('addDates', meal2bc_initial_array);    //將選取日期值塞入
-                        month_calendar_noon = $('#month_calendar_noon').multiDatesPicker({ addDisabledDates: meal2bc_initial_array });    //選取後的日期不能使用
-                    } else {
-                        $('#month_calendar_noon').multiDatesPicker('resetDates');
-                        $('#month_calendar_noon').multiDatesPicker('resetDates', 'disabled');
+                    function enableAllTheseDays_B(date) {
+                        var sdate = $.datepicker.formatDate('yy-mm-dd', date)
+                        if ($.inArray(sdate, enableDays_B) != -1) {
+                            return [true];
+                        }
+                        return [false];
                     }
-                } else {
-                    $('#month_calendar_noon').multiDatesPicker('resetDates');
-                    $('#month_calendar_noon').multiDatesPicker('resetDates', 'disabled');
-                }
-                if ($scope.mealForMember.meal2cc != null) {
-                    if ($scope.mealForMember.meal2cc.length > 9) {
-                        //晚餐的日曆值塞入
-                        var meal2cc_initial = $scope.mealForMember.meal2cc.substring(1, $scope.mealForMember.meal2cc.length - 1);   //先去頭去尾';'
-                        var meal2cc_initial_array = meal2cc_initial.split(";");     //依照;來切
-                        month_calendar_night.multiDatesPicker('addDates', meal2cc_initial_array);   //將選取日期值塞入
-                        month_calendar_night = $('#month_calendar_night').multiDatesPicker({ addDisabledDates: meal2cc_initial_array });  //選取後的日期不能使用
-                    } else {
-                        $('#month_calendar_night').multiDatesPicker('resetDates');
-                        $('#month_calendar_night').multiDatesPicker('resetDates', 'disabled');
+                    function enableAllTheseDays_C(date) {
+                        var sdate = $.datepicker.formatDate('yy-mm-dd', date)
+                        if ($.inArray(sdate, enableDays_C) != -1) {
+                            return [true];
+                        }
+                        return [false];
                     }
-                } else {
-                    $('#month_calendar_night').multiDatesPicker('resetDates');
-                    $('#month_calendar_night').multiDatesPicker('resetDates', 'disabled');
-                }
-            });
+
+                    /** Meal 早 easy UI */
+                    $('#Meal_A_Meal07').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'get',
+                        multiple: true,
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    $('#Meal_A_Meal08').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'post',
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    $('#Meal_A_Meal06').combotree({
+                        url: $rootScope.apiUrl + 'fieldvalueAttrib05',
+                        multiple: true,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    /** Meal 中午 easy UI */
+                    $('#Meal_B_Meal07').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'get',
+                        multiple: true,
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    $('#Meal_B_Meal08').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'post',
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    $('#Meal_B_Meal06').combotree({
+                        url: $rootScope.apiUrl + 'fieldvalueAttrib05',
+                        multiple: true,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    /** Meal 晚 easy UI */
+                    $('#Meal_C_Meal07').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'get',
+                        multiple: true,
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    $('#Meal_C_Meal08').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'post',
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    $('#Meal_C_Meal06').combotree({
+                        url: $rootScope.apiUrl + 'fieldvalueAttrib05',
+                        multiple: true,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    //將初始欄位值塞到前端欄位
+                    MemberService.getOneMEMBER(id, function (data) {
+                        $scope.meal.attrib05 = data[0].Attrib05;
+                        $scope.meal.user = data[0].User;
+                        $scope.meal.attrib14 = data[0].Attrib14;
+                        $scope.meal.attrib15 = data[0].Attrib15;
+
+                        $scope.mealForMember.meal2sicktype = data[0].Meal2SickType;
+                        $scope.mealForMember.meal2a = data[0].Meal2A;
+                        $scope.mealForMember.meal2ac = data[0].Meal2AC;     //早日期
+                        $scope.mealForMember.meal2b = data[0].Meal2B;
+                        $scope.mealForMember.meal2bc = data[0].Meal2BC;     //午日期
+                        $scope.mealForMember.meal2c = data[0].Meal2C;
+                        $scope.mealForMember.meal2cc = data[0].Meal2CC;     //晚日期
+
+                        //日曆塞值：  第一層判斷式：判斷之前有無輸入日期，第二層判斷式：判斷長度有無至少一個日期
+                        if ($scope.mealForMember.meal2ac != null) {
+                            if ($scope.mealForMember.meal2ac.length > 9) {
+                                $('#month_calendar_morning').multiDatesPicker('resetDates');
+                                $('#month_calendar_morning').multiDatesPicker('resetDates', 'disabled');
+                                //早餐的日曆值塞入
+                                var meal2ac_initial = $scope.mealForMember.meal2ac.substring(1, $scope.mealForMember.meal2ac.length - 1);   //先去頭去尾';'
+                                enableDays_A = meal2ac_initial.split(";");     //依照;來切
+                                //日歷easyui初始化
+                                month_calendar_morning = $('#month_calendar_morning').multiDatesPicker({
+                                    dateFormat: "yy-mm-dd",
+                                    beforeShowDay: enableAllTheseDays_A
+                                });
+
+                            } else {
+                                $('#month_calendar_morning').multiDatesPicker('resetDates');
+                                $('#month_calendar_morning').multiDatesPicker('resetDates', 'disabled');
+                                enableDays_A = [];
+                                month_calendar_morning = $('#month_calendar_morning').multiDatesPicker({
+                                    dateFormat: "yy-mm-dd",
+                                    beforeShowDay: enableAllTheseDays_A
+                                });
+                            }
+                        } else {
+                            $('#month_calendar_morning').multiDatesPicker('resetDates');
+                            $('#month_calendar_morning').multiDatesPicker('resetDates', 'disabled');
+                            enableDays_A = [];
+                            month_calendar_morning = $('#month_calendar_morning').multiDatesPicker({
+                                dateFormat: "yy-mm-dd",
+                                beforeShowDay: enableAllTheseDays_A
+                            });
+                        }
+                        if ($scope.mealForMember.meal2bc != null) {
+                            if ($scope.mealForMember.meal2bc.length > 9) {
+                                $('#month_calendar_noon').multiDatesPicker('resetDates');
+                                $('#month_calendar_noon').multiDatesPicker('resetDates', 'disabled');
+                                //午餐的日曆值塞入
+                                var meal2bc_initial = $scope.mealForMember.meal2bc.substring(1, $scope.mealForMember.meal2bc.length - 1);   //先去頭去尾';'
+                                enableDays_B = meal2bc_initial.split(";");     //依照;來切
+                                month_calendar_noon = $('#month_calendar_noon').multiDatesPicker({
+                                    dateFormat: "yy-mm-dd",
+                                    beforeShowDay: enableAllTheseDays_B
+                                });
+                            } else {
+                                $('#month_calendar_noon').multiDatesPicker('resetDates');
+                                $('#month_calendar_noon').multiDatesPicker('resetDates', 'disabled');
+                                enableDays_B = [];
+                                month_calendar_noon = $('#month_calendar_noon').multiDatesPicker({
+                                    dateFormat: "yy-mm-dd",
+                                    beforeShowDay: enableAllTheseDays_B
+                                });
+                            }
+                        } else {
+                            $('#month_calendar_noon').multiDatesPicker('resetDates');
+                            $('#month_calendar_noon').multiDatesPicker('resetDates', 'disabled');
+                            enableDays_B = [];
+                            month_calendar_noon = $('#month_calendar_noon').multiDatesPicker({
+                                dateFormat: "yy-mm-dd",
+                                beforeShowDay: enableAllTheseDays_B
+                            });
+                        }
+                        if ($scope.mealForMember.meal2cc != null) {
+                            if ($scope.mealForMember.meal2cc.length > 9) {
+                                $('#month_calendar_night').multiDatesPicker('resetDates');
+                                $('#month_calendar_night').multiDatesPicker('resetDates', 'disabled');
+                                //晚餐的日曆值塞入
+                                var meal2cc_initial = $scope.mealForMember.meal2cc.substring(1, $scope.mealForMember.meal2cc.length - 1);   //先去頭去尾';'
+                                enableDays_C = meal2cc_initial.split(";");     //依照;來切
+                                month_calendar_night = $('#month_calendar_night').multiDatesPicker({
+                                    dateFormat: "yy-mm-dd",
+                                    beforeShowDay: enableAllTheseDays_C
+                                });
+                            } else {
+                                $('#month_calendar_night').multiDatesPicker('resetDates');
+                                $('#month_calendar_night').multiDatesPicker('resetDates', 'disabled');
+                                enableDays_C = [];
+                                month_calendar_night = $('#month_calendar_night').multiDatesPicker({
+                                    dateFormat: "yy-mm-dd",
+                                    beforeShowDay: enableAllTheseDays_C
+                                });
+                            }
+                        } else {
+                            $('#month_calendar_night').multiDatesPicker('resetDates');
+                            $('#month_calendar_night').multiDatesPicker('resetDates', 'disabled');
+                            enableDays_C = [];
+                            month_calendar_night = $('#month_calendar_night').multiDatesPicker({
+                                dateFormat: "yy-mm-dd",
+                                beforeShowDay: enableAllTheseDays_C
+                            });
+                        }
+                    });
+                    break;
+            }
+
+
         }
     }
 
@@ -952,6 +1359,46 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                 return true;
             }
         }
+    }
+
+    //觀測radio button選取的選項(編輯模式)
+    function Edit_Type_check() {
+        $(document).on("change", "input[name=Edit_Type_1]", function () {
+            Edit_Type = $('[name="Edit_Type_1"]:checked').val();
+            if (Edit_Type === '1') {
+                document.getElementById("a_Link_Save_1").disabled = false;
+                document.getElementById("a_Link_Save_2").disabled = true;
+                document.getElementById("a_Link_Save_3").disabled = true;
+                document.getElementById("a_Link_Save_4").disabled = true;
+                document.getElementById("a_Link_Save_5").disabled = true;
+                initial();
+            } else if (Edit_Type === '2') {
+                document.getElementById("a_Link_Save_1").disabled = true;
+                document.getElementById("a_Link_Save_2").disabled = false;
+                document.getElementById("a_Link_Save_3").disabled = true;
+                document.getElementById("a_Link_Save_4").disabled = true;
+                document.getElementById("a_Link_Save_5").disabled = true;
+                initial();
+            } else if (Edit_Type === '3') {
+                document.getElementById("a_Link_Save_1").disabled = true;
+                document.getElementById("a_Link_Save_2").disabled = true;
+                document.getElementById("a_Link_Save_3").disabled = false;
+                document.getElementById("a_Link_Save_4").disabled = true;
+                document.getElementById("a_Link_Save_5").disabled = true;
+            } else if (Edit_Type === '4') {
+                document.getElementById("a_Link_Save_1").disabled = true;
+                document.getElementById("a_Link_Save_2").disabled = true;
+                document.getElementById("a_Link_Save_3").disabled = true;
+                document.getElementById("a_Link_Save_4").disabled = false;
+                document.getElementById("a_Link_Save_5").disabled = true;
+            } else if (Edit_Type === '5') {
+                document.getElementById("a_Link_Save_1").disabled = true;
+                document.getElementById("a_Link_Save_2").disabled = true;
+                document.getElementById("a_Link_Save_3").disabled = true;
+                document.getElementById("a_Link_Save_4").disabled = true;
+                document.getElementById("a_Link_Save_5").disabled = false;
+            }
+        });
     }
     /**---------------------------------------function zone end--------------------------------------------*/
 });

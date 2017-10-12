@@ -30,6 +30,63 @@ router.delete('/', function (req, res, next) {
         res.json(results);
     });
 });
+// --------  delete sepcific date Data from MySQL's table meal ----------------------- 
+router.delete('/deleteA', function (req, res, next) {
+    req.dbConnection.query('DELETE FROM meal WHERE MemberID=' + req.query.id + " AND Date='" + req.query.date + "' AND MealType=3 AND Type='A';", function (error, results, fields) {
+        if (error) throw error;
+        console.log('The solution is: ', results);
+        res.json(results);
+    });
+});
+router.put('/deleteA', function (req, res, next) {
+    req.dbConnection.query("UPDATE member SET "
+        + 'Meal3AC=' + "? "
+        + 'WHERE ID=' + "?;",
+        [req.body.mea3ac, req.body.id],
+        function (error, results, fields) {
+            if (error) throw error;
+            console.log('The solution is: ', results);
+            res.json(results);
+        });
+});
+
+router.delete('/deleteB', function (req, res, next) {
+    req.dbConnection.query('DELETE FROM meal WHERE MemberID=' + req.query.id + " AND Date='" + req.query.date + "' AND MealType=3 AND Type='B';", function (error, results, fields) {
+        if (error) throw error;
+        console.log('The solution is: ', results);
+        res.json(results);
+    });
+});
+router.put('/deleteB', function (req, res, next) {
+    req.dbConnection.query("UPDATE member SET "
+        + 'Meal3BC=' + "? "
+        + 'WHERE ID=' + "?;",
+        [req.body.mea3bc, req.body.id],
+        function (error, results, fields) {
+            if (error) throw error;
+            console.log('The solution is: ', results);
+            res.json(results);
+        });
+});
+
+router.delete('/deleteC', function (req, res, next) {
+    req.dbConnection.query('DELETE FROM meal WHERE MemberID=' + req.query.id + " AND Date='" + req.query.date + "' AND MealType=3 AND Type='C';", function (error, results, fields) {
+        if (error) throw error;
+        console.log('The solution is: ', results);
+        res.json(results);
+    });
+});
+router.put('/deleteC', function (req, res, next) {
+    req.dbConnection.query("UPDATE member SET "
+        + 'Meal3CC=' + "? "
+        + 'WHERE ID=' + "?;",
+        [req.body.mea3cc, req.body.id],
+        function (error, results, fields) {
+            if (error) throw error;
+            console.log('The solution is: ', results);
+            res.json(results);
+        });
+});
 
 
 module.exports = router;
