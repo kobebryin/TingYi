@@ -8,6 +8,7 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
     var client_ip;              //客戶端IP位置
 
     var Edit_Type = '1';
+    // $scope.Edit_Type_1 = '1';   //編輯模式ng-model預設   
     var enableDays_A = [];
     var enableDays_B = [];
     var enableDays_C = [];

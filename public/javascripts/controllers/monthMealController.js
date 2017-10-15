@@ -8,6 +8,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
     var client_ip;              //客戶端IP位置
 
     var Edit_Type = '1';
+    // $scope.Edit_Type = '1';     //編輯模式ng-model預設   
     var enableDays_A = [];
     var enableDays_B = [];
     var enableDays_C = [];
@@ -813,7 +814,6 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             alert('請點選會員才能進入此頁面!');
             location.href = '/#/memberData';
         } else {
-
             switch (Edit_Type) {
                 // 新增按鈕
                 case '1':
@@ -1113,7 +1113,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     }
 
                     /** Meal 早 easy UI */
-                    $('#Meal_A_Meal09').combobox({
+                    $('#S_Meal_A_Meal09').combobox({
                         url: $rootScope.apiUrl + 'fieldvalueDishList',
                         method: 'get',
                         editable: false,
@@ -1122,7 +1122,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         textField: 'text'
                     });
 
-                    $('#Meal_A_Meal14').combobox({
+                    $('#S_Meal_A_Meal14').combobox({
                         url: $rootScope.apiUrl + 'fieldvalueMeal14',
                         method: 'get',
                         editable: false,
@@ -1131,7 +1131,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         textField: 'text'
                     });
 
-                    $('#Meal_A_Meal15').combobox({
+                    $('#S_Meal_A_Meal15').combobox({
                         url: $rootScope.apiUrl + 'fieldvalueMeal15',
                         method: 'get',
                         editable: false,
@@ -1140,7 +1140,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         textField: 'text'
                     });
 
-                    $('#Meal_A_Meal21').combobox({
+                    $('#S_Meal_A_Meal21').combobox({
                         url: $rootScope.apiUrl + 'fieldvalueMeal21',
                         method: 'get',
                         editable: false,
@@ -1148,66 +1148,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         textField: 'text'
                     });
 
-                    $('#Meal_A_Meal22').combobox({
-                        url: $rootScope.apiUrl + 'fieldvalueMeal21',
-                        method: 'post',
-                        editable: false,
-                        valueField: 'id',
-                        textField: 'text'
-                    });
-
-                    $('#Meal_A_Meal23').combobox({
-                        url: $rootScope.apiUrl + 'fieldvalueMeal21',
-                        method: 'put',
-                        editable: false,
-                        valueField: 'id',
-                        textField: 'text'
-                    });
-
-                    $('#Meal_A_Meal12').combotree({
-                        url: $rootScope.apiUrl + 'fieldvalueAttrib05',
-                        multiple: true,
-                        valueField: 'id',
-                        textField: 'text'
-                    });
-
-                    /** Meal 中午 easy UI */
-                    $('#Meal_B_Meal09').combobox({
-                        url: $rootScope.apiUrl + 'fieldvalueDishList',
-                        method: 'get',
-                        editable: false,
-                        multiple: true,
-                        valueField: 'id',
-                        textField: 'text'
-                    });
-
-                    $('#Meal_B_Meal14').combobox({
-                        url: $rootScope.apiUrl + 'fieldvalueMeal14',
-                        method: 'get',
-                        editable: false,
-                        multiple: true,
-                        valueField: 'id',
-                        textField: 'text'
-                    });
-
-                    $('#Meal_B_Meal15').combobox({
-                        url: $rootScope.apiUrl + 'fieldvalueMeal15',
-                        method: 'get',
-                        editable: false,
-                        multiple: true,
-                        valueField: 'id',
-                        textField: 'text'
-                    });
-
-                    $('#Meal_B_Meal21').combobox({
-                        url: $rootScope.apiUrl + 'fieldvalueMeal21',
-                        method: 'get',
-                        editable: false,
-                        valueField: 'id',
-                        textField: 'text'
-                    });
-
-                    $('#Meal_B_Meal22').combobox({
+                    $('#S_Meal_A_Meal22').combobox({
                         url: $rootScope.apiUrl + 'fieldvalueMeal21',
                         method: 'post',
                         editable: false,
@@ -1215,7 +1156,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         textField: 'text'
                     });
 
-                    $('#Meal_B_Meal23').combobox({
+                    $('#S_Meal_A_Meal23').combobox({
                         url: $rootScope.apiUrl + 'fieldvalueMeal21',
                         method: 'put',
                         editable: false,
@@ -1223,71 +1164,12 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         textField: 'text'
                     });
 
-                    $('#Meal_B_Meal12').combotree({
+                    $('#S_Meal_A_Meal12').combotree({
                         url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                         multiple: true,
                         valueField: 'id',
                         textField: 'text'
-                    });
-
-                    /** Meal 晚 easy UI */
-                    $('#Meal_C_Meal09').combobox({
-                        url: $rootScope.apiUrl + 'fieldvalueDishList',
-                        method: 'get',
-                        editable: false,
-                        multiple: true,
-                        valueField: 'id',
-                        textField: 'text'
-                    });
-
-                    $('#Meal_C_Meal14').combobox({
-                        url: $rootScope.apiUrl + 'fieldvalueMeal14',
-                        method: 'get',
-                        editable: false,
-                        multiple: true,
-                        valueField: 'id',
-                        textField: 'text'
-                    });
-
-                    $('#Meal_C_Meal15').combobox({
-                        url: $rootScope.apiUrl + 'fieldvalueMeal15',
-                        method: 'get',
-                        editable: false,
-                        multiple: true,
-                        valueField: 'id',
-                        textField: 'text'
-                    });
-
-                    $('#Meal_C_Meal21').combobox({
-                        url: $rootScope.apiUrl + 'fieldvalueMeal21',
-                        method: 'get',
-                        editable: false,
-                        valueField: 'id',
-                        textField: 'text'
-                    });
-
-                    $('#Meal_C_Meal22').combobox({
-                        url: $rootScope.apiUrl + 'fieldvalueMeal21',
-                        method: 'post',
-                        editable: false,
-                        valueField: 'id',
-                        textField: 'text'
-                    });
-
-                    $('#Meal_C_Meal23').combobox({
-                        url: $rootScope.apiUrl + 'fieldvalueMeal21',
-                        method: 'put',
-                        editable: false,
-                        valueField: 'id',
-                        textField: 'text'
-                    });
-
-                    $('#Meal_C_Meal12').combotree({
-                        url: $rootScope.apiUrl + 'fieldvalueAttrib05',
-                        multiple: true,
-                        valueField: 'id',
-                        textField: 'text'
-                    });
+                    });                   
 
                     //將初始欄位值塞到前端欄位
                     MemberService.getOneMEMBER(id, function (data) {
