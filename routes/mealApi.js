@@ -197,6 +197,129 @@ router.delete('/', function (req, res, next) {
     });
 });
 
+// --------  UPDATE JOIN Data from MySQL's table meal ----------------------- 
+router.put('/dynamicUpdate', function (req, res, next) {
+    var sqlString = 'UPDATE meal SET ';
+    var sqlArray = [];
+    if (req.body.meal01 != ' ') {
+        sqlString += 'Meal01=?, ';
+        sqlArray.push(req.body.meal01);
+    }
+    if (req.body.meal02 != ' ') {
+        sqlString += 'Meal02=?, ';
+        sqlArray.push(req.body.meal02);
+    }
+    if (req.body.meal03 != ' ') {
+        sqlString += 'Meal03=?, ';
+        sqlArray.push(req.body.meal03);
+    }
+    if (req.body.meal04 != ' ') {
+        sqlString += 'Meal04=?, ';
+        sqlArray.push(req.body.meal04);
+    }
+    if (req.body.meal05 != ' ') {
+        sqlString += 'Meal05=?, ';
+        sqlArray.push(req.body.meal05);
+    }
+    if (req.body.meal06 != ' ') {
+        sqlString += 'Meal06=?, ';
+        sqlArray.push(req.body.meal06);
+    }
+    if (req.body.meal07 != ' ') {
+        sqlString += 'Meal07=?, ';
+        sqlArray.push(req.body.meal07);
+    }
+    if (req.body.meal08 != ' ') {
+        sqlString += 'Meal08=?, ';
+        sqlArray.push(req.body.meal08);
+    }
+    if (req.body.meal09 != '') {
+        sqlString += 'Meal09=?, ';
+        sqlArray.push(req.body.meal09);
+    }
+    if (req.body.meal10 != ' ') {
+        sqlString += 'Meal10=?, ';
+        sqlArray.push(req.body.meal10);
+    }
+    if (req.body.meal11 != ' ') {
+        sqlString += 'Meal11=?, ';
+        sqlArray.push(req.body.meal11);
+    }
+    if (req.body.meal12 != '') {
+        sqlString += 'Meal12=?, ';
+        sqlArray.push(req.body.meal12);
+    }
+    if (req.body.meal13 != ' ') {
+        sqlString += 'Meal13=?, ';
+        sqlArray.push(req.body.meal13);
+    }
+    if (req.body.meal14 != '') {
+        sqlString += 'Meal14=?, ';
+        sqlArray.push(req.body.meal14);
+    }
+    if (req.body.meal15 != '') {
+        sqlString += 'Meal15=?, ';
+        sqlArray.push(req.body.meal15);
+    }
+    if (req.body.meal25 != ' ') {
+        sqlString += 'Meal25=?, ';
+        sqlArray.push(req.body.meal25);
+    }
+    if (req.body.meal16 != ' ') {
+        sqlString += 'Meal16=?, ';
+        sqlArray.push(req.body.meal16);
+    }
+    if (req.body.meal17 != ' ') {
+        sqlString += 'Meal17=?, ';
+        sqlArray.push(req.body.meal17);
+    }
+    if (req.body.meal18 != ' ') {
+        sqlString += 'Meal18=?, ';
+        sqlArray.push(req.body.meal18);
+    }
+    if (req.body.meal19 != ' ') {
+        sqlString += 'Meal19=?, ';
+        sqlArray.push(req.body.meal19);
+    }
+    if (req.body.meal20 != ' ') {
+        sqlString += 'Meal20=?, ';
+        sqlArray.push(req.body.meal20);
+    }
+    if (req.body.meal21 != '') {
+        sqlString += 'Meal21=?, ';
+        sqlArray.push(req.body.meal21);
+    }
+    if (req.body.meal22 != '') {
+        sqlString += 'Meal22=?, ';
+        sqlArray.push(req.body.meal22);
+    }
+    if (req.body.meal23 != '') {
+        sqlString += 'Meal23=?, ';
+        sqlArray.push(req.body.meal23);
+    }
+    if (req.body.meal24 != ' ') {
+        sqlString += 'Meal24=?, ';
+        sqlArray.push(req.body.meal24);
+    }
+    sqlString += 'X';
+    var FinalSqlString = sqlString.split(', X')[0];
+     
+    if (sqlArray.length > 0) {
+        FinalSqlString += ' WHERE MemberID = ? AND Date = ? AND MealType = ? AND Type = ?;';
+        sqlArray.push(req.body.memberid);
+        sqlArray.push(req.body.date);
+        sqlArray.push(1);
+        sqlArray.push(req.body.type);
+        req.dbConnection.query(FinalSqlString, sqlArray, function (error, results, fields) {
+            if (error) throw error;
+            console.log('The solution is: ', results);
+            res.json(results);
+        });
+    } else {
+        res.send('未輸入任何修改資料!');
+    }
+});
+
 // --------  delete sepcific date Data from MySQL's table meal ----------------------- 
 router.delete('/deleteA', function (req, res, next) {
     req.dbConnection.query('DELETE FROM meal WHERE MemberID=' + req.query.id + " AND Date='" + req.query.date + "' AND MealType=1 AND Type='A';", function (error, results, fields) {

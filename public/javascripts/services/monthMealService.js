@@ -7,6 +7,30 @@ angular.module('TinYi').service('monthMealService', function ($rootScope, $http)
         });
     }
 
+    //修改加入餐點資料 -- 月子餐
+    this.edit_join_Meal = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + '/dynamicUpdate', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
+    //修改加入餐點資料 -- 調理餐
+    this.edit_join_Meal2 = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + 'memberForConditionMeal/dynamicUpdate', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
+    //修改加入餐點資料 -- 一般餐
+    this.edit_join_Meal3 = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + 'memberForNormalMeal/dynamicUpdate', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
     //月子餐刪除餐點資料
     this.deleteMeal_A = function (id, callback) {
         $http.delete($rootScope.apiUrl + 'meal?MemberID=' + id).success(function (data) {
@@ -61,7 +85,7 @@ angular.module('TinYi').service('monthMealService', function ($rootScope, $http)
         });
     }
     //調理餐刪除特定日期餐點資料
-     this.S2_deleteMeal_A = function (delete_data, callback) {
+    this.S2_deleteMeal_A = function (delete_data, callback) {
         $http.delete($rootScope.apiUrl + 'memberForConditionMeal/deleteA?id=' + delete_data.id + "&date=" + delete_data.date).success(function (data) {
             // you can do some processing here
             callback(data);

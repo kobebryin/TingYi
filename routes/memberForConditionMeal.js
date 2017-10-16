@@ -88,4 +88,92 @@ router.put('/deleteC', function (req, res, next) {
         });
 });
 
+// --------  UPDATE JOIN Data from MySQL's table meal ----------------------- 
+router.put('/dynamicUpdate', function (req, res, next) {
+    var sqlString = 'UPDATE meal SET ';
+    var sqlArray = [];
+    if (req.body.meal01 != ' ') {
+        sqlString += 'Meal01=?, ';
+        sqlArray.push(req.body.meal01);
+    }
+    if (req.body.meal02 != ' ') {
+        sqlString += 'Meal02=?, ';
+        sqlArray.push(req.body.meal02);
+    }
+    if (req.body.meal03 != ' ') {
+        sqlString += 'Meal03=?, ';
+        sqlArray.push(req.body.meal03);
+    }
+    if (req.body.meal04 != ' ') {
+        sqlString += 'Meal04=?, ';
+        sqlArray.push(req.body.meal04);
+    }
+    if (req.body.meal05 != ' ') {
+        sqlString += 'Meal05=?, ';
+        sqlArray.push(req.body.meal05);
+    }
+    if (req.body.meal06 != '') {
+        sqlString += 'Meal06=?, ';
+        sqlArray.push(req.body.meal06);
+    }
+    if (req.body.meal07 != '') {
+        sqlString += 'Meal07=?, ';
+        sqlArray.push(req.body.meal07);
+    }
+    if (req.body.meal08 != '') {
+        sqlString += 'Meal08=?, ';
+        sqlArray.push(req.body.meal08);
+    }
+    if (req.body.meal09 != ' ') {
+        sqlString += 'Meal09=?, ';
+        sqlArray.push(req.body.meal09);
+    }
+    if (req.body.meal10 != ' ') {
+        sqlString += 'Meal10=?, ';
+        sqlArray.push(req.body.meal10);
+    }
+    if (req.body.meal11 != ' ') {
+        sqlString += 'Meal11=?, ';
+        sqlArray.push(req.body.meal11);
+    }
+    if (req.body.meal12 != ' ') {
+        sqlString += 'Meal12=?, ';
+        sqlArray.push(req.body.meal12);
+    }
+    if (req.body.meal13 != ' ') {
+        sqlString += 'Meal13=?, ';
+        sqlArray.push(req.body.meal13);
+    }
+    if (req.body.meal14 != ' ') {
+        sqlString += 'Meal14=?, ';
+        sqlArray.push(req.body.meal14);
+    }
+    if (req.body.meal15 != ' ') {
+        sqlString += 'Meal15=?, ';
+        sqlArray.push(req.body.meal15);
+    }
+    
+    sqlString += 'X';
+    var FinalSqlString = sqlString.split(', X')[0];
+    console.log(FinalSqlString);
+    console.log(sqlArray.length)
+     
+    if (sqlArray.length > 0) {
+        FinalSqlString += ' WHERE MemberID = ? AND Date = ? AND MealType = ? AND Type = ?;';
+        sqlArray.push(req.body.memberid);
+        sqlArray.push(req.body.date);
+        sqlArray.push(2);
+        sqlArray.push(req.body.type);
+        console.log(FinalSqlString);
+        console.log(sqlArray);
+        req.dbConnection.query(FinalSqlString, sqlArray, function (error, results, fields) {
+            if (error) throw error;
+            console.log('The solution is: ', results);
+            res.json(results);
+        });
+    } else {
+        res.send('未輸入任何修改資料!');
+    }
+});
+
 module.exports = router;
