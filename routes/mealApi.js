@@ -197,6 +197,43 @@ router.delete('/', function (req, res, next) {
     });
 });
 
+// --------  UPDATE OVERWRITE Data from MySQL's table meal ----------------------- 
+router.put('/updateoverwrite', function (req, res, next) {
+    req.dbConnection.query('UPDATE meal SET '
+    + 'Meal01=?, ' 
+    + 'Meal02=?, ' 
+    + 'Meal03=?, ' 
+    + 'Meal04=?, ' 
+    + 'Meal05=?, ' 
+    + 'Meal06=?, ' 
+    + 'Meal07=?, ' 
+    + 'Meal08=?, ' 
+    + 'Meal09=?, ' 
+    + 'Meal10=?, ' 
+    + 'Meal11=?, ' 
+    + 'Meal12=?, ' 
+    + 'Meal13=?, ' 
+    + 'Meal14=?, ' 
+    + 'Meal15=?, ' 
+    + 'Meal16=?, ' 
+    + 'Meal17=?, ' 
+    + 'Meal18=?, ' 
+    + 'Meal19=?, ' 
+    + 'Meal20=?, ' 
+    + 'Meal21=?, ' 
+    + 'Meal22=?, ' 
+    + 'Meal23=?, ' 
+    + 'Meal24=?, ' 
+    + 'Meal25=? ' 
+    + 'WHERE MemberID = ? AND Date = ? AND MealType = ? AND Type = ?;',
+    [req.body.meal01, req.body.meal02, req.body.meal03, req.body.meal04, req.body.meal05, req.body.meal06, req.body.meal07, req.body.meal08, req.body.meal09, req.body.meal10, req.body.meal11, req.body.meal12, req.body.meal13, req.body.meal14, req.body.meal15, req.body.meal16, req.body.meal17, req.body.meal18, req.body.meal19, req.body.meal20, req.body.meal21, req.body.meal22, req.body.meal23, req.body.meal24, req.body.meal25, req.body.memberid, req.body.date, 1, req.body.type]
+    , function (error, results, fields) {
+        if (error) throw error;
+        console.log('The solution is: ', results);
+        res.json(results);
+    });
+});
+
 // --------  UPDATE JOIN Data from MySQL's table meal ----------------------- 
 router.put('/dynamicUpdate', function (req, res, next) {
     var sqlString = 'UPDATE meal SET ';
