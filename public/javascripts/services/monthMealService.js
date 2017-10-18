@@ -15,6 +15,22 @@ angular.module('TinYi').service('monthMealService', function ($rootScope, $http)
         });
     }
 
+    //修改覆蓋餐點資料 -- 調理餐
+    this.edit_overwrite_Meal2 = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + 'memberForConditionMeal/updateoverwrite', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
+    //修改覆蓋餐點資料 -- 一般餐
+    this.edit_overwrite_Meal3 = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + 'memberForNormalMeal/updateoverwrite', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
     //修改加入餐點資料 -- 月子餐
     this.edit_join_Meal = function (inputObj, callback) {
         $http.put($rootScope.apiUrl + 'meal/dynamicUpdate', inputObj).success(function (data) {
