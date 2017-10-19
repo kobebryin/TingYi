@@ -197,6 +197,15 @@ router.delete('/', function (req, res, next) {
     });
 });
 
+// --------  get Data from MySQL's table meal ----------------------- 
+router.put('/show_data', function (req, res, next) {
+    req.dbConnection.query('SELECT * FROM meal WHERE MemberID=' + req.body.memberid + " AND Date='" + req.body.date + "' AND MealType=" + req.body.mealtype + " AND Type='" + req.body.type + "';", function (error, results, fields) {
+        if (error) throw error;
+        console.log('The solution is: ', results);
+        res.json(results);
+    });
+});
+
 // --------  UPDATE OVERWRITE Data from MySQL's table meal ----------------------- 
 router.put('/updateoverwrite', function (req, res, next) {
     req.dbConnection.query('UPDATE meal SET '

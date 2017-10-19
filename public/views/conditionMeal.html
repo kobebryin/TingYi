@@ -18,9 +18,12 @@
                 <tr align="left">
                     <td><input type="button" id="a_Link_Save_1" ng-click="new()" value="新增" class="easyui-linkbutton" disabled/></td>
                     <td><input type="button" id="a_Link_Save_2" ng-click="delete()" value="刪除" class="easyui-linkbutton" disabled></td>
-                    <td><input type="button" id="a_Link_Save_3" ng-click="edit_join()" value="修改(加入)" class="easyui-linkbutton" disabled></td>
-                    <td><input type="button" id="a_Link_Save_5" ng-click="edit_overwrite()" value="修改(覆蓋)" class="easyui-linkbutton" disabled></td>
-                    <td align="right"><input type="button" id="a_Link_Save_4" value="查看輸入資料" class="easyui-linkbutton" disabled></td>
+                    <td><input type="button" id="a_Link_Save_3" ng-click="edit_join()" value="修改(加入)" class="easyui-linkbutton"
+                            disabled></td>
+                    <td><input type="button" id="a_Link_Save_5" ng-click="edit_overwrite()" value="修改(覆蓋)" class="easyui-linkbutton"
+                            disabled></td>
+                    <td align="right"><input type="button" id="a_Link_Save_4" ng-click="show_data()" value="查看輸入資料" class="easyui-linkbutton"
+                            disabled></td>
                 </tr>
             </table>
 
@@ -120,8 +123,15 @@
         </td>
 
         <td>
+            <table width="870" border="0" cellspacing="0" cellpadding="0" ng-if="Edit_Type_1 === '4'">
+                <tr>
+                    <td>
+                        <textarea id="txt_Request_Search" readonly style="width:100%;border-style:none; border-width:0px;height:700px;font-size:18px;"></textarea>
+                    </td>
+                </tr>
+            </table>
 
-            <table width="870" border="0" cellspacing="0" cellpadding="0" ng-if="Edit_Type_1 === '2' || Edit_Type_1 === '3' || Edit_Type_1 === '4' || Edit_Type_1 === '5'">
+            <table width="870" border="0" cellspacing="0" cellpadding="0" ng-if="Edit_Type_1 === '2' || Edit_Type_1 === '3' || Edit_Type_1 === '5'">
                 <tr>
                     <td bgcolor="#FFEE99">
                         <table width="870" border="0" cellspacing="0" cellpadding="0">

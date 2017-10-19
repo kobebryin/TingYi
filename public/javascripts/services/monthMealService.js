@@ -7,6 +7,14 @@ angular.module('TinYi').service('monthMealService', function ($rootScope, $http)
         });
     }
 
+    //查看餐點資料 -- 月子餐
+    this.show_data = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + 'meal/show_data', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
     //修改覆蓋餐點資料 -- 月子餐
     this.edit_overwrite_Meal = function (inputObj, callback) {
         $http.put($rootScope.apiUrl + 'meal/updateoverwrite', inputObj).success(function (data) {

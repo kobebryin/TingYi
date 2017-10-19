@@ -337,7 +337,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     $scope.member.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
                     $scope.member.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
 
-                    console.log($scope.member);
+                    // console.log($scope.member);
 
                     MemberService.putMEMBER($scope.member, function (data) {
                         table.destroy();    //摧毀dataTables
