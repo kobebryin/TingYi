@@ -192,7 +192,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
     //  此頁開始時先呼叫initial()
     initial();
- 
+
     //取得客戶單IP位址
     $.getJSON('//freegeoip.net/json/?callback=?', function (data) {
         client_ip = data.ip;
@@ -556,19 +556,28 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                                     $('#lunch_addr').combobox('setValue', $scope.member.attrib14);
 
                                     //(禁忌)easy-ui combotree 要能夠讓值放入並且顯示勾選，要塞入物件
-                                    var attrib05setArray = [];
-                                    var attrib05Array = $scope.member.attrib05.split(",");
-                                    for (key in attrib05Array) {
-                                        attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
+                                    if ($scope.member.attrib05 != null) {
+                                        var attrib05setArray = [];
+                                        var attrib05Array = $scope.member.attrib05.split(",");
+                                        for (key in attrib05Array) {
+                                            attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
+                                        }
+                                        $('#id_input_Member_Info_Attrib05').combotree('setValue', attrib05setArray);
+                                    } else {
+                                        $('#id_input_Member_Info_Attrib05').combotree('setValue', '');
                                     }
-                                    $('#id_input_Member_Info_Attrib05').combotree('setValue', attrib05setArray);
+
                                     //(贈品)easy-ui combotree 要能夠讓值放入並且顯示勾選，要塞入物件
-                                    var attrib08setArray = [];
-                                    var attrib08Array = $scope.member.attrib08.split(",");
-                                    for (key in attrib08Array) {
-                                        attrib08setArray.push({ id: attrib08Array[key], text: attrib08Array[key] });
+                                    if ($scope.member.attrib08 != null) {
+                                        var attrib08setArray = [];
+                                        var attrib08Array = $scope.member.attrib08.split(",");
+                                        for (key in attrib08Array) {
+                                            attrib08setArray.push({ id: attrib08Array[key], text: attrib08Array[key] });
+                                        }
+                                        $('#id_input_Member_Info_Attrib08').combotree('setValue', attrib08setArray);
+                                    }else{
+                                        $('#id_input_Member_Info_Attrib08').combotree('setValue', ''); 
                                     }
-                                    $('#id_input_Member_Info_Attrib08').combotree('setValue', attrib08setArray);
 
                                     //console.log(data[0].Attrib04);
 
@@ -704,7 +713,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                         }, 200);
                     });
                 });
-            }else{  //假設閒置過久沒有重新登入的話，就踢出去回到登入網址
+            } else {  //假設閒置過久沒有重新登入的話，就踢出去回到登入網址
                 alert('閒置過久，請重新登入!');
                 location.href = $rootScope.apiUrl + "users/logout";
             }
