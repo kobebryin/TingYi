@@ -266,604 +266,593 @@ angular.module('TinYi').controller('normalMealController', function ($rootScope,
         }
     };
 
-        //修改覆蓋按鈕觸發事件
-        $scope.show_data = function () {
-            if (!$scope.cb_morningFalg && !$scope.cb_noonFalg && !$scope.cb_nightFalg) {
-                alert('請至少勾選一個時段才可新增!');
+    //修改覆蓋按鈕觸發事件
+    $scope.show_data = function () {
+        if (month_calendar_morning.multiDatesPicker('getDates').length === 0 && month_calendar_noon.multiDatesPicker('getDates').length === 0 && month_calendar_night.multiDatesPicker('getDates').length === 0) {
+            alert('請至少勾選一個日期才可查詢!');
+        } else {
+            if (month_calendar_morning.multiDatesPicker('getDates').length === 0) {
+
             } else {
-                if ($scope.cb_morningFalg) {
-                    if (month_calendar_morning.multiDatesPicker('getDates').length === 0) {
-                        alert('請至少勾選一個日期才可新增!');
-                    } else {
-                        var dates_A = month_calendar_morning.multiDatesPicker('getDates');
-                        var inputObj = {
-                            memberid: id,
-                            date: dates_A[0],
-                            mealtype: 3,
-                            type: 'A'
-                        }
-                        monthMealService.show_data(inputObj, function (data) {
-                            var ContentStr = "客戶編號: " + data[0].MemberID + "\n" ; //要顯示的字串
-                            ContentStr += "時段: " + inputObj.date + "/早上\n";
-                            ContentStr += "一般餐資料如下:\n";
-                            ContentStr += "-----------------------------------------------------------\n";
-                            ContentStr += "數量 : " +  data[0].Meal01 + "\n";
-                            ContentStr += "手機 : " +  data[0].Meal02 + "\n";
-                            ContentStr += "地址 : " +  data[0].Meal03 + "\n";
-                            ContentStr += "路線 : " +  data[0].Meal04 + "\n";
-                            ContentStr += "提早到 : " +  data[0].Meal05 + ", " + data[0].Meal06 + " : " + data[0].Meal07 + "\n";
-                            ContentStr += "餐票 : " +  data[0].Meal08 + ", " + data[0].Meal09 + "本 " + data[0].Meal10 + "元\n";
-                            ContentStr += "收費方式-餐票 : " +  data[0].Meal11 + ", " + data[0].Meal12 + "張\n";
-                            ContentStr += "收費方式-已付清 : " +  data[0].Meal13 + "\n";
-                            ContentStr += "收費方式-現金 : " +  data[0].Meal14 + ", " + data[0].Meal15 + "個 " + data[0].Meal16 + "元\n";
-                            ContentStr += "收費方式-匯款 : " +  data[0].Meal17 + ", " + data[0].Meal18 + "元\n";
-                            ContentStr += "收費方式-月結 : " +  data[0].Meal19 + ", " + data[0].Meal20 + "個 " + data[0].Meal21 + "元\n";
-                            ContentStr += "放警衛室 : " +  data[0].Meal22 + "\n";
-                            ContentStr += "打電話 : " +  data[0].Meal23 + "\n";
-                            ContentStr += "備註 : " +  data[0].Meal24 + "\n";
-    
-                            $("#txt_Request_Search").val(ContentStr);
-                        });
-                    }
-                }else if ($scope.cb_noonFalg) {
-                    if (month_calendar_noon.multiDatesPicker('getDates').length === 0) {
-                        alert('請至少勾選一個日期才可新增!');
-                    } else {
-                        var dates_B = month_calendar_noon.multiDatesPicker('getDates');
-                        var inputObj = {
-                            memberid: id,
-                            date: dates_B[0],
-                            mealtype: 3,
-                            type: 'B'
-                        }
-                        monthMealService.show_data(inputObj, function (data) {
-                            var ContentStr = "客戶編號: " + data[0].MemberID + "\n" ; //要顯示的字串
-                            ContentStr += "時段: " + inputObj.date + "/中午\n";
-                            ContentStr += "一般餐資料如下:\n";
-                            ContentStr += "-----------------------------------------------------------\n";
-                            ContentStr += "數量 : " +  data[0].Meal01 + "\n";
-                            ContentStr += "手機 : " +  data[0].Meal02 + "\n";
-                            ContentStr += "地址 : " +  data[0].Meal03 + "\n";
-                            ContentStr += "路線 : " +  data[0].Meal04 + "\n";
-                            ContentStr += "提早到 : " +  data[0].Meal05 + ", " + data[0].Meal06 + " : " + data[0].Meal07 + "\n";
-                            ContentStr += "餐票 : " +  data[0].Meal08 + ", " + data[0].Meal09 + "本 " + data[0].Meal10 + "元\n";
-                            ContentStr += "收費方式-餐票 : " +  data[0].Meal11 + ", " + data[0].Meal12 + "張\n";
-                            ContentStr += "收費方式-已付清 : " +  data[0].Meal13 + "\n";
-                            ContentStr += "收費方式-現金 : " +  data[0].Meal14 + ", " + data[0].Meal15 + "個 " + data[0].Meal16 + "元\n";
-                            ContentStr += "收費方式-匯款 : " +  data[0].Meal17 + ", " + data[0].Meal18 + "元\n";
-                            ContentStr += "收費方式-月結 : " +  data[0].Meal19 + ", " + data[0].Meal20 + "個 " + data[0].Meal21 + "元\n";
-                            ContentStr += "放警衛室 : " +  data[0].Meal22 + "\n";
-                            ContentStr += "打電話 : " +  data[0].Meal23 + "\n";
-                            ContentStr += "備註 : " +  data[0].Meal24 + "\n";
-    
-                            $("#txt_Request_Search").val(ContentStr);
-                        });
-                    }
-                }else if ($scope.cb_nightFalg) {
-                    if (month_calendar_night.multiDatesPicker('getDates').length === 0) {
-                        alert('請至少勾選一個日期才可新增!');
-                    } else {
-                        var dates_C = month_calendar_night.multiDatesPicker('getDates');
-                        var inputObj = {
-                            memberid: id,
-                            date: dates_C[0],
-                            mealtype: 3,
-                            type: 'C'
-                        }
-                        monthMealService.show_data(inputObj, function (data) {
-                            var ContentStr = "客戶編號: " + data[0].MemberID + "\n" ; //要顯示的字串
-                            ContentStr += "時段: " + inputObj.date + "/晚上\n";
-                            ContentStr += "一般餐資料如下:\n";
-                            ContentStr += "-----------------------------------------------------------\n";
-                            ContentStr += "數量 : " +  data[0].Meal01 + "\n";
-                            ContentStr += "手機 : " +  data[0].Meal02 + "\n";
-                            ContentStr += "地址 : " +  data[0].Meal03 + "\n";
-                            ContentStr += "路線 : " +  data[0].Meal04 + "\n";
-                            ContentStr += "提早到 : " +  data[0].Meal05 + ", " + data[0].Meal06 + " : " + data[0].Meal07 + "\n";
-                            ContentStr += "餐票 : " +  data[0].Meal08 + ", " + data[0].Meal09 + "本 " + data[0].Meal10 + "元\n";
-                            ContentStr += "收費方式-餐票 : " +  data[0].Meal11 + ", " + data[0].Meal12 + "張\n";
-                            ContentStr += "收費方式-已付清 : " +  data[0].Meal13 + "\n";
-                            ContentStr += "收費方式-現金 : " +  data[0].Meal14 + ", " + data[0].Meal15 + "個 " + data[0].Meal16 + "元\n";
-                            ContentStr += "收費方式-匯款 : " +  data[0].Meal17 + ", " + data[0].Meal18 + "元\n";
-                            ContentStr += "收費方式-月結 : " +  data[0].Meal19 + ", " + data[0].Meal20 + "個 " + data[0].Meal21 + "元\n";
-                            ContentStr += "放警衛室 : " +  data[0].Meal22 + "\n";
-                            ContentStr += "打電話 : " +  data[0].Meal23 + "\n";
-                            ContentStr += "備註 : " +  data[0].Meal24 + "\n";
-    
-                            $("#txt_Request_Search").val(ContentStr);
-                        });
-                    }
+                var dates_A = month_calendar_morning.multiDatesPicker('getDates');
+                var inputObj = {
+                    memberid: id,
+                    date: dates_A[0],
+                    mealtype: 3,
+                    type: 'A'
                 }
+                monthMealService.show_data(inputObj, function (data) {
+                    var ContentStr = "客戶編號: " + data[0].MemberID + "\n"; //要顯示的字串
+                    ContentStr += "時段: " + inputObj.date + "/早上\n";
+                    ContentStr += "一般餐資料如下:\n";
+                    ContentStr += "-----------------------------------------------------------\n";
+                    ContentStr += "數量 : " + data[0].Meal01 + "\n";
+                    ContentStr += "手機 : " + data[0].Meal02 + "\n";
+                    ContentStr += "地址 : " + data[0].Meal03 + "\n";
+                    ContentStr += "路線 : " + data[0].Meal04 + "\n";
+                    ContentStr += "提早到 : " + data[0].Meal05 + ", " + data[0].Meal06 + " : " + data[0].Meal07 + "\n";
+                    ContentStr += "餐票 : " + data[0].Meal08 + ", " + data[0].Meal09 + "本 " + data[0].Meal10 + "元\n";
+                    ContentStr += "收費方式-餐票 : " + data[0].Meal11 + ", " + data[0].Meal12 + "張\n";
+                    ContentStr += "收費方式-已付清 : " + data[0].Meal13 + "\n";
+                    ContentStr += "收費方式-現金 : " + data[0].Meal14 + ", " + data[0].Meal15 + "個 " + data[0].Meal16 + "元\n";
+                    ContentStr += "收費方式-匯款 : " + data[0].Meal17 + ", " + data[0].Meal18 + "元\n";
+                    ContentStr += "收費方式-月結 : " + data[0].Meal19 + ", " + data[0].Meal20 + "個 " + data[0].Meal21 + "元\n";
+                    ContentStr += "放警衛室 : " + data[0].Meal22 + "\n";
+                    ContentStr += "打電話 : " + data[0].Meal23 + "\n";
+                    ContentStr += "備註 : " + data[0].Meal24 + "\n";
+
+                    $("#txt_Request_Search").val(ContentStr);
+                });
             }
-        };
+
+            if (month_calendar_noon.multiDatesPicker('getDates').length === 0) {
+
+            } else {
+                var dates_B = month_calendar_noon.multiDatesPicker('getDates');
+                var inputObj = {
+                    memberid: id,
+                    date: dates_B[0],
+                    mealtype: 3,
+                    type: 'B'
+                }
+                monthMealService.show_data(inputObj, function (data) {
+                    var ContentStr = "客戶編號: " + data[0].MemberID + "\n"; //要顯示的字串
+                    ContentStr += "時段: " + inputObj.date + "/中午\n";
+                    ContentStr += "一般餐資料如下:\n";
+                    ContentStr += "-----------------------------------------------------------\n";
+                    ContentStr += "數量 : " + data[0].Meal01 + "\n";
+                    ContentStr += "手機 : " + data[0].Meal02 + "\n";
+                    ContentStr += "地址 : " + data[0].Meal03 + "\n";
+                    ContentStr += "路線 : " + data[0].Meal04 + "\n";
+                    ContentStr += "提早到 : " + data[0].Meal05 + ", " + data[0].Meal06 + " : " + data[0].Meal07 + "\n";
+                    ContentStr += "餐票 : " + data[0].Meal08 + ", " + data[0].Meal09 + "本 " + data[0].Meal10 + "元\n";
+                    ContentStr += "收費方式-餐票 : " + data[0].Meal11 + ", " + data[0].Meal12 + "張\n";
+                    ContentStr += "收費方式-已付清 : " + data[0].Meal13 + "\n";
+                    ContentStr += "收費方式-現金 : " + data[0].Meal14 + ", " + data[0].Meal15 + "個 " + data[0].Meal16 + "元\n";
+                    ContentStr += "收費方式-匯款 : " + data[0].Meal17 + ", " + data[0].Meal18 + "元\n";
+                    ContentStr += "收費方式-月結 : " + data[0].Meal19 + ", " + data[0].Meal20 + "個 " + data[0].Meal21 + "元\n";
+                    ContentStr += "放警衛室 : " + data[0].Meal22 + "\n";
+                    ContentStr += "打電話 : " + data[0].Meal23 + "\n";
+                    ContentStr += "備註 : " + data[0].Meal24 + "\n";
+
+                    $("#txt_Request_Search").val(ContentStr);
+                });
+            }
+
+            if (month_calendar_night.multiDatesPicker('getDates').length === 0) {
+
+            } else {
+                var dates_C = month_calendar_night.multiDatesPicker('getDates');
+                var inputObj = {
+                    memberid: id,
+                    date: dates_C[0],
+                    mealtype: 3,
+                    type: 'C'
+                }
+                monthMealService.show_data(inputObj, function (data) {
+                    var ContentStr = "客戶編號: " + data[0].MemberID + "\n"; //要顯示的字串
+                    ContentStr += "時段: " + inputObj.date + "/晚上\n";
+                    ContentStr += "一般餐資料如下:\n";
+                    ContentStr += "-----------------------------------------------------------\n";
+                    ContentStr += "數量 : " + data[0].Meal01 + "\n";
+                    ContentStr += "手機 : " + data[0].Meal02 + "\n";
+                    ContentStr += "地址 : " + data[0].Meal03 + "\n";
+                    ContentStr += "路線 : " + data[0].Meal04 + "\n";
+                    ContentStr += "提早到 : " + data[0].Meal05 + ", " + data[0].Meal06 + " : " + data[0].Meal07 + "\n";
+                    ContentStr += "餐票 : " + data[0].Meal08 + ", " + data[0].Meal09 + "本 " + data[0].Meal10 + "元\n";
+                    ContentStr += "收費方式-餐票 : " + data[0].Meal11 + ", " + data[0].Meal12 + "張\n";
+                    ContentStr += "收費方式-已付清 : " + data[0].Meal13 + "\n";
+                    ContentStr += "收費方式-現金 : " + data[0].Meal14 + ", " + data[0].Meal15 + "個 " + data[0].Meal16 + "元\n";
+                    ContentStr += "收費方式-匯款 : " + data[0].Meal17 + ", " + data[0].Meal18 + "元\n";
+                    ContentStr += "收費方式-月結 : " + data[0].Meal19 + ", " + data[0].Meal20 + "個 " + data[0].Meal21 + "元\n";
+                    ContentStr += "放警衛室 : " + data[0].Meal22 + "\n";
+                    ContentStr += "打電話 : " + data[0].Meal23 + "\n";
+                    ContentStr += "備註 : " + data[0].Meal24 + "\n";
+
+                    $("#txt_Request_Search").val(ContentStr);
+                });
+            }
+        }
+    };
 
     //修改覆蓋按鈕觸發事件
     $scope.edit_overwrite = function () {
-        if (!$scope.cb_morningFalg && !$scope.cb_noonFalg && !$scope.cb_nightFalg) {
-            alert('請至少勾選一個時段才可新增!');
+        if (month_calendar_morning.multiDatesPicker('getDates').length === 0 && month_calendar_noon.multiDatesPicker('getDates').length === 0 && month_calendar_night.multiDatesPicker('getDates').length === 0) {
+            alert('請至少勾選一個日期才可修改!');
         } else {
-            if ($scope.cb_morningFalg) {
-                if (month_calendar_morning.multiDatesPicker('getDates').length === 0) {
-                    alert('請至少勾選一個日期才可新增!');
-                } else {
-                    $.LoadingOverlay("show");
-                    var dates_A = month_calendar_morning.multiDatesPicker('getDates');
-                    for (let key in dates_A) {
 
-                        let edit_join_data = {
-                            memberid: id,
-                            date: dates_A[key],
-                            mealtype: 3,
-                            type: 'A',
-                            meal01: $scope.meallistA.meal01,
-                            meal02: $scope.meallistA.meal02,
-                            meal03: $scope.meallistA.meal03,
-                            meal04: $scope.meallistA.meal04,
-                            meal05: $scope.meallistA.meal05,
-                            meal06: $scope.meallistA.meal06,
-                            meal07: $scope.meallistA.meal07,
-                            meal08: $scope.meallistA.meal08,
-                            meal09: $scope.meallistA.meal09,
-                            meal10: $scope.meallistA.meal10,
-                            meal11: $scope.meallistA.meal11,
-                            meal12: $scope.meallistA.meal12,
-                            meal13: $scope.meallistA.meal13,
-                            meal14: $scope.meallistA.meal14,
-                            meal15: $scope.meallistA.meal15,
-                            meal16: $scope.meallistA.meal16,
-                            meal17: $scope.meallistA.meal17,
-                            meal18: $scope.meallistA.meal18,
-                            meal19: $scope.meallistA.meal19,
-                            meal20: $scope.meallistA.meal20,
-                            meal21: $scope.meallistA.meal21,
-                            meal22: $scope.meallistA.meal22,
-                            meal23: $scope.meallistA.meal23,
-                            meal24: $scope.meallistA.meal24
-                        }
-                        monthMealService.edit_overwrite_Meal3(edit_join_data, function (data) {
-                            initial();
-                            if (key == dates_A.length - 1) $.LoadingOverlay("hide");
-                        });
+            if (month_calendar_morning.multiDatesPicker('getDates').length === 0) {
+
+            } else {
+                $.LoadingOverlay("show");
+                var dates_A = month_calendar_morning.multiDatesPicker('getDates');
+                for (let key in dates_A) {
+
+                    let edit_join_data = {
+                        memberid: id,
+                        date: dates_A[key],
+                        mealtype: 3,
+                        type: 'A',
+                        meal01: $scope.meallistA.meal01,
+                        meal02: $scope.meallistA.meal02,
+                        meal03: $scope.meallistA.meal03,
+                        meal04: $scope.meallistA.meal04,
+                        meal05: $scope.meallistA.meal05,
+                        meal06: $scope.meallistA.meal06,
+                        meal07: $scope.meallistA.meal07,
+                        meal08: $scope.meallistA.meal08,
+                        meal09: $scope.meallistA.meal09,
+                        meal10: $scope.meallistA.meal10,
+                        meal11: $scope.meallistA.meal11,
+                        meal12: $scope.meallistA.meal12,
+                        meal13: $scope.meallistA.meal13,
+                        meal14: $scope.meallistA.meal14,
+                        meal15: $scope.meallistA.meal15,
+                        meal16: $scope.meallistA.meal16,
+                        meal17: $scope.meallistA.meal17,
+                        meal18: $scope.meallistA.meal18,
+                        meal19: $scope.meallistA.meal19,
+                        meal20: $scope.meallistA.meal20,
+                        meal21: $scope.meallistA.meal21,
+                        meal22: $scope.meallistA.meal22,
+                        meal23: $scope.meallistA.meal23,
+                        meal24: $scope.meallistA.meal24
                     }
+                    monthMealService.edit_overwrite_Meal3(edit_join_data, function (data) {
+                        initial();
+                        if (key == dates_A.length - 1) $.LoadingOverlay("hide");
+                    });
                 }
             }
-            if ($scope.cb_noonFalg) {
-                if (month_calendar_noon.multiDatesPicker('getDates').length === 0) {
-                    alert('請至少勾選一個日期才可新增!');
-                } else {
-                    $.LoadingOverlay("show");
-                    var dates_B = month_calendar_noon.multiDatesPicker('getDates');
-                    for (let key in dates_B) {
 
-                        let edit_join_data = {
-                            memberid: id,
-                            date: dates_B[key],
-                            mealtype: 3,
-                            type: 'B',
-                            meal01: $scope.meallistA.meal01,
-                            meal02: $scope.meallistA.meal02,
-                            meal03: $scope.meallistA.meal03,
-                            meal04: $scope.meallistA.meal04,
-                            meal05: $scope.meallistA.meal05,
-                            meal06: $scope.meallistA.meal06,
-                            meal07: $scope.meallistA.meal07,
-                            meal08: $scope.meallistA.meal08,
-                            meal09: $scope.meallistA.meal09,
-                            meal10: $scope.meallistA.meal10,
-                            meal11: $scope.meallistA.meal11,
-                            meal12: $scope.meallistA.meal12,
-                            meal13: $scope.meallistA.meal13,
-                            meal14: $scope.meallistA.meal14,
-                            meal15: $scope.meallistA.meal15,
-                            meal16: $scope.meallistA.meal16,
-                            meal17: $scope.meallistA.meal17,
-                            meal18: $scope.meallistA.meal18,
-                            meal19: $scope.meallistA.meal19,
-                            meal20: $scope.meallistA.meal20,
-                            meal21: $scope.meallistA.meal21,
-                            meal22: $scope.meallistA.meal22,
-                            meal23: $scope.meallistA.meal23,
-                            meal24: $scope.meallistA.meal24
-                        }
-                        monthMealService.edit_overwrite_Meal3(edit_join_data, function (data) {
-                            initial();
-                            if (key == dates_B.length - 1) $.LoadingOverlay("hide");
-                        });
+
+            if (month_calendar_noon.multiDatesPicker('getDates').length === 0) {
+
+            } else {
+                $.LoadingOverlay("show");
+                var dates_B = month_calendar_noon.multiDatesPicker('getDates');
+                for (let key in dates_B) {
+
+                    let edit_join_data = {
+                        memberid: id,
+                        date: dates_B[key],
+                        mealtype: 3,
+                        type: 'B',
+                        meal01: $scope.meallistA.meal01,
+                        meal02: $scope.meallistA.meal02,
+                        meal03: $scope.meallistA.meal03,
+                        meal04: $scope.meallistA.meal04,
+                        meal05: $scope.meallistA.meal05,
+                        meal06: $scope.meallistA.meal06,
+                        meal07: $scope.meallistA.meal07,
+                        meal08: $scope.meallistA.meal08,
+                        meal09: $scope.meallistA.meal09,
+                        meal10: $scope.meallistA.meal10,
+                        meal11: $scope.meallistA.meal11,
+                        meal12: $scope.meallistA.meal12,
+                        meal13: $scope.meallistA.meal13,
+                        meal14: $scope.meallistA.meal14,
+                        meal15: $scope.meallistA.meal15,
+                        meal16: $scope.meallistA.meal16,
+                        meal17: $scope.meallistA.meal17,
+                        meal18: $scope.meallistA.meal18,
+                        meal19: $scope.meallistA.meal19,
+                        meal20: $scope.meallistA.meal20,
+                        meal21: $scope.meallistA.meal21,
+                        meal22: $scope.meallistA.meal22,
+                        meal23: $scope.meallistA.meal23,
+                        meal24: $scope.meallistA.meal24
                     }
+                    monthMealService.edit_overwrite_Meal3(edit_join_data, function (data) {
+                        initial();
+                        if (key == dates_B.length - 1) $.LoadingOverlay("hide");
+                    });
                 }
             }
-            if ($scope.cb_nightFalg) {
-                if (month_calendar_night.multiDatesPicker('getDates').length === 0) {
-                    alert('請至少勾選一個日期才可新增!');
-                } else {
-                    $.LoadingOverlay("show");
-                    var dates_C = month_calendar_night.multiDatesPicker('getDates');
-                    for (let key in dates_C) {
 
-                        let edit_join_data = {
-                            memberid: id,
-                            date: dates_C[key],
-                            mealtype: 3,
-                            type: 'C',
-                            meal01: $scope.meallistA.meal01,
-                            meal02: $scope.meallistA.meal02,
-                            meal03: $scope.meallistA.meal03,
-                            meal04: $scope.meallistA.meal04,
-                            meal05: $scope.meallistA.meal05,
-                            meal06: $scope.meallistA.meal06,
-                            meal07: $scope.meallistA.meal07,
-                            meal08: $scope.meallistA.meal08,
-                            meal09: $scope.meallistA.meal09,
-                            meal10: $scope.meallistA.meal10,
-                            meal11: $scope.meallistA.meal11,
-                            meal12: $scope.meallistA.meal12,
-                            meal13: $scope.meallistA.meal13,
-                            meal14: $scope.meallistA.meal14,
-                            meal15: $scope.meallistA.meal15,
-                            meal16: $scope.meallistA.meal16,
-                            meal17: $scope.meallistA.meal17,
-                            meal18: $scope.meallistA.meal18,
-                            meal19: $scope.meallistA.meal19,
-                            meal20: $scope.meallistA.meal20,
-                            meal21: $scope.meallistA.meal21,
-                            meal22: $scope.meallistA.meal22,
-                            meal23: $scope.meallistA.meal23,
-                            meal24: $scope.meallistA.meal24
-                        }
-                        monthMealService.edit_overwrite_Meal3(edit_join_data, function (data) {
-                            initial();
-                            if (key == dates_C.length - 1) $.LoadingOverlay("hide");
-                        });
+
+            if (month_calendar_night.multiDatesPicker('getDates').length === 0) {
+
+            } else {
+                $.LoadingOverlay("show");
+                var dates_C = month_calendar_night.multiDatesPicker('getDates');
+                for (let key in dates_C) {
+
+                    let edit_join_data = {
+                        memberid: id,
+                        date: dates_C[key],
+                        mealtype: 3,
+                        type: 'C',
+                        meal01: $scope.meallistA.meal01,
+                        meal02: $scope.meallistA.meal02,
+                        meal03: $scope.meallistA.meal03,
+                        meal04: $scope.meallistA.meal04,
+                        meal05: $scope.meallistA.meal05,
+                        meal06: $scope.meallistA.meal06,
+                        meal07: $scope.meallistA.meal07,
+                        meal08: $scope.meallistA.meal08,
+                        meal09: $scope.meallistA.meal09,
+                        meal10: $scope.meallistA.meal10,
+                        meal11: $scope.meallistA.meal11,
+                        meal12: $scope.meallistA.meal12,
+                        meal13: $scope.meallistA.meal13,
+                        meal14: $scope.meallistA.meal14,
+                        meal15: $scope.meallistA.meal15,
+                        meal16: $scope.meallistA.meal16,
+                        meal17: $scope.meallistA.meal17,
+                        meal18: $scope.meallistA.meal18,
+                        meal19: $scope.meallistA.meal19,
+                        meal20: $scope.meallistA.meal20,
+                        meal21: $scope.meallistA.meal21,
+                        meal22: $scope.meallistA.meal22,
+                        meal23: $scope.meallistA.meal23,
+                        meal24: $scope.meallistA.meal24
                     }
+                    monthMealService.edit_overwrite_Meal3(edit_join_data, function (data) {
+                        initial();
+                        if (key == dates_C.length - 1) $.LoadingOverlay("hide");
+                    });
                 }
             }
         }
     };
 
     $scope.edit_join = function () {
-        if (!$scope.cb_morningFalg && !$scope.cb_noonFalg && !$scope.cb_nightFalg) {
-            alert('請至少勾選一個時段才可新增!');
+        if (month_calendar_morning.multiDatesPicker('getDates').length === 0 && month_calendar_noon.multiDatesPicker('getDates').length === 0 && month_calendar_night.multiDatesPicker('getDates').length === 0) {
+            alert('請至少勾選一個日期才可修改!');
         } else {
-            if ($scope.cb_morningFalg) {
-                if (month_calendar_morning.multiDatesPicker('getDates').length === 0) {
-                    alert('請至少勾選一個日期才可新增!');
-                } else {
-                    $.LoadingOverlay("show");
-                    var dates_A = month_calendar_morning.multiDatesPicker('getDates');
-                    for (let key in dates_A) {
 
-                        let edit_join_data = {
-                            memberid: id,
-                            date: dates_A[key],
-                            mealtype: 3,
-                            type: 'A',
-                            meal01: $scope.meallistA.meal01,
-                            meal02: $scope.meallistA.meal02,
-                            meal03: $scope.meallistA.meal03,
-                            meal04: $scope.meallistA.meal04,
-                            meal05: $scope.meallistA.meal05,
-                            meal06: $scope.meallistA.meal06,
-                            meal07: $scope.meallistA.meal07,
-                            meal08: $scope.meallistA.meal08,
-                            meal09: $scope.meallistA.meal09,
-                            meal10: $scope.meallistA.meal10,
-                            meal11: $scope.meallistA.meal11,
-                            meal12: $scope.meallistA.meal12,
-                            meal13: $scope.meallistA.meal13,
-                            meal14: $scope.meallistA.meal14,
-                            meal15: $scope.meallistA.meal15,
-                            meal16: $scope.meallistA.meal16,
-                            meal17: $scope.meallistA.meal17,
-                            meal18: $scope.meallistA.meal18,
-                            meal19: $scope.meallistA.meal19,
-                            meal20: $scope.meallistA.meal20,
-                            meal21: $scope.meallistA.meal21,
-                            meal22: $scope.meallistA.meal22,
-                            meal23: $scope.meallistA.meal23,
-                            meal24: $scope.meallistA.meal24
-                        }
-                        monthMealService.edit_join_Meal3(edit_join_data, function (data) {
-                            if (data === '未輸入任何修改資料!') {
-                                alert(data);
-                                $.LoadingOverlay("hide");
-                            } else {
-                                initial();
-                                if (key == dates_A.length - 1) $.LoadingOverlay("hide");
-                            }
-                        });
+            if (month_calendar_morning.multiDatesPicker('getDates').length === 0) {
+
+            } else {
+                $.LoadingOverlay("show");
+                var dates_A = month_calendar_morning.multiDatesPicker('getDates');
+                for (let key in dates_A) {
+
+                    let edit_join_data = {
+                        memberid: id,
+                        date: dates_A[key],
+                        mealtype: 3,
+                        type: 'A',
+                        meal01: $scope.meallistA.meal01,
+                        meal02: $scope.meallistA.meal02,
+                        meal03: $scope.meallistA.meal03,
+                        meal04: $scope.meallistA.meal04,
+                        meal05: $scope.meallistA.meal05,
+                        meal06: $scope.meallistA.meal06,
+                        meal07: $scope.meallistA.meal07,
+                        meal08: $scope.meallistA.meal08,
+                        meal09: $scope.meallistA.meal09,
+                        meal10: $scope.meallistA.meal10,
+                        meal11: $scope.meallistA.meal11,
+                        meal12: $scope.meallistA.meal12,
+                        meal13: $scope.meallistA.meal13,
+                        meal14: $scope.meallistA.meal14,
+                        meal15: $scope.meallistA.meal15,
+                        meal16: $scope.meallistA.meal16,
+                        meal17: $scope.meallistA.meal17,
+                        meal18: $scope.meallistA.meal18,
+                        meal19: $scope.meallistA.meal19,
+                        meal20: $scope.meallistA.meal20,
+                        meal21: $scope.meallistA.meal21,
+                        meal22: $scope.meallistA.meal22,
+                        meal23: $scope.meallistA.meal23,
+                        meal24: $scope.meallistA.meal24
                     }
+                    monthMealService.edit_join_Meal3(edit_join_data, function (data) {
+                        if (data === '未輸入任何修改資料!') {
+                            alert(data);
+                            $.LoadingOverlay("hide");
+                        } else {
+                            initial();
+                            if (key == dates_A.length - 1) $.LoadingOverlay("hide");
+                        }
+                    });
                 }
             }
-            if ($scope.cb_noonFalg) {
-                if (month_calendar_noon.multiDatesPicker('getDates').length === 0) {
-                    alert('請至少勾選一個日期才可新增!');
-                } else {
-                    $.LoadingOverlay("show");
-                    var dates_B = month_calendar_noon.multiDatesPicker('getDates');
-                    for (let key in dates_B) {
 
-                        let edit_join_data = {
-                            memberid: id,
-                            date: dates_B[key],
-                            mealtype: 3,
-                            type: 'B',
-                            meal01: $scope.meallistA.meal01,
-                            meal02: $scope.meallistA.meal02,
-                            meal03: $scope.meallistA.meal03,
-                            meal04: $scope.meallistA.meal04,
-                            meal05: $scope.meallistA.meal05,
-                            meal06: $scope.meallistA.meal06,
-                            meal07: $scope.meallistA.meal07,
-                            meal08: $scope.meallistA.meal08,
-                            meal09: $scope.meallistA.meal09,
-                            meal10: $scope.meallistA.meal10,
-                            meal11: $scope.meallistA.meal11,
-                            meal12: $scope.meallistA.meal12,
-                            meal13: $scope.meallistA.meal13,
-                            meal14: $scope.meallistA.meal14,
-                            meal15: $scope.meallistA.meal15,
-                            meal16: $scope.meallistA.meal16,
-                            meal17: $scope.meallistA.meal17,
-                            meal18: $scope.meallistA.meal18,
-                            meal19: $scope.meallistA.meal19,
-                            meal20: $scope.meallistA.meal20,
-                            meal21: $scope.meallistA.meal21,
-                            meal22: $scope.meallistA.meal22,
-                            meal23: $scope.meallistA.meal23,
-                            meal24: $scope.meallistA.meal24
-                        }
-                        monthMealService.edit_join_Meal3(edit_join_data, function (data) {
-                            if (data === '未輸入任何修改資料!') {
-                                alert(data);
-                                $.LoadingOverlay("hide");
-                            } else {
-                                initial();
-                                if (key == dates_B.length - 1) $.LoadingOverlay("hide");
-                            }
-                        });
+            if (month_calendar_noon.multiDatesPicker('getDates').length === 0) {
+
+            } else {
+                $.LoadingOverlay("show");
+                var dates_B = month_calendar_noon.multiDatesPicker('getDates');
+                for (let key in dates_B) {
+
+                    let edit_join_data = {
+                        memberid: id,
+                        date: dates_B[key],
+                        mealtype: 3,
+                        type: 'B',
+                        meal01: $scope.meallistA.meal01,
+                        meal02: $scope.meallistA.meal02,
+                        meal03: $scope.meallistA.meal03,
+                        meal04: $scope.meallistA.meal04,
+                        meal05: $scope.meallistA.meal05,
+                        meal06: $scope.meallistA.meal06,
+                        meal07: $scope.meallistA.meal07,
+                        meal08: $scope.meallistA.meal08,
+                        meal09: $scope.meallistA.meal09,
+                        meal10: $scope.meallistA.meal10,
+                        meal11: $scope.meallistA.meal11,
+                        meal12: $scope.meallistA.meal12,
+                        meal13: $scope.meallistA.meal13,
+                        meal14: $scope.meallistA.meal14,
+                        meal15: $scope.meallistA.meal15,
+                        meal16: $scope.meallistA.meal16,
+                        meal17: $scope.meallistA.meal17,
+                        meal18: $scope.meallistA.meal18,
+                        meal19: $scope.meallistA.meal19,
+                        meal20: $scope.meallistA.meal20,
+                        meal21: $scope.meallistA.meal21,
+                        meal22: $scope.meallistA.meal22,
+                        meal23: $scope.meallistA.meal23,
+                        meal24: $scope.meallistA.meal24
                     }
+                    monthMealService.edit_join_Meal3(edit_join_data, function (data) {
+                        if (data === '未輸入任何修改資料!') {
+                            alert(data);
+                            $.LoadingOverlay("hide");
+                        } else {
+                            initial();
+                            if (key == dates_B.length - 1) $.LoadingOverlay("hide");
+                        }
+                    });
                 }
             }
-            if ($scope.cb_nightFalg) {
-                if (month_calendar_night.multiDatesPicker('getDates').length === 0) {
-                    alert('請至少勾選一個日期才可新增!');
-                } else {
-                    $.LoadingOverlay("show");
-                    var dates_C = month_calendar_night.multiDatesPicker('getDates');
-                    for (let key in dates_C) {
 
-                        let edit_join_data = {
-                            memberid: id,
-                            date: dates_C[key],
-                            mealtype: 3,
-                            type: 'C',
-                            meal01: $scope.meallistA.meal01,
-                            meal02: $scope.meallistA.meal02,
-                            meal03: $scope.meallistA.meal03,
-                            meal04: $scope.meallistA.meal04,
-                            meal05: $scope.meallistA.meal05,
-                            meal06: $scope.meallistA.meal06,
-                            meal07: $scope.meallistA.meal07,
-                            meal08: $scope.meallistA.meal08,
-                            meal09: $scope.meallistA.meal09,
-                            meal10: $scope.meallistA.meal10,
-                            meal11: $scope.meallistA.meal11,
-                            meal12: $scope.meallistA.meal12,
-                            meal13: $scope.meallistA.meal13,
-                            meal14: $scope.meallistA.meal14,
-                            meal15: $scope.meallistA.meal15,
-                            meal16: $scope.meallistA.meal16,
-                            meal17: $scope.meallistA.meal17,
-                            meal18: $scope.meallistA.meal18,
-                            meal19: $scope.meallistA.meal19,
-                            meal20: $scope.meallistA.meal20,
-                            meal21: $scope.meallistA.meal21,
-                            meal22: $scope.meallistA.meal22,
-                            meal23: $scope.meallistA.meal23,
-                            meal24: $scope.meallistA.meal24
-                        }
-                        monthMealService.edit_join_Meal3(edit_join_data, function (data) {
-                            if (data === '未輸入任何修改資料!') {
-                                alert(data);
-                                $.LoadingOverlay("hide");
-                            } else {
-                                initial();
-                                if (key == dates_C.length - 1) $.LoadingOverlay("hide");
-                            }
-                        });
+            if (month_calendar_night.multiDatesPicker('getDates').length === 0) {
+
+            } else {
+                $.LoadingOverlay("show");
+                var dates_C = month_calendar_night.multiDatesPicker('getDates');
+                for (let key in dates_C) {
+
+                    let edit_join_data = {
+                        memberid: id,
+                        date: dates_C[key],
+                        mealtype: 3,
+                        type: 'C',
+                        meal01: $scope.meallistA.meal01,
+                        meal02: $scope.meallistA.meal02,
+                        meal03: $scope.meallistA.meal03,
+                        meal04: $scope.meallistA.meal04,
+                        meal05: $scope.meallistA.meal05,
+                        meal06: $scope.meallistA.meal06,
+                        meal07: $scope.meallistA.meal07,
+                        meal08: $scope.meallistA.meal08,
+                        meal09: $scope.meallistA.meal09,
+                        meal10: $scope.meallistA.meal10,
+                        meal11: $scope.meallistA.meal11,
+                        meal12: $scope.meallistA.meal12,
+                        meal13: $scope.meallistA.meal13,
+                        meal14: $scope.meallistA.meal14,
+                        meal15: $scope.meallistA.meal15,
+                        meal16: $scope.meallistA.meal16,
+                        meal17: $scope.meallistA.meal17,
+                        meal18: $scope.meallistA.meal18,
+                        meal19: $scope.meallistA.meal19,
+                        meal20: $scope.meallistA.meal20,
+                        meal21: $scope.meallistA.meal21,
+                        meal22: $scope.meallistA.meal22,
+                        meal23: $scope.meallistA.meal23,
+                        meal24: $scope.meallistA.meal24
                     }
+                    monthMealService.edit_join_Meal3(edit_join_data, function (data) {
+                        if (data === '未輸入任何修改資料!') {
+                            alert(data);
+                            $.LoadingOverlay("hide");
+                        } else {
+                            initial();
+                            if (key == dates_C.length - 1) $.LoadingOverlay("hide");
+                        }
+                    });
                 }
             }
         }
     };
 
     $scope.delete = function () {
-        if (!$scope.cb_morningFalg && !$scope.cb_noonFalg && !$scope.cb_nightFalg) {
-            alert('請至少勾選一個時段才可新增!');
+        if (month_calendar_morning.multiDatesPicker('getDates').length === 0 && month_calendar_noon.multiDatesPicker('getDates').length === 0 && month_calendar_night.multiDatesPicker('getDates').length === 0) {
+            alert('請至少勾選一個日期才可刪除!');
         } else {
-            if ($scope.cb_morningFalg) {
-                if (month_calendar_morning.multiDatesPicker('getDates').length === 0) {
-                    alert('請至少勾選一個日期才可新增!');
+
+            if (month_calendar_morning.multiDatesPicker('getDates').length === 0) {
+
+            } else {
+                $.LoadingOverlay("show");
+                var dates_A = month_calendar_morning.multiDatesPicker('getDates');
+                var meal3ac_string = ";"
+
+                for (let key in dates_A) {
+
+                    let delete_data = {
+                        id: sessionStorage.memberid,
+                        date: dates_A[key]
+                    }
+                    monthMealService.S3_deleteMeal_A(delete_data, function (data) {
+                        initial();
+                        if (key == dates_A.length - 1) $.LoadingOverlay("hide");
+                    });
+                }
+
+                var meal3ac_initial = $scope.mealForMember.meal3ac.substring(1, $scope.mealForMember.meal3ac.length - 1);   //先去頭去尾';'
+                var meal3ac_initial_array = meal3ac_initial.split(";");     //依照;來切
+                // console.log(meal3ac_initial_array);
+
+                var dates = month_calendar_morning.multiDatesPicker('getDates');
+                // console.log(dates);
+                var set1 = new Set(meal3ac_initial_array);
+                var set2 = new Set(dates);
+
+                var subset = [];
+
+                for (let item of set1) {
+                    if (!set2.has(item)) {
+                        subset.push(item);
+                    }
+                }
+                // console.log(subset);
+
+                if (subset.length === 0) {
+                    let inputObj = {
+                        id: sessionStorage.memberid,
+                        mea3ac: null
+                    }
+                    monthMealService.S3_putMeal_A(inputObj, function (data) {
+                        initial();
+                    });
                 } else {
-                    $.LoadingOverlay("show");
-                    var dates_A = month_calendar_morning.multiDatesPicker('getDates');
-                    var meal3ac_string = ";"
-
-                    for (let key in dates_A) {
-
-                        let delete_data = {
-                            id: sessionStorage.memberid,
-                            date: dates_A[key]
-                        }
-                        monthMealService.S3_deleteMeal_A(delete_data, function (data) {
-                            initial();
-                            if (key == dates_A.length - 1) $.LoadingOverlay("hide");
-                        });
+                    for (key in subset) {
+                        meal3ac_string += subset[key] + ";";
                     }
 
-                    var meal3ac_initial = $scope.mealForMember.meal3ac.substring(1, $scope.mealForMember.meal3ac.length - 1);   //先去頭去尾';'
-                    var meal3ac_initial_array = meal3ac_initial.split(";");     //依照;來切
-                    // console.log(meal3ac_initial_array);
-
-                    var dates = month_calendar_morning.multiDatesPicker('getDates');
-                    // console.log(dates);
-                    var set1 = new Set(meal3ac_initial_array);
-                    var set2 = new Set(dates);
-
-                    var subset = [];
-
-                    for (let item of set1) {
-                        if (!set2.has(item)) {
-                            subset.push(item);
-                        }
+                    let inputObj = {
+                        id: sessionStorage.memberid,
+                        mea3ac: meal3ac_string
                     }
-                    // console.log(subset);
-
-                    if (subset.length === 0) {
-                        let inputObj = {
-                            id: sessionStorage.memberid,
-                            mea3ac: null
-                        }
-                        monthMealService.S3_putMeal_A(inputObj, function (data) {
-                            initial();
-                        });
-                    } else {
-                        for (key in subset) {
-                            meal3ac_string += subset[key] + ";";
-                        }
-
-                        let inputObj = {
-                            id: sessionStorage.memberid,
-                            mea3ac: meal3ac_string
-                        }
-                        monthMealService.S3_putMeal_A(inputObj, function (data) {
-                            initial();
-                        });
-                    }
+                    monthMealService.S3_putMeal_A(inputObj, function (data) {
+                        initial();
+                    });
                 }
             }
 
-            if ($scope.cb_noonFalg) {
-                if (month_calendar_noon.multiDatesPicker('getDates').length === 0) {
-                    alert('請至少勾選一個日期才可新增!');
+            if (month_calendar_noon.multiDatesPicker('getDates').length === 0) {
+
+            } else {
+                $.LoadingOverlay("show");
+                var dates_B = month_calendar_noon.multiDatesPicker('getDates');
+                var meal3bc_string = ";"
+
+                for (let key in dates_B) {
+
+                    let delete_data = {
+                        id: sessionStorage.memberid,
+                        date: dates_B[key]
+                    }
+                    monthMealService.S3_deleteMeal_B(delete_data, function (data) {
+                        initial();
+                        if (key == dates_B.length - 1) $.LoadingOverlay("hide");
+                    });
+                }
+
+                var meal3bc_initial = $scope.mealForMember.meal3bc.substring(1, $scope.mealForMember.meal3bc.length - 1);   //先去頭去尾';'
+                var meal3bc_initial_array = meal3bc_initial.split(";");     //依照;來切
+                // console.log(meal3ac_initial_array);
+
+                var dates = month_calendar_noon.multiDatesPicker('getDates');
+                // console.log(dates);
+                var set1 = new Set(meal3bc_initial_array);
+                var set2 = new Set(dates);
+
+                var subset = [];
+
+                for (let item of set1) {
+                    if (!set2.has(item)) {
+                        subset.push(item);
+                    }
+                }
+                // console.log(subset);
+
+                if (subset.length === 0) {
+                    let inputObj = {
+                        id: sessionStorage.memberid,
+                        mea3bc: null
+                    }
+                    monthMealService.S3_putMeal_B(inputObj, function (data) {
+                        initial();
+                    });
                 } else {
-                    $.LoadingOverlay("show");
-                    var dates_B = month_calendar_noon.multiDatesPicker('getDates');
-                    var meal3bc_string = ";"
-
-                    for (let key in dates_B) {
-
-                        let delete_data = {
-                            id: sessionStorage.memberid,
-                            date: dates_B[key]
-                        }
-                        monthMealService.S3_deleteMeal_B(delete_data, function (data) {
-                            initial();
-                            if (key == dates_B.length - 1) $.LoadingOverlay("hide");
-                        });
+                    for (key in subset) {
+                        meal3bc_string += subset[key] + ";";
                     }
 
-                    var meal3bc_initial = $scope.mealForMember.meal3bc.substring(1, $scope.mealForMember.meal3bc.length - 1);   //先去頭去尾';'
-                    var meal3bc_initial_array = meal3bc_initial.split(";");     //依照;來切
-                    // console.log(meal3ac_initial_array);
-
-                    var dates = month_calendar_noon.multiDatesPicker('getDates');
-                    // console.log(dates);
-                    var set1 = new Set(meal3bc_initial_array);
-                    var set2 = new Set(dates);
-
-                    var subset = [];
-
-                    for (let item of set1) {
-                        if (!set2.has(item)) {
-                            subset.push(item);
-                        }
+                    let inputObj = {
+                        id: sessionStorage.memberid,
+                        mea3bc: meal3bc_string
                     }
-                    // console.log(subset);
-
-                    if (subset.length === 0) {
-                        let inputObj = {
-                            id: sessionStorage.memberid,
-                            mea3bc: null
-                        }
-                        monthMealService.S3_putMeal_B(inputObj, function (data) {
-                            initial();
-                        });
-                    } else {
-                        for (key in subset) {
-                            meal3bc_string += subset[key] + ";";
-                        }
-
-                        let inputObj = {
-                            id: sessionStorage.memberid,
-                            mea3bc: meal3bc_string
-                        }
-                        monthMealService.S3_putMeal_B(inputObj, function (data) {
-                            initial();
-                        });
-                    }
+                    monthMealService.S3_putMeal_B(inputObj, function (data) {
+                        initial();
+                    });
                 }
             }
 
-            if ($scope.cb_nightFalg) {
-                if (month_calendar_night.multiDatesPicker('getDates').length === 0) {
-                    alert('請至少勾選一個日期才可新增!');
+            if (month_calendar_night.multiDatesPicker('getDates').length === 0) {
+
+            } else {
+                $.LoadingOverlay("show");
+                var dates_C = month_calendar_night.multiDatesPicker('getDates');
+                var meal3cc_string = ";"
+
+                for (let key in dates_C) {
+
+                    let delete_data = {
+                        id: sessionStorage.memberid,
+                        date: dates_C[key]
+                    }
+                    monthMealService.S3_deleteMeal_C(delete_data, function (data) {
+                        initial();
+                        if (key == dates_C.length - 1) $.LoadingOverlay("hide");
+                    });
+                }
+
+                var meal3cc_initial = $scope.mealForMember.meal3cc.substring(1, $scope.mealForMember.meal3cc.length - 1);   //先去頭去尾';'
+                var meal3cc_initial_array = meal3cc_initial.split(";");     //依照;來切
+                // console.log(meal3ac_initial_array);
+
+                var dates = month_calendar_night.multiDatesPicker('getDates');
+                // console.log(dates);
+                var set1 = new Set(meal3cc_initial_array);
+                var set2 = new Set(dates);
+
+                var subset = [];
+
+                for (let item of set1) {
+                    if (!set2.has(item)) {
+                        subset.push(item);
+                    }
+                }
+                // console.log(subset);
+
+                if (subset.length === 0) {
+                    let inputObj = {
+                        id: sessionStorage.memberid,
+                        mea3cc: null
+                    }
+                    monthMealService.S3_putMeal_C(inputObj, function (data) {
+                        initial();
+                    });
                 } else {
-                    $.LoadingOverlay("show");
-                    var dates_C = month_calendar_night.multiDatesPicker('getDates');
-                    var meal3cc_string = ";"
-
-                    for (let key in dates_C) {
-
-                        let delete_data = {
-                            id: sessionStorage.memberid,
-                            date: dates_C[key]
-                        }
-                        monthMealService.S3_deleteMeal_C(delete_data, function (data) {
-                            initial();
-                            if (key == dates_C.length - 1) $.LoadingOverlay("hide");
-                        });
+                    for (key in subset) {
+                        meal3cc_string += subset[key] + ";";
                     }
 
-                    var meal3cc_initial = $scope.mealForMember.meal3cc.substring(1, $scope.mealForMember.meal3cc.length - 1);   //先去頭去尾';'
-                    var meal3cc_initial_array = meal3cc_initial.split(";");     //依照;來切
-                    // console.log(meal3ac_initial_array);
-
-                    var dates = month_calendar_night.multiDatesPicker('getDates');
-                    // console.log(dates);
-                    var set1 = new Set(meal3cc_initial_array);
-                    var set2 = new Set(dates);
-
-                    var subset = [];
-
-                    for (let item of set1) {
-                        if (!set2.has(item)) {
-                            subset.push(item);
-                        }
+                    let inputObj = {
+                        id: sessionStorage.memberid,
+                        mea3cc: meal3cc_string
                     }
-                    // console.log(subset);
-
-                    if (subset.length === 0) {
-                        let inputObj = {
-                            id: sessionStorage.memberid,
-                            mea3cc: null
-                        }
-                        monthMealService.S3_putMeal_C(inputObj, function (data) {
-                            initial();
-                        });
-                    } else {
-                        for (key in subset) {
-                            meal3cc_string += subset[key] + ";";
-                        }
-
-                        let inputObj = {
-                            id: sessionStorage.memberid,
-                            mea3cc: meal3cc_string
-                        }
-                        monthMealService.S3_putMeal_C(inputObj, function (data) {
-                            initial();
-                        });
-                    }
+                    monthMealService.S3_putMeal_C(inputObj, function (data) {
+                        initial();
+                    });
                 }
             }
         }
@@ -872,341 +861,335 @@ angular.module('TinYi').controller('normalMealController', function ($rootScope,
     //新增按鈕觸發事件
     $scope.new = function () {
 
-        if (!$scope.cb_morningFalg && !$scope.cb_noonFalg && !$scope.cb_nightFalg) {
-            alert('請至少勾選一個時段才可新增!');
+        if (!DifferenceSet_A() && !DifferenceSet_B() && !DifferenceSet_C()) {
+            alert('請至少勾選一個日期才可新增!');
         } else {
             //判斷勾選的時段(早午晚)
-            if ($scope.cb_morningFalg) {
-                if (DifferenceSet_A()) {
-                    $.LoadingOverlay("show");
-                    var dates_A = month_calendar_morning.multiDatesPicker('getDates');
-                    $scope.mealForMember.meal3ac = ";";
-                    for (key in dates_A) {
-                        $scope.mealForMember.meal3ac += dates_A[key] + ";";
-                    }
-                    $scope.mealForMember.id = id;
-                    $scope.mealForMember.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-                    $scope.mealForMember.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-
-                    let mealForMember = {
-                        meal3sicktype: $scope.mealForMember.meal3sicktype,
-                        meal3a: $scope.mealForMember.meal3a,
-                        meal3ac: $scope.mealForMember.meal3ac,
-                        meal3b: $scope.mealForMember.meal3b,
-                        meal3bc: $scope.mealForMember.meal3bc,
-                        meal3c: $scope.mealForMember.meal3c,
-                        meal3cc: $scope.mealForMember.meal3cc,
-                        recordtime: $scope.mealForMember.recordtime,
-                        showtime: $scope.mealForMember.showtime,
-                        id: $scope.mealForMember.id
-                    }
-                    MemberService.putMEMBERforNormalMeal(mealForMember, function (data) {
-                        initial();
-                    });
-
-                    //CreateTime、RecordTime、ShowTime initialize
-                    $scope.meallistA.createtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-                    $scope.meallistA.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-                    $scope.meallistA.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-
-                    //存入客戶端IP
-                    $scope.meallistA.mip = client_ip;
-                    $scope.meallistA.mip2 = client_ip;
-
-                    //memberID欄位
-                    $scope.meallistA.memberid = id;
-
-                    var dates_A = subset_calendar_A;
-
-                    for (let key in dates_A) {
-                        //$scope.meallistA.date = dates_A[key];
-                        let input = {
-                            rid: $scope.meallistA.rid,
-                            mid: sessionStorage.userId,
-                            mip: $scope.meallistA.mip,
-                            mid2: sessionStorage.userId,
-                            mip2: $scope.meallistA.mip2,
-                            memberid: $scope.meallistA.memberid,
-                            date: dates_A[key],
-                            mealtype: 3,
-                            type: 'A',
-                            meal01: $scope.meallistA.meal01,
-                            meal02: $scope.meallistA.meal02,
-                            meal03: $scope.meallistA.meal03,
-                            meal04: $scope.meallistA.meal04,
-                            meal05: $scope.meallistA.meal05,
-                            meal06: $scope.meallistA.meal06,
-                            meal07: $scope.meallistA.meal07,
-                            meal08: $scope.meallistA.meal08,
-                            meal09: $scope.meallistA.meal09,
-                            meal10: $scope.meallistA.meal10,
-                            meal11: $scope.meallistA.meal11,
-                            meal12: $scope.meallistA.meal12,
-                            meal13: $scope.meallistA.meal13,
-                            meal14: $scope.meallistA.meal14,
-                            meal15: $scope.meallistA.meal15,
-                            meal16: $scope.meallistA.meal16,
-                            meal17: $scope.meallistA.meal17,
-                            meal18: $scope.meallistA.meal18,
-                            meal19: $scope.meallistA.meal19,
-                            meal20: $scope.meallistA.meal20,
-                            meal21: $scope.meallistA.meal21,
-                            meal22: $scope.meallistA.meal22,
-                            meal23: $scope.meallistA.meal23,
-                            meal24: $scope.meallistA.meal24,
-                            meal25: $scope.meallistA.meal25,
-                            meal26: $scope.meallistA.meal26,
-                            meal27: $scope.meallistA.meal27,
-                            meal28: $scope.meallistA.meal28,
-                            meal29: $scope.meallistA.meal29,
-                            meal30: $scope.meallistA.meal30,
-                            meal31: $scope.meallistA.meal31,
-                            meal32: $scope.meallistA.meal32,
-                            meal33: $scope.meallistA.meal33,
-                            meal34: $scope.meallistA.meal34,
-                            meal35: $scope.meallistA.meal35,
-                            meal36: $scope.meallistA.meal36,
-                            meal37: $scope.meallistA.meal37,
-                            meal38: $scope.meallistA.meal38,
-                            meal39: $scope.meallistA.meal39,
-                            meal40: $scope.meallistA.meal40,
-                            flag: 9,
-                            createtime: $scope.meallistA.createtime,
-                            recordtime: $scope.meallistA.recordtime,
-                            showtime: $scope.meallistA.showtime
-                        };
-
-                        monthMealService.postMeal(input, function (data) {
-                            clearScopeMemberObj();
-                            initial();
-                            if (key == dates_A.length - 1) $.LoadingOverlay("hide");
-                        });
-                    }
-                } else {
-                    alert('請至少勾選一個日期才可新增!');
+            if (DifferenceSet_A()) {
+                $.LoadingOverlay("show");
+                var dates_A = month_calendar_morning.multiDatesPicker('getDates');
+                $scope.mealForMember.meal3ac = ";";
+                for (key in dates_A) {
+                    $scope.mealForMember.meal3ac += dates_A[key] + ";";
                 }
+                $scope.mealForMember.id = id;
+                $scope.mealForMember.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+                $scope.mealForMember.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+
+                let mealForMember = {
+                    meal3sicktype: $scope.mealForMember.meal3sicktype,
+                    meal3a: $scope.mealForMember.meal3a,
+                    meal3ac: $scope.mealForMember.meal3ac,
+                    meal3b: $scope.mealForMember.meal3b,
+                    meal3bc: $scope.mealForMember.meal3bc,
+                    meal3c: $scope.mealForMember.meal3c,
+                    meal3cc: $scope.mealForMember.meal3cc,
+                    recordtime: $scope.mealForMember.recordtime,
+                    showtime: $scope.mealForMember.showtime,
+                    id: $scope.mealForMember.id
+                }
+                MemberService.putMEMBERforNormalMeal(mealForMember, function (data) {
+                    initial();
+                });
+
+                //CreateTime、RecordTime、ShowTime initialize
+                $scope.meallistA.createtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+                $scope.meallistA.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+                $scope.meallistA.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+
+                //存入客戶端IP
+                $scope.meallistA.mip = client_ip;
+                $scope.meallistA.mip2 = client_ip;
+
+                //memberID欄位
+                $scope.meallistA.memberid = id;
+
+                var dates_A = subset_calendar_A;
+
+                for (let key in dates_A) {
+                    //$scope.meallistA.date = dates_A[key];
+                    let input = {
+                        rid: $scope.meallistA.rid,
+                        mid: sessionStorage.userId,
+                        mip: $scope.meallistA.mip,
+                        mid2: sessionStorage.userId,
+                        mip2: $scope.meallistA.mip2,
+                        memberid: $scope.meallistA.memberid,
+                        date: dates_A[key],
+                        mealtype: 3,
+                        type: 'A',
+                        meal01: $scope.meallistA.meal01,
+                        meal02: $scope.meallistA.meal02,
+                        meal03: $scope.meallistA.meal03,
+                        meal04: $scope.meallistA.meal04,
+                        meal05: $scope.meallistA.meal05,
+                        meal06: $scope.meallistA.meal06,
+                        meal07: $scope.meallistA.meal07,
+                        meal08: $scope.meallistA.meal08,
+                        meal09: $scope.meallistA.meal09,
+                        meal10: $scope.meallistA.meal10,
+                        meal11: $scope.meallistA.meal11,
+                        meal12: $scope.meallistA.meal12,
+                        meal13: $scope.meallistA.meal13,
+                        meal14: $scope.meallistA.meal14,
+                        meal15: $scope.meallistA.meal15,
+                        meal16: $scope.meallistA.meal16,
+                        meal17: $scope.meallistA.meal17,
+                        meal18: $scope.meallistA.meal18,
+                        meal19: $scope.meallistA.meal19,
+                        meal20: $scope.meallistA.meal20,
+                        meal21: $scope.meallistA.meal21,
+                        meal22: $scope.meallistA.meal22,
+                        meal23: $scope.meallistA.meal23,
+                        meal24: $scope.meallistA.meal24,
+                        meal25: $scope.meallistA.meal25,
+                        meal26: $scope.meallistA.meal26,
+                        meal27: $scope.meallistA.meal27,
+                        meal28: $scope.meallistA.meal28,
+                        meal29: $scope.meallistA.meal29,
+                        meal30: $scope.meallistA.meal30,
+                        meal31: $scope.meallistA.meal31,
+                        meal32: $scope.meallistA.meal32,
+                        meal33: $scope.meallistA.meal33,
+                        meal34: $scope.meallistA.meal34,
+                        meal35: $scope.meallistA.meal35,
+                        meal36: $scope.meallistA.meal36,
+                        meal37: $scope.meallistA.meal37,
+                        meal38: $scope.meallistA.meal38,
+                        meal39: $scope.meallistA.meal39,
+                        meal40: $scope.meallistA.meal40,
+                        flag: 9,
+                        createtime: $scope.meallistA.createtime,
+                        recordtime: $scope.meallistA.recordtime,
+                        showtime: $scope.meallistA.showtime
+                    };
+
+                    monthMealService.postMeal(input, function (data) {
+                        clearScopeMemberObj();
+                        initial();
+                        if (key == dates_A.length - 1) $.LoadingOverlay("hide");
+                    });
+                }
+            } else {
+
             }
 
             //判斷勾選的時段(早午晚)
-            if ($scope.cb_noonFalg) {
-                if (DifferenceSet_B()) {
-                    $.LoadingOverlay("show");
-                    var dates_B = month_calendar_noon.multiDatesPicker('getDates');
-                    $scope.mealForMember.meal3bc = ";";
-                    for (key in dates_B) {
-                        $scope.mealForMember.meal3bc += dates_B[key] + ";";
-                    }
-                    $scope.mealForMember.id = id;
-                    $scope.mealForMember.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-                    $scope.mealForMember.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-
-                    let mealForMember = {
-                        meal3sicktype: $scope.mealForMember.meal3sicktype,
-                        meal3a: $scope.mealForMember.meal3a,
-                        meal3ac: $scope.mealForMember.meal3ac,
-                        meal3b: $scope.mealForMember.meal3b,
-                        meal3bc: $scope.mealForMember.meal3bc,
-                        meal3c: $scope.mealForMember.meal3c,
-                        meal3cc: $scope.mealForMember.meal3cc,
-                        recordtime: $scope.mealForMember.recordtime,
-                        showtime: $scope.mealForMember.showtime,
-                        id: $scope.mealForMember.id
-                    }
-                    MemberService.putMEMBERforNormalMeal(mealForMember, function (data) {
-                        initial();
-                    });
-
-                    //CreateTime、RecordTime、ShowTime initialize
-                    $scope.meallistB.createtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-                    $scope.meallistB.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-                    $scope.meallistB.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-
-                    //存入客戶端IP
-                    $scope.meallistB.mip = client_ip;
-                    $scope.meallistB.mip2 = client_ip;
-
-                    //memberID欄位
-                    $scope.meallistB.memberid = id;
-
-                    var dates_B = subset_calendar_B;
-
-                    for (let key in dates_B) {
-                        //$scope.meallistB.date = dates_B[key];
-                        let input = {
-                            rid: $scope.meallistB.rid,
-                            mid: sessionStorage.userId,
-                            mip: $scope.meallistB.mip,
-                            mid2: sessionStorage.userId,
-                            mip2: $scope.meallistB.mip2,
-                            memberid: $scope.meallistB.memberid,
-                            date: dates_B[key],
-                            mealtype: 3,
-                            type: 'B',
-                            meal01: $scope.meallistB.meal01,
-                            meal02: $scope.meallistB.meal02,
-                            meal03: $scope.meallistB.meal03,
-                            meal04: $scope.meallistB.meal04,
-                            meal05: $scope.meallistB.meal05,
-                            meal06: $scope.meallistB.meal06,
-                            meal07: $scope.meallistB.meal07,
-                            meal08: $scope.meallistB.meal08,
-                            meal09: $scope.meallistB.meal09,
-                            meal10: $scope.meallistB.meal10,
-                            meal11: $scope.meallistB.meal11,
-                            meal12: $scope.meallistB.meal12,
-                            meal13: $scope.meallistB.meal13,
-                            meal14: $scope.meallistB.meal14,
-                            meal15: $scope.meallistB.meal15,
-                            meal16: $scope.meallistB.meal16,
-                            meal17: $scope.meallistB.meal17,
-                            meal18: $scope.meallistB.meal18,
-                            meal19: $scope.meallistB.meal19,
-                            meal20: $scope.meallistB.meal20,
-                            meal21: $scope.meallistB.meal21,
-                            meal22: $scope.meallistB.meal22,
-                            meal23: $scope.meallistB.meal23,
-                            meal24: $scope.meallistB.meal24,
-                            meal25: $scope.meallistB.meal25,
-                            meal26: $scope.meallistB.meal26,
-                            meal27: $scope.meallistB.meal27,
-                            meal28: $scope.meallistB.meal28,
-                            meal29: $scope.meallistB.meal29,
-                            meal30: $scope.meallistB.meal30,
-                            meal31: $scope.meallistB.meal31,
-                            meal32: $scope.meallistB.meal32,
-                            meal33: $scope.meallistB.meal33,
-                            meal34: $scope.meallistB.meal34,
-                            meal35: $scope.meallistB.meal35,
-                            meal36: $scope.meallistB.meal36,
-                            meal37: $scope.meallistB.meal37,
-                            meal38: $scope.meallistB.meal38,
-                            meal39: $scope.meallistB.meal39,
-                            meal40: $scope.meallistB.meal40,
-                            flag: 9,
-                            createtime: $scope.meallistB.createtime,
-                            recordtime: $scope.meallistB.recordtime,
-                            showtime: $scope.meallistB.showtime
-                        };
-
-                        monthMealService.postMeal(input, function (data) {
-                            clearScopeMemberObj();
-                            initial();
-                            if (key == dates_B.length - 1) $.LoadingOverlay("hide");
-                        });
-                    }
-                } else {
-                    alert('請至少勾選一個日期才可新增!');
+            if (DifferenceSet_B()) {
+                $.LoadingOverlay("show");
+                var dates_B = month_calendar_noon.multiDatesPicker('getDates');
+                $scope.mealForMember.meal3bc = ";";
+                for (key in dates_B) {
+                    $scope.mealForMember.meal3bc += dates_B[key] + ";";
                 }
+                $scope.mealForMember.id = id;
+                $scope.mealForMember.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+                $scope.mealForMember.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+
+                let mealForMember = {
+                    meal3sicktype: $scope.mealForMember.meal3sicktype,
+                    meal3a: $scope.mealForMember.meal3a,
+                    meal3ac: $scope.mealForMember.meal3ac,
+                    meal3b: $scope.mealForMember.meal3b,
+                    meal3bc: $scope.mealForMember.meal3bc,
+                    meal3c: $scope.mealForMember.meal3c,
+                    meal3cc: $scope.mealForMember.meal3cc,
+                    recordtime: $scope.mealForMember.recordtime,
+                    showtime: $scope.mealForMember.showtime,
+                    id: $scope.mealForMember.id
+                }
+                MemberService.putMEMBERforNormalMeal(mealForMember, function (data) {
+                    initial();
+                });
+
+                //CreateTime、RecordTime、ShowTime initialize
+                $scope.meallistB.createtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+                $scope.meallistB.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+                $scope.meallistB.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+
+                //存入客戶端IP
+                $scope.meallistB.mip = client_ip;
+                $scope.meallistB.mip2 = client_ip;
+
+                //memberID欄位
+                $scope.meallistB.memberid = id;
+
+                var dates_B = subset_calendar_B;
+
+                for (let key in dates_B) {
+                    //$scope.meallistB.date = dates_B[key];
+                    let input = {
+                        rid: $scope.meallistB.rid,
+                        mid: sessionStorage.userId,
+                        mip: $scope.meallistB.mip,
+                        mid2: sessionStorage.userId,
+                        mip2: $scope.meallistB.mip2,
+                        memberid: $scope.meallistB.memberid,
+                        date: dates_B[key],
+                        mealtype: 3,
+                        type: 'B',
+                        meal01: $scope.meallistB.meal01,
+                        meal02: $scope.meallistB.meal02,
+                        meal03: $scope.meallistB.meal03,
+                        meal04: $scope.meallistB.meal04,
+                        meal05: $scope.meallistB.meal05,
+                        meal06: $scope.meallistB.meal06,
+                        meal07: $scope.meallistB.meal07,
+                        meal08: $scope.meallistB.meal08,
+                        meal09: $scope.meallistB.meal09,
+                        meal10: $scope.meallistB.meal10,
+                        meal11: $scope.meallistB.meal11,
+                        meal12: $scope.meallistB.meal12,
+                        meal13: $scope.meallistB.meal13,
+                        meal14: $scope.meallistB.meal14,
+                        meal15: $scope.meallistB.meal15,
+                        meal16: $scope.meallistB.meal16,
+                        meal17: $scope.meallistB.meal17,
+                        meal18: $scope.meallistB.meal18,
+                        meal19: $scope.meallistB.meal19,
+                        meal20: $scope.meallistB.meal20,
+                        meal21: $scope.meallistB.meal21,
+                        meal22: $scope.meallistB.meal22,
+                        meal23: $scope.meallistB.meal23,
+                        meal24: $scope.meallistB.meal24,
+                        meal25: $scope.meallistB.meal25,
+                        meal26: $scope.meallistB.meal26,
+                        meal27: $scope.meallistB.meal27,
+                        meal28: $scope.meallistB.meal28,
+                        meal29: $scope.meallistB.meal29,
+                        meal30: $scope.meallistB.meal30,
+                        meal31: $scope.meallistB.meal31,
+                        meal32: $scope.meallistB.meal32,
+                        meal33: $scope.meallistB.meal33,
+                        meal34: $scope.meallistB.meal34,
+                        meal35: $scope.meallistB.meal35,
+                        meal36: $scope.meallistB.meal36,
+                        meal37: $scope.meallistB.meal37,
+                        meal38: $scope.meallistB.meal38,
+                        meal39: $scope.meallistB.meal39,
+                        meal40: $scope.meallistB.meal40,
+                        flag: 9,
+                        createtime: $scope.meallistB.createtime,
+                        recordtime: $scope.meallistB.recordtime,
+                        showtime: $scope.meallistB.showtime
+                    };
+
+                    monthMealService.postMeal(input, function (data) {
+                        clearScopeMemberObj();
+                        initial();
+                        if (key == dates_B.length - 1) $.LoadingOverlay("hide");
+                    });
+                }
+            } else {
+
             }
 
-            if ($scope.cb_nightFalg) {
-                if (DifferenceSet_C()) {
-                    $.LoadingOverlay("show");
-                    var dates_C = month_calendar_night.multiDatesPicker('getDates');
-                    $scope.mealForMember.meal3cc = ";";
-                    for (key in dates_C) {
-                        $scope.mealForMember.meal3cc += dates_C[key] + ";";
-                    }
-                    $scope.mealForMember.id = id;
-                    $scope.mealForMember.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-                    $scope.mealForMember.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-
-                    let mealForMember = {
-                        meal3sicktype: $scope.mealForMember.meal3sicktype,
-                        meal3a: $scope.mealForMember.meal3a,
-                        meal3ac: $scope.mealForMember.meal3ac,
-                        meal3b: $scope.mealForMember.meal3b,
-                        meal3bc: $scope.mealForMember.meal3bc,
-                        meal3c: $scope.mealForMember.meal3c,
-                        meal3cc: $scope.mealForMember.meal3cc,
-                        recordtime: $scope.mealForMember.recordtime,
-                        showtime: $scope.mealForMember.showtime,
-                        id: $scope.mealForMember.id
-                    }
-                    MemberService.putMEMBERforNormalMeal(mealForMember, function (data) {
-                        initial();
-                    });
-
-                    //CreateTime、RecordTime、ShowTime initialize
-                    $scope.meallistC.createtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-                    $scope.meallistC.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-                    $scope.meallistC.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
-
-                    //存入客戶端IP
-                    $scope.meallistC.mip = client_ip;
-                    $scope.meallistC.mip2 = client_ip;
-
-                    //memberID欄位
-                    $scope.meallistC.memberid = id;
-
-                    var dates_C = subset_calendar_C;
-
-                    for (let key in dates_C) {
-                        //$scope.meallistC.date = dates_C[key];
-                        let input = {
-                            rid: $scope.meallistC.rid,
-                            mid: sessionStorage.userId,
-                            mip: $scope.meallistC.mip,
-                            mid2: sessionStorage.userId,
-                            mip2: $scope.meallistC.mip2,
-                            memberid: $scope.meallistC.memberid,
-                            date: dates_C[key],
-                            mealtype: 3,
-                            type: 'C',
-                            meal01: $scope.meallistC.meal01,
-                            meal02: $scope.meallistC.meal02,
-                            meal03: $scope.meallistC.meal03,
-                            meal04: $scope.meallistC.meal04,
-                            meal05: $scope.meallistC.meal05,
-                            meal06: $scope.meallistC.meal06,
-                            meal07: $scope.meallistC.meal07,
-                            meal08: $scope.meallistC.meal08,
-                            meal09: $scope.meallistC.meal09,
-                            meal10: $scope.meallistC.meal10,
-                            meal11: $scope.meallistC.meal11,
-                            meal12: $scope.meallistC.meal12,
-                            meal13: $scope.meallistC.meal13,
-                            meal14: $scope.meallistC.meal14,
-                            meal15: $scope.meallistC.meal15,
-                            meal16: $scope.meallistC.meal16,
-                            meal17: $scope.meallistC.meal17,
-                            meal18: $scope.meallistC.meal18,
-                            meal19: $scope.meallistC.meal19,
-                            meal20: $scope.meallistC.meal20,
-                            meal21: $scope.meallistC.meal21,
-                            meal22: $scope.meallistC.meal22,
-                            meal23: $scope.meallistC.meal23,
-                            meal24: $scope.meallistC.meal24,
-                            meal25: $scope.meallistC.meal25,
-                            meal26: $scope.meallistC.meal26,
-                            meal27: $scope.meallistC.meal27,
-                            meal28: $scope.meallistC.meal28,
-                            meal29: $scope.meallistC.meal29,
-                            meal30: $scope.meallistC.meal30,
-                            meal31: $scope.meallistC.meal31,
-                            meal32: $scope.meallistC.meal32,
-                            meal33: $scope.meallistC.meal33,
-                            meal34: $scope.meallistC.meal34,
-                            meal35: $scope.meallistC.meal35,
-                            meal36: $scope.meallistC.meal36,
-                            meal37: $scope.meallistC.meal37,
-                            meal38: $scope.meallistC.meal38,
-                            meal39: $scope.meallistC.meal39,
-                            meal40: $scope.meallistC.meal40,
-                            flag: 9,
-                            createtime: $scope.meallistC.createtime,
-                            recordtime: $scope.meallistC.recordtime,
-                            showtime: $scope.meallistC.showtime
-                        };
-                        monthMealService.postMeal(input, function (data) {
-                            clearScopeMemberObj();
-                            initial();
-                            if (key == dates_C.length - 1) $.LoadingOverlay("hide");
-                        });
-                    }
-                } else {
-                    alert('請至少勾選一個日期才可新增!');
+            if (DifferenceSet_C()) {
+                $.LoadingOverlay("show");
+                var dates_C = month_calendar_night.multiDatesPicker('getDates');
+                $scope.mealForMember.meal3cc = ";";
+                for (key in dates_C) {
+                    $scope.mealForMember.meal3cc += dates_C[key] + ";";
                 }
+                $scope.mealForMember.id = id;
+                $scope.mealForMember.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+                $scope.mealForMember.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+
+                let mealForMember = {
+                    meal3sicktype: $scope.mealForMember.meal3sicktype,
+                    meal3a: $scope.mealForMember.meal3a,
+                    meal3ac: $scope.mealForMember.meal3ac,
+                    meal3b: $scope.mealForMember.meal3b,
+                    meal3bc: $scope.mealForMember.meal3bc,
+                    meal3c: $scope.mealForMember.meal3c,
+                    meal3cc: $scope.mealForMember.meal3cc,
+                    recordtime: $scope.mealForMember.recordtime,
+                    showtime: $scope.mealForMember.showtime,
+                    id: $scope.mealForMember.id
+                }
+                MemberService.putMEMBERforNormalMeal(mealForMember, function (data) {
+                    initial();
+                });
+
+                //CreateTime、RecordTime、ShowTime initialize
+                $scope.meallistC.createtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+                $scope.meallistC.recordtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+                $scope.meallistC.showtime = Today.getUTCFullYear() + '-' + (Today.getUTCMonth() + 1) + '-' + Today.getUTCDate() + " " + Today.getUTCHours() + ":" + Today.getUTCMinutes() + ":" + Today.getUTCSeconds();
+
+                //存入客戶端IP
+                $scope.meallistC.mip = client_ip;
+                $scope.meallistC.mip2 = client_ip;
+
+                //memberID欄位
+                $scope.meallistC.memberid = id;
+
+                var dates_C = subset_calendar_C;
+
+                for (let key in dates_C) {
+                    //$scope.meallistC.date = dates_C[key];
+                    let input = {
+                        rid: $scope.meallistC.rid,
+                        mid: sessionStorage.userId,
+                        mip: $scope.meallistC.mip,
+                        mid2: sessionStorage.userId,
+                        mip2: $scope.meallistC.mip2,
+                        memberid: $scope.meallistC.memberid,
+                        date: dates_C[key],
+                        mealtype: 3,
+                        type: 'C',
+                        meal01: $scope.meallistC.meal01,
+                        meal02: $scope.meallistC.meal02,
+                        meal03: $scope.meallistC.meal03,
+                        meal04: $scope.meallistC.meal04,
+                        meal05: $scope.meallistC.meal05,
+                        meal06: $scope.meallistC.meal06,
+                        meal07: $scope.meallistC.meal07,
+                        meal08: $scope.meallistC.meal08,
+                        meal09: $scope.meallistC.meal09,
+                        meal10: $scope.meallistC.meal10,
+                        meal11: $scope.meallistC.meal11,
+                        meal12: $scope.meallistC.meal12,
+                        meal13: $scope.meallistC.meal13,
+                        meal14: $scope.meallistC.meal14,
+                        meal15: $scope.meallistC.meal15,
+                        meal16: $scope.meallistC.meal16,
+                        meal17: $scope.meallistC.meal17,
+                        meal18: $scope.meallistC.meal18,
+                        meal19: $scope.meallistC.meal19,
+                        meal20: $scope.meallistC.meal20,
+                        meal21: $scope.meallistC.meal21,
+                        meal22: $scope.meallistC.meal22,
+                        meal23: $scope.meallistC.meal23,
+                        meal24: $scope.meallistC.meal24,
+                        meal25: $scope.meallistC.meal25,
+                        meal26: $scope.meallistC.meal26,
+                        meal27: $scope.meallistC.meal27,
+                        meal28: $scope.meallistC.meal28,
+                        meal29: $scope.meallistC.meal29,
+                        meal30: $scope.meallistC.meal30,
+                        meal31: $scope.meallistC.meal31,
+                        meal32: $scope.meallistC.meal32,
+                        meal33: $scope.meallistC.meal33,
+                        meal34: $scope.meallistC.meal34,
+                        meal35: $scope.meallistC.meal35,
+                        meal36: $scope.meallistC.meal36,
+                        meal37: $scope.meallistC.meal37,
+                        meal38: $scope.meallistC.meal38,
+                        meal39: $scope.meallistC.meal39,
+                        meal40: $scope.meallistC.meal40,
+                        flag: 9,
+                        createtime: $scope.meallistC.createtime,
+                        recordtime: $scope.meallistC.recordtime,
+                        showtime: $scope.meallistC.showtime
+                    };
+                    monthMealService.postMeal(input, function (data) {
+                        clearScopeMemberObj();
+                        initial();
+                        if (key == dates_C.length - 1) $.LoadingOverlay("hide");
+                    });
+                }
+            } else {
+
             }
         }
     };
