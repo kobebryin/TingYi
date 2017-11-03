@@ -210,6 +210,14 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
         showtime: ' '
     }
 
+    //修改取消用來刪除陣列元素函式
+    function remove(array, deleteValue) {
+        for (var key in array) {
+            if (array[key] == deleteValue) array.splice(key, 1);
+        }
+        return array;
+    }
+
     initial();
     Edit_Type_check();
 
@@ -265,7 +273,275 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
         }
     };
 
-    //修改覆蓋按鈕觸發事件
+    //修改取消觸發事件
+    $scope.edit_cancle = function () {
+        if (month_calendar_morning.multiDatesPicker('getDates').length === 0 && month_calendar_noon.multiDatesPicker('getDates').length === 0 && month_calendar_night.multiDatesPicker('getDates').length === 0) {
+            alert('請至少勾選一個日期才可修改!');
+        } else {
+
+            if (month_calendar_morning.multiDatesPicker('getDates').length === 0) {
+
+            } else {
+                $.LoadingOverlay("show");
+
+                $scope.meallistA.meal06 = ' ';
+                $scope.meallistA.meal07 = ' ';
+                $scope.meallistA.meal08 = ' ';
+
+                var dates_A = month_calendar_morning.multiDatesPicker('getDates');
+                var inputObj = {
+                    memberid: id,
+                    date: dates_A[0],
+                    mealtype: 2,
+                    type: 'A'
+                }
+                monthMealService.show_data(inputObj, function (data) {
+                    var updateflag = false;
+
+                    if ($('#Meal_A_Meal06').val() != '') {
+                        var meal06Array = data[0].Meal06.split(",");
+                        var deleteArray = $('#Meal_A_Meal06').val().split(',');
+
+                        for (let key in deleteArray) {
+                            meal06Array = remove(meal06Array, deleteArray[key]);
+                        }
+                        $scope.meallistA.meal06 = meal06Array.join(',');
+
+                        updateflag = true;
+                    }
+
+                    if ($('#Meal_A_Meal07').val() != '') {
+                        var meal07Array = data[0].Meal07.split(",");
+                        var deleteArray = $('#Meal_A_Meal07').val().split(',');
+
+                        for (let key in deleteArray) {
+                            meal07Array = remove(meal07Array, deleteArray[key]);
+                        }
+                        $scope.meallistA.meal07 = meal07Array.join(',');
+
+                        updateflag = true;
+                    }
+
+                    if ($('#Meal_A_Meal08').val() != '') {
+                        var meal08Array = data[0].Meal08;
+                        var deleteArray = $('#Meal_A_Meal08').val();
+
+                        if (meal08Array == deleteArray) {
+                            meal08Array = '';
+                        }
+
+                        $scope.meallistA.meal08 = meal08Array;
+
+                        updateflag = true;
+                    }
+
+                    if (updateflag) {
+                        var dates_A = month_calendar_morning.multiDatesPicker('getDates');
+                        for (let key in dates_A) {
+
+                            let edit_join_data = {
+                                memberid: id,
+                                date: dates_A[key],
+                                mealtype: 2,
+                                type: 'A',
+                                meal06: $scope.meallistA.meal06,
+                                meal07: $scope.meallistA.meal07,
+                                meal08: $scope.meallistA.meal08
+                            }
+
+                            monthMealService.edit_cancle_Meal2(edit_join_data, function (data) {
+                                if (data === '未輸入任何修改資料!') {
+                                    alert(data);
+                                    $.LoadingOverlay("hide");
+                                } else {
+                                    initial();
+                                    if (key == dates_A.length - 1) $.LoadingOverlay("hide");
+                                }
+                            });
+                        }
+                    } else {
+                        alert('沒輸入修改資料！');
+                        $.LoadingOverlay("hide");
+                    }
+                });
+            }
+
+            if (month_calendar_noon.multiDatesPicker('getDates').length === 0) {
+
+            } else {
+                $.LoadingOverlay("show");
+
+                $scope.meallistA.meal06 = ' ';
+                $scope.meallistA.meal07 = ' ';
+                $scope.meallistA.meal08 = ' ';
+
+                var dates_A = month_calendar_noon.multiDatesPicker('getDates');
+                var inputObj = {
+                    memberid: id,
+                    date: dates_A[0],
+                    mealtype: 2,
+                    type: 'B'
+                }
+                monthMealService.show_data(inputObj, function (data) {
+                    var updateflag = false;
+
+                    if ($('#Meal_A_Meal06').val() != '') {
+                        var meal06Array = data[0].Meal06.split(",");
+                        var deleteArray = $('#Meal_A_Meal06').val().split(',');
+
+                        for (let key in deleteArray) {
+                            meal06Array = remove(meal06Array, deleteArray[key]);
+                        }
+                        $scope.meallistA.meal06 = meal06Array.join(',');
+
+                        updateflag = true;
+                    }
+
+                    if ($('#Meal_A_Meal07').val() != '') {
+                        var meal07Array = data[0].Meal07.split(",");
+                        var deleteArray = $('#Meal_A_Meal07').val().split(',');
+
+                        for (let key in deleteArray) {
+                            meal07Array = remove(meal07Array, deleteArray[key]);
+                        }
+                        $scope.meallistA.meal07 = meal07Array.join(',');
+
+                        updateflag = true;
+                    }
+
+                    if ($('#Meal_A_Meal08').val() != '') {
+                        var meal08Array = data[0].Meal08;
+                        var deleteArray = $('#Meal_A_Meal08').val();
+
+                        if (meal08Array == deleteArray) {
+                            meal08Array = '';
+                        }
+
+                        $scope.meallistA.meal08 = meal08Array;
+
+                        updateflag = true;
+                    }
+
+                    if (updateflag) {
+                        var dates_A = month_calendar_noon.multiDatesPicker('getDates');
+                        for (let key in dates_A) {
+
+                            let edit_join_data = {
+                                memberid: id,
+                                date: dates_A[key],
+                                mealtype: 2,
+                                type: 'B',
+                                meal06: $scope.meallistA.meal06,
+                                meal07: $scope.meallistA.meal07,
+                                meal08: $scope.meallistA.meal08
+                            }
+
+                            monthMealService.edit_cancle_Meal2(edit_join_data, function (data) {
+                                if (data === '未輸入任何修改資料!') {
+                                    alert(data);
+                                    $.LoadingOverlay("hide");
+                                } else {
+                                    initial();
+                                    if (key == dates_A.length - 1) $.LoadingOverlay("hide");
+                                }
+                            });
+                        }
+                    } else {
+                        alert('沒輸入修改資料！');
+                        $.LoadingOverlay("hide");
+                    }
+                });
+            }
+            if (month_calendar_night.multiDatesPicker('getDates').length === 0) {
+
+            } else {
+                $.LoadingOverlay("show");
+
+                $scope.meallistA.meal06 = ' ';
+                $scope.meallistA.meal07 = ' ';
+                $scope.meallistA.meal08 = ' ';
+
+                var dates_A = month_calendar_night.multiDatesPicker('getDates');
+                var inputObj = {
+                    memberid: id,
+                    date: dates_A[0],
+                    mealtype: 2,
+                    type: 'C'
+                }
+                monthMealService.show_data(inputObj, function (data) {
+                    var updateflag = false;
+
+                    if ($('#Meal_A_Meal06').val() != '') {
+                        var meal06Array = data[0].Meal06.split(",");
+                        var deleteArray = $('#Meal_A_Meal06').val().split(',');
+
+                        for (let key in deleteArray) {
+                            meal06Array = remove(meal06Array, deleteArray[key]);
+                        }
+                        $scope.meallistA.meal06 = meal06Array.join(',');
+
+                        updateflag = true;
+                    }
+
+                    if ($('#Meal_A_Meal07').val() != '') {
+                        var meal07Array = data[0].Meal07.split(",");
+                        var deleteArray = $('#Meal_A_Meal07').val().split(',');
+
+                        for (let key in deleteArray) {
+                            meal07Array = remove(meal07Array, deleteArray[key]);
+                        }
+                        $scope.meallistA.meal07 = meal07Array.join(',');
+
+                        updateflag = true;
+                    }
+
+                    if ($('#Meal_A_Meal08').val() != '') {
+                        var meal08Array = data[0].Meal08;
+                        var deleteArray = $('#Meal_A_Meal08').val();
+
+                        if (meal08Array == deleteArray) {
+                            meal08Array = '';
+                        }
+
+                        $scope.meallistA.meal08 = meal08Array;
+
+                        updateflag = true;
+                    }
+
+                    if (updateflag) {
+                        var dates_A = month_calendar_night.multiDatesPicker('getDates');
+                        for (let key in dates_A) {
+
+                            let edit_join_data = {
+                                memberid: id,
+                                date: dates_A[key],
+                                mealtype: 2,
+                                type: 'C',
+                                meal06: $scope.meallistA.meal06,
+                                meal07: $scope.meallistA.meal07,
+                                meal08: $scope.meallistA.meal08
+                            }
+
+                            monthMealService.edit_cancle_Meal2(edit_join_data, function (data) {
+                                if (data === '未輸入任何修改資料!') {
+                                    alert(data);
+                                    $.LoadingOverlay("hide");
+                                } else {
+                                    initial();
+                                    if (key == dates_A.length - 1) $.LoadingOverlay("hide");
+                                }
+                            });
+                        }
+                    } else {
+                        alert('沒輸入修改資料！');
+                        $.LoadingOverlay("hide");
+                    }
+                });
+            }
+        }
+    };
+
+    //查詢按鈕觸發事件
     $scope.show_data = function () {
         if (month_calendar_morning.multiDatesPicker('getDates').length === 0 && month_calendar_noon.multiDatesPicker('getDates').length === 0 && month_calendar_night.multiDatesPicker('getDates').length === 0) {
             alert('請至少勾選一個日期才可查詢!');
@@ -335,7 +611,7 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
             }
 
             if (month_calendar_night.multiDatesPicker('getDates').length === 0) {
-                
+
             } else {
                 var dates_C = month_calendar_night.multiDatesPicker('getDates');
                 var inputObj = {
@@ -2122,6 +2398,212 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                     });
                     break;
 
+                // 修改取消按鈕
+                case '6':
+                    function enableAllTheseDays_A(date) {
+                        var sdate = $.datepicker.formatDate('yy-mm-dd', date)
+                        if ($.inArray(sdate, enableDays_A) != -1) {
+                            return [true];
+                        }
+                        return [false];
+                    }
+                    function enableAllTheseDays_B(date) {
+                        var sdate = $.datepicker.formatDate('yy-mm-dd', date)
+                        if ($.inArray(sdate, enableDays_B) != -1) {
+                            return [true];
+                        }
+                        return [false];
+                    }
+                    function enableAllTheseDays_C(date) {
+                        var sdate = $.datepicker.formatDate('yy-mm-dd', date)
+                        if ($.inArray(sdate, enableDays_C) != -1) {
+                            return [true];
+                        }
+                        return [false];
+                    }
+
+                    /** Meal 早 easy UI */
+                    $('#Meal_A_Meal07').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'get',
+                        multiple: true,
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    $('#Meal_A_Meal08').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'post',
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    $('#Meal_A_Meal06').combotree({
+                        url: $rootScope.apiUrl + 'fieldvalueAttrib05',
+                        multiple: true,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    /** Meal 中午 easy UI */
+                    $('#Meal_B_Meal07').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'get',
+                        multiple: true,
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    $('#Meal_B_Meal08').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'post',
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    $('#Meal_B_Meal06').combotree({
+                        url: $rootScope.apiUrl + 'fieldvalueAttrib05',
+                        multiple: true,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    /** Meal 晚 easy UI */
+                    $('#Meal_C_Meal07').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'get',
+                        multiple: true,
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    $('#Meal_C_Meal08').combobox({
+                        url: $rootScope.apiUrl + 'fieldvalueMeal0708',
+                        method: 'post',
+                        editable: false,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    $('#Meal_C_Meal06').combotree({
+                        url: $rootScope.apiUrl + 'fieldvalueAttrib05',
+                        multiple: true,
+                        valueField: 'id',
+                        textField: 'text'
+                    });
+
+                    //將初始欄位值塞到前端欄位
+                    MemberService.getOneMEMBER(id, function (data) {
+                        // $scope.meal.attrib05 = data[0].Attrib05;
+                        // $scope.meal.user = data[0].User;
+                        // $scope.meal.attrib14 = data[0].Attrib14;
+                        // $scope.meal.attrib15 = data[0].Attrib15;
+
+                        $scope.mealForMember.meal2sicktype = data[0].Meal2SickType;
+                        $scope.mealForMember.meal2a = data[0].Meal2A;
+                        $scope.mealForMember.meal2ac = data[0].Meal2AC;     //早日期
+                        $scope.mealForMember.meal2b = data[0].Meal2B;
+                        $scope.mealForMember.meal2bc = data[0].Meal2BC;     //午日期
+                        $scope.mealForMember.meal2c = data[0].Meal2C;
+                        $scope.mealForMember.meal2cc = data[0].Meal2CC;     //晚日期
+
+                        //日曆塞值：  第一層判斷式：判斷之前有無輸入日期，第二層判斷式：判斷長度有無至少一個日期
+                        if ($scope.mealForMember.meal2ac != null) {
+                            if ($scope.mealForMember.meal2ac.length > 9) {
+                                $('#month_calendar_morning').multiDatesPicker('resetDates');
+                                $('#month_calendar_morning').multiDatesPicker('resetDates', 'disabled');
+                                //早餐的日曆值塞入
+                                var meal2ac_initial = $scope.mealForMember.meal2ac.substring(1, $scope.mealForMember.meal2ac.length - 1);   //先去頭去尾';'
+                                enableDays_A = meal2ac_initial.split(";");     //依照;來切
+                                //日歷easyui初始化
+                                month_calendar_morning = $('#month_calendar_morning').multiDatesPicker({
+                                    dateFormat: "yy-mm-dd",
+                                    beforeShowDay: enableAllTheseDays_A
+                                });
+
+                            } else {
+                                $('#month_calendar_morning').multiDatesPicker('resetDates');
+                                $('#month_calendar_morning').multiDatesPicker('resetDates', 'disabled');
+                                enableDays_A = [];
+                                month_calendar_morning = $('#month_calendar_morning').multiDatesPicker({
+                                    dateFormat: "yy-mm-dd",
+                                    beforeShowDay: enableAllTheseDays_A
+                                });
+                            }
+                        } else {
+                            $('#month_calendar_morning').multiDatesPicker('resetDates');
+                            $('#month_calendar_morning').multiDatesPicker('resetDates', 'disabled');
+                            enableDays_A = [];
+                            month_calendar_morning = $('#month_calendar_morning').multiDatesPicker({
+                                dateFormat: "yy-mm-dd",
+                                beforeShowDay: enableAllTheseDays_A
+                            });
+                        }
+                        if ($scope.mealForMember.meal2bc != null) {
+                            if ($scope.mealForMember.meal2bc.length > 9) {
+                                $('#month_calendar_noon').multiDatesPicker('resetDates');
+                                $('#month_calendar_noon').multiDatesPicker('resetDates', 'disabled');
+                                //午餐的日曆值塞入
+                                var meal2bc_initial = $scope.mealForMember.meal2bc.substring(1, $scope.mealForMember.meal2bc.length - 1);   //先去頭去尾';'
+                                enableDays_B = meal2bc_initial.split(";");     //依照;來切
+                                month_calendar_noon = $('#month_calendar_noon').multiDatesPicker({
+                                    dateFormat: "yy-mm-dd",
+                                    beforeShowDay: enableAllTheseDays_B
+                                });
+                            } else {
+                                $('#month_calendar_noon').multiDatesPicker('resetDates');
+                                $('#month_calendar_noon').multiDatesPicker('resetDates', 'disabled');
+                                enableDays_B = [];
+                                month_calendar_noon = $('#month_calendar_noon').multiDatesPicker({
+                                    dateFormat: "yy-mm-dd",
+                                    beforeShowDay: enableAllTheseDays_B
+                                });
+                            }
+                        } else {
+                            $('#month_calendar_noon').multiDatesPicker('resetDates');
+                            $('#month_calendar_noon').multiDatesPicker('resetDates', 'disabled');
+                            enableDays_B = [];
+                            month_calendar_noon = $('#month_calendar_noon').multiDatesPicker({
+                                dateFormat: "yy-mm-dd",
+                                beforeShowDay: enableAllTheseDays_B
+                            });
+                        }
+                        if ($scope.mealForMember.meal2cc != null) {
+                            if ($scope.mealForMember.meal2cc.length > 9) {
+                                $('#month_calendar_night').multiDatesPicker('resetDates');
+                                $('#month_calendar_night').multiDatesPicker('resetDates', 'disabled');
+                                //晚餐的日曆值塞入
+                                var meal2cc_initial = $scope.mealForMember.meal2cc.substring(1, $scope.mealForMember.meal2cc.length - 1);   //先去頭去尾';'
+                                enableDays_C = meal2cc_initial.split(";");     //依照;來切
+                                month_calendar_night = $('#month_calendar_night').multiDatesPicker({
+                                    dateFormat: "yy-mm-dd",
+                                    beforeShowDay: enableAllTheseDays_C
+                                });
+                            } else {
+                                $('#month_calendar_night').multiDatesPicker('resetDates');
+                                $('#month_calendar_night').multiDatesPicker('resetDates', 'disabled');
+                                enableDays_C = [];
+                                month_calendar_night = $('#month_calendar_night').multiDatesPicker({
+                                    dateFormat: "yy-mm-dd",
+                                    beforeShowDay: enableAllTheseDays_C
+                                });
+                            }
+                        } else {
+                            $('#month_calendar_night').multiDatesPicker('resetDates');
+                            $('#month_calendar_night').multiDatesPicker('resetDates', 'disabled');
+                            enableDays_C = [];
+                            month_calendar_night = $('#month_calendar_night').multiDatesPicker({
+                                dateFormat: "yy-mm-dd",
+                                beforeShowDay: enableAllTheseDays_C
+                            });
+                        }
+                    });
+                    break;
             }
         }
     }
@@ -2304,6 +2786,7 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                 document.getElementById("a_Link_Save_3").disabled = true;
                 document.getElementById("a_Link_Save_4").disabled = true;
                 document.getElementById("a_Link_Save_5").disabled = true;
+                document.getElementById("a_Link_Save_6").disabled = true;
                 initial();
             } else if (Edit_Type === '2') {
                 document.getElementById("a_Link_Save_1").disabled = true;
@@ -2311,6 +2794,7 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                 document.getElementById("a_Link_Save_3").disabled = true;
                 document.getElementById("a_Link_Save_4").disabled = true;
                 document.getElementById("a_Link_Save_5").disabled = true;
+                document.getElementById("a_Link_Save_6").disabled = true;
                 initial();
             } else if (Edit_Type === '3') {
                 document.getElementById("a_Link_Save_1").disabled = true;
@@ -2318,6 +2802,7 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                 document.getElementById("a_Link_Save_3").disabled = false;
                 document.getElementById("a_Link_Save_4").disabled = true;
                 document.getElementById("a_Link_Save_5").disabled = true;
+                document.getElementById("a_Link_Save_6").disabled = true;
                 initial();
             } else if (Edit_Type === '4') {
                 document.getElementById("a_Link_Save_1").disabled = true;
@@ -2325,6 +2810,7 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                 document.getElementById("a_Link_Save_3").disabled = true;
                 document.getElementById("a_Link_Save_4").disabled = false;
                 document.getElementById("a_Link_Save_5").disabled = true;
+                document.getElementById("a_Link_Save_6").disabled = true;
                 initial();
             } else if (Edit_Type === '5') {
                 document.getElementById("a_Link_Save_1").disabled = true;
@@ -2332,6 +2818,15 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                 document.getElementById("a_Link_Save_3").disabled = true;
                 document.getElementById("a_Link_Save_4").disabled = true;
                 document.getElementById("a_Link_Save_5").disabled = false;
+                document.getElementById("a_Link_Save_6").disabled = true;
+                initial();
+            } else if (Edit_Type === '6') {
+                document.getElementById("a_Link_Save_1").disabled = true;
+                document.getElementById("a_Link_Save_2").disabled = true;
+                document.getElementById("a_Link_Save_3").disabled = true;
+                document.getElementById("a_Link_Save_4").disabled = true;
+                document.getElementById("a_Link_Save_5").disabled = true;
+                document.getElementById("a_Link_Save_6").disabled = false;
                 initial();
             }
         });

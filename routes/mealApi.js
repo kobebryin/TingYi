@@ -366,6 +366,64 @@ router.put('/dynamicUpdate', function (req, res, next) {
     }
 });
 
+// --------  UPDATE CANCLE Data from MySQL's table meal ----------------------- 
+router.put('/dynamicUpdateCancle', function (req, res, next) {
+    var sqlString = 'UPDATE meal SET ';
+    var sqlArray = [];
+   
+    if (req.body.meal09 != ' ') {
+        sqlString += 'Meal09=?, ';
+        sqlArray.push(req.body.meal09);
+    }
+    
+    if (req.body.meal12 != ' ') {
+        sqlString += 'Meal12=?, ';
+        sqlArray.push(req.body.meal12);
+    }
+    
+    if (req.body.meal14 != ' ') {
+        sqlString += 'Meal14=?, ';
+        sqlArray.push(req.body.meal14);
+    }
+    if (req.body.meal15 != ' ') {
+        sqlString += 'Meal15=?, ';
+        sqlArray.push(req.body.meal15);
+    }
+    
+    if (req.body.meal21 != ' ') {
+        sqlString += 'Meal21=?, ';
+        sqlArray.push(req.body.meal21);
+    }
+    if (req.body.meal22 != ' ') {
+        sqlString += 'Meal22=?, ';
+        sqlArray.push(req.body.meal22);
+    }
+    if (req.body.meal23 != ' ') {
+        sqlString += 'Meal23=?, ';
+        sqlArray.push(req.body.meal23);
+    }
+   
+    sqlString += 'X';
+    var FinalSqlString = sqlString.split(', X')[0];
+    console.log(FinalSqlString);
+     
+    if (sqlArray.length > 0) {
+        FinalSqlString += ' WHERE MemberID = ? AND Date = ? AND MealType = ? AND Type = ?;';
+        console.log(FinalSqlString);
+        sqlArray.push(req.body.memberid);
+        sqlArray.push(req.body.date);
+        sqlArray.push(1);
+        sqlArray.push(req.body.type);
+        req.dbConnection.query(FinalSqlString, sqlArray, function (error, results, fields) {
+            if (error) throw error;
+            console.log('The solution is: ', results);
+            res.json(results);
+        });
+    } else {
+        res.send('未輸入任何修改資料!');
+    }
+});
+
 // --------  delete sepcific date Data from MySQL's table meal ----------------------- 
 router.delete('/deleteA', function (req, res, next) {
     req.dbConnection.query('DELETE FROM meal WHERE MemberID=' + req.query.id + " AND Date='" + req.query.date + "' AND MealType=1 AND Type='A';", function (error, results, fields) {

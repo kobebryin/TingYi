@@ -63,6 +63,22 @@ angular.module('TinYi').service('monthMealService', function ($rootScope, $http)
         });
     }
 
+    //修改取消餐點資料 -- 月子餐
+    this.edit_cancle_Meal = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + 'meal/dynamicUpdateCancle', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
+    //修改取消餐點資料 -- 調理餐
+    this.edit_cancle_Meal2 = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + 'memberForConditionMeal/dynamicUpdateCancle', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
     //月子餐刪除餐點資料
     this.deleteMeal_A = function (id, callback) {
         $http.delete($rootScope.apiUrl + 'meal?MemberID=' + id).success(function (data) {

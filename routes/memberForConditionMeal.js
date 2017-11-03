@@ -115,6 +115,47 @@ router.put('/updateoverwrite', function (req, res, next) {
     });
 });
 
+// --------  UPDATE CANCLE Data from MySQL's table meal ----------------------- 
+router.put('/dynamicUpdateCancle', function (req, res, next) {
+    var sqlString = 'UPDATE meal SET ';
+    var sqlArray = [];
+   
+    if (req.body.meal06 != ' ') {
+        sqlString += 'Meal06=?, ';
+        sqlArray.push(req.body.meal06);
+    }
+    
+    if (req.body.meal07 != ' ') {
+        sqlString += 'Meal07=?, ';
+        sqlArray.push(req.body.meal07);
+    }
+    
+    if (req.body.meal08 != ' ') {
+        sqlString += 'Meal08=?, ';
+        sqlArray.push(req.body.meal08);
+    }
+   
+    sqlString += 'X';
+    var FinalSqlString = sqlString.split(', X')[0];
+    console.log(FinalSqlString);
+     
+    if (sqlArray.length > 0) {
+        FinalSqlString += ' WHERE MemberID = ? AND Date = ? AND MealType = ? AND Type = ?;';
+        console.log(FinalSqlString);
+        sqlArray.push(req.body.memberid);
+        sqlArray.push(req.body.date);
+        sqlArray.push(2);
+        sqlArray.push(req.body.type);
+        req.dbConnection.query(FinalSqlString, sqlArray, function (error, results, fields) {
+            if (error) throw error;
+            console.log('The solution is: ', results);
+            res.json(results);
+        });
+    } else {
+        res.send('未輸入任何修改資料!');
+    }
+});
+
 // --------  UPDATE JOIN Data from MySQL's table meal ----------------------- 
 router.put('/dynamicUpdate', function (req, res, next) {
     var sqlString = 'UPDATE meal SET ';
