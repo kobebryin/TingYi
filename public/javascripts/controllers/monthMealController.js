@@ -423,7 +423,6 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                                 meal23: $scope.meallistA.meal23
                             }
 
-                            console.log(edit_join_data.meal12);
                             monthMealService.edit_cancle_Meal(edit_join_data, function (data) {
                                 if (data === '未輸入任何修改資料!') {
                                     alert(data);
@@ -831,7 +830,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     mealtype: 1,
                     type: 'C'
                 }
-                console.log(inputObj);
+
                 monthMealService.show_data(inputObj, function (data) {
                     var ContentStr = "客戶編號: " + data[0].MemberID + "\n"; //要顯示的字串
                     ContentStr += "時段: " + inputObj.date + "/晚上\n";
