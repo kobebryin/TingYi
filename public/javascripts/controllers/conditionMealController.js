@@ -218,6 +218,20 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
         return array;
     }
 
+    //修改取消用來刪除陣列元素函式
+    function editJoin_check(array, deleteValue) {
+        var same_flag = false;
+        for (var key in array) {
+            if (array[key] == deleteValue) {
+                same_flag = true;
+                break;
+            } else {
+                same_flag = false;
+            }
+        }
+        return same_flag;
+    }
+
     initial();
     Edit_Type_check();
 
@@ -788,39 +802,74 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                 $scope.meallistA.meal08 = $('#Meal_A_Meal08').val();
 
                 var dates_A = month_calendar_morning.multiDatesPicker('getDates');
-                for (let key in dates_A) {
-
-                    let edit_join_data = {
-                        memberid: id,
-                        date: dates_A[key],
-                        mealtype: 2,
-                        type: 'A',
-                        meal01: $scope.meallistA.meal01,
-                        meal02: $scope.meallistA.meal02,
-                        meal03: $scope.meallistA.meal03,
-                        meal04: $scope.meallistA.meal04,
-                        meal05: $scope.meallistA.meal05,
-                        meal06: $scope.meallistA.meal06,
-                        meal07: $scope.meallistA.meal07,
-                        meal08: $scope.meallistA.meal08,
-                        meal09: $scope.meallistA.meal09,
-                        meal10: $scope.meallistA.meal10,
-                        meal11: $scope.meallistA.meal11,
-                        meal12: $scope.meallistA.meal12,
-                        meal13: $scope.meallistA.meal13,
-                        meal14: $scope.meallistA.meal14,
-                        meal15: $scope.meallistA.meal15
-                    }
-                    monthMealService.edit_join_Meal2(edit_join_data, function (data) {
-                        if (data === '未輸入任何修改資料!') {
-                            alert(data);
-                            $.LoadingOverlay("hide");
-                        } else {
-                            initial();
-                            if (key == dates_A.length - 1) $.LoadingOverlay("hide");
-                        }
-                    });
+                var inputObj = {
+                    memberid: id,
+                    date: dates_A[0],
+                    mealtype: 2,
+                    type: 'A'
                 }
+                monthMealService.show_data(inputObj, function (data) {
+                    var editJoin_meal06 = data[0].Meal06.split(',');
+                    var editJoin_meal07 = data[0].Meal07.split(',');
+
+                    if ($('#Meal_A_Meal06').val() != '') {
+                        var deleteArray = $('#Meal_A_Meal06').val().split(',');
+                        for (let key in deleteArray) {
+                            if (!editJoin_check(editJoin_meal06, deleteArray[key])) {
+                                editJoin_meal06.push(deleteArray[key]);
+                            } else {
+                                //原本陣列內有相同的就不做加入
+                            }
+                        }
+                        $scope.meallistA.meal06 = editJoin_meal06.join(',');
+                    }
+                    if ($('#Meal_A_Meal07').val() != '') {
+                        var deleteArray = $('#Meal_A_Meal07').val().split(',');
+                        for (let key in deleteArray) {
+                            if (!editJoin_check(editJoin_meal07, deleteArray[key])) {
+                                editJoin_meal07.push(deleteArray[key]);
+                            } else {
+                                //原本陣列內有相同的就不做加入
+                            }
+                        }
+                        $scope.meallistA.meal07 = editJoin_meal07.join(',');
+                    }
+
+                    var dates_A = month_calendar_morning.multiDatesPicker('getDates');
+                    for (let key in dates_A) {
+
+                        let edit_join_data = {
+                            memberid: id,
+                            date: dates_A[key],
+                            mealtype: 2,
+                            type: 'A',
+                            meal01: $scope.meallistA.meal01,
+                            meal02: $scope.meallistA.meal02,
+                            meal03: $scope.meallistA.meal03,
+                            meal04: $scope.meallistA.meal04,
+                            meal05: $scope.meallistA.meal05,
+                            meal06: $scope.meallistA.meal06,
+                            meal07: $scope.meallistA.meal07,
+                            meal08: $scope.meallistA.meal08,
+                            meal09: $scope.meallistA.meal09,
+                            meal10: $scope.meallistA.meal10,
+                            meal11: $scope.meallistA.meal11,
+                            meal12: $scope.meallistA.meal12,
+                            meal13: $scope.meallistA.meal13,
+                            meal14: $scope.meallistA.meal14,
+                            meal15: $scope.meallistA.meal15
+                        }
+                        monthMealService.edit_join_Meal2(edit_join_data, function (data) {
+                            if (data === '未輸入任何修改資料!') {
+                                alert(data);
+                                $.LoadingOverlay("hide");
+                            } else {
+                                initial();
+                                if (key == dates_A.length - 1) $.LoadingOverlay("hide");
+                            }
+                        });
+                    }
+                });
             }
 
             if (month_calendar_noon.multiDatesPicker('getDates').length === 0) {
@@ -833,39 +882,73 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                 $scope.meallistA.meal08 = $('#Meal_A_Meal08').val();
 
                 var dates_B = month_calendar_noon.multiDatesPicker('getDates');
-                for (let key in dates_B) {
-
-                    let edit_join_data = {
-                        memberid: id,
-                        date: dates_B[key],
-                        mealtype: 2,
-                        type: 'B',
-                        meal01: $scope.meallistA.meal01,
-                        meal02: $scope.meallistA.meal02,
-                        meal03: $scope.meallistA.meal03,
-                        meal04: $scope.meallistA.meal04,
-                        meal05: $scope.meallistA.meal05,
-                        meal06: $scope.meallistA.meal06,
-                        meal07: $scope.meallistA.meal07,
-                        meal08: $scope.meallistA.meal08,
-                        meal09: $scope.meallistA.meal09,
-                        meal10: $scope.meallistA.meal10,
-                        meal11: $scope.meallistA.meal11,
-                        meal12: $scope.meallistA.meal12,
-                        meal13: $scope.meallistA.meal13,
-                        meal14: $scope.meallistA.meal14,
-                        meal15: $scope.meallistA.meal15
-                    }
-                    monthMealService.edit_join_Meal2(edit_join_data, function (data) {
-                        if (data === '未輸入任何修改資料!') {
-                            alert(data);
-                            $.LoadingOverlay("hide");
-                        } else {
-                            initial();
-                            if (key == dates_B.length - 1) $.LoadingOverlay("hide");
-                        }
-                    });
+                var inputObj = {
+                    memberid: id,
+                    date: dates_B[0],
+                    mealtype: 2,
+                    type: 'B'
                 }
+                monthMealService.show_data(inputObj, function (data) {
+                    var editJoin_meal06 = data[0].Meal06.split(',');
+                    var editJoin_meal07 = data[0].Meal07.split(',');
+
+                    if ($('#Meal_A_Meal06').val() != '') {
+                        var deleteArray = $('#Meal_A_Meal06').val().split(',');
+                        for (let key in deleteArray) {
+                            if (!editJoin_check(editJoin_meal06, deleteArray[key])) {
+                                editJoin_meal06.push(deleteArray[key]);
+                            } else {
+                                //原本陣列內有相同的就不做加入
+                            }
+                        }
+                        $scope.meallistA.meal06 = editJoin_meal06.join(',');
+                    }
+                    if ($('#Meal_A_Meal07').val() != '') {
+                        var deleteArray = $('#Meal_A_Meal07').val().split(',');
+                        for (let key in deleteArray) {
+                            if (!editJoin_check(editJoin_meal07, deleteArray[key])) {
+                                editJoin_meal07.push(deleteArray[key]);
+                            } else {
+                                //原本陣列內有相同的就不做加入
+                            }
+                        }
+                        $scope.meallistA.meal07 = editJoin_meal07.join(',');
+                    }
+                    var dates_B = month_calendar_noon.multiDatesPicker('getDates');
+                    for (let key in dates_B) {
+
+                        let edit_join_data = {
+                            memberid: id,
+                            date: dates_B[key],
+                            mealtype: 2,
+                            type: 'B',
+                            meal01: $scope.meallistA.meal01,
+                            meal02: $scope.meallistA.meal02,
+                            meal03: $scope.meallistA.meal03,
+                            meal04: $scope.meallistA.meal04,
+                            meal05: $scope.meallistA.meal05,
+                            meal06: $scope.meallistA.meal06,
+                            meal07: $scope.meallistA.meal07,
+                            meal08: $scope.meallistA.meal08,
+                            meal09: $scope.meallistA.meal09,
+                            meal10: $scope.meallistA.meal10,
+                            meal11: $scope.meallistA.meal11,
+                            meal12: $scope.meallistA.meal12,
+                            meal13: $scope.meallistA.meal13,
+                            meal14: $scope.meallistA.meal14,
+                            meal15: $scope.meallistA.meal15
+                        }
+                        monthMealService.edit_join_Meal2(edit_join_data, function (data) {
+                            if (data === '未輸入任何修改資料!') {
+                                alert(data);
+                                $.LoadingOverlay("hide");
+                            } else {
+                                initial();
+                                if (key == dates_B.length - 1) $.LoadingOverlay("hide");
+                            }
+                        });
+                    }
+                });
             }
 
             if (month_calendar_night.multiDatesPicker('getDates').length === 0) {
@@ -878,39 +961,73 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                 $scope.meallistA.meal08 = $('#Meal_A_Meal08').val();
 
                 var dates_C = month_calendar_night.multiDatesPicker('getDates');
-                for (let key in dates_C) {
-
-                    let edit_join_data = {
-                        memberid: id,
-                        date: dates_C[key],
-                        mealtype: 2,
-                        type: 'C',
-                        meal01: $scope.meallistA.meal01,
-                        meal02: $scope.meallistA.meal02,
-                        meal03: $scope.meallistA.meal03,
-                        meal04: $scope.meallistA.meal04,
-                        meal05: $scope.meallistA.meal05,
-                        meal06: $scope.meallistA.meal06,
-                        meal07: $scope.meallistA.meal07,
-                        meal08: $scope.meallistA.meal08,
-                        meal09: $scope.meallistA.meal09,
-                        meal10: $scope.meallistA.meal10,
-                        meal11: $scope.meallistA.meal11,
-                        meal12: $scope.meallistA.meal12,
-                        meal13: $scope.meallistA.meal13,
-                        meal14: $scope.meallistA.meal14,
-                        meal15: $scope.meallistA.meal15
-                    }
-                    monthMealService.edit_join_Meal2(edit_join_data, function (data) {
-                        if (data === '未輸入任何修改資料!') {
-                            alert(data);
-                            $.LoadingOverlay("hide");
-                        } else {
-                            initial();
-                            if (key == dates_C.length - 1) $.LoadingOverlay("hide");
-                        }
-                    });
+                var inputObj = {
+                    memberid: id,
+                    date: dates_C[0],
+                    mealtype: 2,
+                    type: 'C'
                 }
+                monthMealService.show_data(inputObj, function (data) {
+                    var editJoin_meal06 = data[0].Meal06.split(',');
+                    var editJoin_meal07 = data[0].Meal07.split(',');
+
+                    if ($('#Meal_A_Meal06').val() != '') {
+                        var deleteArray = $('#Meal_A_Meal06').val().split(',');
+                        for (let key in deleteArray) {
+                            if (!editJoin_check(editJoin_meal06, deleteArray[key])) {
+                                editJoin_meal06.push(deleteArray[key]);
+                            } else {
+                                //原本陣列內有相同的就不做加入
+                            }
+                        }
+                        $scope.meallistA.meal06 = editJoin_meal06.join(',');
+                    }
+                    if ($('#Meal_A_Meal07').val() != '') {
+                        var deleteArray = $('#Meal_A_Meal07').val().split(',');
+                        for (let key in deleteArray) {
+                            if (!editJoin_check(editJoin_meal07, deleteArray[key])) {
+                                editJoin_meal07.push(deleteArray[key]);
+                            } else {
+                                //原本陣列內有相同的就不做加入
+                            }
+                        }
+                        $scope.meallistA.meal07 = editJoin_meal07.join(',');
+                    }
+                    var dates_C = month_calendar_night.multiDatesPicker('getDates');
+                    for (let key in dates_C) {
+
+                        let edit_join_data = {
+                            memberid: id,
+                            date: dates_C[key],
+                            mealtype: 2,
+                            type: 'C',
+                            meal01: $scope.meallistA.meal01,
+                            meal02: $scope.meallistA.meal02,
+                            meal03: $scope.meallistA.meal03,
+                            meal04: $scope.meallistA.meal04,
+                            meal05: $scope.meallistA.meal05,
+                            meal06: $scope.meallistA.meal06,
+                            meal07: $scope.meallistA.meal07,
+                            meal08: $scope.meallistA.meal08,
+                            meal09: $scope.meallistA.meal09,
+                            meal10: $scope.meallistA.meal10,
+                            meal11: $scope.meallistA.meal11,
+                            meal12: $scope.meallistA.meal12,
+                            meal13: $scope.meallistA.meal13,
+                            meal14: $scope.meallistA.meal14,
+                            meal15: $scope.meallistA.meal15
+                        }
+                        monthMealService.edit_join_Meal2(edit_join_data, function (data) {
+                            if (data === '未輸入任何修改資料!') {
+                                alert(data);
+                                $.LoadingOverlay("hide");
+                            } else {
+                                initial();
+                                if (key == dates_C.length - 1) $.LoadingOverlay("hide");
+                            }
+                        });
+                    }
+                });
             }
         }
     };
