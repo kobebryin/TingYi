@@ -1,4 +1,12 @@
 angular.module('TinYi').service('monthMealService', function ($rootScope, $http) {
+    //地址轉換路線
+    this.change_routeNumber = function (address, callback) {
+        $http.get($rootScope.apiUrl + 'route?address=' + address).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
     //新增餐點資料
     this.postMeal = function (inputObj, callback) {
         $http.post($rootScope.apiUrl + 'meal', inputObj).success(function (data) {

@@ -3,7 +3,7 @@ var router = express.Router();
 
 // --------  get Data from MySQL's table route ----------------------- 
 router.get('/', function (req, res, next) {
-    req.dbConnection.query('SELECT * FROM route;', function (error, results, fields) {
+    req.dbConnection.query('SELECT RouteNumber FROM route WHERE Address = "' + req.query.address + '";', function (error, results, fields) {
         if (error) throw error;
         console.log('The solution is: ', results);
         res.json(results);

@@ -1,4 +1,4 @@
-angular.module('TinYi').controller('monthMealController', function ($rootScope, $scope, MemberService, monthMealService) {
+angular.module('TinYi').controller('monthMealController', function ($rootScope, $scope, $timeout, MemberService, monthMealService) {
     var id = sessionStorage.memberid; //11960;
     $scope.UserName = id;
     var month_calendar_morning;
@@ -231,6 +231,42 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
         }
         return same_flag;
     }
+
+    //地址更改ng-change事件 + delay延遲
+    $scope.ChkAddress_onChange = function () {
+        var addressA = $scope.meallistA.meal03;
+        var addressB = $scope.meallistB.meal03;
+        var addressC = $scope.meallistC.meal03;
+
+        monthMealService.change_routeNumber(addressA, function (data) {
+            if (data.length > 0) {
+                $scope.meallistA.meal04 = data[0].RouteNumber;
+            } else {
+                $scope.meallistA.meal04 = ' ';
+            }
+        });
+        monthMealService.change_routeNumber(addressB, function (data) {
+            if (data.length > 0) {
+                $scope.meallistB.meal04 = data[0].RouteNumber;
+            } else {
+                $scope.meallistB.meal04 = ' ';
+            }
+        });
+        monthMealService.change_routeNumber(addressC, function (data) {
+            if (data.length > 0) {
+                $scope.meallistC.meal04 = data[0].RouteNumber;
+            } else {
+                $scope.meallistC.meal04 = ' ';
+            }
+        });
+    }
+    $scope.delay = (function () {
+        var promise = null;
+        return function (callback, ms) {
+            $timeout.cancel(promise); //clearTimeout(timer);
+            promise = $timeout(callback, ms); //timer = setTimeout(callback, ms);
+        };
+    })();
 
     initial();
 
@@ -2166,6 +2202,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         $scope.meallistA.meal03 = $scope.meal.attrib14;    //早餐地址
                         $scope.meallistB.meal03 = $scope.meal.attrib14;    //午餐地址
                         $scope.meallistC.meal03 = $scope.meal.attrib15;    //晚餐地址
+                        $scope.ChkAddress_onChange();
                         //(禁忌)easy-ui combotree 要能夠讓值放入並且顯示勾選，要塞入物件
                         var attrib05setArray = [];
                         var attrib05Array = $scope.meal.attrib05.split(",");
