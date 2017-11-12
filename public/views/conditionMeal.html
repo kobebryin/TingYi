@@ -55,6 +55,9 @@
             </table>
 
             <!-- <input type="checkbox" type="hidden" name="month_calendar_morning" ng-model="cb_morningFalg" />早 -->
+            <h2 ng-if="Edit_Type_1 === '4' || Edit_Type_1 === '5'">總月曆</h2>
+            <div ng-if="Edit_Type_1 === '4' || Edit_Type_1 === '5'" id="month_calendar"></div>
+            <input ng-if="Edit_Type_1 === '5'" type="button" id="getMealData" ng-click="getMealData()" value="帶入資料">
             <h2>早</h2>
             <div id="month_calendar_morning"></div>
             <!-- <input type="checkbox" type="hidden" name="month_calendar_noon" ng-model="cb_noonFalg" />午 -->
@@ -163,7 +166,7 @@
         </td>
 
         <td>
-            <table width="870" border="0" cellspacing="0" cellpadding="0" ng-if="Edit_Type_1 === '4'">
+            <table width="870" border="0" cellspacing="0" cellpadding="0" ng-if="Edit_Type_1 === '7'">
                 <tr>
                     <td>
                         <textarea id="txt_Request_Search" readonly style="width:100%;border-style:none; border-width:0px;height:700px;font-size:18px;"></textarea>
@@ -171,7 +174,7 @@
                 </tr>
             </table>
 
-            <table width="870" border="0" cellspacing="0" cellpadding="0" ng-if="Edit_Type_1 === '2' || Edit_Type_1 === '3' || Edit_Type_1 === '5' || Edit_Type_1 === '6'">
+            <table width="870" border="0" cellspacing="0" cellpadding="0" ng-if="Edit_Type_1 === '2' || Edit_Type_1 === '3' || Edit_Type_1 === '6'">
                 <tr>
                     <td bgcolor="#FFEE99">
                         <table width="870" border="0" cellspacing="0" cellpadding="0">
@@ -304,7 +307,7 @@
                 </tr>
             </table>
 
-            <table width="870" border="0" cellspacing="0" cellpadding="0" ng-if="Edit_Type_1 === '1'">
+            <table width="870" border="0" cellspacing="0" cellpadding="0" ng-if="Edit_Type_1 === '4' || Edit_Type_1 === '5' || Edit_Type_1 === '1'">
                 <tr>
                     <td bgcolor="#FFEE99">
                         <table width="870" border="0" cellspacing="0" cellpadding="0">
