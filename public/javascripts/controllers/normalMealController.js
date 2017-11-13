@@ -275,7 +275,7 @@ angular.module('TinYi').controller('normalMealController', function ($rootScope,
                     $scope.meallistA.meal24 = data[0].Meal24;
 
                 } else {
-                    clearScopeMemberObj();              
+                    clearScopeMemberObjA();              
                 }
 
             });
@@ -314,7 +314,7 @@ angular.module('TinYi').controller('normalMealController', function ($rootScope,
                     $scope.meallistB.meal24 = data[0].Meal24;
                     
                 } else {
-                    clearScopeMemberObj();
+                    clearScopeMemberObjB();
                 }
             });
 
@@ -352,7 +352,7 @@ angular.module('TinYi').controller('normalMealController', function ($rootScope,
                     $scope.meallistC.meal24 = data[0].Meal24;
 
                 } else {
-                    clearScopeMemberObj();                    
+                    clearScopeMemberObjC();                    
                 }
             });
         }
@@ -437,7 +437,7 @@ angular.module('TinYi').controller('normalMealController', function ($rootScope,
                         $scope.meallistA.meal24 = data[0].Meal24;
     
                     } else {
-                        clearScopeMemberObj();              
+                        clearScopeMemberObjA();              
                     }
     
                 });
@@ -476,7 +476,7 @@ angular.module('TinYi').controller('normalMealController', function ($rootScope,
                         $scope.meallistB.meal24 = data[0].Meal24;
                         
                     } else {
-                        clearScopeMemberObj();
+                        clearScopeMemberObjB();
                     }
                 });
     
@@ -514,7 +514,7 @@ angular.module('TinYi').controller('normalMealController', function ($rootScope,
                         $scope.meallistC.meal24 = data[0].Meal24;
     
                     } else {
-                        clearScopeMemberObj();                    
+                        clearScopeMemberObjC();                    
                     }
                 });
             }
@@ -2170,6 +2170,42 @@ angular.module('TinYi').controller('normalMealController', function ($rootScope,
                     break;
             }
         }
+    }
+
+    function clearScopeMemberObjA() {
+        //用迴圈將所有值設為null
+        for (var p in $scope.meallistA) {
+            if ($scope.meallistA.hasOwnProperty(p)) {
+                $scope.meallistA[p] = ' ';
+            }
+        }
+        $scope.meallistA.flag = 9;
+        $scope.meallistA.type = 'A';
+        $scope.meallistA.mealtype = 3;
+    }
+
+    function clearScopeMemberObjB() {
+        //用迴圈將所有值設為null
+        for (var p in $scope.meallistB) {
+            if ($scope.meallistB.hasOwnProperty(p)) {
+                $scope.meallistB[p] = ' ';
+            }
+        }
+        $scope.meallistB.flag = 9;
+        $scope.meallistB.type = 'B';
+        $scope.meallistB.mealtype = 3;
+    }
+
+    function clearScopeMemberObjC() {
+        //用迴圈將所有值設為null
+        for (var p in $scope.meallistC) {
+            if ($scope.meallistC.hasOwnProperty(p)) {
+                $scope.meallistC[p] = ' ';
+            }
+        }
+        $scope.meallistC.flag = 9;
+        $scope.meallistC.type = 'C';
+        $scope.meallistC.mealtype = 3;
     }
 
     function clearScopeMemberObj() {

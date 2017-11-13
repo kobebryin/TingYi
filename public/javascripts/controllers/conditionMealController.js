@@ -338,7 +338,7 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
 
                     $('#Meal_A_Meal08').combobox('setValue', $scope.meallistA.meal08);
                 } else {
-                    clearScopeMemberObj();
+                    clearScopeMemberObjA();
                     $('#Meal_A_Meal06').combotree('setValue', '');
                     $('#Meal_A_Meal07').combobox('setValue', '');
                     $('#Meal_A_Meal08').combobox('setValue', '');
@@ -382,7 +382,7 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
 
                     $('#Meal_B_Meal08').combobox('setValue', $scope.meallistB.meal08);
                 } else {
-                    clearScopeMemberObj();
+                    clearScopeMemberObjB();
                     $('#Meal_B_Meal06').combotree('setValue', '');
                     $('#Meal_B_Meal07').combobox('setValue', '');
                     $('#Meal_B_Meal08').combobox('setValue', '');
@@ -425,7 +425,7 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
 
                     $('#Meal_C_Meal08').combobox('setValue', $scope.meallistC.meal08);
                 } else {
-                    clearScopeMemberObj();
+                    clearScopeMemberObjC();
                     $('#Meal_C_Meal06').combotree('setValue', '');
                     $('#Meal_C_Meal07').combobox('setValue', '');
                     $('#Meal_C_Meal08').combobox('setValue', '');
@@ -752,7 +752,7 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
             $('#Meal_C_Meal08').combobox('setValue', '');
 
             if (month_calendar.multiDatesPicker('getDates').length === 0) {
-                
+
             } else {
                 var date = month_calendar.multiDatesPicker('getDates');
                 var inputObj = {
@@ -761,7 +761,7 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                     mealtype: 2,
                     type: 'A'
                 }
-    
+
                 monthMealService.show_data(inputObj, function (data) {
                     if (data.length > 0) {
                         $scope.meallistA.meal01 = data[0].Meal01;
@@ -779,27 +779,27 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                         $scope.meallistA.meal13 = data[0].Meal13;
                         $scope.meallistA.meal14 = data[0].Meal14;
                         $scope.meallistA.meal15 = data[0].Meal15;
-    
+
                         var attrib05setArray = [];
                         var attrib05Array = $scope.meallistA.meal06.split(",");
                         for (key in attrib05Array) {
                             attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                         }
                         $('#Meal_A_Meal06').combotree('setValue', attrib05setArray);    //早餐禁忌
-    
+
                         var meal07Array = $scope.meallistA.meal07.split(",");
                         $('#Meal_A_Meal07').combobox('setValues', meal07Array);
-    
+
                         $('#Meal_A_Meal08').combobox('setValue', $scope.meallistA.meal08);
                     } else {
-                        clearScopeMemberObj();
+                        clearScopeMemberObjA();
                         $('#Meal_A_Meal06').combotree('setValue', '');
                         $('#Meal_A_Meal07').combobox('setValue', '');
                         $('#Meal_A_Meal08').combobox('setValue', '');
                     }
-    
+
                 });
-    
+
                 var inputObj = {
                     memberid: id,
                     date: date[0],
@@ -823,26 +823,26 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                         $scope.meallistB.meal13 = data[0].Meal13;
                         $scope.meallistB.meal14 = data[0].Meal14;
                         $scope.meallistB.meal15 = data[0].Meal15;
-    
+
                         var attrib05setArray = [];
                         var attrib05Array = $scope.meallistB.meal06.split(",");
                         for (key in attrib05Array) {
                             attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                         }
                         $('#Meal_B_Meal06').combotree('setValue', attrib05setArray);    //早餐禁忌
-    
+
                         var meal07Array = $scope.meallistB.meal07.split(",");
                         $('#Meal_B_Meal07').combobox('setValues', meal07Array);
-    
+
                         $('#Meal_B_Meal08').combobox('setValue', $scope.meallistB.meal08);
                     } else {
-                        clearScopeMemberObj();
+                        clearScopeMemberObjB();
                         $('#Meal_B_Meal06').combotree('setValue', '');
                         $('#Meal_B_Meal07').combobox('setValue', '');
                         $('#Meal_B_Meal08').combobox('setValue', '');
                     }
                 });
-    
+
                 var inputObj = {
                     memberid: id,
                     date: date[0],
@@ -866,20 +866,20 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                         $scope.meallistC.meal13 = data[0].Meal13;
                         $scope.meallistC.meal14 = data[0].Meal14;
                         $scope.meallistC.meal15 = data[0].Meal15;
-    
+
                         var attrib05setArray = [];
                         var attrib05Array = $scope.meallistC.meal06.split(",");
                         for (key in attrib05Array) {
                             attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                         }
                         $('#Meal_C_Meal06').combotree('setValue', attrib05setArray);    //早餐禁忌
-    
+
                         var meal07Array = $scope.meallistC.meal07.split(",");
                         $('#Meal_C_Meal07').combobox('setValues', meal07Array);
-    
+
                         $('#Meal_C_Meal08').combobox('setValue', $scope.meallistC.meal08);
                     } else {
-                        clearScopeMemberObj();
+                        clearScopeMemberObjC();
                         $('#Meal_C_Meal06').combotree('setValue', '');
                         $('#Meal_C_Meal07').combobox('setValue', '');
                         $('#Meal_C_Meal08').combobox('setValue', '');
@@ -3248,6 +3248,42 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
         $scope.meallistC.meal06 = $('#Meal_C_Meal06').val();
         $scope.meallistC.meal07 = $('#Meal_C_Meal07').val();
         $scope.meallistC.meal08 = $('#Meal_C_Meal08').val();
+    }
+
+    function clearScopeMemberObjA() {
+        //用迴圈將所有值設為null
+        for (var p in $scope.meallistA) {
+            if ($scope.meallistA.hasOwnProperty(p)) {
+                $scope.meallistA[p] = ' ';
+            }
+        }
+        $scope.meallistA.flag = 9;
+        $scope.meallistA.type = 'A';
+        $scope.meallistA.mealtype = 2;
+    }
+
+    function clearScopeMemberObjB() {
+        //用迴圈將所有值設為null
+        for (var p in $scope.meallistB) {
+            if ($scope.meallistB.hasOwnProperty(p)) {
+                $scope.meallistB[p] = ' ';
+            }
+        }
+        $scope.meallistB.flag = 9;
+        $scope.meallistB.type = 'B';
+        $scope.meallistB.mealtype = 2;
+    }
+
+    function clearScopeMemberObjC() {
+        //用迴圈將所有值設為null
+        for (var p in $scope.meallistC) {
+            if ($scope.meallistC.hasOwnProperty(p)) {
+                $scope.meallistC[p] = ' ';
+            }
+        }
+        $scope.meallistC.flag = 9;
+        $scope.meallistC.type = 'C';
+        $scope.meallistC.mealtype = 2;
     }
 
     function clearScopeMemberObj() {
