@@ -1,6 +1,7 @@
 angular.module('TinYi').controller('conditionMealController', function ($rootScope, $scope, $timeout, MemberService, monthMealService) {
     var id = sessionStorage.memberid;// var id = 11823;//$rootScope.id;
     $scope.UserName = id;
+    $scope.UserNAME = sessionStorage.membername;
     var month_calendar;
     var month_calendar_morning;
     var month_calendar_noon;

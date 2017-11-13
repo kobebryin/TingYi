@@ -204,16 +204,19 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     $scope.goToMonthMeal = function () {
         location.href = '/#/monthMeal';
         sessionStorage.memberid = $scope.member.id;
+        sessionStorage.membername = $scope.member.attrib01;
     };
 
     $rootScope.goToConditionMeal = function () {
         location.href = '/#/conditionMeal';
         sessionStorage.memberid = $scope.member.id;
+        sessionStorage.membername = $scope.member.attrib01;
     };
 
     $rootScope.goToNormalMeal = function () {
         location.href = '/#/normalMeal';
         sessionStorage.memberid = $scope.member.id;
+        sessionStorage.membername = $scope.member.attrib01;
     };
 
     //新增資料上ＭySQL
@@ -422,6 +425,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
     function initial() {
 
         sessionStorage.memberid = null;　    //將點選會員的ID從SessionStorage中清空
+        sessionStorage.membername = null;　    //將點選會員的ID從SessionStorage中清空        
         $rootScope.id = null;
 
         // Show full page LoadingOverlay

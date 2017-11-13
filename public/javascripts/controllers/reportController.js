@@ -56,10 +56,10 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
                     $scope.exportData = [];
                     // Headers: 
                     $scope.exportData.push(["", excel_title, ""]);
-                    $scope.exportData.push(["編號", "床號", "姓名", "備註"]);
+                    $scope.exportData.push(["床號", "姓名", "備註"]);
                     // Data:
                     angular.forEach($scope.jsonToExport, function (value, key) {
-                        $scope.exportData.push([value.ID, value.Meal01, value.Attrib01, value.Meal24]);
+                        $scope.exportData.push([value.Meal01, value.Attrib01, value.Meal24]);
                     });
 
                     //ui datagrid show data
@@ -69,7 +69,6 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
                         singleSelect: true,
                         data: data,
                         columns: [[
-                            { field: 'ID', title: '編號', width: '24%', align: 'center' },
                             { field: 'Meal01', title: '床號', width: '24%', align: 'center' },
                             { field: 'Attrib01', title: '姓名', width: '24%', align: 'center' },
                             { field: 'Meal24', title: '備註', width: '24%', align: 'center' }
@@ -96,10 +95,10 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
                     $scope.exportData = [];
                     // Headers: 
                     $scope.exportData.push(["", excel_title, ""]);
-                    $scope.exportData.push(["編號", "姓名", "調理內容", "禁忌", "湯換飲品", "加減"]);
+                    $scope.exportData.push(["姓名", "調理內容", "禁忌", "湯換飲品", "加減"]);
                     // Data:
                     angular.forEach($scope.jsonToExport, function (value, key) {
-                        $scope.exportData.push([value.ID, value.Attrib01, value.Meal05, value.Meal06, value.Meal08, value.Meal07]);
+                        $scope.exportData.push([value.Attrib01, value.Meal05, value.Meal06, value.Meal08, value.Meal07]);
                     });
 
                     //ui datagrid show data
@@ -108,8 +107,7 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
                         rownumbers: true,
                         singleSelect: true,
                         data: data,
-                        columns: [[
-                            { field: 'ID', title: '編號', width: '14%', align: 'center' },
+                        columns: [[                           
                             { field: 'Attrib01', title: '姓名', width: '14%', align: 'center' },
                             { field: 'Meal05', title: '調理內容', width: '14%', align: 'center' },
                             { field: 'Meal06', title: '禁忌', width: '14%', align: 'center' },
@@ -139,10 +137,10 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
                     $scope.exportData = [];
                     // Headers: 
                     $scope.exportData.push(["", excel_title, ""]);
-                    $scope.exportData.push(["編號", "姓名", "數量", "餐票", "月結", "現金", "備註"]);
+                    $scope.exportData.push(["姓名", "數量", "餐票", "月結", "現金", "備註"]);
                     // Data:
                     angular.forEach($scope.jsonToExport, function (value, key) {
-                        $scope.exportData.push([value.ID, value.Attrib01, value.Meal01, value.Meal12, value.Meal21, value.Meal16, value.Meal24]);
+                        $scope.exportData.push([value.Attrib01, value.Meal01, value.Meal12, value.Meal21, value.Meal16, value.Meal24]);
                     });
 
                     //ui datagrid show data
@@ -151,8 +149,7 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
                         rownumbers: true,
                         singleSelect: true,
                         data: data,
-                        columns: [[
-                            { field: 'ID', title: '編號', width: '24%', align: 'center' },
+                        columns: [[                           
                             { field: 'Attrib01', title: '姓名', width: '24%', align: 'center' },
                             { field: 'Meal01', title: '數量', width: '24%', align: 'center' },
                             { field: 'Meal12', title: '餐票', width: '24%', align: 'center' },
@@ -182,10 +179,10 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
                     $scope.exportData = [];
                     // Headers: 
                     $scope.exportData.push(["", excel_title, ""]);
-                    $scope.exportData.push(["編號", "姓名", "餐別", "手機", "住家電話", "地址", "現金", "路線", "備註"]);
+                    $scope.exportData.push(["姓名", "餐別", "手機", "住家電話", "地址", "現金", "路線", "備註"]);
                     // Data:
                     angular.forEach($scope.jsonToExport, function (value, key) {
-                        $scope.exportData.push([value.ID, value.Attrib01, value.MealType, value.User, value.Attrib10, value.Meal03, value.Meal20, value.Meal04, value.Meal24]);
+                        $scope.exportData.push([value.Attrib01, value.MealType, value.User, value.Attrib10, value.Meal03, value.Meal20, value.Meal04, value.Meal24]);
                     });
 
                     //ui datagrid show data
@@ -195,7 +192,6 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
                         singleSelect: true,
                         data: data,
                         columns: [[
-                            { field: 'ID', title: '編號', width: '9%', align: 'center' },
                             { field: 'Attrib01', title: '姓名', width: '9%', align: 'center' },
                             { field: 'MealType', title: '餐別', width: '9%', align: 'center' },
                             { field: 'User', title: '手機', width: '9%', align: 'center' },
@@ -223,7 +219,6 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
         rownumbers: true,
         singleSelect: true,
         columns: [[
-            { field: 'ID', title: '編號', width: 100 },
             { field: 'Address', title: '床號', width: 100 },
             { field: 'Name', title: '姓名', width: 100 },
             { field: 'Memo', title: '備註', width: 100, align: 'right' }
