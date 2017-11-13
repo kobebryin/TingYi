@@ -241,31 +241,46 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
             $scope.mealForMember.meal1bc = data[0].Meal1BC;     //午日期
             $scope.mealForMember.meal1cc = data[0].Meal1CC;     //晚日期
 
-            if ($scope.mealForMember.meal1ac.length > 9) {
-                var meal1ac_initial = $scope.mealForMember.meal1ac.substring(1, $scope.mealForMember.meal1ac.length - 1);   //先去頭去尾';'
-                var meal1ac_initial_array = meal1ac_initial.split(";");     //依照;來切
-                $scope.MealXARemain = - meal1ac_initial_array.length; //剩餘參數塞值
-                if ($scope.mealForMember.meal1a !== null) $scope.MealXARemain = - meal1ac_initial_array.length + $scope.mealForMember.meal1a;
+            if ($scope.mealForMember.meal1ac != null) {
+                if ($scope.mealForMember.meal1ac.length > 9) {
+                    var meal1ac_initial = $scope.mealForMember.meal1ac.substring(1, $scope.mealForMember.meal1ac.length - 1);   //先去頭去尾';'
+                    var meal1ac_initial_array = meal1ac_initial.split(";");     //依照;來切
+                    $scope.MealXARemain = - meal1ac_initial_array.length; //剩餘參數塞值
+                    if ($scope.mealForMember.meal1a !== null) $scope.MealXARemain = - meal1ac_initial_array.length + $scope.mealForMember.meal1a;
+                } else {
+                    $scope.MealXARemain = 0; //剩餘參數塞值
+                    if ($scope.mealForMember.meal1a !== null) $scope.MealXARemain = 0 + $scope.mealForMember.meal1a;
+                }
             } else {
                 $scope.MealXARemain = 0; //剩餘參數塞值
                 if ($scope.mealForMember.meal1a !== null) $scope.MealXARemain = 0 + $scope.mealForMember.meal1a;
             }
 
-            if ($scope.mealForMember.meal1bc.length > 9) {
-                var meal1bc_initial = $scope.mealForMember.meal1bc.substring(1, $scope.mealForMember.meal1bc.length - 1);   //先去頭去尾';'
-                var meal1bc_initial_array = meal1bc_initial.split(";");     //依照;來切
-                $scope.MealXBRemain = - meal1bc_initial_array.length; //剩餘參數塞值
-                if ($scope.mealForMember.meal1b !== null) $scope.MealXBRemain = - meal1bc_initial_array.length + $scope.mealForMember.meal1b;
+            if ($scope.mealForMember.meal1bc != null) {
+                if ($scope.mealForMember.meal1bc.length > 9) {
+                    var meal1bc_initial = $scope.mealForMember.meal1bc.substring(1, $scope.mealForMember.meal1bc.length - 1);   //先去頭去尾';'
+                    var meal1bc_initial_array = meal1bc_initial.split(";");     //依照;來切
+                    $scope.MealXBRemain = - meal1bc_initial_array.length; //剩餘參數塞值
+                    if ($scope.mealForMember.meal1b !== null) $scope.MealXBRemain = - meal1bc_initial_array.length + $scope.mealForMember.meal1b;
+                } else {
+                    $scope.MealXBRemain = 0; //剩餘參數塞值
+                    if ($scope.mealForMember.meal1b !== null) $scope.MealXBRemain = 0 + $scope.mealForMember.meal1b;
+                }
             } else {
                 $scope.MealXBRemain = 0; //剩餘參數塞值
                 if ($scope.mealForMember.meal1b !== null) $scope.MealXBRemain = 0 + $scope.mealForMember.meal1b;
             }
 
-            if ($scope.mealForMember.meal1cc.length > 9) {
-                var meal1cc_initial = $scope.mealForMember.meal1cc.substring(1, $scope.mealForMember.meal1cc.length - 1);   //先去頭去尾';'
-                var meal1cc_initial_array = meal1cc_initial.split(";");     //依照;來切
-                $scope.MealXCRemain = - meal1cc_initial_array.length; //剩餘參數塞值
-                if ($scope.mealForMember.meal1c !== null) $scope.MealXCRemain = - meal1cc_initial_array.length + $scope.mealForMember.meal1c;
+            if ($scope.mealForMember.meal1cc != null) {
+                if ($scope.mealForMember.meal1cc.length > 9) {
+                    var meal1cc_initial = $scope.mealForMember.meal1cc.substring(1, $scope.mealForMember.meal1cc.length - 1);   //先去頭去尾';'
+                    var meal1cc_initial_array = meal1cc_initial.split(";");     //依照;來切
+                    $scope.MealXCRemain = - meal1cc_initial_array.length; //剩餘參數塞值
+                    if ($scope.mealForMember.meal1c !== null) $scope.MealXCRemain = - meal1cc_initial_array.length + $scope.mealForMember.meal1c;
+                } else {
+                    $scope.MealXCRemain = 0; //剩餘參數塞值
+                    if ($scope.mealForMember.meal1c !== null) $scope.MealXCRemain = 0 + $scope.mealForMember.meal1c;
+                }
             } else {
                 $scope.MealXCRemain = 0; //剩餘參數塞值
                 if ($scope.mealForMember.meal1c !== null) $scope.MealXCRemain = 0 + $scope.mealForMember.meal1c;
@@ -2848,6 +2863,8 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         } else {
                             $('#month_calendar_morning').multiDatesPicker('resetDates');
                             $('#month_calendar_morning').multiDatesPicker('resetDates', 'disabled');
+                            $scope.MealXARemain = 0; //剩餘參數塞值
+                            if ($scope.mealForMember.meal1a !== null) $scope.MealXARemain = 0 + $scope.mealForMember.meal1a;
                         }
                         if ($scope.mealForMember.meal1bc != null) {
                             if ($scope.mealForMember.meal1bc.length > 9) {
@@ -2867,6 +2884,8 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         } else {
                             $('#month_calendar_noon').multiDatesPicker('resetDates');
                             $('#month_calendar_noon').multiDatesPicker('resetDates', 'disabled');
+                            $scope.MealXBRemain = 0; //剩餘參數塞值
+                            if ($scope.mealForMember.meal1b !== null) $scope.MealXBRemain = 0 + $scope.mealForMember.meal1b;
                         }
                         if ($scope.mealForMember.meal1cc != null) {
                             if ($scope.mealForMember.meal1cc.length > 9) {
@@ -2886,6 +2905,8 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         } else {
                             $('#month_calendar_night').multiDatesPicker('resetDates');
                             $('#month_calendar_night').multiDatesPicker('resetDates', 'disabled');
+                            $scope.MealXCRemain = 0; //剩餘參數塞值
+                            if ($scope.mealForMember.meal1c !== null) $scope.MealXCRemain = 0 + $scope.mealForMember.meal1c;
                         }
                     });
                     break;
