@@ -275,7 +275,7 @@ angular.module('TinYi').controller('normalMealController', function ($rootScope,
     })();
 
     initial();
-    Edit_Type_check();
+    // Edit_Type_check();
 
     //取得客戶單IP位址
     $.getJSON('//freegeoip.net/json/?callback=?', function (data) {
@@ -294,6 +294,25 @@ angular.module('TinYi').controller('normalMealController', function ($rootScope,
 
     $rootScope.goToNormalMeal = function () {
         location.href = '/#/normalMeal';
+    };
+
+    //儲存總餐數與病理種類
+    $scope.saveMeal = function() {
+        $.LoadingOverlay("show");
+        $scope.mealForMember.id = id;
+
+        let mealForMember = {
+            meal3sicktype: $scope.mealForMember.meal3sicktype,
+            meal3a: $scope.mealForMember.meal3a,
+            meal3b: $scope.mealForMember.meal3b,
+            meal3c: $scope.mealForMember.meal3c,
+            id: $scope.mealForMember.id
+        }
+        
+        MemberService.putMEMBERMEALforNormalMea(mealForMember, function (data) {
+            initial();
+            $.LoadingOverlay("hide");
+        });
     };
 
     //將資料匯出到右側欄位中
@@ -2435,46 +2454,43 @@ angular.module('TinYi').controller('normalMealController', function ($rootScope,
     }
 
     //觀測radio button選取的選項(編輯模式)
-    function Edit_Type_check() {
-        $(document).on("change", "input[name=Edit_Type_2]", function () {
-            Edit_Type = $('[name="Edit_Type_2"]:checked').val();
-            if (Edit_Type === '1') {
-                document.getElementById("a_Link_Save_1").disabled = false;
-                document.getElementById("a_Link_Save_2").disabled = true;
-                document.getElementById("a_Link_Save_3").disabled = true;
-                document.getElementById("a_Link_Save_4").disabled = true;
-                document.getElementById("a_Link_Save_5").disabled = true;
-                initial();
-            } else if (Edit_Type === '2') {
-                document.getElementById("a_Link_Save_1").disabled = true;
-                document.getElementById("a_Link_Save_2").disabled = false;
-                document.getElementById("a_Link_Save_3").disabled = true;
-                document.getElementById("a_Link_Save_4").disabled = true;
-                document.getElementById("a_Link_Save_5").disabled = true;
-                initial();
-            } else if (Edit_Type === '3') {
-                document.getElementById("a_Link_Save_1").disabled = true;
-                document.getElementById("a_Link_Save_2").disabled = true;
-                document.getElementById("a_Link_Save_3").disabled = false;
-                document.getElementById("a_Link_Save_4").disabled = true;
-                document.getElementById("a_Link_Save_5").disabled = true;
-                initial();
-            } else if (Edit_Type === '4') {
-                document.getElementById("a_Link_Save_1").disabled = true;
-                document.getElementById("a_Link_Save_2").disabled = true;
-                document.getElementById("a_Link_Save_3").disabled = true;
-                document.getElementById("a_Link_Save_4").disabled = false;
-                document.getElementById("a_Link_Save_5").disabled = true;
-                initial();
-            } else if (Edit_Type === '5') {
-                document.getElementById("a_Link_Save_1").disabled = true;
-                document.getElementById("a_Link_Save_2").disabled = true;
-                document.getElementById("a_Link_Save_3").disabled = true;
-                document.getElementById("a_Link_Save_4").disabled = true;
-                document.getElementById("a_Link_Save_5").disabled = false;
-                initial();
-            }
-        });
+    $scope.onChange = function () {
+        Edit_Type = $('[name="Edit_Type_2"]:checked').val();
+        if (Edit_Type === '1') {
+            document.getElementById("a_Link_Save_1").disabled = false;
+            document.getElementById("a_Link_Save_2").disabled = true;
+            document.getElementById("a_Link_Save_3").disabled = true;
+            document.getElementById("a_Link_Save_4").disabled = true;
+            document.getElementById("a_Link_Save_5").disabled = true;
+            setTimeout(initial, 0);
+        } else if (Edit_Type === '2') {
+            document.getElementById("a_Link_Save_1").disabled = true;
+            document.getElementById("a_Link_Save_2").disabled = false;
+            document.getElementById("a_Link_Save_3").disabled = true;
+            document.getElementById("a_Link_Save_4").disabled = true;
+            document.getElementById("a_Link_Save_5").disabled = true;
+            setTimeout(initial, 0);
+        } else if (Edit_Type === '3') {
+            document.getElementById("a_Link_Save_1").disabled = true;
+            document.getElementById("a_Link_Save_2").disabled = true;
+            document.getElementById("a_Link_Save_3").disabled = false;
+            document.getElementById("a_Link_Save_4").disabled = true;
+            document.getElementById("a_Link_Save_5").disabled = true;
+            setTimeout(initial, 0);
+        } else if (Edit_Type === '4') {
+            document.getElementById("a_Link_Save_1").disabled = true;
+            document.getElementById("a_Link_Save_2").disabled = true;
+            document.getElementById("a_Link_Save_3").disabled = true;
+            document.getElementById("a_Link_Save_4").disabled = false;
+            document.getElementById("a_Link_Save_5").disabled = true;
+            setTimeout(initial, 0);
+        } else if (Edit_Type === '5') {
+            document.getElementById("a_Link_Save_1").disabled = true;
+            document.getElementById("a_Link_Save_2").disabled = true;
+            document.getElementById("a_Link_Save_3").disabled = true;
+            document.getElementById("a_Link_Save_4").disabled = true;
+            document.getElementById("a_Link_Save_5").disabled = false;
+            setTimeout(initial, 0);
+        }
     }
-
 });    

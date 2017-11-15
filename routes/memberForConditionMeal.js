@@ -22,6 +22,22 @@ router.put('/', function (req, res, next) {
         });
 });
 
+// --------  update Data from MySQL's table member ----------------------- 
+router.put('/mealSickType', function (req, res, next) {
+    req.dbConnection.query('UPDATE member SET '
+        + 'Meal2SickType=' + "?, "
+        + 'Meal2A=' + "?, "
+        + 'Meal2B=' + "?, "
+        + 'Meal2C=' + "? "
+        + 'WHERE ID=' + "?;",
+        [req.body.meal2sicktype, req.body.meal2a, req.body.meal2b, req.body.meal2c, req.body.id]
+        , function (error, results, fields) {
+            if (error) throw error;
+            console.log('The solution is: ', results);
+            res.json(results);
+        });
+});
+
 // --------  delete Data from MySQL's table meal ----------------------- 
 router.delete('/', function (req, res, next) {
     req.dbConnection.query('DELETE FROM meal WHERE MemberID=' + req.query.MemberID + ' AND MealType=2;', function (error, results, fields) {

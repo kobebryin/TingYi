@@ -21,4 +21,19 @@ router.put('/', function (req, res, next) {
             res.json(results);
         });
 });
+
+router.put('/mealSickType', function (req, res, next) {
+    req.dbConnection.query('UPDATE member SET '
+    + 'Meal1SickType=' + "?, "
+    + 'Meal1A=' + "?, "
+    + 'Meal1B=' + "?, "
+    + 'Meal1C=' + "? "
+    + 'WHERE ID=' + "?;",
+    [req.body.meal1sicktype, req.body.meal1a, req.body.meal1b,req.body.meal1c, req.body.id]
+        , function (error, results, fields) {
+            if (error) throw error;
+            console.log('The solution is: ', results);
+            res.json(results);
+        });
+});
 module.exports = router;

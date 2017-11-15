@@ -55,9 +55,25 @@ angular.module('TinYi').service('MemberService', function ($rootScope, $http) {
         });
     }
 
+    //月子餐頁面病理種類總餐數存檔
+    this.putMEMBERMEALforMonthMeal = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + 'memberForMeal/mealSickType', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
     //調理餐頁面日期午存檔
     this.putMEMBERforConditionMeal = function (inputObj, callback) {
         $http.put($rootScope.apiUrl + 'memberForConditionMeal', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
+    //調理餐頁面病理種類總餐數存檔
+    this.putMEMBERMEALforConditionMeal = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + 'memberForConditionMeal/mealSickType', inputObj).success(function (data) {
             // you can do some processing here
             callback(data);
         });
@@ -70,6 +86,15 @@ angular.module('TinYi').service('MemberService', function ($rootScope, $http) {
             callback(data);
         });
     }
+
+    //一般餐頁面病理種類總餐數存檔
+    this.putMEMBERMEALforNormalMea = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + 'memberForNormalMeal/mealSickType', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
 
     //get Session ID
     this.getSessionID = function (callback) {

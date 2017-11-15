@@ -330,7 +330,7 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
     })();
 
     initial();
-    Edit_Type_check();
+    // Edit_Type_check();
 
     //取得客戶單IP位址
     $.getJSON('//freegeoip.net/json/?callback=?', function (data) {
@@ -349,6 +349,25 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
 
     $rootScope.goToNormalMeal = function () {
         location.href = '/#/normalMeal';
+    };
+
+    //儲存總餐數與病理種類
+    $scope.saveMeal = function() {
+        $.LoadingOverlay("show");
+        $scope.mealForMember.id = id;
+
+        let mealForMember = {
+            meal2sicktype: $scope.mealForMember.meal2sicktype,
+            meal2a: $scope.mealForMember.meal2a,
+            meal2b: $scope.mealForMember.meal2b,
+            meal2c: $scope.mealForMember.meal2c,
+            id: $scope.mealForMember.id
+        }
+        
+        MemberService.putMEMBERMEALforConditionMeal(mealForMember, function (data) {
+            initial();
+            $.LoadingOverlay("hide");
+        });
     };
 
     //將資料匯出到右側欄位中
@@ -383,7 +402,8 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                     $scope.meallistA.meal15 = data[0].Meal15;
 
                     var attrib05setArray = [];
-                    var attrib05Array = $scope.meallistA.meal06.split(",");
+                    var attrib05Array = [];
+                    if ($scope.meallistA.meal06 !== null) attrib05Array = $scope.meallistA.meal06.split(",");
                     for (key in attrib05Array) {
                         attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                     }
@@ -427,7 +447,8 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                     $scope.meallistB.meal15 = data[0].Meal15;
 
                     var attrib05setArray = [];
-                    var attrib05Array = $scope.meallistB.meal06.split(",");
+                    var attrib05Array = [];
+                    if ($scope.meallistB.meal06 !== null) attrib05Array = $scope.meallistB.meal06.split(",");
                     for (key in attrib05Array) {
                         attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                     }
@@ -470,7 +491,8 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                     $scope.meallistC.meal15 = data[0].Meal15;
 
                     var attrib05setArray = [];
-                    var attrib05Array = $scope.meallistC.meal06.split(",");
+                    var attrib05Array = [];
+                    if ($scope.meallistC.meal06 !== null) attrib05Array = $scope.meallistC.meal06.split(",");
                     for (key in attrib05Array) {
                         attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                     }
@@ -837,7 +859,8 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                         $scope.meallistA.meal15 = data[0].Meal15;
 
                         var attrib05setArray = [];
-                        var attrib05Array = $scope.meallistA.meal06.split(",");
+                        var attrib05Array = [];
+                        if ($scope.meallistA.meal06 !== null) attrib05Array = $scope.meallistA.meal06.split(",");
                         for (key in attrib05Array) {
                             attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                         }
@@ -881,7 +904,8 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                         $scope.meallistB.meal15 = data[0].Meal15;
 
                         var attrib05setArray = [];
-                        var attrib05Array = $scope.meallistB.meal06.split(",");
+                        var attrib05Array = [];
+                        if ($scope.meallistB.meal06 !== null) attrib05Array = $scope.meallistB.meal06.split(",");
                         for (key in attrib05Array) {
                             attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                         }
@@ -924,7 +948,8 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                         $scope.meallistC.meal15 = data[0].Meal15;
 
                         var attrib05setArray = [];
-                        var attrib05Array = $scope.meallistC.meal06.split(",");
+                        var attrib05Array = [];
+                        if ($scope.meallistC.meal06 !== null) attrib05Array = $scope.meallistC.meal06.split(",");
                         for (key in attrib05Array) {
                             attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                         }
@@ -989,7 +1014,8 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                     $scope.meallistA.meal15 = data[0].Meal15;
 
                     var attrib05setArray = [];
-                    var attrib05Array = $scope.meallistA.meal06.split(",");
+                    var attrib05Array = [];
+                    if ($scope.meallistA.meal06 !== null) attrib05Array = $scope.meallistA.meal06.split(",");
                     for (key in attrib05Array) {
                         attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                     }
@@ -1048,7 +1074,8 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                     $scope.meallistB.meal15 = data[0].Meal15;
 
                     var attrib05setArray = [];
-                    var attrib05Array = $scope.meallistB.meal06.split(",");
+                    var attrib05Array = [];
+                    if ($scope.meallistB.meal06 !== null) attrib05Array = $scope.meallistB.meal06.split(",");
                     for (key in attrib05Array) {
                         attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                     }
@@ -1107,7 +1134,8 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                     $scope.meallistC.meal15 = data[0].Meal15;
 
                     var attrib05setArray = [];
-                    var attrib05Array = $scope.meallistC.meal06.split(",");
+                    var attrib05Array = [];
+                    if ($scope.meallistC.meal06 !== null) attrib05Array = $scope.meallistC.meal06.split(",");
                     for (key in attrib05Array) {
                         attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                     }
@@ -2165,7 +2193,8 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
                         $scope.ChkAddress_onChange();
                         //(禁忌)easy-ui combotree 要能夠讓值放入並且顯示勾選，要塞入物件
                         var attrib05setArray = [];
-                        var attrib05Array = $scope.meal.attrib05.split(",");
+                        var attrib05Array = [];
+                        if ($scope.meal.attrib05 !== null) attrib05Array = $scope.meal.attrib05.split(",")
                         for (key in attrib05Array) {
                             attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                         }
@@ -3508,59 +3537,58 @@ angular.module('TinYi').controller('conditionMealController', function ($rootSco
     }
 
     //觀測radio button選取的選項(編輯模式)
-    function Edit_Type_check() {
-        $(document).on("change", "input[name=Edit_Type_1]", function () {
-            Edit_Type = $('[name="Edit_Type_1"]:checked').val();
-            if (Edit_Type === '1') {
-                document.getElementById("a_Link_Save_1").disabled = false;
-                document.getElementById("a_Link_Save_2").disabled = true;
-                document.getElementById("a_Link_Save_3").disabled = true;
-                document.getElementById("a_Link_Save_4").disabled = true;
-                document.getElementById("a_Link_Save_5").disabled = true;
-                document.getElementById("a_Link_Save_6").disabled = true;
-                initial();
-            } else if (Edit_Type === '2') {
-                document.getElementById("a_Link_Save_1").disabled = true;
-                document.getElementById("a_Link_Save_2").disabled = false;
-                document.getElementById("a_Link_Save_3").disabled = true;
-                document.getElementById("a_Link_Save_4").disabled = true;
-                document.getElementById("a_Link_Save_5").disabled = true;
-                document.getElementById("a_Link_Save_6").disabled = true;
-                initial();
-            } else if (Edit_Type === '3') {
-                document.getElementById("a_Link_Save_1").disabled = true;
-                document.getElementById("a_Link_Save_2").disabled = true;
-                document.getElementById("a_Link_Save_3").disabled = false;
-                document.getElementById("a_Link_Save_4").disabled = true;
-                document.getElementById("a_Link_Save_5").disabled = true;
-                document.getElementById("a_Link_Save_6").disabled = true;
-                initial();
-            } else if (Edit_Type === '4') {
-                document.getElementById("a_Link_Save_1").disabled = true;
-                document.getElementById("a_Link_Save_2").disabled = true;
-                document.getElementById("a_Link_Save_3").disabled = true;
-                document.getElementById("a_Link_Save_4").disabled = false;
-                document.getElementById("a_Link_Save_5").disabled = true;
-                document.getElementById("a_Link_Save_6").disabled = true;
-                initial();
-            } else if (Edit_Type === '5') {
-                document.getElementById("a_Link_Save_1").disabled = true;
-                document.getElementById("a_Link_Save_2").disabled = true;
-                document.getElementById("a_Link_Save_3").disabled = true;
-                document.getElementById("a_Link_Save_4").disabled = true;
-                document.getElementById("a_Link_Save_5").disabled = false;
-                document.getElementById("a_Link_Save_6").disabled = true;
-                initial();
-            } else if (Edit_Type === '6') {
-                document.getElementById("a_Link_Save_1").disabled = true;
-                document.getElementById("a_Link_Save_2").disabled = true;
-                document.getElementById("a_Link_Save_3").disabled = true;
-                document.getElementById("a_Link_Save_4").disabled = true;
-                document.getElementById("a_Link_Save_5").disabled = true;
-                document.getElementById("a_Link_Save_6").disabled = false;
-                initial();
-            }
-        });
+    $scope.onChange = function () {
+
+        Edit_Type = $('[name="Edit_Type_1"]:checked').val();
+        if (Edit_Type === '1') {
+            document.getElementById("a_Link_Save_1").disabled = false;
+            document.getElementById("a_Link_Save_2").disabled = true;
+            document.getElementById("a_Link_Save_3").disabled = true;
+            document.getElementById("a_Link_Save_4").disabled = true;
+            document.getElementById("a_Link_Save_5").disabled = true;
+            document.getElementById("a_Link_Save_6").disabled = true;
+            setTimeout(initial, 0);
+        } else if (Edit_Type === '2') {
+            document.getElementById("a_Link_Save_1").disabled = true;
+            document.getElementById("a_Link_Save_2").disabled = false;
+            document.getElementById("a_Link_Save_3").disabled = true;
+            document.getElementById("a_Link_Save_4").disabled = true;
+            document.getElementById("a_Link_Save_5").disabled = true;
+            document.getElementById("a_Link_Save_6").disabled = true;
+            setTimeout(initial, 0);
+        } else if (Edit_Type === '3') {
+            document.getElementById("a_Link_Save_1").disabled = true;
+            document.getElementById("a_Link_Save_2").disabled = true;
+            document.getElementById("a_Link_Save_3").disabled = false;
+            document.getElementById("a_Link_Save_4").disabled = true;
+            document.getElementById("a_Link_Save_5").disabled = true;
+            document.getElementById("a_Link_Save_6").disabled = true;
+            setTimeout(initial, 0);
+        } else if (Edit_Type === '4') {
+            document.getElementById("a_Link_Save_1").disabled = true;
+            document.getElementById("a_Link_Save_2").disabled = true;
+            document.getElementById("a_Link_Save_3").disabled = true;
+            document.getElementById("a_Link_Save_4").disabled = false;
+            document.getElementById("a_Link_Save_5").disabled = true;
+            document.getElementById("a_Link_Save_6").disabled = true;
+            setTimeout(initial, 0);
+        } else if (Edit_Type === '5') {
+            document.getElementById("a_Link_Save_1").disabled = true;
+            document.getElementById("a_Link_Save_2").disabled = true;
+            document.getElementById("a_Link_Save_3").disabled = true;
+            document.getElementById("a_Link_Save_4").disabled = true;
+            document.getElementById("a_Link_Save_5").disabled = false;
+            document.getElementById("a_Link_Save_6").disabled = true;
+            setTimeout(initial, 0);
+        } else if (Edit_Type === '6') {
+            document.getElementById("a_Link_Save_1").disabled = true;
+            document.getElementById("a_Link_Save_2").disabled = true;
+            document.getElementById("a_Link_Save_3").disabled = true;
+            document.getElementById("a_Link_Save_4").disabled = true;
+            document.getElementById("a_Link_Save_5").disabled = true;
+            document.getElementById("a_Link_Save_6").disabled = false;
+            setTimeout(initial, 0);
+        }
     }
     /**---------------------------------------function zone end--------------------------------------------*/
 });

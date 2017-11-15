@@ -330,7 +330,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
 
     initial();
 
-    Edit_Type_check();
+    // Edit_Type_check();
 
     //取得客戶單IP位址
     $.getJSON('//freegeoip.net/json/?callback=?', function (data) {
@@ -349,6 +349,25 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
 
     $rootScope.goToNormalMeal = function () {
         location.href = '/#/normalMeal';
+    };
+
+    //儲存總餐數與病理種類
+    $scope.saveMeal = function() {
+        $.LoadingOverlay("show");
+        $scope.mealForMember.id = id;
+
+        let mealForMember = {
+            meal1sicktype: $scope.mealForMember.meal1sicktype,
+            meal1a: $scope.mealForMember.meal1a,
+            meal1b: $scope.mealForMember.meal1b,
+            meal1c: $scope.mealForMember.meal1c,
+            id: $scope.mealForMember.id
+        }
+        
+        MemberService.putMEMBERMEALforMonthMeal(mealForMember, function (data) {
+            initial();
+            $.LoadingOverlay("hide");
+        });
     };
 
     //將資料匯出到右側欄位中
@@ -393,7 +412,8 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $scope.meallistA.meal25 = data[0].Meal25;
 
                     var attrib05setArray = [];
-                    var attrib05Array = $scope.meallistA.meal12.split(",");
+                    var attrib05Array = [];
+                    if ($scope.meallistA.meal12 !== null) attrib05Array = $scope.meallistA.meal12.split(",");
                     for (key in attrib05Array) {
                         attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                     }
@@ -459,7 +479,8 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $scope.meallistB.meal25 = data[0].Meal25;
 
                     var attrib05setArray = [];
-                    var attrib05Array = $scope.meallistB.meal12.split(",");
+                    var attrib05Array = [];
+                    if ($scope.meallistB.meal12 !== null) attrib05Array = $scope.meallistB.meal12.split(",");
                     for (key in attrib05Array) {
                         attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                     }
@@ -524,7 +545,8 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $scope.meallistC.meal25 = data[0].Meal25;
 
                     var attrib05setArray = [];
-                    var attrib05Array = $scope.meallistC.meal12.split(",");
+                    var attrib05Array = [];
+                    if ($scope.meallistC.meal12 !== null) attrib05Array = $scope.meallistC.meal12.split(",");
                     for (key in attrib05Array) {
                         attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                     }
@@ -1101,7 +1123,8 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         $scope.meallistA.meal25 = data[0].Meal25;
 
                         var attrib05setArray = [];
-                        var attrib05Array = $scope.meallistA.meal12.split(",");
+                        var attrib05Array = [];
+                        if ($scope.meallistA.meal12 !== null) attrib05Array = $scope.meallistA.meal12.split(",");
                         for (key in attrib05Array) {
                             attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                         }
@@ -1167,7 +1190,8 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         $scope.meallistB.meal25 = data[0].Meal25;
 
                         var attrib05setArray = [];
-                        var attrib05Array = $scope.meallistB.meal12.split(",");
+                        var attrib05Array = [];
+                        if ($scope.meallistB.meal12 !== null) attrib05Array = $scope.meallistB.meal12.split(",");
                         for (key in attrib05Array) {
                             attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                         }
@@ -1232,7 +1256,8 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         $scope.meallistC.meal25 = data[0].Meal25;
 
                         var attrib05setArray = [];
-                        var attrib05Array = $scope.meallistC.meal12.split(",");
+                        var attrib05Array = [];
+                        if ($scope.meallistC.meal12 !== null) attrib05Array = $scope.meallistC.meal12.split(",");
                         for (key in attrib05Array) {
                             attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                         }
@@ -1329,7 +1354,8 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $scope.meallistA.meal25 = data[0].Meal25;
 
                     var attrib05setArray = [];
-                    var attrib05Array = $scope.meallistA.meal12.split(",");
+                    var attrib05Array = [];
+                    if ($scope.meallistA.meal12 !== null) attrib05Array = $scope.meallistA.meal12.split(",");
                     for (key in attrib05Array) {
                         attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                     }
@@ -1416,7 +1442,8 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $scope.meallistB.meal25 = data[0].Meal25;
 
                     var attrib05setArray = [];
-                    var attrib05Array = $scope.meallistB.meal12.split(",");
+                    var attrib05Array = [];
+                    if ($scope.meallistB.meal12 !== null) attrib05Array = $scope.meallistB.meal12.split(",");
                     for (key in attrib05Array) {
                         attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                     }
@@ -1504,7 +1531,8 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $scope.meallistC.meal25 = data[0].Meal25;
 
                     var attrib05setArray = [];
-                    var attrib05Array = $scope.meallistC.meal12.split(",");
+                    var attrib05Array = [];
+                    if ($scope.meallistC.meal12 !== null) attrib05Array = $scope.meallistC.meal12.split(",");
                     for (key in attrib05Array) {
                         attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                     }
@@ -2835,7 +2863,8 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                         $scope.ChkAddress_onChange();
                         //(禁忌)easy-ui combotree 要能夠讓值放入並且顯示勾選，要塞入物件
                         var attrib05setArray = [];
-                        var attrib05Array = $scope.meal.attrib05.split(",");
+                        var attrib05Array = [];
+                        if ($scope.meal.attrib05 !== null) attrib05Array = $scope.meal.attrib05.split(",");
                         for (key in attrib05Array) {
                             attrib05setArray.push({ id: attrib05Array[key], text: attrib05Array[key] });
                         }
@@ -2851,7 +2880,6 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                                 var meal1ac_initial_array = meal1ac_initial.split(";");     //依照;來切
                                 $scope.MealXARemain = - meal1ac_initial_array.length; //剩餘參數塞值
                                 if ($scope.mealForMember.meal1a !== null) $scope.MealXARemain = - meal1ac_initial_array.length + $scope.mealForMember.meal1a;
-                                // console.log(meal1ac_initial_array);
                                 month_calendar_morning.multiDatesPicker('addDates', meal1ac_initial_array); //將選取日期值塞入
                                 month_calendar_morning = $('#month_calendar_morning').multiDatesPicker({ addDisabledDates: meal1ac_initial_array });     //選取後的日期不能使用        
                             } else {
@@ -4351,64 +4379,62 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
     }
 
     //觀測radio button選取的選項(編輯模式)
-    function Edit_Type_check() {
-        $(document).on("change", "input[name=Edit_Type]", function () {
-            Edit_Type = $('[name="Edit_Type"]:checked').val();
-            if (Edit_Type === '1') {
-                document.getElementById("a_Link_Save_1").disabled = false;
-                document.getElementById("a_Link_Save_2").disabled = true;
-                document.getElementById("a_Link_Save_3").disabled = true;
-                document.getElementById("a_Link_Save_4").disabled = true;
-                document.getElementById("a_Link_Save_5").disabled = true;
-                document.getElementById("a_Link_Save_6").disabled = true;
-                initial();
-            } else if (Edit_Type === '2') {
-                document.getElementById("a_Link_Save_1").disabled = true;
-                document.getElementById("a_Link_Save_2").disabled = false;
-                document.getElementById("a_Link_Save_3").disabled = true;
-                document.getElementById("a_Link_Save_4").disabled = true;
-                document.getElementById("a_Link_Save_5").disabled = true;
-                document.getElementById("a_Link_Save_6").disabled = true;
-                initial();
-                clearScopeMemberObj();
-            } else if (Edit_Type === '3') {
-                document.getElementById("a_Link_Save_1").disabled = true;
-                document.getElementById("a_Link_Save_2").disabled = true;
-                document.getElementById("a_Link_Save_3").disabled = false;
-                document.getElementById("a_Link_Save_4").disabled = true;
-                document.getElementById("a_Link_Save_5").disabled = true;
-                document.getElementById("a_Link_Save_6").disabled = true;
-                initial();
-                clearScopeMemberObj();
-            } else if (Edit_Type === '4') {
-                document.getElementById("a_Link_Save_1").disabled = true;
-                document.getElementById("a_Link_Save_2").disabled = true;
-                document.getElementById("a_Link_Save_3").disabled = true;
-                document.getElementById("a_Link_Save_4").disabled = false;
-                document.getElementById("a_Link_Save_5").disabled = true;
-                document.getElementById("a_Link_Save_6").disabled = true;
-                initial();
-                clearScopeMemberObj();
-            } else if (Edit_Type === '5') {
-                document.getElementById("a_Link_Save_1").disabled = true;
-                document.getElementById("a_Link_Save_2").disabled = true;
-                document.getElementById("a_Link_Save_3").disabled = true;
-                document.getElementById("a_Link_Save_4").disabled = true;
-                document.getElementById("a_Link_Save_5").disabled = false;
-                document.getElementById("a_Link_Save_6").disabled = true;
-                initial();
-                clearScopeMemberObj();
-            } else if (Edit_Type === '6') {
-                document.getElementById("a_Link_Save_1").disabled = true;
-                document.getElementById("a_Link_Save_2").disabled = true;
-                document.getElementById("a_Link_Save_3").disabled = true;
-                document.getElementById("a_Link_Save_4").disabled = true;
-                document.getElementById("a_Link_Save_5").disabled = true;
-                document.getElementById("a_Link_Save_6").disabled = false;
-                initial();
-                clearScopeMemberObj();
-            }
-        });
+    $scope.onChange = function () {
+        Edit_Type = $('[name="Edit_Type"]:checked').val();
+        if (Edit_Type === '1') {
+            document.getElementById("a_Link_Save_1").disabled = false;
+            document.getElementById("a_Link_Save_2").disabled = true;
+            document.getElementById("a_Link_Save_3").disabled = true;
+            document.getElementById("a_Link_Save_4").disabled = true;
+            document.getElementById("a_Link_Save_5").disabled = true;
+            document.getElementById("a_Link_Save_6").disabled = true;
+            setTimeout(initial, 0);
+        } else if (Edit_Type === '2') {
+            document.getElementById("a_Link_Save_1").disabled = true;
+            document.getElementById("a_Link_Save_2").disabled = false;
+            document.getElementById("a_Link_Save_3").disabled = true;
+            document.getElementById("a_Link_Save_4").disabled = true;
+            document.getElementById("a_Link_Save_5").disabled = true;
+            document.getElementById("a_Link_Save_6").disabled = true;
+            setTimeout(initial, 0);
+            clearScopeMemberObj();
+        } else if (Edit_Type === '3') {
+            document.getElementById("a_Link_Save_1").disabled = true;
+            document.getElementById("a_Link_Save_2").disabled = true;
+            document.getElementById("a_Link_Save_3").disabled = false;
+            document.getElementById("a_Link_Save_4").disabled = true;
+            document.getElementById("a_Link_Save_5").disabled = true;
+            document.getElementById("a_Link_Save_6").disabled = true;
+            setTimeout(initial, 0);
+            clearScopeMemberObj();
+        } else if (Edit_Type === '4') {
+            document.getElementById("a_Link_Save_1").disabled = true;
+            document.getElementById("a_Link_Save_2").disabled = true;
+            document.getElementById("a_Link_Save_3").disabled = true;
+            document.getElementById("a_Link_Save_4").disabled = false;
+            document.getElementById("a_Link_Save_5").disabled = true;
+            document.getElementById("a_Link_Save_6").disabled = true;
+            setTimeout(initial, 0);
+            clearScopeMemberObj();
+        } else if (Edit_Type === '5') {
+            document.getElementById("a_Link_Save_1").disabled = true;
+            document.getElementById("a_Link_Save_2").disabled = true;
+            document.getElementById("a_Link_Save_3").disabled = true;
+            document.getElementById("a_Link_Save_4").disabled = true;
+            document.getElementById("a_Link_Save_5").disabled = false;
+            document.getElementById("a_Link_Save_6").disabled = true;
+            setTimeout(initial, 0);
+            clearScopeMemberObj();
+        } else if (Edit_Type === '6') {
+            document.getElementById("a_Link_Save_1").disabled = true;
+            document.getElementById("a_Link_Save_2").disabled = true;
+            document.getElementById("a_Link_Save_3").disabled = true;
+            document.getElementById("a_Link_Save_4").disabled = true;
+            document.getElementById("a_Link_Save_5").disabled = true;
+            document.getElementById("a_Link_Save_6").disabled = false;
+            setTimeout(initial, 0);
+            clearScopeMemberObj();
+        }
     }
     /**---------------------------------------function zone end--------------------------------------------*/
 });
