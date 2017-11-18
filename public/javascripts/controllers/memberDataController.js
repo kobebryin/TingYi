@@ -434,7 +434,17 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         //營養顧問dropdown list名單抓取
         MemberService.getSalesList(function (data) {
             $scope.saleslist = data;
+            // 營養顧問dropdown list名單預設
+            MemberService.getSessionID(function (data) {
+                console.log($scope.saleslist);
+                for(key in $scope.saleslist){
+                    console.log(data.id == $scope.saleslist[key].ID);
+                    if(data.id == $scope.saleslist[key].ID) $scope.member.upid = data.id;
+                }
+            });
         });
+
+
 
         //午,晚餐地址combobox設定
         $('#dinner_addr').combobox({
@@ -503,9 +513,9 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                             table = $('#example').DataTable({
                                 "order": [[0, "desc"]],         //用ＩＤ當排序，遞減
                                 "fnRowCallback":
-                                function (nRow, aData, iDisplayIndex) {
-                                    nRow.className = nRow.className + aData[4]; return nRow;
-                                },
+                                    function (nRow, aData, iDisplayIndex) {
+                                        nRow.className = nRow.className + aData[4]; return nRow;
+                                    },
                                 "aoData": [
                                     null,
                                     null,
@@ -579,8 +589,8 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                                             attrib08setArray.push({ id: attrib08Array[key], text: attrib08Array[key] });
                                         }
                                         $('#id_input_Member_Info_Attrib08').combotree('setValue', attrib08setArray);
-                                    }else{
-                                        $('#id_input_Member_Info_Attrib08').combotree('setValue', ''); 
+                                    } else {
+                                        $('#id_input_Member_Info_Attrib08').combotree('setValue', '');
                                     }
 
                                     //console.log(data[0].Attrib04);
