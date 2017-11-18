@@ -6,18 +6,27 @@ router.get('/', function (req, res, next) {
     req.dbConnection.query('SELECT Type FROM member WHERE ID = ' + req.query.UserID + ";", function (error, results, fields) {
         var role = results[0].Type;
         var sql = '';
-        
-        if(role == 0)
+
+        if (role == 0)
             sql = 'SELECT * FROM member WHERE Flag = ' + 9 + ';';
         else
             sql = 'SELECT * FROM member WHERE Type = ' + 5 + " AND Flag = " + 9 + ";";
         // console.log(role)
-         console.log(sql)
+        console.log(sql)
         req.dbConnection.query(sql, function (error, results, fields) {
             if (error) throw error;
             //console.log('The solution is: ', results);
             res.json(results);
         });
+    });
+});
+
+// --------  get Data from MySQL's table member 2.0 ----------------------- 
+router.get('/getmember2', function (req, res, next) {
+    req.dbConnection.query("SELECT * FROM member WHERE Attrib01 = '" + req.query.UserName + "';", function (error, results, fields) {
+        if (error) throw error;
+        //console.log('The solution is: ', results);
+        res.json(results);
     });
 });
 

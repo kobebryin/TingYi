@@ -7,6 +7,14 @@ angular.module('TinYi').service('MemberService', function ($rootScope, $http) {
         });
     }
 
+    //抓取單一會員資料
+    this.getMEMBERver2 = function (userName , callback) {
+        $http.get($rootScope.apiUrl + 'member/getmember2?UserName=' + userName).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
     //新增會員資料
     this.postMEMBER = function (inputObj, callback) {
         $http.post($rootScope.apiUrl + 'member', inputObj).success(function (data) {
