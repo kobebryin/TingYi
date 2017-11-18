@@ -436,10 +436,10 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
             $scope.saleslist = data;
             // 營養顧問dropdown list名單預設
             MemberService.getSessionID(function (data) {
-                console.log($scope.saleslist);
-                for(key in $scope.saleslist){
-                    console.log(data.id == $scope.saleslist[key].ID);
-                    if(data.id == $scope.saleslist[key].ID) $scope.member.upid = data.id;
+                // console.log($scope.saleslist);
+                for (key in $scope.saleslist) {
+                    // console.log(data.id == $scope.saleslist[key].ID);
+                    if (data.id == $scope.saleslist[key].ID) $scope.member.upid = data.id;
                 }
             });
         });
@@ -513,9 +513,9 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                             table = $('#example').DataTable({
                                 "order": [[0, "desc"]],         //用ＩＤ當排序，遞減
                                 "fnRowCallback":
-                                    function (nRow, aData, iDisplayIndex) {
-                                        nRow.className = nRow.className + aData[4]; return nRow;
-                                    },
+                                function (nRow, aData, iDisplayIndex) {
+                                    nRow.className = nRow.className + aData[4]; return nRow;
+                                },
                                 "aoData": [
                                     null,
                                     null,
@@ -742,9 +742,19 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
             }
         }
 
-        //將會員類型預設客戶(5)營養顧問預設張書齊(11761)
+        //將會員類型預設客戶(5)
         $scope.member.type = 5;
-        $scope.member.upid = 11761;
+
+        //營養顧問預設張書齊
+        MemberService.getSalesList(function (data) {
+            $scope.saleslist = data;
+            // 營養顧問dropdown list名單預設
+            MemberService.getSessionID(function (data) {
+                for (key in $scope.saleslist) {
+                    if (data.id == $scope.saleslist[key].ID) $scope.member.upid = data.id;
+                }
+            });
+        });
 
         $scope.attrib04_0_TMP = null;
         $scope.attrib04_1_TMP = null;
