@@ -67,3 +67,35 @@ td, th {
 .button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
 .button5 {background-color: #555555;} /* Black */
 
+#search_Name_input {
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    border: 2px solid #ff8800;
+    border-radius: 4px;
+    padding-left: 20px;
+}
+
+#search_Name_btn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: white; 
+    color: black; 
+    border: 2px solid #ff8800;
+}
+
+#search_Name_btn:hover {
+    background-color: #ff8800;
+    color: white;
+}
+
