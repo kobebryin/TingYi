@@ -25,7 +25,7 @@ router.post('/', function (req, res, next) {
                 var string = data[key2].split(",");
                 for (var key3 in string) {
                     if (string[key3] != '') {
-                        sqlquery += ' AND meal.' + objKey[0] + ' LIKE "%' + string[key3] + '%"';
+                        sqlquery += ' AND meal.' + objKey[0] + ' REGEXP "[[:<:]]' + string[key3] + '[[:>:]]"';
                     }
                 }
                 //console.log(data[key2])

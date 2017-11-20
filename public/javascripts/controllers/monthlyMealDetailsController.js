@@ -74,7 +74,7 @@ angular.module('TinYi').controller('monthlyMealDetailsController', function ($ro
                 var obj = { Meal23: $('#id_input_Meal_Meal23').val() };
                 SearchArray.data.push(obj);
             }
-            //console.log(SearchArray);
+            // console.log(SearchArray);
 
             //查詢ＳＥＲＶＩＣＥ呼叫
             searchMonthMealService.postSearch(SearchArray, function (data) {
