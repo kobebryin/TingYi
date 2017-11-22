@@ -436,9 +436,9 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                         table = $('#example').DataTable({
                             "order": [[0, "desc"]],         //用ＩＤ當排序，遞減
                             "fnRowCallback":
-                                function (nRow, aData, iDisplayIndex) {
-                                    nRow.className = nRow.className + aData[4]; return nRow;
-                                },
+                            function (nRow, aData, iDisplayIndex) {
+                                nRow.className = nRow.className + aData[4]; return nRow;
+                            },
                             "aoData": [
                                 null,
                                 null,
@@ -670,14 +670,13 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         //營養顧問dropdown list名單抓取
         MemberService.getSalesList(function (data) {
             $scope.saleslist = data;
+
             // 營養顧問dropdown list名單預設
-            MemberService.getSessionID(function (data) {
-                // console.log($scope.saleslist);
-                for (key in $scope.saleslist) {
-                    // console.log(data.id == $scope.saleslist[key].ID);
-                    if (data.id == $scope.saleslist[key].ID) $scope.member.upid = data.id;
-                }
-            });
+            for (key in $scope.saleslist) {
+                // console.log(data.id == $scope.saleslist[key].ID);
+                if ( sessionStorage.userId == $scope.saleslist[key].ID) $scope.member.upid =  parseInt(sessionStorage.userId);
+            }
+
         });
 
         //午,晚餐地址combobox設定
@@ -708,15 +707,18 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
 
         //將登入者ID存進SessionStorage
         MemberService.getSessionID(function (data) {
-            sessionStorage.userId = data.id;
-            sessionStorage.loginType = data.loginType;
+            //登入者ID與類型初始化
+            if (typeof sessionStorage.userId == 'undefined' && sessionStorage.userId == null) {
+                sessionStorage.userId = data.id;
+                sessionStorage.loginType = data.loginType;
+            }
 
-            if (data.loginType === 1 || data.loginType === 0) {     //Type = 0or 1(最高權限 或 管理人員) 可以修改刪除新增
+            if (sessionStorage.loginType == 1 || sessionStorage.loginType == 0) {     //Type = 0or 1(最高權限 或 管理人員) 可以修改刪除新增
                 $scope.c_loginTypeReadonly = false;
                 $scope.u_loginTypeReadonly = false;
                 $scope.d_loginTypeReadonly = false;
                 $scope.p_loginTypeReadonly = false;
-            } else if (data.loginType === 2) {       //Type = 2 (寫單人員)不行修改刪除但可新增
+            } else if (sessionStorage.loginType == 2) {       //Type = 2 (寫單人員)不行修改刪除但可新增
                 $scope.c_loginTypeReadonly = false;
                 $scope.u_loginTypeReadonly = true;
                 $scope.d_loginTypeReadonly = true;
@@ -728,7 +730,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                 $scope.p_loginTypeReadonly = false;
             }
 
-            if (data.loginType != 0) {  //登入會員類型不是最高權限的話，只能新增會員類型為客戶
+            if (sessionStorage.loginType != 0) {  //登入會員類型不是最高權限的話，只能新增會員類型為客戶
                 //會員類型分類
                 $scope.typeMapping = [
                     { value: 5, name: '客戶' }
@@ -750,9 +752,9 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
                     table = $('#example').DataTable({
                         "order": [[0, "desc"]],         //用ＩＤ當排序，遞減
                         "fnRowCallback":
-                            function (nRow, aData, iDisplayIndex) {
-                                nRow.className = nRow.className + aData[4]; return nRow;
-                            },
+                        function (nRow, aData, iDisplayIndex) {
+                            nRow.className = nRow.className + aData[4]; return nRow;
+                        },
                         "aoData": [
                             null,
                             null,
@@ -986,12 +988,12 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         //營養顧問預設張書齊
         MemberService.getSalesList(function (data) {
             $scope.saleslist = data;
+
             // 營養顧問dropdown list名單預設
-            MemberService.getSessionID(function (data) {
-                for (key in $scope.saleslist) {
-                    if (data.id == $scope.saleslist[key].ID) $scope.member.upid = data.id;
-                }
-            });
+            for (key in $scope.saleslist) {
+                if (sessionStorage.userId == $scope.saleslist[key].ID) $scope.member.upid = parseInt(sessionStorage.userId);
+            }
+
         });
 
         $scope.attrib04_0_TMP = null;
