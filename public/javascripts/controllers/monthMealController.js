@@ -2716,6 +2716,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $('#Meal_A_Meal12').combotree({
                         url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                         multiple: true,
+                        cascadeCheck:'',
                         valueField: 'id',
                         textField: 'text'
                     });
@@ -2775,6 +2776,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $('#Meal_B_Meal12').combotree({
                         url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                         multiple: true,
+                        cascadeCheck:'',
                         valueField: 'id',
                         textField: 'text'
                     });
@@ -2834,6 +2836,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $('#Meal_C_Meal12').combotree({
                         url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                         multiple: true,
+                        cascadeCheck:'',
                         valueField: 'id',
                         textField: 'text'
                     });
@@ -3019,6 +3022,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $('#S_Meal_A_Meal12').combotree({
                         url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                         multiple: true,
+                        cascadeCheck:'',
                         valueField: 'id',
                         textField: 'text'
                     });
@@ -3211,6 +3215,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $('#S_Meal_A_Meal12').combotree({
                         url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                         multiple: true,
+                        cascadeCheck:'',
                         valueField: 'id',
                         textField: 'text'
                     });
@@ -3410,6 +3415,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $('#Meal_A_Meal12').combotree({
                         url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                         multiple: true,
+                        cascadeCheck:'',
                         valueField: 'id',
                         textField: 'text'
                     });
@@ -3469,6 +3475,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $('#Meal_B_Meal12').combotree({
                         url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                         multiple: true,
+                        cascadeCheck:'',
                         valueField: 'id',
                         textField: 'text'
                     });
@@ -3528,6 +3535,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $('#Meal_C_Meal12').combotree({
                         url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                         multiple: true,
+                        cascadeCheck:'',
                         valueField: 'id',
                         textField: 'text'
                     });
@@ -3727,6 +3735,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $('#Meal_A_Meal12').combotree({
                         url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                         multiple: true,
+                        cascadeCheck:'',
                         valueField: 'id',
                         textField: 'text'
                     });
@@ -3786,6 +3795,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $('#Meal_B_Meal12').combotree({
                         url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                         multiple: true,
+                        cascadeCheck:'',
                         valueField: 'id',
                         textField: 'text'
                     });
@@ -3845,6 +3855,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $('#Meal_C_Meal12').combotree({
                         url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                         multiple: true,
+                        cascadeCheck:'',
                         valueField: 'id',
                         textField: 'text'
                     });
@@ -4046,6 +4057,7 @@ angular.module('TinYi').controller('monthMealController', function ($rootScope, 
                     $('#S_Meal_A_Meal12').combotree({
                         url: $rootScope.apiUrl + 'fieldvalueAttrib05',
                         multiple: true,
+                        cascadeCheck:'',
                         valueField: 'id',
                         textField: 'text'
                     });

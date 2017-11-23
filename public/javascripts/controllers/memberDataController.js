@@ -693,6 +693,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
         $('#id_input_Member_Info_Attrib05').combotree({
             url: $rootScope.apiUrl + 'fieldvalueAttrib05',
             multiple: true,
+            cascadeCheck:'',
             valueField: 'id',
             textField: 'text'
         });
