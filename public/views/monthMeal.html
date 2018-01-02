@@ -51,8 +51,10 @@
             </table>
 
             <!-- <input type="checkbox" type="hidden" name="month_calendar_morning" ng-model="cb_morningFalg" />早 -->
-            <h2 ng-if="Edit_Type === '4' || Edit_Type === '5'">總月曆</h2>
-            <div ng-if="Edit_Type === '4' || Edit_Type === '5'" id="month_calendar"></div>
+            <!-- <h2 ng-if="Edit_Type === '4' || Edit_Type === '5'">總月曆</h2>
+            <div ng-if="Edit_Type === '4' || Edit_Type === '5'" id="month_calendar"></div> -->
+            <h2 ng-if="Edit_Type === '5'">總月曆</h2>
+            <div ng-if="Edit_Type === '5'" id="month_calendar"></div>
             <input ng-if="Edit_Type === '5'" type="button" id="getMealData" ng-click="getMealData()" value="帶入資料">
             <h2>早</h2>
             <div id="month_calendar_morning"></div>
