@@ -56,5 +56,11 @@ angular.module('TinYi').config(function($stateProvider, $urlRouterProvider) {
       url: "/report",
       templateUrl: "views/report.html",
      controller: "reportController"
+    })
+    //更改密碼
+    .state('changePassword', {
+      url: "/changePassword",
+      templateUrl: "views/changePassword.html",
+     controller: "changePasswordController"
     });
 });

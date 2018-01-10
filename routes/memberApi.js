@@ -287,6 +287,19 @@ router.put('/', function (req, res, next) {
         });
 });
 
+// --------  change password from MySQL's table member ----------------------- 
+router.put('/changePS', function (req, res, next) {
+    req.dbConnection.query('UPDATE member SET '
+        + 'Password=' + "? "
+        + 'WHERE ID=' + "?;",
+        [req.body.password, req.body.id]
+        , function (error, results, fields) {
+            if (error) throw error;
+            // console.log('The solution is: ', results);
+            res.json(results);
+        });
+});
+
 // --------  delete Data from MySQL's table member ----------------------- 
 router.delete('/', function (req, res, next) {
     req.dbConnection.query('DELETE FROM member WHERE ID=' + req.query.ID + ';', function (error, results, fields) {

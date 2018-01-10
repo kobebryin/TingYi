@@ -31,6 +31,14 @@ angular.module('TinYi').service('MemberService', function ($rootScope, $http) {
         });
     }
 
+    //修改登入會員密碼
+    this.changePS = function (inputObj, callback) {
+        $http.put($rootScope.apiUrl + 'member/changePS', inputObj).success(function (data) {
+            // you can do some processing here
+            callback(data);
+        });
+    }
+
     //選取會員時抓取單一會員資料進入表單
     this.getOneMEMBER = function ( id, callback) {
         $http.get($rootScope.apiUrl + 'memberOne?ID=' + id).success(function (data) {

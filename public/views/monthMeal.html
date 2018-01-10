@@ -53,16 +53,16 @@
             <!-- <input type="checkbox" type="hidden" name="month_calendar_morning" ng-model="cb_morningFalg" />早 -->
             <!-- <h2 ng-if="Edit_Type === '4' || Edit_Type === '5'">總月曆</h2>
             <div ng-if="Edit_Type === '4' || Edit_Type === '5'" id="month_calendar"></div> -->
-            <h2 ng-if="Edit_Type === '5'">總月曆</h2>
-            <div ng-if="Edit_Type === '5'" id="month_calendar"></div>
-            <input ng-if="Edit_Type === '5'" type="button" id="getMealData" ng-click="getMealData()" value="帶入資料">
-            <h2>早</h2>
+            <p ng-if="Edit_Type === '4' || Edit_Type === '5'">總月曆 : <input type="text" id="month_calendar"><input ng-if="Edit_Type === '5'" type="button" id="getMealData" ng-click="getMealData()" value="帶入資料"></p>
+            <!-- <div ng-if="Edit_Type === '5'" id="month_calendar"></div> -->
+            
+            <p style="margin:3px;">早</p>
             <div id="month_calendar_morning"></div>
             <!-- <input type="checkbox" type="hidden" name="month_calendar_noon" ng-model="cb_noonFalg" />午 -->
-            <h2>午</h2>
+            <p style="margin:3px;">午</p>
             <div id="month_calendar_noon"></div>
             <!-- <input type="checkbox" type="hidden" name="month_calendar_night" ng-model="cb_nightFalg" />晚 -->
-            <h2>晚</h2>
+            <p style="margin:3px;">晚</p>
             <div id="month_calendar_night"></div>
 
             <table width="428" border="0" cellspacing="0" cellpadding="0">
