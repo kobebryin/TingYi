@@ -186,7 +186,7 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
                     // Data:
                     angular.forEach($scope.jsonToExport, function (value, key) {
                         if(value.MealType == 1) $scope.exportData.push([value.ID, value.Attrib01, '月子餐', value.User, value.Attrib10, value.Meal03, value.Meal20, value.Meal04, value.Meal24]);
-                        if(value.MealType == 2) $scope.exportData.push([value.ID, value.Attrib01, '調理餐', value.User, value.Attrib10, value.Meal03, value.Meal20, value.Meal04, value.Meal24]);
+                        if(value.MealType == 2) $scope.exportData.push([value.ID, value.Attrib01, '調理餐', value.User, value.Attrib10, value.Meal03, value.Meal20, value.Meal04, value.Meal15]);
                         if(value.MealType == 3) $scope.exportData.push([value.ID, value.Attrib01, '一般餐', value.User, value.Attrib10, value.Meal03, value.Meal20, value.Meal04, value.Meal24]);
                     });
 
@@ -218,7 +218,20 @@ angular.module('TinYi').controller('reportController', function ($rootScope, $sc
                             { field: 'Meal03', title: '地址', width: '9%', halign: 'center' },
                             { field: 'Meal20', title: '現金', width: '9%', align: 'center' },
                             { field: 'Meal04', title: '路線', width: '9%', align: 'center' },
-                            { field: 'Meal24', title: '備註', width: '9%', align: 'center' }
+                            { field: 'Note', title: '備註', width: '9%', align: 'center' ,
+                                formatter: function (value, row, index) {
+                                    if (row.MealType == 1) {
+                                        return row.Meal24;
+                                    } else if(row.MealType == 2) {
+                                        return row.Meal15;
+                                    } else if(row.MealType == 3) {
+                                        return row.Meal24;
+                                    } else {
+                                        return '';
+                                }
+                            }},
+                            { field: 'Meal24', title: '月子/一般備註', width: '9%', align: 'center', hidden: true },
+                            { field: 'Meal15', title: '調理備註', width: '9%', align: 'center', hidden: true }
                         ]]
                     });
                 });
