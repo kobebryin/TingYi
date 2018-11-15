@@ -427,7 +427,7 @@ angular.module('TinYi').controller('memberDataController', function ($rootScope,
             // Show full page LoadingOverlay
             $.LoadingOverlay("show");
 
-            MemberService.getMEMBERver2($scope.searchName, function (data) {
+            MemberService.getMEMBERver2(encodeURIComponent($scope.searchName), function (data) {
                 $scope.getMember = data;
 
                 setTimeout(function () {

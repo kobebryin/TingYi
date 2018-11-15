@@ -23,7 +23,7 @@ router.get('/', function (req, res, next) {
 
 // --------  get Data from MySQL's table member 2.0 ----------------------- 
 router.get('/getmember2', function (req, res, next) {
-    req.dbConnection.query("SELECT * FROM member WHERE Attrib01 LIKE '%" + req.query.UserName + "%';", function (error, results, fields) {
+    req.dbConnection.query("SELECT * FROM member WHERE Attrib01 LIKE '%" + decodeURIComponent(req.query.UserName) + "%';", function (error, results, fields) {
         if (error) throw error;
         //console.log('The solution is: ', results);
         res.json(results);
